@@ -1,0 +1,123 @@
+#!/usr/bin/python3
+"""Lokaltog's status script for dwm"""
+
+import re
+from datetime import datetime
+from subprocess import *
+
+def run_cmd(cmd):
+	return Popen(cmd, stdout=PIPE).communicate()[0].decode("utf-8").strip()
+
+def get_acpi():
+	try:
+		acpi = run_cmd(["acpi", "-V"])
+	except OSError:
+		return
+
+	has_bat = False
+	has_temp = False
+
+	for line in acpi.split("\n"):
+		split = re.split("\s+", line)
+		if "Battery" in line and not has_bat:
+			has_bat = True
+			try:
+				battery = [split[2][:-1], int(split[3].replace(',', '').replace('%', '')), split[4]]
+			except IndexError:
+				battery = [split[2][:-1], int(split[3].replace(',', '').replace('%', '')), False]
+		elif "Thermal" in line and not has_temp:
+			has_temp = True
+			temperature = int(float(split[3]))
+
+	baticon = "\x07Ï "
+
+	if battery[0] == "Discharging":
+		baticon = "\x05Î"
+		if battery[1] <= 30:
+			baticon = "\x05Í"
+		if battery[1] <= 15:
+			baticon = "\x06Í"
+		baticon += " {0}\x01".format(battery[2])
+
+	if battery[0] not in ("Full", "Unknown") or battery[1] < 97:
+		baticon += str(battery[1])+"%"
+	else:
+		baticon += "Full"
+
+	tempicon = "\x05þ\x01"
+	if temperature > 75:
+		tempicon = "\x06þ "
+
+	return "{baticon}  {tempicon}{temp}°C  ".format(baticon=baticon, tempicon=tempicon, temp=temperature)
+
+def get_mpd():
+	try:
+		status = run_cmd(["ncmpcpp", "--now-playing"])
+	except OSError:
+		return
+
+	if "Cannot connect" in status or not status:
+		status = "Not playing"
+
+	return "\x05î\x01{status}  ".format(status=status)
+
+def get_wifi():
+	try:
+		iwconfig = run_cmd(["iwconfig", "wlan0"])
+		lquality = re.search("Link Quality=(\d+)/(\d+)", iwconfig).groups()
+	except (OSError, AttributeError):
+		return ""
+
+	sigstrength = int(int(lquality[0]) / int(lquality[1]) * 100)
+
+	return "\x05ï\x01{strength}%  ".format(strength=sigstrength)
+
+def get_volume():
+	try:
+		amixer = run_cmd(["amixer", "get", "Master"])
+	except OSError:
+		return
+
+	volume = int(re.search("\[(\d+)%\]", amixer).groups()[0])
+	muted = re.search("\[(on|off)\]", amixer).groups()[0] == "off"
+
+	if muted:
+		return "\x06ê Muted"
+
+	icon = "í"
+	if volume < 50:
+		icon = "ì"
+	if volume < 10:
+		icon = "ë"
+
+	return "\x05{icon}\x01{volume}%  ".format(icon=icon, volume=volume)
+
+def get_ip():
+	try:
+		ip = open('/tmp/extip', 'r').read().strip()
+		color = "\x01"
+
+		if not ip:
+			color = "\x06"
+			raise IOError
+		if ip[:7] != "138.199":
+			color = "\x06"
+
+		return "\x05IP{color}{ip}  ".format(color=color, ip=ip)
+	except IOError:
+		return "\x05IP\x06?  "
+
+def get_date():
+	date = datetime.now().strftime("%Y-%m-%d %R").split(" ")
+
+	return "\x01{date}\x05@ {time}".format(date=date[0], time=date[1])
+
+print(
+	get_mpd()    +
+	get_volume() +
+	get_acpi()   +
+#	get_ip()     +
+	get_wifi()   +
+
+	get_date()
+)

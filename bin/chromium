@@ -1,0 +1,9 @@
+#!/bin/sh
+
+chromium \
+	--disable-ipv6 \
+	--enable-extension-apps \
+	--enable-extension-timeline-api \
+	--enable-sync-settings \
+	--omnibox-popup-count=10 \
+	--bookmark-menu

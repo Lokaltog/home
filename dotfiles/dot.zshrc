@@ -291,14 +291,4 @@
 		stop()   { service stop $*    }
 		restart(){ service restart $* }
 	# }}}
-	# check pacnew files {{{
-		pacnews(){
-			for f in /etc/**/*.pacnew; do
-				if [[ -r ${n%.*} ]]; then
-					+ vimdiff $n ${n%.*} && echo "Replace?"
-					read -q && sudo mv $n ${n%.*}
-				fi
-			done
-		}
-	# }}}
 # }}}

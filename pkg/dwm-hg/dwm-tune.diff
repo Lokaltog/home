@@ -1,0 +1,13 @@
+--- a/config.mk	2010-04-29 00:48:58.865687096 +0200
++++ b/config.mk	2010-04-29 00:49:37.179799047 +0200
+@@ -19,8 +19,8 @@
+ LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${XINERAMALIBS}
+
+ # flags
+-CPPFLAGS = -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+-CFLAGS = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
++CPPFLAGS = -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS} -O3 -march=native
++CFLAGS = -g -std=c99 -pedantic -Wall ${INCS} ${CPPFLAGS}
+ #CFLAGS = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
+ LDFLAGS = -g ${LIBS}
+ #LDFLAGS = -s ${LIBS}

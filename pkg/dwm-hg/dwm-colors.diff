@@ -1,0 +1,20 @@
+--- a/dwm.c	2010-05-25 12:49:08.417634564 +0200
++++ b/dwm.c	2010-05-25 12:48:36.382385078 +0200
+@@ -724,7 +724,7 @@
+ 		dc.x += dc.w;
+ 	}
+ 	dc.w = blw = TEXTW(m->ltsymbol);
+-	drawtext(m->ltsymbol, dc.colors[0], True);
++	drawtext(m->ltsymbol, dc.colors[4], True);
+ 	dc.x += dc.w;
+ 	x = dc.x;
+ 	if(m == selmon) { /* status is only drawn on selected monitor */
+@@ -741,7 +741,7 @@
+ 	if((dc.w = dc.x - x) > bh) {
+ 		dc.x = x;
+ 		if(m->sel) {
+-			col = m == selmon ? dc.colors[1] : dc.colors[0];
++			col = m == selmon ? dc.colors[7] : dc.colors[0];
+ 			drawtext(m->sel->name, col, True);
+ 			drawsquare(m->sel->isfixed, m->sel->isfloating, col);
+ 		}

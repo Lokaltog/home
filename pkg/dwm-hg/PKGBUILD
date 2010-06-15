@@ -1,0 +1,49 @@
+# vim:set ft=sh:
+pkgname="dwm-hg"
+pkgver=1521
+pkgrel=1
+pkgdesc="The latest hg pull of dwm"
+url="http://dwm.suckless.org"
+license="MIT"
+arch=("any")
+depends=("libx11")
+makedepends=("mercurial" "sed")
+conflicts=("dwm")
+provides=("dwm")
+source=(
+	config.h
+	dwm-base.diff
+	dwm-colors.diff
+	dwm-tune.diff
+	dwm-attachaside.diff
+	dwm-gaplessgrid.diff
+	dwm-pertag.diff
+	dwm-statuscolors.diff
+)
+
+_hgroot="http://code.suckless.org/hg"
+_hgrepo="dwm"
+
+build() {
+	cd $startdir/src
+
+	hg clone ${_hgroot}/${_hgrepo}
+	cd $_hgrepo
+
+	cp $srcdir/config.h .
+
+	hg patch -m null -u null $srcdir/dwm-base.diff || return 1
+	hg patch -m null -u null $srcdir/dwm-attachaside.diff || return 1
+	hg patch -m null -u null $srcdir/dwm-tune.diff || return 1
+	hg patch -m null -u null $srcdir/dwm-gaplessgrid.diff || return 1
+	hg patch -m null -u null $srcdir/dwm-pertag.diff || return 1
+	hg patch -m null -u null $srcdir/dwm-statuscolors.diff || return 1
+	hg patch -m null -u null $srcdir/dwm-colors.diff || return 1
+
+	msg "Starting build process."
+	make || return 1
+	make PREFIX=$startdir/pkg/usr install
+
+	mkdir -p $startdir/pkg/usr/share/licenses/dwm
+	cp LICENSE $startdir/pkg/usr/share/licenses/dwm
+}

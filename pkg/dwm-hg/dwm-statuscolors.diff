@@ -1,0 +1,234 @@
+diff -r 2bcd25cce4ab config.def.h
+--- a/config.def.h	Sun Sep 27 20:20:14 2009 +0100
++++ b/config.def.h	Mon Oct 05 22:01:49 2009 -0300
+@@ -1,13 +1,16 @@
+ /* See LICENSE file for copyright and license details. */
+
+ /* appearance */
++#define NUMCOLORS         4             // need at least 3
++static const char colors[NUMCOLORS][ColLast][8] = {
++	// border   foreground  background
++	{ "#cccccc", "#000000", "#cccccc" },  // 0 = normal
++	{ "#0066ff", "#ffffff", "#0066ff" },  // 1 = selected
++	{ "#0066ff", "#0066ff", "#ffffff" },  // 2 = urgent/warning
++	{ "#ff0000", "#ffffff", "#ff0000" },  // 3 = error
++	// add more here
++};
+ static const char font[]            = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
+-static const char normbordercolor[] = "#cccccc";
+-static const char normbgcolor[]     = "#cccccc";
+-static const char normfgcolor[]     = "#000000";
+-static const char selbordercolor[]  = "#0066ff";
+-static const char selbgcolor[]      = "#0066ff";
+-static const char selfgcolor[]      = "#ffffff";
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const Bool showbar           = True;     /* False means no bar */
+@@ -45,7 +48,7 @@
+ #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+
+ /* commands */
+-static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
++static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
+ static const char *termcmd[]  = { "uxterm", NULL };
+
+ static Key keys[] = {
+diff -r 2bcd25cce4ab dwm.c
+--- a/dwm.c	Sun Sep 27 20:20:14 2009 +0100
++++ b/dwm.c	Mon Oct 05 22:01:49 2009 -0300
+@@ -48,6 +48,7 @@
+ #define LENGTH(X)               (sizeof X / sizeof X[0])
+ #define MAX(A, B)               ((A) > (B) ? (A) : (B))
+ #define MIN(A, B)               ((A) < (B) ? (A) : (B))
++#define MAXCOLORS               8
+ #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
+ #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
+ #define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
+@@ -95,8 +96,7 @@
+
+ typedef struct {
+ 	int x, y, w, h;
+-	unsigned long norm[ColLast];
+-	unsigned long sel[ColLast];
++    unsigned long colors[MAXCOLORS][ColLast];
+ 	Drawable drawable;
+ 	GC gc;
+ 	struct {
+@@ -172,8 +172,9 @@
+ static Monitor *dirtomon(int dir);
+ static void drawbar(Monitor *m);
+ static void drawbars(void);
+-static void drawsquare(Bool filled, Bool empty, Bool invert, unsigned long col[ColLast]);
+-static void drawtext(const char *text, unsigned long col[ColLast], Bool invert);
++static void drawcoloredtext(char *text);
++static void drawsquare(Bool filled, Bool empty, unsigned long col[ColLast]);
++static void drawtext(const char *text, unsigned long col[ColLast], Bool pad);
+ static void enternotify(XEvent *e);
+ static void expose(XEvent *e);
+ static void focus(Client *c);
+@@ -691,14 +692,13 @@
+ 	dc.x = 0;
+ 	for(i = 0; i < LENGTH(tags); i++) {
+ 		dc.w = TEXTW(tags[i].name);
+-		col = m->tagset[m->seltags] & 1 << i ? dc.sel : dc.norm;
+-		drawtext(tags[i].name, col, urg & 1 << i);
+-		drawsquare(m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+-		           occ & 1 << i, urg & 1 << i, col);
++		col = dc.colors[ (m->tagset[m->seltags] & 1 << i ? 1:(urg & 1 << i ? 2:0))];
++		drawtext(tags[i].name, col, True);
++		drawsquare(m == selmon && selmon->sel && selmon->sel->tags & 1 << i, occ & 1 << i, col);
+ 		dc.x += dc.w;
+ 	}
+ 	dc.w = blw = TEXTW(m->ltsymbol);
+-	drawtext(m->ltsymbol, dc.norm, False);
++	drawtext(m->ltsymbol, dc.colors[0], True);
+ 	dc.x += dc.w;
+ 	x = dc.x;
+ 	if(m == selmon) { /* status is only drawn on selected monitor */
+@@ -708,19 +708,19 @@
+ 			dc.x = x;
+ 			dc.w = m->ww - x;
+ 		}
+-		drawtext(stext, dc.norm, False);
++		drawcoloredtext(stext);
+ 	}
+ 	else
+ 		dc.x = m->ww;
+ 	if((dc.w = dc.x - x) > bh) {
+ 		dc.x = x;
+ 		if(m->sel) {
+-			col = m == selmon ? dc.sel : dc.norm;
+-			drawtext(m->sel->name, col, False);
+-			drawsquare(m->sel->isfixed, m->sel->isfloating, False, col);
++			col = m == selmon ? dc.colors[1] : dc.colors[0];
++			drawtext(m->sel->name, col, True);
++			drawsquare(m->sel->isfixed, m->sel->isfloating, col);
+ 		}
+ 		else
+-			drawtext(NULL, dc.norm, False);
++			drawtext(NULL, dc.colors[0], False);
+ 	}
+ 	XCopyArea(dpy, dc.drawable, m->barwin, dc.gc, 0, 0, m->ww, bh, 0, 0);
+ 	XSync(dpy, False);
+@@ -735,12 +735,42 @@
+ }
+
+ void
+-drawsquare(Bool filled, Bool empty, Bool invert, unsigned long col[ColLast]) {
++drawcoloredtext(char *text) {
++	Bool first=True;
++	char *buf = text, *ptr = buf, c = 1;
++	unsigned long *col = dc.colors[0];
++	int i, ox = dc.x;
++
++	while( *ptr ) {
++		for( i = 0; *ptr < 0 || *ptr > NUMCOLORS; i++, ptr++);
++		if( !*ptr ) break;
++		c=*ptr;
++		*ptr=0;
++		if( i ) {
++			dc.w = selmon->ww - dc.x;
++			drawtext(buf, col, first);
++			dc.x += textnw(buf, i) + textnw(&c,1);
++			if( first ) dc.x += ( dc.font.ascent + dc.font.descent ) / 2;
++			first = False;
++		} else if( first ) {
++			ox = dc.x += textnw(&c,1);
++		}
++		*ptr = c;
++		col = dc.colors[ c-1 ];
++		buf = ++ptr;
++	}
++	if( !first ) dc.x-=(dc.font.ascent+dc.font.descent)/2;
++	drawtext(buf, col, True);
++	dc.x = ox;
++}
++
++void
++drawsquare(Bool filled, Bool empty, unsigned long col[ColLast]) {
+ 	int x;
+ 	XGCValues gcv;
+ 	XRectangle r = { dc.x, dc.y, dc.w, dc.h };
+
+-	gcv.foreground = col[invert ? ColBG : ColFG];
++	gcv.foreground = col[ ColFG ];
+ 	XChangeGC(dpy, dc.gc, GCForeground, &gcv);
+ 	x = (dc.font.ascent + dc.font.descent + 2) / 4;
+ 	r.x = dc.x + 1;
+@@ -756,18 +786,18 @@
+ }
+
+ void
+-drawtext(const char *text, unsigned long col[ColLast], Bool invert) {
++drawtext(const char *text, unsigned long col[ColLast], Bool pad) {
+ 	char buf[256];
+ 	int i, x, y, h, len, olen;
+ 	XRectangle r = { dc.x, dc.y, dc.w, dc.h };
+
+-	XSetForeground(dpy, dc.gc, col[invert ? ColFG : ColBG]);
++	XSetForeground(dpy, dc.gc, col[ ColBG ]);
+ 	XFillRectangles(dpy, dc.drawable, dc.gc, &r, 1);
+ 	if(!text)
+ 		return;
+ 	olen = strlen(text);
+-	h = dc.font.ascent + dc.font.descent;
+-	y = dc.y + (dc.h / 2) - (h / 2) + dc.font.ascent;
++	h = pad ? (dc.font.ascent + dc.font.descent) : 0;
++	y = dc.y + ((dc.h + dc.font.ascent - dc.font.descent) / 2);
+ 	x = dc.x + (h / 2);
+ 	/* shorten text if necessary */
+ 	for(len = MIN(olen, sizeof buf); len && textnw(text, len) > dc.w - h; len--);
+@@ -776,7 +806,7 @@
+ 	memcpy(buf, text, len);
+ 	if(len < olen)
+ 		for(i = len; i && i > len - 3; buf[--i] = '.');
+-	XSetForeground(dpy, dc.gc, col[invert ? ColBG : ColFG]);
++	XSetForeground(dpy, dc.gc, col[ ColFG ]);
+ 	if(dc.font.set)
+ 		XmbDrawString(dpy, dc.drawable, dc.font.set, dc.gc, x, y, buf, len);
+ 	else
+@@ -824,7 +854,7 @@
+ 		detachstack(c);
+ 		attachstack(c);
+ 		grabbuttons(c, True);
+-		XSetWindowBorder(dpy, c->win, dc.sel[ColBorder]);
++		XSetWindowBorder(dpy, c->win, dc.colors[1][ColBorder]);
+ 		XSetInputFocus(dpy, c->win, RevertToPointerRoot, CurrentTime);
+ 	}
+ 	else
+@@ -1132,7 +1162,7 @@
+ 	}
+ 	wc.border_width = c->bw;
+ 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
+-	XSetWindowBorder(dpy, w, dc.norm[ColBorder]);
++	XSetWindowBorder(dpy, w, dc.colors[0][ColBorder]);
+ 	configure(c); /* propagates border_width, if size doesn't change */
+ 	updatesizehints(c);
+ 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
+@@ -1498,12 +1528,11 @@
+ 	cursor[CurResize] = XCreateFontCursor(dpy, XC_sizing);
+ 	cursor[CurMove] = XCreateFontCursor(dpy, XC_fleur);
+ 	/* init appearance */
+-	dc.norm[ColBorder] = getcolor(normbordercolor);
+-	dc.norm[ColBG] = getcolor(normbgcolor);
+-	dc.norm[ColFG] = getcolor(normfgcolor);
+-	dc.sel[ColBorder] = getcolor(selbordercolor);
+-	dc.sel[ColBG] = getcolor(selbgcolor);
+-	dc.sel[ColFG] = getcolor(selfgcolor);
++	for(int i=0; i<NUMCOLORS; i++) {
++		dc.colors[i][ColBorder] = getcolor( colors[i][ColBorder] );
++		dc.colors[i][ColFG] = getcolor( colors[i][ColFG] );
++		dc.colors[i][ColBG] = getcolor( colors[i][ColBG] );
++	}
+ 	dc.drawable = XCreatePixmap(dpy, root, DisplayWidth(dpy, screen), bh, DefaultDepth(dpy, screen));
+ 	dc.gc = XCreateGC(dpy, root, 0, NULL);
+ 	XSetLineAttributes(dpy, dc.gc, 1, LineSolid, CapButt, JoinMiter);
+@@ -1837,7 +1837,7 @@
+ 	if(!c)
+ 		return;
+ 	grabbuttons(c, False);
+-	XSetWindowBorder(dpy, c->win, dc.norm[ColBorder]);
++	XSetWindowBorder(dpy, c->win, dc.colors[0][ColBorder]);
+ 	if(setfocus)
+ 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
+ }

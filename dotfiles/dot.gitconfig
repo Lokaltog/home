@@ -1,0 +1,43 @@
+[user]
+	name = Kim Silkebækken
+	email = kim.silkebaekken@gmail.com
+[merge]
+	tool = vimdiff
+	log = true
+[core]
+	autocrlf = input
+[color]
+	branch = auto
+	diff = auto
+	grep = auto
+	interactive = auto
+	showbranch = auto
+	status = auto
+	ui = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	frag = magenta bold
+	meta = yellow bold
+	new = green bold
+	old = red bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[format]
+	numbered = auto
+[push]
+	default = current
+[alias]
+	co = checkout
+	st = status
+	unstage = reset HEAD
+	origin = remote show origin
+	commit-submodules = "!subs=$(git ls-files --error-unmatch --stage -- $(git ls-files --modified) | grep \"^160000\" | cut -f2-); msg=$(echo Submodule updates: $subs; echo; git submodule summary); git commit -e -m \"$msg\" --only $(echo $subs | tr \"\n\" \" \")"
+	mkpatch = diff-tree -p --pretty
+	unmerged = ls-files --unmerged
+	cdiff = diff --cached
+	wdiff = diff --color-words

@@ -208,11 +208,11 @@
 # prompt {{{
 	if [[ "$TERM" == "linux" ]]; then
 		PR_DELIM=('[' ']')
-        PR_SSH='SSH'
+		PR_SSH='SSH'
 		PR_START='%%'
 	else
 		PR_DELIM=('Î' 'Ï')
-        PR_SSH='ê'
+		PR_SSH='ê'
 		PR_START='ý'
 	fi
 	# regular prompt {{{

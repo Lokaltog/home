@@ -10,20 +10,11 @@ Xft.rgba     : rgb
 ! URxvt settings
 URxvt.termName       : rxvt-256color
 URxvt.title          : Terminal
-URxvt.buffered       : true
-URxvt.underlineColor : #dd4010
-URxvt.cursorUnderline: false
 URxvt.cursorColor    : #dd4010
 URxvt.cursorColor2   : #fff
-URxvt.pointerColor   : #dd4010
-URxvt.pointerColor2  : #fff
 URxvt.pointerBlank   : true
-URxvt.visualBell     : true
 URxvt.urgentOnBell   : true
-URxvt.scrollstyle    : plain
 URxvt.scrollBar      : false
-URxvt.scrollBar_right: true
-URxvt.scrollColor    : #444
 URxvt.transparent    : true
 URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher    : chromium

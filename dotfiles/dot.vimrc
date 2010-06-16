@@ -13,7 +13,7 @@
 		set directory=~/.vim/tmp
 
 		set autochdir
-		set backspace=2
+		set backspace=indent,eol,start
 		set fileformats=unix,dos
 		set fileformat=unix
 

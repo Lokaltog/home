@@ -1,0 +1,21 @@
+#!/bin/bash
+# connects to vim server and sends bell
+
+vim="vim --servername vim"
+
+$vim --remote-send ""
+
+if [[ $? -gt 0 ]]; then
+	if [[ ! -z $@ ]]; then
+		urxvtc +sb -name vim -e $vim -c ":silent exec '!echo -e \"\07\"' | redraw!" --remote-tab-silent $@
+	else
+		urxvtc +sb -name vim -e $vim -c ":silent exec '!echo -e \"\07\"' | redraw!"
+	fi
+else
+	if [[ -z $@ ]]; then
+		$vim --remote-send ":tabnew<cr>:silent exec '!echo -e \"\07\"' | redraw!<cr>"
+	else
+		$vim --remote-tab-silent $@
+		$vim --remote-send ":silent exec '!echo -e \"\07\"' | redraw!<cr>"
+	fi
+fi

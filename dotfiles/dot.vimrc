@@ -119,7 +119,7 @@
 	set foldmethod=marker
 	set foldlevel=1
 	set foldopen-=search
-	set foldcolumn=2
+	set foldcolumn=1
 
 	function! VimFold()
 		let t = getline(v:foldstart)

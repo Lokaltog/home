@@ -5,5 +5,5 @@ chromium \
 	--enable-extension-apps \
 	--enable-extension-timeline-api \
 	--enable-sync-settings \
-	--omnibox-popup-count=10 \
-	--bookmark-menu
+	--enable-sync-extensions \
+	--omnibox-popup-count=10

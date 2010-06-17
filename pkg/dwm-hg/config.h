@@ -72,7 +72,7 @@ dwm_button(const Arg *arg)
 {
 	Arg a;
 
-	a.v = (const char*[]){"/home/kim/.scripts/dwm-buttons.sh", (char *)arg->v, NULL};
+	a.v = (const char*[]){"/home/kim/sync/bin/dwm-buttons", (char *)arg->v, NULL};
 	spawn(&a);
 }
 
@@ -92,9 +92,8 @@ static const char terminal[]  = "urxvtc";
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
-static const char *chromium[] = { "/home/kim/.scripts/chromium.sh", NULL };
-static const char *vim[]      = { "/home/kim/.scripts/vim.sh", NULL };
-static const char *thunar[]   = { "thunar", NULL };
+static const char *chromium[] = { "/home/kim/sync/bin/chromium", NULL };
+static const char *vim[]      = { "/home/kim/sync/bin/vim", NULL };
 static const char *termcmd[]  = { terminal, NULL };
 static const char *mpc[]      = { terminal, "-name", "ncmpcpp", "-geometry", "100x60", "-e", "ncmpcpp", NULL };
 static const char *ranger[]   = { terminal, "-name", "ranger", "-e", "ranger", NULL };

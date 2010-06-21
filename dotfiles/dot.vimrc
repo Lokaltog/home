@@ -284,9 +284,6 @@
 		" Override SASS defaults
 		au FileType sass set sw=4 ts=4 noet
 
-		" Set margincolumn for git commit files
-		au FileType gitcommit set margincolumn=50 | hi MarginColumn ctermbg=52
-
 		" Highlight vim modeline in all files {{{
 			au Syntax *
 				\ syn match VimModelineLine /^.\{-1,}vim:[^:]\{-1,}:.*/ contains=VimModeline |

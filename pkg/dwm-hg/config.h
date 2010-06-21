@@ -91,7 +91,7 @@ dwm_button(const Arg *arg)
 static const char terminal[]  = "urxvtc";
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], "-p", ">", NULL };
 static const char *chromium[] = { "/home/kim/sync/bin/chromium", NULL };
 static const char *vim[]      = { "/home/kim/sync/bin/vim", NULL };
 static const char *termcmd[]  = { terminal, NULL };

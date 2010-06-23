@@ -6,6 +6,7 @@
 	log = true
 [core]
 	autocrlf = input
+	whitespace = trailing-space,space-before-tab,indent-with-non-tab
 [color]
 	branch = auto
 	diff = auto
@@ -39,7 +40,7 @@
 	unstage = reset HEAD --
 	origin = remote show origin
 	last = log -1 HEAD
-	commit-submodules = "!subs=$(git ls-files --error-unmatch --stage -- $(git ls-files --modified) | grep \"^160000\" | cut -f2-); msg=$(echo Submodule updates: $subs; echo; git submodule summary); git commit -e -m \"$msg\" --only $(echo $subs | tr \"\n\" \" \")"
+	commit-submodules = "!subs=$(git ls-files --error-unmatch --stage -- $(git ls-files --modified) | grep \"^160000\" | cut -f2-); msg=$(echo Update submodules: $subs; echo; git submodule summary); git commit -e -m \"$msg\" --only $(echo $subs | tr \"\n\" \" \")"
 	mkpatch = diff-tree -p --pretty
 	unmerged = ls-files --unmerged
 	sdiff = diff --staged

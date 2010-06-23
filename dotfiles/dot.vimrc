@@ -314,6 +314,8 @@
 		let g:python_print_as_function = 1
 	" }}}
 	" delimitMate settings {{{
+		let g:delimitMate_unbalanced_parens = 1
+		let g:delimitMate_expand_cr = 0
 		let g:delimitMate_excluded_ft = "mail,txt,vim"
 		let g:delimitMate_matchpairs = "(:),[:],{:},\":\",':',`:`"
 	" }}}

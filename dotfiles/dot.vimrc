@@ -25,7 +25,6 @@
 		set whichwrap=b,s,[,]
 		set clipboard+=unnamed
 		set hidden
-	"	set margincolumn=100
 	" }}}
 	" Wild menu {{{
 		set wildmenu
@@ -69,7 +68,6 @@
 			return synIDattr(synID(line("."),col("."),1),"name")
 		endfunction
 	" }}}
-
 	" Git branch wrapper {{{
 		function! GitBranch()
 			if !exists("b:branch")
@@ -85,7 +83,6 @@
 			return b:branch
 		endfunction
 	" }}}
-
 	set statusline=
     set statusline+=%1*%{GitBranch()}%* " Git branch (User1)
 	set statusline+=\ %< " Separator, truncate
@@ -132,7 +129,6 @@
 	au FileType vim set foldlevel=0 foldtext=VimFold()
 " }}}
 " Mappings - Dvorak based {{{
-	nmap <Leader>b <Esc>:Bp<CR>
 	nmap <F7> v
 	nmap <F8> s
 	nmap <silent><F9> :BufExplorer<CR>
@@ -140,12 +136,6 @@
 
 	" q: sucks
 	nmap q: :q
-
-	" Override PageUp/PageDown
-	nmap <PageUp> <C-U>
-	nmap <PageDown> <C-D>
-	imap <PageUp> <C-O><C-U>
-	imap <PageDown> <C-O><C-D>
 
 	" Folding/unfolding
 	nnoremap <S-Left> zc
@@ -155,14 +145,8 @@
 	nnoremap <Leader>l zo
 	inoremap <S-Right> <C-O>zo
 
-	" Fix Shift-up/down in case shift is held while browsing folds
-	nmap <S-Up> <Up>
-	imap <S-Up> <Up>
-	nmap <S-Down> <Down>
-	imap <S-Down> <Down>
-
 	" Quick edit .vimrc
-	nmap ,v <Esc>:tabnew $MYVIMRC<CR>
+	nmap <Leader>v <Esc>:e $MYVIMRC<CR>
 
 	" Navigate by visual lines
 	noremap k gk
@@ -184,20 +168,6 @@
 	" Sudo write
 	command! -bar -nargs=0 SudoW :silent exe "write !sudo tee % >/dev/null"|silent edit!
 
-	" Home toggles start of line/start of text {{{
-		imap <khome> <home>
-		nmap <khome> <home>
-		inoremap <silent> <home> <C-O>:call Home()<CR>
-		nnoremap <silent> <home> :call Home()<CR>
-		function! Home()
-			let curcol=wincol()
-			normal ^
-			let newcol=wincol()
-			if newcol==curcol
-				normal 0
-			endif
-		endfunction
-	" }}}
 	" Line moving {{{
 		function! MoveLineUp()
 			call MoveLineOrVisualUp(".", "")
@@ -331,7 +301,7 @@
 		let g:NERDTreeCaseSensitiveSort = 1
 		let g:NERDTreeQuitOnOpen = 1
 		let g:NERDTreeWinPos = 'right'
-		let g:NERDTreeWinSize = 40
+		let g:NERDTreeWinSize = 50
 		let g:NERDTreeShowBookmarks = 1
 	" }}}
 " }}}

@@ -1,0 +1,1 @@
+../../../vimplugins/vim-haml/indent/haml.vim

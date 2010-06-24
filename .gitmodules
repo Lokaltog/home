@@ -1,0 +1,18 @@
+[submodule "vimplugins/vim-fugitive"]
+	path = vimplugins/vim-fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "vimplugins/vim-git"]
+	path = vimplugins/vim-git
+	url = http://github.com/tpope/vim-git.git
+[submodule "vimplugins/vim-haml"]
+	path = vimplugins/vim-haml
+	url = http://github.com/tpope/vim-haml.git
+[submodule "vimplugins/snipmate"]
+	path = vimplugins/snipmate
+	url = http://github.com/msanders/snipmate.vim.git
+[submodule "vimplugins/delimitmate"]
+	path = vimplugins/delimitmate
+	url = http://github.com/Raimondi/delimitMate.git
+[submodule "vimplugins/nerdtree"]
+	path = vimplugins/nerdtree
+	url = http://github.com/scrooloose/nerdtree.git

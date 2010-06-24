@@ -1,0 +1,1 @@
+../../../vimplugins/vim-haml/ftplugin/haml.vim

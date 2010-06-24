@@ -1,0 +1,1 @@
+../../../vimplugins/vim-git/indent/gitconfig.vim

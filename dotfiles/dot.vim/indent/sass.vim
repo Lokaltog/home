@@ -1,0 +1,1 @@
+../../../vimplugins/vim-haml/indent/sass.vim

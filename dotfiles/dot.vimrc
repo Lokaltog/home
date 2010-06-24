@@ -53,7 +53,7 @@
 	set updatetime=500
 	set list listchars=tab:Ë\ ,trail:í,eol:î
 
-	colo unrealized
+	colo lokaltog
 	" Change cursor color in insert mode {{{
 		if &term =~ "xterm\\|rxvt"
 			silent !echo -ne "]12;\#dd4010\x7"
@@ -255,6 +255,9 @@
 
 		" Custom psql highlighting
 		au BufNewFile,BufRead *.sql set ft=psql foldmethod=marker
+
+		" Nginx highlighting
+		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
 
 		" Remove trailing whitespace on write
 		au BufWritePre * :call setline(1, map(getline(1, "$"), 'substitute(v:val, "\\s\\+$", "","")'))

@@ -135,7 +135,7 @@
 	nmap <Leader>b <Esc>:Bp<CR>
 	nmap <F7> v
 	nmap <F8> s
-	nmap <F9> :w<CR>
+	nmap <silent><F9> :BufExplorer<CR>
 	nmap <silent><F10> :NERDTreeToggle<CR>
 
 	" q: sucks

@@ -16,20 +16,20 @@
 	status = auto
 	ui = auto
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+	current = bold cyan reverse
+	local = cyan
+	remote = yellow
 [color "diff"]
-	frag = magenta bold
-	meta = yellow bold
-	new = green bold
+	meta = yellow
+	frag = cyan
 	old = red bold
+	new = green bold
+	whitespace = red bold reverse
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
-[format]
-	numbered = auto
+	added = green bold
+	changed = yellow
+	untracked = red
+	nobranch = red bold reverse
 [push]
 	default = current
 [alias]

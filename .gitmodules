@@ -25,3 +25,6 @@
 [submodule "vimplugins/lusty"]
 	path = vimplugins/lusty
 	url = http://github.com/sjbach/lusty.git
+[submodule "vimplugins/vim-easytags"]
+	path = vimplugins/vim-easytags
+	url = http://github.com/xolox/vim-easytags.git

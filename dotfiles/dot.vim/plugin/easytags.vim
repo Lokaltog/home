@@ -1,0 +1,1 @@
+../../../vimplugins/vim-easytags/easytags.vim

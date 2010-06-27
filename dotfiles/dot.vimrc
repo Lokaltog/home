@@ -269,6 +269,9 @@
 		let g:easytags_cmd = '/usr/bin/ctags'
 		let g:easytags_file = '~/.vim/tags'
 	" }}}
+	" Supertab settings {{{
+		let g:SuperTabSetDefaultCompletionType = 'context'
+	" }}}
 	" PHP highlighting settings {{{
 		let g:php_smart_members = 1
 		let g:php_alt_properties = 1

@@ -22,3 +22,6 @@
 [submodule "vimplugins/vim-javascript"]
 	path = vimplugins/vim-javascript
 	url = http://github.com/pangloss/vim-javascript.git
+[submodule "vimplugins/lusty"]
+	path = vimplugins/lusty
+	url = http://github.com/sjbach/lusty.git

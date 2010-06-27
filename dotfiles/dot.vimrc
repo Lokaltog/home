@@ -128,10 +128,11 @@
 	endfunction
 	au FileType vim set foldlevel=0 foldtext=VimFold()
 " }}}
-" Mappings - Dvorak based {{{
-	nmap <F7> v
-	nmap <F8> s
-	nmap <silent><F9> :BufExplorer<CR>
+" Mappings {{{
+	nmap <silent><F5> v
+	nmap <silent><F6> s
+	nmap <silent><F8> :LustyJuggler<CR>
+	nmap <silent><F9> :LustyBufferExplorer<CR>
 	nmap <silent><F10> :NERDTreeToggle<CR>
 
 	" q: sucks
@@ -156,13 +157,7 @@
 	vmap <Tab> >gv
 	vmap <S-Tab> <gv
 
-	" Tab controls
-	nmap <Leader><Tab> :tabnew<CR>
-	nmap <Leader>o :tabnext<CR>
-	nmap <Leader>a :tabprevious<CR>
-	nmap <Leader>; :tabclose!<CR>
-
-	" ,n clears highlighting
+	" Clear search highlighting
 	nmap <silent> <Leader>n :silent noh<cr>
 
 	" Sudo write
@@ -267,9 +262,13 @@
 	augroup END
 " }}}
 " Plugin settings {{{
-	" Disable matchparens (slow and useless)
-	let loaded_matchparen = 1
-
+	" Disable matchparens (slow and useless) {{{
+		let loaded_matchparen = 1
+	" }}}
+	" EasyTags settings {{{
+		let g:easytags_cmd = '/usr/bin/ctags'
+		let g:easytags_file = '~/.vim/tags'
+	" }}}
 	" PHP highlighting settings {{{
 		let g:php_smart_members = 1
 		let g:php_alt_properties = 1

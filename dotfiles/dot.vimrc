@@ -268,6 +268,7 @@
 	" EasyTags settings {{{
 		let g:easytags_cmd = '/usr/bin/ctags'
 		let g:easytags_file = '~/.vim/tags'
+		let g:easytags_resolve_links = 1
 	" }}}
 	" Supertab settings {{{
 		let g:SuperTabSetDefaultCompletionType = 'context'

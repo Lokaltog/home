@@ -2,6 +2,7 @@
 
 chromium \
 	--disable-ipv6 \
+	--new-wrench-menu \
 	--enable-extension-apps \
 	--enable-extension-timeline-api \
 	--enable-sync-settings \

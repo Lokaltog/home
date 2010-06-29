@@ -16,13 +16,23 @@ hi xmlEndTag ctermfg=209 cterm=bold
 
 hi Normal ctermbg=none ctermfg=231
 
-hi LineNr ctermbg=234 ctermfg=242
-hi CursorLine ctermbg=52 cterm=bold
-hi VertSplit ctermfg=245 ctermbg=235 cterm=none
+hi LineNr ctermbg=235 ctermfg=243
+hi CursorLine ctermbg=88 cterm=bold
+hi VertSplit ctermbg=none ctermfg=240 cterm=none
 
-hi Folded ctermbg=235 ctermfg=246 cterm=bold
-hi FoldColumn ctermbg=235 ctermfg=246 cterm=none
-hi Visual ctermfg=231 ctermbg=88 cterm=bold
+hi Folded ctermbg=235 ctermfg=249 cterm=bold
+hi FoldColumn ctermbg=none ctermfg=239 cterm=none
+hi Visual ctermbg=247 ctermfg=16 cterm=bold
+
+hi StatusLineNC cterm=bold ctermfg=240 ctermbg=234
+hi StatusLine cterm=bold ctermfg=231 ctermbg=236
+hi User1 cterm=bold ctermfg=244 ctermbg=236
+hi User2 cterm=bold ctermfg=196 ctermbg=236
+hi User3 cterm=bold ctermfg=244 ctermbg=236
+hi User4 cterm=bold ctermfg=130 ctermbg=236
+hi User5 cterm=bold ctermfg=214 ctermbg=236
+hi User6 cterm=bold ctermfg=242 ctermbg=236 cterm=none
+hi User7 cterm=bold ctermfg=242 ctermbg=236
 
 hi Directory ctermfg=143 cterm=bold
 hi Underlined ctermfg=130
@@ -63,10 +73,10 @@ hi Function ctermfg=221 cterm=none
 hi Include ctermfg=173 cterm=none
 hi PreCondit ctermfg=173 cterm=none
 hi Keyword ctermfg=173 cterm=none
-hi Search ctermbg=160 ctermfg=231 cterm=bold,underline
+hi Search ctermbg=34 ctermfg=190 cterm=bold,underline
 hi Title ctermfg=15
 
-hi TODO ctermfg=228 ctermbg=none cterm=bold
+hi TODO ctermbg=94 ctermfg=228 cterm=bold
 
 hi Pmenu ctermfg=248 ctermbg=240
 hi PmenuSel ctermfg=253 ctermbg=245
@@ -87,16 +97,6 @@ hi DiffAdd ctermfg=231 ctermbg=71
 hi DiffChange ctermfg=231 ctermbg=130
 hi DiffText ctermfg=229 ctermbg=130 cterm=bold
 hi DiffDelete ctermfg=231 ctermbg=88
-
-hi StatusLineNC cterm=bold ctermfg=240 ctermbg=234
-hi StatusLine cterm=bold ctermfg=231 ctermbg=236
-hi User1 cterm=bold ctermfg=244 ctermbg=236
-hi User2 cterm=bold ctermfg=196 ctermbg=236
-hi User3 cterm=bold ctermfg=244 ctermbg=236
-hi User4 cterm=bold ctermfg=202 ctermbg=236
-hi User5 cterm=bold ctermfg=178 ctermbg=236
-hi User6 cterm=bold ctermfg=242 ctermbg=236 cterm=none
-hi User7 cterm=bold ctermfg=242 ctermbg=236
 
 " Highlight problematic whitespace (spaces before tabs)
 hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold

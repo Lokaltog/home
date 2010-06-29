@@ -39,10 +39,10 @@
 	set incsearch
 	set lazyredraw
 	set linespace=0
-	set number
-	set numberwidth=5
+	set relativenumber
+	set numberwidth=4
 	set ruler
-	set scrolloff=999
+	set scrolloff=10
 	set sidescrolloff=20
 	set showcmd
 	set showbreak=Ì
@@ -116,7 +116,7 @@
 	set foldmethod=marker
 	set foldlevel=1
 	set foldopen-=search
-	set foldcolumn=1
+	set foldcolumn=0
 
 	function! VimFold()
 		let t = getline(v:foldstart)

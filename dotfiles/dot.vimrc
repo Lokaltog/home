@@ -224,9 +224,6 @@
 		" Nginx highlighting
 		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
 
-		" Remove trailing whitespace on write
-		au BufWritePre * :call setline(1, map(getline(1, "$"), 'substitute(v:val, "\\s\\+$", "","")'))
-
 		" Always do a full syntax refresh
 		au BufEnter * syntax sync fromstart
 
@@ -259,6 +256,12 @@
 			hi def link VimModelineLine comment
 			hi def link VimModeline     special
 		" }}}
+	augroup END
+	augroup whitespace
+		autocmd!
+
+		" Remove trailing whitespace on write
+		au BufWritePre * :call setline(1, map(getline(1, "$"), 'substitute(v:val, "\\s\\+$", "","")'))
 	augroup END
 " }}}
 " Plugin settings {{{

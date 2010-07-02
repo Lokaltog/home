@@ -34,13 +34,13 @@ xset r rate 300 30
 
 # start dwm status script
 while sleep 10; do
-	xsetroot -name "$(~/.scripts/dwm-status.py)"
+	xsetroot -name "$(~/sync/bin/dwm-status)"
 done &
 
 # start default apps
 urxvtd -q -o -f
 urxvtc -name wee -e weechat-curses &
-chromium &
+~/sync/bin/chromium &
 
 # disable bluetooth
 echo disable | sudo tee -a /proc/acpi/ibm/bluetooth

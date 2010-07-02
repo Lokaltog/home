@@ -32,7 +32,7 @@
 # }}}
 # Compose {{{
 	set askcc
-	set attribution = "%n [%{%Y-%m-%d %H:%M}]:"
+	set attribution = "%n (%{%Y-%m-%d %H:%M}):"
 	set noedit_headers
 	set fast_reply
 	set forward_format = "Fwd: %s"

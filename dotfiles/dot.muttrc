@@ -1,0 +1,131 @@
+# General {{{
+	set beep_new = yes
+	set editor = "vim"
+	set sort = "threads"
+	set sort_aux = "reverse-last-date-received"
+	set menu_scroll
+	set pager_index_lines = 20
+	set pager_context = 5
+	set pager_stop
+	set pipe_decode
+	set reverse_alias
+
+	set markers = no
+	set tilde
+
+	set index_format = "%4C %Z ┃ %-20.20L │ %-50.50s %> │ %{%Y-%m-%d %H:%M} ╎ %4c"
+
+	set display_filter = "~/sync/bin/mail-filter display"
+# }}}
+# Sidebar {{{
+	set sidebar_width = 24
+	set sidebar_visible = no
+	set sidebar_delim = " ║"
+
+	color sidebar_new brightcolor190 color22
+
+	bind index,pager \ck sidebar-prev
+	bind index,pager \cj sidebar-next
+	bind index,pager \cl sidebar-open
+
+	macro index,pager h "<enter-command>toggle sidebar_visible<enter>" "toggle sidebar"
+# }}}
+# Compose {{{
+	set askcc
+	set attribution = "%n [%{%Y-%m-%d %H:%M}]:"
+	set noedit_headers
+	set fast_reply
+	set forward_format = "Fwd: %s"
+	set forward_quote
+	set include
+	set reply_to
+	set reverse_name
+# }}}
+# Headers {{{
+	ignore *
+	unignore Cc Date From Reply-To Subject To
+	unignore X-Mailer X-Mailing-List Posted-To
+
+	unhdr_order *
+	hdr_order To Cc Date From Subject
+# }}}
+# Viewing formats {{{
+	auto_view text/html
+	alternative_order text/plain text/html *
+# }}}
+# Key bindings {{{
+	bind pager / search
+	bind pager k previous-line
+	bind pager j next-line
+	bind pager gg top
+	bind pager G bottom
+	bind pager K previous-undeleted
+	bind pager J next-undeleted
+	bind pager l view-attachments
+	bind pager,index R group-reply
+	bind index gg first-entry
+	bind index G last-entry
+	bind index K previous-unread
+	bind index J next-unread
+	bind index l display-message
+	bind browser l select-entry
+	bind attach l view-attach
+	bind attach,browser,index,pager z exit
+# }}}
+# Macros {{{
+	macro index,pager y "<enter-command>unset trash\n <delete-message>" "archive message"
+	macro index,pager d "<enter-command>set trash=\"+[Gmail]/Trash\"\n<delete-message>" "delete message"
+	macro index,pager S "<save-message>=[Gmail]/Spam<enter>" "mark message as spam"
+	macro index,pager H "<save-message>=INBOX<enter>" "mark message as ham"
+	macro index,pager gi "<change-folder>=INBOX<enter>" "go to inbox"
+	macro index,pager ga "<change-folder>=[Gmail]/All<tab><enter>" "go to all mail"
+	macro index,pager gs "<change-folder>=[Gmail]/Starred<enter>" "go to starred messages"
+	macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "go to drafts"
+# }}}
+# Gmail configuration {{{
+	source "~/.mutt/gmail"
+
+	set folder = "imaps://imap.gmail.com:993"
+	set spoolfile = "+INBOX"
+	set imap_check_subscribed
+	set hostname = "gmail.com"
+	set mail_check = 15
+	set timeout = 15
+	set imap_keepalive = 300
+	set postponed = "+[Gmail]/Drafts"
+	set record = ""
+
+	set header_cache = "~/.mutt/cache/headers"
+	set message_cachedir = "~/.mutt/cache/bodies"
+	set certificate_file = "~/.mutt/certificates"
+	set move = no
+	set include
+	set auto_tag = yes
+# }}}
+# Colors {{{
+	color message brightcolor33 default
+	color error brightcolor160 default
+	color attachment color150 default
+	color bold brightcolor231 default
+	color indicator brightcolor231 color237
+	color markers color88 default
+	color normal color231 default
+	color quoted color243 default
+	color search brightcolor190 color34
+	color signature color250 default
+	color status color241 default
+	color tilde color88 default
+	color tree color208 default
+	color underline color231 default
+
+	color hdrdefault color143 default
+	color header color243 default "^(To|Cc):"
+	color header brightcolor185 default "^(From|Subject):"
+
+	color index brightcolor190 color22 "~N" # New
+	color index brightcolor231 color24 "~T" # Tagged
+	color index brightcolor231 color52 "~F" # Flagged
+	color index color88 default "~D" # Deleted
+
+	color body brightcolor139 default " [;:]-*[})>{(<|]"
+# }}}

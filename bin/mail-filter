@@ -1,0 +1,115 @@
+#!/usr/bin/python3
+
+import sys, re
+
+def parse_body(text, level=0, max_level=-1):
+	if max_level > -1 and level > max_level:
+		return
+
+	tree = []
+	quote = []
+
+	for line in text:
+		if len(line) and line[0] == ">":
+			quote.append(line[1:].strip())
+		else:
+			if quote:
+				tree.append(parse_body(quote, level=level + 1, max_level=max_level))
+				quote = []
+
+			tree.append(line)
+
+	return tree
+
+def clean_body(tree, level=0, aggressive=False):
+	ret = []
+	pos = { 'body': False, 'footer': False }
+
+	for key, line in enumerate(tree):
+		try:
+			if isinstance(line, list):
+				ret.append(clean_body(line, level=level + 1))
+				continue
+
+			# Skip empty lines and headers above body
+			if not pos['body']:
+				if not line.strip():
+					continue
+
+				if re.search('^([A-Z][\w-]+):.*$', line):
+					continue
+
+			# Remove empty lines before and after quote blocks
+			if level > 0 and not line.strip():
+				if not tree[key - 1].strip() or not tree[key + 1].strip():
+					continue
+
+			# Strip signatures
+			if level > 0 or aggressive:
+				if re.search(r'^ *[-_]{2,} *$', line):
+					pos['footer'] = True
+					continue
+		except (AttributeError, TypeError, IndexError):
+			# Ignore all errors here
+			continue
+
+		if pos['footer']:
+			for i in range(len(ret) - 1, 0, -1):
+				try:
+					if not ret[i].strip():
+						del ret[i]
+						continue
+				except AttributeError:
+					# ret[i] is not a string, ignore
+					pass
+
+				break
+			continue
+
+		pos['body'] = True
+
+		# Remove excessive punctuation
+		line = re.sub(r'(([!?.,])\2{,2})\2*', r'\1', line)
+
+		ret.append(line)
+
+	return ret
+
+def compile_body(tree, level=0):
+	body = []
+
+	for key, line in enumerate(tree):
+		if isinstance(line, list):
+			body.append(compile_body(line, level=level + 1))
+			continue
+
+		body.append(("> " * level) + line)
+
+	return "\n".join(body)
+
+headers = []
+body = []
+
+for line in sys.stdin.readlines():
+	line = line.rstrip("\n")
+
+	if not body and re.search(r'^([A-Z][\w-]+):.*$', line):
+		headers.append(line)
+		continue
+
+	body.append(line)
+
+if headers:
+	print("\n".join(headers) + "\n")
+
+try:
+	if sys.argv[1] == 'display':
+		tree = parse_body(body, max_level=2)
+		tree = clean_body(tree, aggressive=True)
+	else:
+		raise IndexError
+except IndexError:
+	tree = parse_body(body, max_level=2)
+	tree = clean_body(tree)
+
+print(compile_body(tree).strip())

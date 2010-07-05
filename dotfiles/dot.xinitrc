@@ -39,7 +39,8 @@ done &
 
 # start default apps
 urxvtd -q -o -f
-urxvtc -name wee -e weechat-curses &
+urxvtc -name mutt -e mutt &
+urxvtc -name weechat -e weechat-curses &
 ~/sync/bin/chromium &
 
 # disable bluetooth

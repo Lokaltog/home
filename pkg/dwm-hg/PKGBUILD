@@ -27,8 +27,14 @@ _hgrepo="dwm"
 build() {
 	cd $startdir/src
 
-	hg clone ${_hgroot}/${_hgrepo}
-	cd $_hgrepo
+	if [ -d $_hgrepo ]; then
+		cd $_hgrepo
+		make clean
+		hg pull -u
+	else
+		hg clone ${_hgroot}/${_hgrepo}
+		cd $_hgrepo
+	fi
 
 	cp $srcdir/config.h .
 

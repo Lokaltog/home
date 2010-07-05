@@ -38,8 +38,8 @@ static const Tag tags[] = {
 	// name       layout           mfact
 	{ "main",     &layouts[0],     -1   },
 	{ "dev",      &layouts[0],     0.5  },
-	{ "term",     &layouts[3],     -1   },
-	{ "misc",     &layouts[0],     -1   },
+	{ "misc",     &layouts[3],     -1   },
+	{ "mail",     &layouts[2],     -1   },
 	{ "im",       &layouts[2],     -1   },
 };
 
@@ -47,13 +47,14 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",           NULL,       NULL,       0,         True,        -1 },
 	{ "feh",            NULL,       NULL,       0,         True,        -1 },
-	{ "Gnome-mplayer",  NULL,       NULL,       1<<4,      True,        -1 },
-	{ NULL,             "Mplayer",  NULL,       1<<4,      True,        -1 },
+	{ "Gnome-mplayer",  NULL,       NULL,       0,         True,        -1 },
+	{ NULL,             "Mplayer",  NULL,       0,         True,        -1 },
 	{ "Chromium",       NULL,       NULL,       1<<0,      False,       -1 },
 	{ "URxvt",          "vim",      NULL,       1<<1,      False,       -1 },
-	{ "URxvt",          "term",     "term",     1<<2,      False,       -1 },
-	{ "URxvt",          "ncmpcpp",  NULL,       1<<3,      False,       -1 },
-	{ "URxvt",          "wee",      NULL,       1<<4,      False,       -1 },
+	{ "URxvt",          "ncmpcpp",  NULL,       0,         True,        -1 },
+	{ "URxvt",          "ranger",   NULL,       0,         True,        -1 },
+	{ "URxvt",          "mutt",     NULL,       1<<3,      False,       -1 },
+	{ "URxvt",          "weechat",  NULL,       1<<4,      False,       -1 },
 };
 
 
@@ -95,8 +96,10 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][Col
 static const char *chromium[] = { "/home/kim/sync/bin/chromium", NULL };
 static const char *vim[]      = { "/home/kim/sync/bin/vim", NULL };
 static const char *termcmd[]  = { terminal, NULL };
-static const char *mpc[]      = { terminal, "-name", "ncmpcpp", "-geometry", "100x60", "-e", "ncmpcpp", NULL };
-static const char *ranger[]   = { terminal, "-name", "ranger", "-e", "ranger", NULL };
+static const char *ncmpcpp[]  = { terminal, "-name", "ncmpcpp", "-e", "ncmpcpp",        NULL };
+static const char *ranger[]   = { terminal, "-name", "ranger",  "-e", "ranger",         NULL };
+static const char *mutt[]     = { terminal, "-name", "mutt",    "-e", "mutt",           NULL };
+static const char *weechat[]  = { terminal, "-name", "weechat", "-e", "weechat-curses", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -104,8 +107,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_n,      spawn,          {.v = chromium } },
 	{ MODKEY,                       XK_v,      spawn,          {.v = vim } },
-	{ MODKEY,                       XK_p,      spawn,          {.v = ranger } },
-	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mpc } },
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = ncmpcpp } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = ranger } },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mutt } },
+	{ MODKEY,                       XK_c,      spawn,          {.v = weechat } },
 
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },

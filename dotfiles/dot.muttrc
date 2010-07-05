@@ -1,5 +1,5 @@
 # General {{{
-	set beep_new = yes
+	set beep_new
 	set editor = "vim"
 	set sort = "threads"
 	set sort_aux = "reverse-last-date-received"
@@ -12,10 +12,18 @@
 
 	set markers = no
 	set tilde
+	set help = no
 
 	set index_format = "%4C %Z ┃ %-20.20L │ %-50.50s %> │ %{%Y-%m-%d %H:%M} ╎ %4c"
 
 	set display_filter = "~/sync/bin/mail-filter display"
+# }}}
+# GnuPG {{{
+	source "~/.mutt/gpg.rc"
+
+	set pgp_replysign
+	set pgp_replyencrypt
+	set pgp_verify_sig
 # }}}
 # Sidebar {{{
 	set sidebar_width = 24
@@ -31,7 +39,8 @@
 	macro index,pager h "<enter-command>toggle sidebar_visible<enter>" "toggle sidebar"
 # }}}
 # Compose {{{
-	set askcc
+	unset askcc
+	unset askbcc
 	set attribution = "%n (%{%Y-%m-%d %H:%M}):"
 	set noedit_headers
 	set fast_reply
@@ -125,7 +134,8 @@
 	color index brightcolor190 color22 "~N" # New
 	color index brightcolor231 color24 "~T" # Tagged
 	color index brightcolor231 color52 "~F" # Flagged
-	color index color88 default "~D" # Deleted
+	color index color124 default "~D" # Deleted
+	color index color226 default "~g | ~G" # Signed/encrypted messages
 
 	color body brightcolor139 default " [;:]-*[})>{(<|]"
 # }}}

@@ -18,7 +18,6 @@
 		set fileformat=unix
 
 		let mapleader=','
-		set whichwrap=b,s
 		set matchpairs+=<:>
 		set shortmess=atToOI
 		set iskeyword+=_,$,@,%,#
@@ -39,7 +38,7 @@
 	set incsearch
 	set lazyredraw
 	set linespace=0
-	set relativenumber
+	set number
 	set numberwidth=4
 	set ruler
 	set scrolloff=10
@@ -101,6 +100,7 @@
 " }}}
 " Layout / Text formatting {{{
 	set autoindent
+	set wrap
 	set formatoptions=tcroqn1
 	set ignorecase
 	set linebreak

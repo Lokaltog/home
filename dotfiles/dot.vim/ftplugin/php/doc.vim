@@ -1,0 +1,1 @@
+../../../../vimplugins/piv/ftplugin/php/doc.vim

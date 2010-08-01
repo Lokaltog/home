@@ -3,6 +3,10 @@ snippet ph
 	${1}
 snippet de
 	echo Kohana::debug(${1});${2:die;}
+snippet redir
+	Request::instance()->redirect(${1})
+snippet uri
+	Route::get('default')->uri(array('controller' => '${1}', 'action' => '${2}'${3}))${4}
 snippet w
 	// ${1}
 	${2}

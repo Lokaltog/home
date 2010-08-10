@@ -7,4 +7,5 @@ chromium \
 	--enable-extension-timeline-api \
 	--enable-sync-settings \
 	--enable-sync-extensions \
-	--omnibox-popup-count=10
+	--omnibox-popup-count=10 \
+	--enable-apps

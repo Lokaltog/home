@@ -82,7 +82,7 @@ def get_volume():
 	muted = re.search("\[(on|off)\]", amixer).groups()[0] == "off"
 
 	if muted:
-		return "\x06ê Muted"
+		return "\x06ê Muted  "
 
 	icon = "í"
 	if volume < 50:

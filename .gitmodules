@@ -34,3 +34,6 @@
 [submodule "vimplugins/piv"]
 	path = vimplugins/piv
 	url = http://github.com/spf13/PIV.git
+[submodule "vimplugins/syntastic"]
+	path = vimplugins/syntastic
+	url = http://github.com/scrooloose/syntastic.git

@@ -37,6 +37,7 @@
 	br = branch
 	ci = commit
 	st = status -s
+	pa = push --all
 	cbr = checkout -b
 	dbr = branch -d
 	unstage = reset HEAD --

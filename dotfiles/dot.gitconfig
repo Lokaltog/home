@@ -2,7 +2,7 @@
 	name = Kim Silkebækken
 	email = kim.silkebaekken@gmail.com
 [merge]
-	tool = vimdiff
+	tool = meld
 	log = true
 [core]
 	autocrlf = input

@@ -28,13 +28,14 @@ URxvt.italicFont     : -*-lokaltog-medium-r-*-*-10-*-*-*-*-*-*-*
 URxvt.boldItalicFont : -*-lokaltog-bold-r-*-*-10-*-*-*-*-*-*-*
 ! }}}
 ! }}}
+! URxvt/vim settings {{{
+vim.saveLines: 0
+! }}}
 ! URxvt/ncmpcpp settings {{{
 ncmpcpp.saveLines: 0
-ncmpcpp.geometry : 140x70
 ! }}}
 ! URxvt/ranger settings {{{
 ranger.saveLines: 0
-ranger.geometry : 140x70
 ! }}}
 ! URxvt/mutt settings {{{
 mutt.saveLines: 0

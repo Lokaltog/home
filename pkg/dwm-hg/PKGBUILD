@@ -1,6 +1,6 @@
 # vim:set ft=sh:
 pkgname="dwm-hg"
-pkgver=1521
+pkgver=1524
 pkgrel=1
 pkgdesc="The latest hg pull of dwm"
 url="http://dwm.suckless.org"

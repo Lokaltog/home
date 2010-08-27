@@ -16,7 +16,7 @@ static const char colors[NUMCOLORS][ColLast][8] = {
   { "#ff0",    "#000",    "#dd4010" },  // urgent/warning  (black on yellow)
   { "#dd4010", "#fff",    "#ee4010" },  // error (white on red)
   { "#fff",    "#fff",    "#000000" },  // white
-  { "#dd4010", "#dd4010", "#000"    },  // red
+  { "#dd4010", "#dd4010", "#000"    },  // red (warning)
   { "#daff30", "#daff30", "#000"    },  // green
   { "#fff",    "#fff",    "#000"    },  // selected bar
 };
@@ -47,12 +47,11 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",           NULL,       NULL,       0,         True,        -1 },
 	{ "feh",            NULL,       NULL,       0,         True,        -1 },
-	{ "Gnome-mplayer",  NULL,       NULL,       0,         True,        -1 },
-	{ NULL,             "Mplayer",  NULL,       0,         True,        -1 },
+	{ "MPlayer",        NULL,       NULL,       0,         True,        -1 },
 	{ "Chromium",       NULL,       NULL,       1<<0,      False,       -1 },
 	{ "URxvt",          "vim",      NULL,       1<<1,      False,       -1 },
-	{ "URxvt",          "ncmpcpp",  NULL,       0,         True,        -1 },
-	{ "URxvt",          "ranger",   NULL,       0,         True,        -1 },
+	{ "URxvt",          "ncmpcpp",  NULL,       0,         False,       -1 },
+	{ "URxvt",          "ranger",   NULL,       0,         False,       -1 },
 	{ "URxvt",          "mutt",     NULL,       1<<3,      False,       -1 },
 	{ "URxvt",          "weechat",  NULL,       1<<4,      False,       -1 },
 };

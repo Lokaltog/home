@@ -138,6 +138,10 @@
 	" q: sucks
 	nmap q: :q
 
+	" Buffer swithing
+	nnoremap <silent> <Tab> :bnext<CR>
+	nnoremap <silent> <S-Tab> :bprevious<CR>
+
 	" Folding/unfolding
 	nnoremap <S-Left> zc
 	nnoremap <Leader>h zc

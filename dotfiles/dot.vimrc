@@ -69,17 +69,7 @@
 	" }}}
 	" Git branch wrapper {{{
 		function! GitBranch()
-			if !exists("b:branch")
-				let b:branch = fugitive#statusline()
-
-				if empty(b:branch)
-					return ''
-				endif
-
-				let b:branch = substitute(b:branch, 'GIT(\(\w\+\))', ' Í \1', 'g')
-			endif
-
-			return b:branch
+			return substitute(fugitive#statusline(), 'GIT(\(\w\+\))', ' Í \1', 'g')
 		endfunction
 	" }}}
 	set statusline=
@@ -96,7 +86,7 @@
 	set statusline+=\ Ï " Group end
 	set statusline+=\ %4*%{strlen(&ft)?toupper(&ft):'NONE'}%* " File type (User4)
 	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
-    "set statusline+=%{SyntaxItem()}
+    "set statusline+=\ %{SyntaxItem()}
 " }}}
 " Layout / Text formatting {{{
 	set autoindent

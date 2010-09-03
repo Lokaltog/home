@@ -199,19 +199,17 @@
 	autoload -Uz vcs_info
 
 	zstyle ':vcs_info:*' enable git svn hg
-	zstyle ':vcs_info:*' formats '%F{0}%BÎ%%b%F{5}%s %B%r%%b %F{7}%BÍ %b%F{0}%BÏ%%b'
+	zstyle ':vcs_info:*' formats '%F{5}%s%f %F{7}%BÍ %b'
 
 	precmd(){
-		#vcs_info
+		vcs_info
 	}
 # }}}
 # prompt {{{
 	if [[ "$TERM" == "linux" ]]; then
-		PR_DELIM=('[' ']')
 		PR_SSH='SSH'
 		PR_START='%%'
 	else
-		PR_DELIM=('Î' 'Ï')
 		PR_SSH='ê'
 		PR_START='ý'
 	fi
@@ -219,13 +217,13 @@
 		PROMPTDIR='%b%F{6}%3~%f'
 
 		if [[ $UID == 0 ]]; then
-			PROMPT='%F{0}%B${PR_DELIM[1]}%F{1}%n '$PROMPTDIR'%F{0}%B${PR_DELIM[2]} %F{1}${PR_START}%f%b '
+			PROMPT='%B%F{1}%n%f '$PROMPTDIR' %B%F{1}${PR_START}%f%b '
 		else
-			PROMPT='%F{0}%B${PR_DELIM[1]}%F{4}%n '$PROMPTDIR'%F{0}%B${PR_DELIM[2]} %F{7}${PR_START}%f%b '
+			PROMPT='%B%F{4}%n%f '$PROMPTDIR' %B%F{7}${PR_START}%f%b '
 		fi
 
 		# check if user is logged in via ssh
-		[[ ! -z "$SSH_CLIENT" ]] && PROMPT='%F{3}${PR_DELIM[1]}%B${PR_SSH} %M%b%F{3}${PR_DELIM[2]}%f '$PROMPT
+		[[ ! -z "$SSH_CLIENT" ]] && PROMPT='%F{3}${PR_SSH} %M%f %F{0}%B│%b%f '$PROMPT
 	# }}}
 	# right prompt {{{
 		RPROMPT='${vcs_info_msg_0_}'

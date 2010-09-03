@@ -69,7 +69,7 @@
 	" }}}
 	" Git branch wrapper {{{
 		function! GitBranch()
-			return substitute(fugitive#statusline(), 'GIT(\(\w\+\))', ' Í \1', 'g')
+			return substitute(fugitive#statusline(), 'GIT(\([a-z0-9\-_]\+\))', ' Í \1', 'gi')
 		endfunction
 	" }}}
 	set statusline=

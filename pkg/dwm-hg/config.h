@@ -13,8 +13,8 @@ static const char colors[NUMCOLORS][ColLast][8] = {
   // border    foreground background
   { "#111",    "#aaa",    "#000"    },  // normal
   { "#fff",    "#000",    "#fff"    },  // selected tag
-  { "#ff0",    "#000",    "#dd4010" },  // urgent/warning  (black on yellow)
-  { "#dd4010", "#fff",    "#ee4010" },  // error (white on red)
+  { "#dd4010", "#fff",    "#dd4010" },  // urgent/warning
+  { "#dd4010", "#fff",    "#ee4010" },  // error
   { "#fff",    "#fff",    "#000000" },  // white
   { "#dd4010", "#dd4010", "#000"    },  // red (warning)
   { "#daff30", "#daff30", "#000"    },  // green

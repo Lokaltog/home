@@ -1,0 +1,48 @@
+diff -r -U5 dwm-5.8.2/dwm.c dwm-5.8.2_monocle_count/dwm.c
+--- dwm-5.8.2/dwm.c	2010-06-04 12:39:15.000000000 +0200
++++ dwm-5.8.2_monocle_count/dwm.c	2010-06-15 15:52:51.000000000 +0200
+@@ -684,10 +684,12 @@
+ void
+ drawbar(Monitor *m) {
+ 	int x;
+ 	unsigned int i, occ = 0, urg = 0;
+ 	unsigned long *col;
++	unsigned int a= 0, s= 0;
++	char posbuf[10];
+ 	Client *c;
+
+ 	for(c = m->clients; c; c = c->next) {
+ 		occ |= c->tags;
+ 		if(c->isurgent)
+@@ -733,6 +733,18 @@
+ 	drawtext(m->ltsymbol, dc.colors[4], False);
+ 	dc.x += dc.w;
+ 	x = dc.x;
++	if(m->lt[m->sellt]->arrange == monocle){
++		for(c= nexttiled(m->clients), a= 0, s= 0; c; c= nexttiled(c->next), a++)
++			if(c == m->stack)
++				s= a;
++		if(!s && a)
++			s= a;
++		snprintf(posbuf, LENGTH(posbuf), "[%d/%d]", s, a);
++		dc.w= TEXTW(posbuf);
++		drawtext(posbuf, dc.colors[4], False);
++		x= dc.x + dc.w;
++	}
++
+ 	if(m == selmon) { /* status is only drawn on selected monitor */
+ 		dc.w = TEXTW(stext);
+ 		dc.x = m->ww - dc.w;
+@@ -1184,12 +1198,10 @@
+ 	Client *c;
+
+ 	for(c = m->clients; c; c = c->next)
+ 		if(ISVISIBLE(c))
+ 			n++;
+-	if(n > 0) /* override layout symbol */
+-		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
+ 	for(c = nexttiled(m->clients); c; c = nexttiled(c->next))
+ 		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, False);
+ }
+
+ void

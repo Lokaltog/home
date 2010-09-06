@@ -19,6 +19,7 @@ source=(
 	dwm-gaplessgrid.diff
 	dwm-pertag.diff
 	dwm-statuscolors.diff
+	dwm-monoclecount.diff
 )
 
 _hgroot="http://code.suckless.org/hg"
@@ -45,6 +46,7 @@ build() {
 	hg patch -m null -u null $srcdir/dwm-pertag.diff || return 1
 	hg patch -m null -u null $srcdir/dwm-statuscolors.diff || return 1
 	hg patch -m null -u null $srcdir/dwm-colors.diff || return 1
+	hg patch -m null -u null $srcdir/dwm-monoclecount.diff || return 1
 
 	msg "Starting build process."
 	make || return 1

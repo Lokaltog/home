@@ -1,0 +1,1 @@
+../../../vimplugins/neocomplcache/doc/neocomplcache.txt

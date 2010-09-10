@@ -1,1 +1,1 @@
-../../../vimplugins/piv/autoload/phpcomplete.vim
+../../../vimplugins/phpcomplete/phpcomplete.vim

@@ -289,9 +289,6 @@
 		let g:easytags_file = '~/.vim/tags'
 		let g:easytags_resolve_links = 1
 	" }}}
-	" Supertab settings {{{
-		let g:SuperTabSetDefaultCompletionType = 'context'
-	" }}}
 	" PHP highlighting settings {{{
 		let g:php_smart_members = 1
 		let g:php_alt_properties = 1

@@ -3,7 +3,7 @@
 	syntax on
 	set mouse=ar
 
-	set tags+=tags;$HOME
+	set tags+=tags;~/.tags;~/.vimtags
 
 	" General options {{{
 		filetype plugin indent on
@@ -286,8 +286,9 @@
 	" }}}
 	" EasyTags settings {{{
 		let g:easytags_cmd = '/usr/bin/ctags'
-		let g:easytags_file = '~/.vim/tags'
+		let g:easytags_file = '~/.vimtags'
 		let g:easytags_resolve_links = 1
+		let g:easytags_include_members = 1
 	" }}}
 	" neocomplcache settings {{{
 		let g:neocomplcache_enable_at_startup = 1

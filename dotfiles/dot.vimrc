@@ -33,7 +33,7 @@
 " }}}
 " UI options {{{
 	set laststatus=2
-	set fillchars=vert:ÿ,fold:Û
+	set fillchars=vert:║,fold:Û
 	set hlsearch
 	set incsearch
 	set lazyredraw
@@ -73,9 +73,8 @@
 		endfunction
 	" }}}
 	set statusline=
-    set statusline+=%1*%{GitBranch()}%* " Git branch (User1)
-	set statusline+=\ %< " Separator, truncate
-	set statusline+=Î " Group start
+	set statusline+=%1*%{GitBranch()}%* " Git branch (User1)
+	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
 	set statusline+=%(\ %2*%M%*%) " Modified (+, -) (User2)
 	set statusline+=%(\ %3*[%R%H%W]%*%) " RO,HLP,PRV (User3)
@@ -83,7 +82,7 @@
 	set statusline+=\ %6*%{&fileformat}%* " File format
 	set statusline+=\ %6*%{(&fenc==\"\"?&enc:&fenc)}%* " File encoding
 	set statusline+=\ %(%l:%c%V%)
-	set statusline+=\ Ï " Group end
+	set statusline+=\ │ " Group end
 	set statusline+=\ %4*%{strlen(&ft)?toupper(&ft):'NONE'}%* " File type (User4)
 	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
     "set statusline+=\ %{SyntaxItem()}
@@ -233,8 +232,8 @@
 		au BufNewFile *.php so ~/.vim/templates/tpl.php
 
 		" Help file settings
-		au FileType help set nonumber " No line numbers when viewing help
-		au FileType help nnoremap <buffer><cr> <c-]> " Enter selects subject
+		au FileType help set nonumber statusline=%f%<
+		au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
 		au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
 		au FileType help wincmd L
 		au FileType help vertical resize 80

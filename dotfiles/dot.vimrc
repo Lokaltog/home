@@ -119,9 +119,8 @@
 	au FileType vim set foldlevel=0 foldtext=VimFold()
 " }}}
 " Mappings {{{
-	nmap <silent><F5> v
-	nmap <silent><F6> s
-	nmap <silent><F8> :LustyJuggler<CR>
+	nmap <silent><F7> :LustyJuggler<CR>
+	nmap <silent><F8> :TlistToggle<CR>
 	nmap <silent><F9> :LustyBufferExplorer<CR>
 	nmap <silent><F10> :NERDTreeToggle<CR>
 
@@ -335,5 +334,14 @@
 		let g:NERDTreeWinPos = 'right'
 		let g:NERDTreeWinSize = 50
 		let g:NERDTreeShowBookmarks = 1
+	" }}}
+	" Taglist settings {{{
+		let g:Tlist_Close_On_Select = 1
+		let g:Tlist_Compact_Format = 1
+		let g:Tlist_Display_Tag_Scope = 1
+		let g:Tlist_Exit_OnlyWindow = 1
+		let g:Tlist_File_Fold_Auto_Close = 1
+		let g:Tlist_GainFocus_On_ToggleOpen = 1
+		let g:Tlist_Use_Right_Window = 1
 	" }}}
 " }}}

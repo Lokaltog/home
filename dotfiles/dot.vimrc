@@ -295,17 +295,15 @@
 		let g:neocomplcache_enable_underbar_completion = 1
 		let g:neocomplcache_min_syntax_length = 3
 		let g:neocomplcache_enable_auto_select = 0
-"		let g:neocomplcache_omni_patterns = { 'php': '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|extends\)\s\+\|\h\w*::'}
+"		let g:neocomplcache_disable_auto_complete = 1
+		let g:neocomplcache_omni_patterns = { 'php': '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|extends\)\s\+\|\h\w*::' }
 
 		inoremap <expr><C-g> neocomplcache#close_popup()."\<C-g>"
 		inoremap <expr><BS> neocomplcache#cancel_popup()."\<BS>"
 	" }}}
 	" PHP highlighting settings {{{
-		let g:php_smart_members = 1
-		let g:php_alt_properties = 1
-		let g:php_show_semicolon = 1
-		let g:php_smart_semicolon = 1
 		let g:php_folding = 0
+		let g:php_sql_query = 1
 		let g:php_html_in_strings = 1
 		let g:php_parent_error_close = 1
 		let g:php_parent_error_open = 1
@@ -318,9 +316,10 @@
 	" }}}
 	" delimitMate settings {{{
 		let g:delimitMate_unbalanced_parens = 1
-		let g:delimitMate_expand_cr = 0
-		let g:delimitMate_excluded_ft = "mail,txt,vim"
-		let g:delimitMate_matchpairs = "(:),[:],{:},\":\",':',`:`"
+		let g:delimitMate_balance_matchpairs = 1
+		let g:delimitMate_expand_space = 1
+
+		au FileType mail,text let b:delimitMate_autoclose = 0
 	" }}}
 	" Disable annoying sql bindings {{{
 		let g:ftplugin_sql_omni_key_right = "<C-S-M-Right>"

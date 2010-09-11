@@ -33,8 +33,8 @@ xset m 2 0
 xset r rate 300 30
 
 # start dwm status script
-while sleep 10; do
-	xsetroot -name "$(~/sync/bin/dwm-status)"
+while xsetroot -name "`~/sync/bin/dwm-status`"; do
+	sleep 10
 done &
 
 # start default apps

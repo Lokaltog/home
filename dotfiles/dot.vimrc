@@ -49,6 +49,7 @@
 	set textwidth=0
 	set confirm
 	set updatetime=500
+	set history=100
 	set list listchars=tab:Ë\ ,trail:í,eol:î
 
 	colo lokaltog
@@ -233,7 +234,7 @@
 		au BufNewFile *.php so ~/.vim/templates/tpl.php
 
 		" Help file settings
-		au FileType help set nonumber statusline=%f%<
+		au FileType help setl nonumber statusline=%f%<
 		au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
 		au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
 		au FileType help wincmd L
@@ -297,8 +298,8 @@
 		let g:neocomplcache_enable_smart_case = 1
 		let g:neocomplcache_enable_camel_case_completion = 1
 		let g:neocomplcache_enable_underbar_completion = 1
-		let g:neocomplcache_min_syntax_length = 3
 		let g:neocomplcache_enable_auto_select = 0
+		let g:neocomplcache_enable_cursor_hold_i = 1
 "		let g:neocomplcache_disable_auto_complete = 1
 		let g:neocomplcache_omni_patterns = { 'php': '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|extends\)\s\+\|\h\w*::' }
 

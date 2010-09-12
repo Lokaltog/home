@@ -18,10 +18,11 @@ hi Normal ctermbg=none ctermfg=231
 
 hi LineNr ctermbg=235 ctermfg=243
 hi CursorLine ctermbg=88 cterm=bold
-hi VertSplit ctermbg=none ctermfg=240 cterm=none
+hi VertSplit ctermbg=none ctermfg=237 cterm=none
 
 hi Folded ctermbg=235 ctermfg=249 cterm=bold
 hi FoldColumn ctermbg=none ctermfg=239 cterm=none
+hi SignColumn ctermbg=none cterm=bold
 hi Visual ctermbg=247 ctermfg=16 cterm=bold
 
 hi StatusLineNC cterm=bold ctermfg=240 ctermbg=234
@@ -73,7 +74,7 @@ hi Function ctermfg=221 cterm=none
 hi Include ctermfg=173 cterm=none
 hi PreCondit ctermfg=173 cterm=none
 hi Keyword ctermfg=173 cterm=none
-hi Search ctermbg=34 ctermfg=190 cterm=bold,underline
+hi Search ctermbg=25 ctermfg=153 cterm=bold
 hi Title ctermfg=15
 
 hi TODO ctermbg=94 ctermfg=228 cterm=bold

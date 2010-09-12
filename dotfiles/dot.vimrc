@@ -101,6 +101,7 @@
 	set smartindent
 	set smarttab
 	set startofline
+	set completeopt=menu,menuone,longest,preview
 " }}}
 " Folding {{{
 	set foldenable
@@ -294,7 +295,9 @@
 		let g:easytags_include_members = 1
 	" }}}
 	" Supertab settings {{{
-		let g:SuperTabSetDefaultCompletionType = 'context'
+		let g:SuperTabMappingForward = '<s-tab>'
+		let g:SuperTabMappingBackward = '<tab>'
+		let g:SuperTabLongestEnhanced = 1
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0

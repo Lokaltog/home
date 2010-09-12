@@ -1,0 +1,1 @@
+../../../vimplugins/supertab/plugin/supertab.vim

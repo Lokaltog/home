@@ -293,6 +293,9 @@
 		let g:easytags_resolve_links = 1
 		let g:easytags_include_members = 1
 	" }}}
+	" Supertab settings {{{
+		let g:SuperTabSetDefaultCompletionType = 'context'
+	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
 		let g:php_sql_query = 1

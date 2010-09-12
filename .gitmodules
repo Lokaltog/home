@@ -40,9 +40,6 @@
 [submodule "vimplugins/phpcomplete"]
 	path = vimplugins/phpcomplete
 	url = http://github.com/shawncplus/phpcomplete.vim.git
-[submodule "vimplugins/neocomplcache"]
-	path = vimplugins/neocomplcache
-	url = http://github.com/Shougo/neocomplcache.git
 [submodule "vimplugins/vim-taglist"]
 	path = vimplugins/vim-taglist
 	url = http://github.com/bronson/vim-taglist.git

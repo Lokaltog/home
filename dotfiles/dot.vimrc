@@ -293,19 +293,6 @@
 		let g:easytags_resolve_links = 1
 		let g:easytags_include_members = 1
 	" }}}
-	" neocomplcache settings {{{
-		let g:neocomplcache_enable_at_startup = 1
-		let g:neocomplcache_enable_smart_case = 1
-		let g:neocomplcache_enable_camel_case_completion = 1
-		let g:neocomplcache_enable_underbar_completion = 1
-		let g:neocomplcache_enable_auto_select = 0
-		let g:neocomplcache_enable_cursor_hold_i = 1
-"		let g:neocomplcache_disable_auto_complete = 1
-		let g:neocomplcache_omni_patterns = { 'php': '[^. \t]->\h\w*\|\$\h\w*\|\%(=\s*new\|extends\)\s\+\|\h\w*::' }
-
-		inoremap <expr><C-g> neocomplcache#close_popup()."\<C-g>"
-		inoremap <expr><BS> neocomplcache#cancel_popup()."\<BS>"
-	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
 		let g:php_sql_query = 1

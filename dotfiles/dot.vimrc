@@ -76,6 +76,7 @@
 	set statusline+=%1*%{GitBranch()}%* " Git branch (User1)
 	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
+	set statusline+=%(\ %2*%{SyntasticStatuslineFlag()}%*%)
 	set statusline+=%(\ %2*%M%*%) " Modified (+, -) (User2)
 	set statusline+=%(\ %3*[%R%H%W]%*%) " RO,HLP,PRV (User3)
 	set statusline+=\ %= " Separator, left/right
@@ -241,6 +242,9 @@
 		" Override SASS defaults
 		au FileType sass set sw=4 ts=4 noet
 
+		" Enable Syntastic {{{
+			au BufNewFile,BufRead * SyntasticEnable
+		" }}}
 		" Highlight vim modeline in all files {{{
 			au Syntax *
 				\ syn match VimModelineLine /^.\{-1,}vim:[^:]\{-1,}:.*/ contains=VimModeline |
@@ -341,5 +345,9 @@
 		let g:Tlist_File_Fold_Auto_Close = 1
 		let g:Tlist_GainFocus_On_ToggleOpen = 1
 		let g:Tlist_Use_Right_Window = 1
+	" }}}
+	" Syntastic settings {{{
+		let g:syntastic_enable_signs = 1
+		let g:syntastic_auto_loc_list = 1
 	" }}}
 " }}}

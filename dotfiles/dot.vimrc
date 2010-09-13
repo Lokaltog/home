@@ -74,7 +74,7 @@
 		endfunction
 	" }}}
 	set statusline=
-	set statusline+=%(\ %1*%{GitBranch()}%*%) " Git branch (User1)
+	set statusline+=%(\ %1*%{GitBranch()}%*\ │%) " Git branch (User1)
 	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
 	set statusline+=%(\ %2*%{SyntasticStatuslineFlag()}%*%)

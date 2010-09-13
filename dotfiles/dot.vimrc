@@ -70,22 +70,22 @@
 	" }}}
 	" Git branch wrapper {{{
 		function! GitBranch()
-			return substitute(fugitive#statusline(), 'GIT(\([a-z0-9\-_]\+\))', ' Í \1', 'gi')
+			return substitute(fugitive#statusline(), 'GIT(\([a-z0-9\-_]\+\))', 'Í \1', 'gi')
 		endfunction
 	" }}}
 	set statusline=
-	set statusline+=%1*%{GitBranch()}%* " Git branch (User1)
+	set statusline+=%(\ %1*%{GitBranch()}%*%) " Git branch (User1)
 	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
 	set statusline+=%(\ %2*%{SyntasticStatuslineFlag()}%*%)
 	set statusline+=%(\ %2*%M%*%) " Modified (+, -) (User2)
 	set statusline+=%(\ %3*[%R%H%W]%*%) " RO,HLP,PRV (User3)
 	set statusline+=\ %= " Separator, left/right
-	set statusline+=\ %6*%{&fileformat}%* " File format
-	set statusline+=\ %6*%{(&fenc==\"\"?&enc:&fenc)}%* " File encoding
+	set statusline+=%(\ %6*%{&fileformat}%*%) " File format
+	set statusline+=%(\ %6*%{(&fenc==''?&enc:&fenc)}%*%) " File encoding
 	set statusline+=\ %(%l:%c%V%)
 	set statusline+=\ │ " Group end
-	set statusline+=\ %4*%{strlen(&ft)?toupper(&ft):'NONE'}%* " File type (User4)
+	set statusline+=%(\ %4*%{strlen(&ft)?&ft:''}%*%) " File type (User4)
 	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
     "set statusline+=\ %{SyntaxItem()}
 " }}}
@@ -125,9 +125,6 @@
 	nmap <silent><F8> :TlistToggle<CR>
 	nmap <silent><F9> :LustyBufferExplorer<CR>
 	nmap <silent><F10> :NERDTreeToggle<CR>
-
-	" q: sucks
-	nmap q: :q
 
 	" Buffer swithing
 	nnoremap <silent> <Tab> :bnext<CR>
@@ -219,9 +216,6 @@
 		" Nginx highlighting
 		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
 
-		" Always do a full syntax refresh
-		au BufEnter * syntax sync fromstart
-
 		" Source .vimrc on write
 		au BufWritePost .vimrc source %
 
@@ -243,6 +237,9 @@
 
 		" Override SASS defaults
 		au FileType sass set sw=4 ts=4 noet
+
+		" Disable whitespace trimming on patch files
+		au FileType diff au! whitespace
 
 		" Enable Syntastic {{{
 			au BufNewFile,BufRead * SyntasticEnable
@@ -301,7 +298,6 @@
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
-		let g:php_sql_query = 1
 		let g:php_html_in_strings = 1
 		let g:php_parent_error_close = 1
 		let g:php_parent_error_open = 1

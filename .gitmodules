@@ -43,3 +43,6 @@
 [submodule "vimplugins/vim-taglist"]
 	path = vimplugins/vim-taglist
 	url = http://github.com/bronson/vim-taglist.git
+[submodule "vimplugins/nerdcommenter"]
+	path = vimplugins/nerdcommenter
+	url = http://github.com/scrooloose/nerdcommenter.git

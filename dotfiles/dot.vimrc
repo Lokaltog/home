@@ -152,8 +152,8 @@
 	" Clear search highlighting
 	nmap <silent> <Leader>n :silent noh<cr>
 
-	" Sudo write
-	command! -bar -nargs=0 SudoW :silent exe "write !sudo tee % >/dev/null"|silent edit!
+	" Sudo write (:W)
+	command! -bar -nargs=0 W :silent exec "write !sudo tee % >/dev/null" | silent edit!
 
 	" Line moving {{{
 		function! MoveLineUp()

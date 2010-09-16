@@ -22,10 +22,10 @@ URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher    : chromium
 URxvt.saveLines      : 8192
 ! URxvt fonts {{{
-URxvt.font           : -*-lokaltog-medium-r-*-*-10-*-*-*-*-*-*-*
-URxvt.boldFont       : -*-lokaltog-bold-r-*-*-10-*-*-*-*-*-*-*
-URxvt.italicFont     : -*-lokaltog-medium-r-*-*-10-*-*-*-*-*-*-*
-URxvt.boldItalicFont : -*-lokaltog-bold-r-*-*-10-*-*-*-*-*-*-*
+URxvt.font           : -*-lokaltog-medium-r-*-*-12-*-*-*-*-*-*-*
+URxvt.boldFont       : -*-lokaltog-bold-r-*-*-12-*-*-*-*-*-*-*
+URxvt.italicFont     : -*-lokaltog-medium-r-*-*-12-*-*-*-*-*-*-*
+URxvt.boldItalicFont : -*-lokaltog-bold-r-*-*-12-*-*-*-*-*-*-*
 ! }}}
 ! }}}
 ! URxvt/vim settings {{{

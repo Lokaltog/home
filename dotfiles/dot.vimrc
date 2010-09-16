@@ -70,11 +70,11 @@
 	" }}}
 	" Git branch wrapper {{{
 		function! GitBranch()
-			return substitute(fugitive#statusline(), 'GIT(\([a-z0-9\-_]\+\))', 'Í \1', 'gi')
+			return substitute(fugitive#statusline(), 'GIT(\([a-z0-9\-_]\+\))', ' Í \1 │', 'gi')
 		endfunction
 	" }}}
 	set statusline=
-	set statusline+=%(\ %1*%{GitBranch()}%*\ │%) " Git branch (User1)
+	set statusline+=%(%1*%{GitBranch()}%*%) " Git branch (User1)
 	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
 	set statusline+=%(\ %2*%{SyntasticStatuslineFlag()}%*%)
@@ -84,8 +84,8 @@
 	set statusline+=%(\ %6*%{&fileformat}%*%) " File format
 	set statusline+=%(\ %6*%{(&fenc==''?&enc:&fenc)}%*%) " File encoding
 	set statusline+=\ %(%l:%c%V%)
-	set statusline+=\ │ " Group end
-	set statusline+=%(\ %4*%{strlen(&ft)?&ft:''}%*%) " File type (User4)
+	set statusline+=\ %1*│%* " Group end
+	set statusline+=%(\ %4*%{strlen(&ft)?&ft:''}\ %1*│%*%) " File type (User4)
 	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
     "set statusline+=\ %{SyntaxItem()}
 " }}}

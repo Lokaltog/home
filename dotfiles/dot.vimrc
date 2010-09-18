@@ -24,6 +24,9 @@
 		set whichwrap=b,s,[,]
 		set clipboard+=unnamed
 		set hidden
+
+		" Disable all bells
+		set vb t_vb=
 	" }}}
 	" Wild menu {{{
 		set wildmenu

@@ -21,8 +21,10 @@ snippet /
 	 * ${1}
 	 */
 snippet class
-	class ${3} {
-		${4:public }function ${5:__construct}(${6}) {
+	class ${3}
+	{
+		${4:public }function ${5:__construct}(${6})
+		{
 			${7}
 		}
 	}
@@ -31,59 +33,73 @@ snippet def
 snippet def?
 	${1}defined('${2}')${3}
 snippet wh
-	while (${1}) {
+	while (${1})
+	{
 		${2}
 	}
 snippet do
-	do {
+	do
+	{
 		${2}
-	} while (${1});
+	}
+	while (${1});
 snippet if
-	if (${1}) {
+	if (${1})
+	{
 		${2}
 	}
 snippet ife
-	if (${1}) {
+	if (${1})
+	{
 		${2}
 	}
-	else {
+	else
+	{
 
 	}
 snippet els
-	else {
+	else
+	{
 		${1}
 	}
 snippet eli
-	elseif (${1}) {
+	elseif (${1})
+	{
 		${2}
 	}
 snippet t
 	$${1} = (${2}) ? ${3} : ${4};${5}
 snippet sw
-	switch ($${1}) {
+	switch ($${1})
+	{
 		${2}
 	}
 snippet ca
 	case ${1}:
 		${2}
-		break;
+	break;
 
 snippet for
-	for ($${2:i} = 0; $$2 < ${1}; $$2${3:++}) {
+	for ($${2:i} = 0; $$2 < ${1}; $$2${3:++})
+	{
 		${4}
 	}
 snippet fe
-	foreach ($${1} as $${2}) {
+	foreach ($${1} as $${2})
+	{
 		${3}
 	}
 snippet try
-	try {
+	try
+	{
 		${3}
 	}
-	catch (${1}Exception $${2:e}) {
+	catch (${1}Exception $${2:e})
+	{
 	}
 snippet fun
-	${1}function ${2}(${3}) {
+	${1}function ${2}(${3})
+	{
 		${4}
 	}
 snippet se

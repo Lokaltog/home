@@ -48,9 +48,6 @@
 			-c 'nmap <ESC>u :nohlsearch<cr>' \
 			-\""
 	# }}}
-	# path {{{
-		export PATH="/home/kim/sync/bin:$PATH"
-	# }}}
 # }}}
 # zsh options {{{
 	typeset -g -A key

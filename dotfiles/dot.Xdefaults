@@ -17,7 +17,7 @@ URxvt.pointerBlank   : true
 URxvt.urgentOnBell   : true
 URxvt.visualBell     : true
 URxvt.scrollBar      : false
-URxvt.transparent    : false
+URxvt.transparent    : true
 URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher    : chromium
 URxvt.saveLines      : 8192

@@ -99,6 +99,7 @@ static const char *ncmpcpp[]  = { terminal, "-name", "ncmpcpp", "-e", "ncmpcpp",
 static const char *ranger[]   = { terminal, "-name", "ranger",  "-e", "ranger",         NULL };
 static const char *mutt[]     = { terminal, "-name", "mutt",    "-e", "mutt",           NULL };
 static const char *weechat[]  = { terminal, "-name", "weechat", "-e", "weechat-curses", NULL };
+static const char *scrot[]    = { "scrot", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -110,6 +111,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_r,      spawn,          {.v = ranger } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = mutt } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = weechat } },
+	{ 0,                            XK_Print,  spawn,          {.v = scrot } },
 
 	{ MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },

@@ -2,10 +2,10 @@
 
 chromium \
 	--disable-ipv6 \
-	--new-wrench-menu \
-	--enable-extension-apps \
 	--enable-extension-timeline-api \
-	--enable-sync-settings \
-	--enable-sync-extensions \
-	--omnibox-popup-count=10 \
-	--enable-apps
+	--omnibox-popup-count=15 \
+	--enable-preconnect \
+	--enable-page-prerender \
+	--enable-fastback \
+	--enable-preparsed-js-caching \
+	--enable-tcp-fastopen

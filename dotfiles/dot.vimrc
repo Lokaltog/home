@@ -76,16 +76,16 @@
 	set statusline+=%(%1*%{GitBranch()}%*%) " Git branch (User1)
 	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
-	set statusline+=%(\ %6*@\ %{Tlist_Get_Tagname_By_Line()}%*%)
-	set statusline+=%(\ %2*%{SyntasticStatuslineFlag()}%*%)
-	set statusline+=%(\ %2*%M%*%) " Modified (+, -) (User2)
-	set statusline+=%(\ %3*[%R%H%W]%*%) " RO,HLP,PRV (User3)
+	set statusline+=%6*%(\ @\ %{Tlist_Get_Tagname_By_Line()}%)%*
+	set statusline+=%2*%(\ %{SyntasticStatuslineFlag()}%)%*
+	set statusline+=%2*%(\ %M%)%* " Modified (+, -) (User2)
+	set statusline+=%3*%(\ [%R%H%W]%)%* " RO,HLP,PRV (User3)
 	set statusline+=\ %= " Separator, left/right
-	set statusline+=%(\ %6*%{&fileformat}%*%) " File format
-	set statusline+=%(\ %6*%{(&fenc==''?&enc:&fenc)}%*%) " File encoding
+	set statusline+=%6*%(\ %{&fileformat}%)%* " File format
+	set statusline+=%6*%(\ %{(&fenc==''?&enc:&fenc)}%)%* " File encoding
 	set statusline+=\ %(%l:%c%V%)
 	set statusline+=\ %1*│%* " Group end
-	set statusline+=%(\ %4*%{strlen(&ft)?&ft:''}\ %1*│%*%) " File type (User4)
+	set statusline+=%4*%(\ %{strlen(&ft)?&ft:''}\ %1*│%)%* " File type (User4)
 	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
 "	set statusline+=\ %{SyntaxItem()}
 " }}}

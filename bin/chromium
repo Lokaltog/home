@@ -7,5 +7,4 @@ chromium \
 	--enable-preconnect \
 	--enable-page-prerender \
 	--enable-fastback \
-	--enable-preparsed-js-caching \
-	--enable-tcp-fastopen
+	--enable-preparsed-js-caching

@@ -129,21 +129,6 @@ def get_volume():
 
 	return "\x05{icon}\x01{volume}  ".format(icon=icon, volume=draw_bar(volume))
 
-def get_ip():
-	try:
-		ip = open('/tmp/extip', 'r').read().strip()
-		color = "\x01"
-
-		if not ip:
-			color = "\x06"
-			raise IOError
-		if ip[:7] != "138.199":
-			color = "\x06"
-
-		return "\x05IP{color}{ip}  ".format(color=color, ip=ip)
-	except IOError:
-		return "\x05IP\x06?  "
-
 def get_date():
 	date = datetime.now().strftime("%Y-%m-%d %R").split(" ")
 

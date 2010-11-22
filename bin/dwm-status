@@ -11,7 +11,7 @@ def run_cmd(cmd):
 
 def draw_bar(percent, bar_len=15):
 	chars_empty = ("ò", "ô", "ö")
-	chars_full = ("ó", "õ", "÷")
+	chars_full = ("ó", "õ", "÷", "ð")
 	full_len = int(percent / 100 * bar_len)
 	bar = ""
 
@@ -28,8 +28,9 @@ def draw_bar(percent, bar_len=15):
 	else:
 		# partial bar
 		bar += chars_full[0]
-		bar += chars_full[1] * full_len
-		bar += chars_empty[1] * (bar_len - full_len - 1)
+		bar += chars_full[1] * (full_len - 1)
+		bar += chars_full[3]
+		bar += chars_empty[1] * (bar_len - full_len - 2)
 		bar += chars_empty[2]
 
 	return bar

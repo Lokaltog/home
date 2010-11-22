@@ -2,6 +2,7 @@
 """Lokaltog's status script for dwm"""
 
 import re
+import sys
 from datetime import datetime
 from subprocess import *
 
@@ -137,11 +138,17 @@ def get_date():
 
 	return "\x05{date} ù {time}".format(date=date[0], time=date[1])
 
+def get_notification():
+	if len(sys.argv) > 1:
+		return " \x03 ÿ {notification} ".format(notification=sys.argv[-1])
+
+	return ""
+
 print(
 	get_mpd()    +
 	get_volume() +
 	get_wifi()   +
 	get_acpi()   +
-
-	get_date()
+	get_date()   +
+	get_notification()
 )

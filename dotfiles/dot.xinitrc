@@ -32,10 +32,8 @@ feh --bg-center ~/.sync/eos.png &
 xset m 2 0
 xset r rate 300 30
 
-# start dwm status script
-while xsetroot -name "`~/sync/bin/dwm-status`"; do
-	sleep 10
-done &
+# start statnot
+statnot ~/sync/conf/statnot.py &
 
 # start default apps
 urxvtd -q -o -f

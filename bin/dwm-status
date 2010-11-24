@@ -62,10 +62,10 @@ def get_acpi():
 
 	if battery[0] == "Discharging":
 		baticon = "\x05Î\x01"
-		if battery[1] <= 30:
-			baticon = "\x05Í\x01"
+		if battery[1] <= 25:
+			baticon = "\x06Í\x01"
 		if battery[1] <= 15:
-			baticon = "\x03 Í"
+			baticon = "\x03 Ì "
 		baticon += "{0} ".format(battery[2])
 
 	baticon += draw_bar(battery[1])

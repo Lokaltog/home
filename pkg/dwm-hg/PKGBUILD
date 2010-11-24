@@ -1,6 +1,6 @@
 # vim:set ft=sh:
 pkgname="dwm-hg"
-pkgver=1528
+pkgver=1525
 pkgrel=1
 pkgdesc="The latest hg pull of dwm"
 url="http://dwm.suckless.org"
@@ -20,7 +20,6 @@ source=(
 	dwm-pertag.diff
 	dwm-statuscolors.diff
 	dwm-monoclecount.diff
-	dwm-combo.diff
 )
 
 _hgroot="http://code.suckless.org/hg"
@@ -48,7 +47,6 @@ build() {
 	hg patch -m null -u null $srcdir/dwm-statuscolors.diff || return 1
 	hg patch -m null -u null $srcdir/dwm-colors.diff || return 1
 	hg patch -m null -u null $srcdir/dwm-monoclecount.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-combo.diff || return 1
 
 	msg "Starting build process."
 	make || return 1

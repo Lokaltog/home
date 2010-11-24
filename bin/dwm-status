@@ -68,10 +68,7 @@ def get_acpi():
 			baticon = "\x03 Í"
 		baticon += "{0} ".format(battery[2])
 
-	if battery[0] not in ("Full", "Unknown") or battery[1] < 97:
-		baticon += draw_bar(battery[1])
-	else:
-		baticon += "Full"
+	baticon += draw_bar(battery[1])
 
 	tempicon = "\x05þ\x01"
 	if temperature > 75:

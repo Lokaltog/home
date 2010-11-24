@@ -1,25 +1,21 @@
-/* See LICENSE file for copyright and license details. */
-
-/* appearance */
+// Appearance
+#define NUMCOLORS 8
+static const char colors[NUMCOLORS][ColLast][8] = {
+	// border    foreground background
+	{ "#111",    "#aaa",    "#000"    },  // normal
+	{ "#fff",    "#000",    "#fff"    },  // selected tag
+	{ "#dd4010", "#fff",    "#dd4010" },  // urgent/warning
+	{ "#dd4010", "#fff",    "#ee4010" },  // error
+	{ "#fff",    "#fff",    "#000000" },  // white
+	{ "#dd4010", "#dd4010", "#000"    },  // red (warning)
+	{ "#daff30", "#daff30", "#000"    },  // green
+	{ "#fff",    "#fff",    "#000"    },  // selected bar
+};
 static const char font[]            = "-artwiz-cureextra-medium-*-*-*-*-*-*-*-*-*-*-*";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
-
-// Colors
-#define NUMCOLORS 8
-static const char colors[NUMCOLORS][ColLast][8] = {
-  // border    foreground background
-  { "#111",    "#aaa",    "#000"    },  // normal
-  { "#fff",    "#000",    "#fff"    },  // selected tag
-  { "#dd4010", "#fff",    "#dd4010" },  // urgent/warning
-  { "#dd4010", "#fff",    "#ee4010" },  // error
-  { "#fff",    "#fff",    "#000000" },  // white
-  { "#dd4010", "#dd4010", "#000"    },  // red (warning)
-  { "#daff30", "#daff30", "#000"    },  // green
-  { "#fff",    "#fff",    "#000"    },  // selected bar
-};
 
 // Layout(s)
 static const float mfact      = 0.68;   // factor of master area size [0.05..0.95]
@@ -31,29 +27,30 @@ static const Layout layouts[] = {
 	{ "¾",      NULL },         // <><  no layout function means floating behavior
 	{ "¼",      monocle },      // [M]
 	{ "¿",      gaplessgrid },  // [#]
+	{ "À",      bstack },       // [TTT]
 };
 
 // Tags
 static const Tag tags[] = {
 	// name       layout           mfact
 	{ "main",     &layouts[0],     -1   },
-	{ "dev",      &layouts[0],     0.5  },
+	{ "web",      &layouts[0],     0.5  },
+	{ "dev",      &layouts[4],     0.7  },
 	{ "misc",     &layouts[3],     -1   },
-	{ "mail",     &layouts[2],     -1   },
 	{ "im",       &layouts[2],     -1   },
 };
 
 static const Rule rules[] = {
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",           NULL,       NULL,       0,         True,        -1 },
-	{ "feh",            NULL,       NULL,       0,         True,        -1 },
-	{ "MPlayer",        NULL,       NULL,       0,         True,        -1 },
-	{ "Chromium",       NULL,       NULL,       1<<0,      False,       -1 },
-	{ "URxvt",          "vim",      NULL,       1<<1,      False,       -1 },
-	{ "URxvt",          "ncmpcpp",  NULL,       0,         False,       -1 },
-	{ "URxvt",          "ranger",   NULL,       0,         False,       -1 },
-	{ "URxvt",          "mutt",     NULL,       1<<3,      False,       -1 },
-	{ "URxvt",          "weechat",  NULL,       1<<4,      False,       -1 },
+	// class      instance    title       tags mask     isfloating   monitor
+	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
+	{ "feh",      NULL,       NULL,       0,            True,        -1 },
+	{ "MPlayer",  NULL,       NULL,       0,            True,        -1 },
+	{ "Chromium", NULL,       NULL,       1<<1,         False,       -1 },
+	{ "URxvt",    "vim",      NULL,       1<<2,         False,       -1 },
+	{ "URxvt",    "ncmpcpp",  NULL,       0,            False,       -1 },
+	{ "URxvt",    "ranger",   NULL,       0,            False,       -1 },
+	{ "URxvt",    "mutt",     NULL,       1<<3,         False,       -1 },
+	{ "URxvt",    "weechat",  NULL,       1<<4,         False,       -1 },
 };
 
 
@@ -77,7 +74,7 @@ dwm_button(const Arg *arg)
 }
 
 
-/* key definitions */
+// Key definitions
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
@@ -85,12 +82,9 @@ dwm_button(const Arg *arg)
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-
 static const char terminal[]  = "urxvtc";
 
-/* commands */
+// Commands
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], "-p", ">", NULL };
 static const char *chromium[] = { "/home/kim/sync/bin/chromium", NULL };
 static const char *vim[]      = { "/home/kim/sync/bin/vim", NULL };
@@ -102,7 +96,7 @@ static const char *weechat[]  = { terminal, "-name", "weechat", "-e", "weechat-c
 static const char *scrot[]    = { "scrot", NULL };
 
 static Key keys[] = {
-	/* modifier                     key        function        argument */
+	// modifier                     key        function        argument
 	{ MODKEY,                       XK_x,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_n,      spawn,          {.v = chromium } },
@@ -150,7 +144,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Escape, quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      restart,        {0} },
 
-	/* Special keys (no modifiers) */
+	// Special keys (no modifiers)
 	{0, 0x1008ff14, dwm_button, {.v = "play"}},
 	{0, 0x1008ff16, dwm_button, {.v = "prev"}},
 	{0, 0x1008ff17, dwm_button, {.v = "next"}},
@@ -160,10 +154,10 @@ static Key keys[] = {
 	{0, 0x1008ff13, dwm_button, {.v = "vol+"}},
 };
 
-/* button definitions */
-/* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+// Button definitions
+// Click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin
 static Button buttons[] = {
-	/* click                event mask      button          function        argument */
+	// click                event mask      button          function        argument
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },

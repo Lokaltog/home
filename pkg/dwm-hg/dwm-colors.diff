@@ -14,7 +14,7 @@
  		dc.x = x;
  		if(m->sel) {
 -			col = m == selmon ? dc.colors[1] : dc.colors[0];
-+			col = m == selmon ? dc.colors[7] : dc.colors[0];
++			col = m == selmon ? dc.colors[5] : dc.colors[0];
  			drawtext(m->sel->name, col, True);
  			drawsquare(m->sel->isfixed, m->sel->isfloating, col);
  		}

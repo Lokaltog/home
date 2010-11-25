@@ -2,14 +2,14 @@
 #define NUMCOLORS 8
 static const char colors[NUMCOLORS][ColLast][8] = {
 	// border    foreground background
-	{ "#111",    "#aaa",    "#000"    },  // normal
-	{ "#fff",    "#000",    "#fff"    },  // selected tag
-	{ "#dd4010", "#fff",    "#dd4010" },  // urgent/warning
-	{ "#dd4010", "#fff",    "#ee4010" },  // error
-	{ "#fff",    "#fff",    "#000000" },  // white
-	{ "#dd4010", "#dd4010", "#000"    },  // red (warning)
-	{ "#daff30", "#daff30", "#000"    },  // green
-	{ "#fff",    "#fff",    "#000"    },  // selected bar
+	{ "#222222", "#8c8c8c", "#222222" },  // normal           light gray / dark gray
+	{ "#82ca42", "#ffffff", "#82ca42" },  // selected tag     white      / light green
+	{ "#fd5337", "#ffffff", "#fd5337" },  // urgent/warning   white      / salmon red
+	{ "#fda12b", "#ffffff", "#fda12b" },  // error            white      / orange
+	{ "#000000", "#90d94e", "#222222" },  // layout icon      green      / dark gray
+	{ "#000000", "#ffffff", "#222222" },  // white            white      / dark gray
+	{ "#000000", "#fd5337", "#222222" },  // red warning fg   red        / dark gray
+	{ "#000000", "#daff30", "#222222" },  //
 };
 static const char font[]            = "-artwiz-cureextra-medium-*-*-*-*-*-*-*-*-*-*-*";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -23,22 +23,23 @@ static const Bool resizehints = False;  // True means respect size hints in tile
 
 static const Layout layouts[] = {
 	// symbol   arrange function
-	{ "½",      tile },         // []=  first entry is default
-	{ "¾",      NULL },         // <><  no layout function means floating behavior
-	{ "¼",      monocle },      // [M]
-	{ "¿",      gaplessgrid },  // [#]
-	{ "À",      bstack },       // [TTT]
+	{ "½",      tile        }, // []=  first entry is default
+	{ "¾",      NULL        }, // <><  no layout function means floating behavior
+	{ "¼",      monocle     }, // [M]
+	{ "¿",      gaplessgrid }, // [#]
+	{ "À",      bstack      }, // [TTT]
 };
 
 // Tags
 static const Tag tags[] = {
 	// name       layout           mfact
-	{ "main",     &layouts[0],     -1   },
-	{ "web",      &layouts[0],     0.5  },
-	{ "dev",      &layouts[4],     0.7  },
-	{ "misc",     &layouts[3],     -1   },
-	{ "im",       &layouts[2],     -1   },
+	{ "Ä Main",     &layouts[0],     -1   },
+	{ "Ã Web",      &layouts[0],     0.5  },
+	{ "Â Dev",      &layouts[4],     0.7  },
+	{ "Ç Misc",     &layouts[3],     -1   },
+	{ "Á IM",       &layouts[2],     -1   },
 };
+
 
 static const Rule rules[] = {
 	// class      instance    title       tags mask     isfloating   monitor

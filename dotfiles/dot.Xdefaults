@@ -47,14 +47,14 @@ weechat.saveLines: 0
 *background: #000000
 *foreground: #ffffff
 ! Black
-*color0 : #050505
-*color8 : #777777
+*color0 : #000000
+*color8 : #555753
 ! Red
-*color1 : #b04020
+*color1 : #bf2d00
 *color9 : #dd4010
 ! Green
-*color2 : #afd700
-*color10: #daff30
+*color2 : #5b9f1e
+*color10: #93d44f
 ! Yellow
 *color3 : #eab93d
 *color11: #ffc123
@@ -65,8 +65,8 @@ weechat.saveLines: 0
 *color5 : #d6156c
 *color13: #fe4365
 ! Cyan
-*color6 : #89b6e2
-*color14: #46a4ff
+*color6 : #619bd7
+*color14: #89b6e2
 ! White
 *color7 : #ffffff
 *color15: #dddddd

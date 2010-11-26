@@ -2,14 +2,14 @@
 #define NUMCOLORS 8
 static const char colors[NUMCOLORS][ColLast][8] = {
 	// border    foreground background
-	{ "#222222", "#8c8c8c", "#222222" },  // normal           light gray / dark gray
+	{ "#1a1a1a", "#888888", "#1a1a1a" },  // normal           light gray / dark gray
 	{ "#82ca42", "#ffffff", "#82ca42" },  // selected tag     white      / light green
 	{ "#fd5337", "#ffffff", "#fd5337" },  // urgent/warning   white      / salmon red
 	{ "#fda12b", "#ffffff", "#fda12b" },  // error            white      / orange
-	{ "#000000", "#90d94e", "#222222" },  // layout icon      green      / dark gray
-	{ "#000000", "#ffffff", "#222222" },  // white            white      / dark gray
-	{ "#000000", "#fd5337", "#222222" },  // red warning fg   red        / dark gray
-	{ "#000000", "#daff30", "#222222" },  //
+	{ "#000000", "#90d94e", "#1a1a1a" },  // layout icon      green      / dark gray
+	{ "#000000", "#ffffff", "#1a1a1a" },  // white            white      / dark gray
+	{ "#000000", "#fd5337", "#1a1a1a" },  // red warning fg   red        / dark gray
+	{ "#000000", "#daff30", "#1a1a1a" },  //
 };
 static const char font[]            = "-artwiz-cureextra-medium-*-*-*-*-*-*-*-*-*-*-*";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */

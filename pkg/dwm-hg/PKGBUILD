@@ -10,50 +10,45 @@ depends=("libx11")
 makedepends=("mercurial" "sed")
 conflicts=("dwm")
 provides=("dwm")
-source=(
-	config.h
-	dwm-base.diff
-	dwm-colors.diff
-	dwm-tune.diff
-	dwm-attachaside.diff
-	dwm-gaplessgrid.diff
-	dwm-pertag.diff
-	dwm-statuscolors.diff
-	dwm-monoclecount.diff
-	dwm-bstack.diff
-)
+
+_patches=(dwm-base.diff
+          dwm-attachaside.diff
+          dwm-tune.diff
+          dwm-gaplessgrid.diff
+          dwm-pertag.diff
+          dwm-statuscolors.diff
+          dwm-colors.diff
+          dwm-monoclecount.diff
+          dwm-bstack.diff)
+source=(config.h
+        ${_patches[@]})
 
 _hgroot="http://code.suckless.org/hg"
 _hgrepo="dwm"
 
 build() {
-	cd $startdir/src
+	cd ${startdir}/src
 
-	if [ -d $_hgrepo ]; then
-		cd $_hgrepo
+	if [ -d ${_hgrepo} ]; then
+		cd ${_hgrepo}
 		make clean
 		hg pull -u
 	else
 		hg clone ${_hgroot}/${_hgrepo}
-		cd $_hgrepo
+		cd ${_hgrepo}
 	fi
 
 	cp $srcdir/config.h .
 
-	hg patch -m null -u null $srcdir/dwm-base.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-attachaside.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-tune.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-gaplessgrid.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-pertag.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-statuscolors.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-colors.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-monoclecount.diff || return 1
-	hg patch -m null -u null $srcdir/dwm-bstack.diff || return 1
+	msg "Applying patches..."
+	for patch in ${_patches[@]}; do
+		hg patch -m null -u null ${srcdir}/${patch} || return 1
+	done
 
-	msg "Starting build process."
+	msg "Starting build process..."
 	make || return 1
-	make PREFIX=$startdir/pkg/usr install
+	make PREFIX=${startdir}/pkg/usr install
 
-	mkdir -p $startdir/pkg/usr/share/licenses/dwm
-	cp LICENSE $startdir/pkg/usr/share/licenses/dwm
+	mkdir -p ${startdir}/pkg/usr/share/licenses/dwm
+	cp LICENSE ${startdir}/pkg/usr/share/licenses/dwm
 }

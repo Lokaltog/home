@@ -76,7 +76,8 @@
 	setopt short_loops # allow short loops
 # }}}
 # keybindings {{{
-	bindkey -e
+	bindkey -v
+
 	bindkey '^?' backward-delete-char
 	bindkey '^[[1~' beginning-of-line # Home
 	bindkey '^[[4~' end-of-line # End

@@ -2,6 +2,9 @@
 # -----------------
 # vim:set ft=zsh:
 
+# show dopefish {{{
+	cat ~/sync/etc/dopefish
+# }}}
 # environment variables {{{
 	# command history {{{
 		export HISTFILE=~/.zshhist

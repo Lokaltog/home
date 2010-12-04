@@ -7,6 +7,8 @@ snippet redir
 	Request::instance()->redirect(${1})
 snippet uri
 	Route::get('default')->uri(array('controller' => '${1}', 'action' => '${2}'${3}))${4}
+snippet fi
+	'${1}' => Jelly::field('${2}'${3}),
 snippet w
 	// ${1}
 	${2}
@@ -109,11 +111,15 @@ snippet v
 snippet ar
 	array(${1})
 snippet arr
+	array(
+		${1}
+	)
+snippet arf
 	$${1} = array(
 		${2}
 	);
 snippet ak
-	'${1}'	=> ${2},${3}
+	'${1}' => ${2},
 snippet p
 	<?php ${1} ?>
 snippet pe

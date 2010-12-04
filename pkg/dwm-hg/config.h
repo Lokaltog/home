@@ -87,8 +87,8 @@ static const char terminal[]  = "urxvtc";
 
 // Commands
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], "-p", ">", NULL };
-static const char *chromium[] = { "/home/kim/sync/bin/chromium", NULL };
-static const char *vim[]      = { "/home/kim/sync/bin/vim", NULL };
+static const char *chromium[] = { "chromium", NULL };
+static const char *vim[]      = { "uvim", NULL };
 static const char *termcmd[]  = { terminal, NULL };
 static const char *ncmpcpp[]  = { terminal, "-name", "ncmpcpp", "-e", "ncmpcpp",        NULL };
 static const char *ranger[]   = { terminal, "-name", "ranger",  "-e", "ranger",         NULL };
@@ -144,15 +144,6 @@ static Key keys[] = {
 
 	{ MODKEY|ShiftMask,             XK_Escape, quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      restart,        {0} },
-
-	// Special keys (no modifiers)
-	{0, 0x1008ff14, dwm_button, {.v = "play"}},
-	{0, 0x1008ff16, dwm_button, {.v = "prev"}},
-	{0, 0x1008ff17, dwm_button, {.v = "next"}},
-	{0, 0x1008ff15, dwm_button, {.v = "stop"}},
-	{0, 0x1008ff12, dwm_button, {.v = "vol#"}},
-	{0, 0x1008ff11, dwm_button, {.v = "vol-"}},
-	{0, 0x1008ff13, dwm_button, {.v = "vol+"}},
 };
 
 // Button definitions
@@ -171,4 +162,3 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-

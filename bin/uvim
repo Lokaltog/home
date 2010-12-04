@@ -1,4 +1,4 @@
 #!/bin/sh
 # starts vim in a new urxvt terminal window
 
-urxvtc -name vim -e vim
+/usr/bin/urxvtc -name vim -e /usr/bin/vim

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-chromium \
+/usr/bin/chromium \
 	--disable-ipv6 \
 	--enable-extension-timeline-api \
 	--omnibox-popup-count=15 \

@@ -37,7 +37,7 @@
 		export LDFLAGS="-Wl,--hash-style=gnu -Wl,--as-needed"
 		export MAKEFLAGS="-j6"
 	# }}}
-	# application variables {{{
+	# applications {{{
 		export LESS_VIM="vim -R \
 			-c 'let no_plugin_maps = 1' \
 			-c 'set foldlevel=999 scrolloff=999 mouse=h nolist nonumber laststatus=0 foldcolumn=0' \
@@ -53,6 +53,10 @@
 		export VISUAL="vim"
 		export BROWSER="chromium"
 		export WINEARCH="win32"
+	# }}}
+	# path {{{
+		# add sync/bin to path
+		export PATH="$HOME/sync/bin:$PATH"
 	# }}}
 # }}}
 # zsh options {{{

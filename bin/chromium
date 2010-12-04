@@ -4,7 +4,4 @@ chromium \
 	--disable-ipv6 \
 	--enable-extension-timeline-api \
 	--omnibox-popup-count=15 \
-	--enable-preconnect \
-	--enable-page-prerender \
-	--enable-fastback \
 	--enable-preparsed-js-caching

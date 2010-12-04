@@ -114,7 +114,7 @@
 		alias p="+ pacman"
 		alias pr="packer --noedit"
 		alias sshfs="sshfs -o reconnect,nosuid,nodev,allow_other,uid=1000,gid=100"
-		alias sy="packer -Syu"
+		alias sy="p -Syu"
 		alias df="df -h"
 		alias du="du -h"
 		alias rmr="rm -rf"
@@ -125,7 +125,7 @@
 		alias chown="chown -v"
 	# }}}
 	# default sudo commands {{{
-		for cmd in mount ifconfig pacman; do
+		for cmd in mount ifconfig pacman chmod chown; do
 			alias $cmd="+ $cmd"
 		done
 	# }}}

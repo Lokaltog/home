@@ -4,16 +4,16 @@
 [merge]
 	tool = meld
 	log = true
+[mergetool]
+	prompt = false
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
 [core]
 	autocrlf = input
-	whitespace = trailing-space,space-before-tab,indent-with-non-tab
+	whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
 [color]
-	branch = auto
-	diff = auto
-	grep = auto
-	interactive = auto
-	showbranch = auto
-	status = auto
 	ui = auto
 [color "branch"]
 	current = bold cyan reverse
@@ -36,14 +36,15 @@
 	co = checkout
 	br = branch
 	ci = commit
-	st = status -s
+	st = status -sb
 	pa = push --all
 	cbr = checkout -b
 	dbr = branch -d
 	unstage = reset HEAD --
 	origin = remote show origin
-	sdiff = diff --staged
-	hdiff = diff HEAD
+	d = diff --no-color
+	sd = diff --no-color --staged
+	hd = diff --no-color HEAD
 	last = log -1 HEAD
 	commit-submodules = "!subs=$(git ls-files --error-unmatch --stage -- $(git ls-files --modified) | grep \"^160000\" | cut -f2-); msg=$(echo Update submodules: $subs; echo; git submodule summary); git commit -e -m \"$msg\" --only $(echo $subs | tr \"\n\" \" \")"
 	mkpatch = diff-tree -p --pretty

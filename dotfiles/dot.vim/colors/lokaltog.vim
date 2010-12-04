@@ -97,10 +97,13 @@ hi phpFunctionsTag ctermfg=222 cterm=bold
 
 hi cssImportant ctermfg=166 cterm=bold
 
-hi DiffAdd ctermfg=231 ctermbg=71
-hi DiffChange ctermfg=231 ctermbg=130
-hi DiffText ctermfg=229 ctermbg=130 cterm=bold
-hi DiffDelete ctermfg=231 ctermbg=88
+hi DiffAdd ctermfg=76 ctermbg=none cterm=bold
+hi DiffChange ctermfg=220 ctermbg=none cterm=bold
+hi DiffDelete ctermfg=160 ctermbg=none cterm=bold
+
+hi link diffAdded DiffAdd
+hi link diffChanged DiffChange
+hi link diffRemoved DiffDelete
 
 " Highlight problematic whitespace (spaces before tabs)
 hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold

@@ -38,18 +38,21 @@
 		export MAKEFLAGS="-j6"
 	# }}}
 	# application preferences {{{
-		export EDITOR="vim"
-		export BROWSER="chromium"
-		export PAGER="less"
-		export MANPAGER="sh -c \"unset PAGER; col -b -x | vim -R \
+		export LESS_VIM="vim -R \
 			-c 'let no_plugin_maps = 1' \
-			-c 'set ft=man foldlevel=999 scrolloff=999 mouse=h nolist nonumber laststatus=0 foldcolumn=0' \
+			-c 'set foldlevel=999 scrolloff=999 mouse=h nolist nonumber laststatus=0 foldcolumn=0' \
 			-c 'runtime! macros/less.vim' \
-			-c 'map q :q<cr>' \
 			-c 'map <space> <c-d>' \
+			-c 'hi RedundantSpaces none'"
+		export PAGER="$LESS_VIM -"
+		export MANPAGER="sh -c \"unset PAGER; col -b -x | $LESS_VIM \
+			-c 'set ft=man' \
 			-c 'map K :Man <c-r>=expand(\\\"<cword>\\\")<cr><cr>' \
-			-c 'nmap <ESC>u :nohlsearch<cr>' \
 			-\""
+		export EDITOR="vim"
+		export VISUAL="vim"
+		export BROWSER="chromium"
+		export WINEARCH="win32"
 	# }}}
 # }}}
 # zsh options {{{

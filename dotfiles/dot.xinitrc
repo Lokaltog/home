@@ -25,20 +25,19 @@ xmodmap \
 	-e 'keycode 20 = exclam        percent exclamdown'
 
 # set background
-xsetroot -bg "#121212" -mod 3 3
+xsetroot -bg "#121212" -mod 3 3 &
+xrdb -merge ~/.Xresources &
 feh --bg-center ~/.sync/eos.png &
 
 # set mouse/keyboard speed
-xset m 2 0
-xset r rate 300 30
+xset m 2 0 &
+xset r rate 300 30 &
 
 # start statnot
 statnot ~/sync/conf/statnot.py &
 
 # start default apps
 urxvtd -q -o -f
-#urxvtc -name mutt -e mutt &
-#urxvtc -name weechat -e weechat-curses &
 ~/sync/bin/chromium &
 
 # disable bluetooth

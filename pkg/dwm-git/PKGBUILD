@@ -53,4 +53,4 @@ build() {
 	install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/dwm
 }
 
-md5sums=('edc053544f1f1f0d2772d202c5778ca3')
+md5sums=('3d41e73b11b26f8166b18dbe9d9dd387')

@@ -88,8 +88,8 @@ static const char terminal[]  = "urxvtc";
 // Commands
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], "-p", ">", NULL };
 static const char *chromium[] = { "chromium", NULL };
-static const char *vim[]      = { "uvim", NULL };
 static const char *termcmd[]  = { terminal, NULL };
+static const char *vim[]      = { terminal, "-name", "vim",     "-e", "vim",            NULL };
 static const char *ncmpcpp[]  = { terminal, "-name", "ncmpcpp", "-e", "ncmpcpp",        NULL };
 static const char *ranger[]   = { terminal, "-name", "ranger",  "-e", "ranger",         NULL };
 static const char *mutt[]     = { terminal, "-name", "mutt",    "-e", "mutt",           NULL };

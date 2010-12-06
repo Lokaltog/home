@@ -1,0 +1,56 @@
+# vim:set ft=sh:
+# Contributor: Kim Silkebækken <kim.silkebaekken@gmail.com
+pkgname="dwm-git"
+pkgver=20101206
+pkgrel=1
+pkgdesc="A dynamic window manager for X"
+url="http://dwm.suckless.org/"
+license="MIT"
+arch=("any")
+depends=("libx11")
+makedepends=("git")
+conflicts=("dwm")
+provides=("dwm")
+source=(config.h)
+
+_gitroot="git://github.com/Lokaltog/dwm.git"
+_gitname="dwm"
+
+build() {
+	cd "${srcdir}"
+
+	msg "Connecting to GitHub..."
+
+	if [ -d "${_gitname}" ]; then
+		cd "${_gitname}"
+
+		git checkout patched
+		git pull origin patched
+
+		msg "The local files are updated"
+	else
+		git clone ${_gitroot}
+
+		cd "${_gitname}"
+
+		git checkout patched
+	fi
+
+	msg "Checkout done or server timeout"
+	msg "Cloning into build directory..."
+
+	rm -rf "${srcdir}/${_gitname}-build"
+	git clone "${srcdir}/${_gitname}" "${srcdir}/${_gitname}-build"
+	cd "${srcdir}/${_gitname}-build"
+
+	cp "${srcdir}/config.h" .
+
+	msg "Starting build process..."
+
+	make || return 1
+	make PREFIX=${pkgdir}/usr install
+
+	install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/dwm
+}
+
+md5sums=('edc053544f1f1f0d2772d202c5778ca3')

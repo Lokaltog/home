@@ -40,7 +40,7 @@ static const Tag tags[] = {
 	{ "Á IM",       &layouts[2],     -1   },
 };
 
-
+// Window rules
 static const Rule rules[] = {
 	// class      instance    title       tags mask     isfloating   monitor
 	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
@@ -54,7 +54,7 @@ static const Rule rules[] = {
 	{ "URxvt",    "weechat",  NULL,       1<<4,         False,       -1 },
 };
 
-
+// Restart function
 void
 restart(const Arg *arg)
 {
@@ -64,16 +64,6 @@ restart(const Arg *arg)
 		execlp("dwm", "dwm", NULL);
 	}
 }
-
-void
-dwm_button(const Arg *arg)
-{
-	Arg a;
-
-	a.v = (const char*[]){"/home/kim/sync/bin/dwm-buttons", (char *)arg->v, NULL};
-	spawn(&a);
-}
-
 
 // Key definitions
 #define MODKEY Mod4Mask
@@ -86,7 +76,7 @@ dwm_button(const Arg *arg)
 static const char terminal[]  = "urxvtc";
 
 // Commands
-static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], "-p", ">", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 static const char *chromium[] = { "chromium", NULL };
 static const char *termcmd[]  = { terminal, NULL };
 static const char *vim[]      = { terminal, "-name", "vim",     "-e", "vim",            NULL };

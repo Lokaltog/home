@@ -40,7 +40,7 @@
 	# applications {{{
 		export LESS_VIM="vim -R \
 			-c 'let no_plugin_maps = 1' \
-			-c 'set foldlevel=999 scrolloff=999 mouse=h nolist nonumber laststatus=0 foldcolumn=0' \
+			-c 'set foldlevel=999 scrolloff=999 mouse=h nolist nonumber nowrap laststatus=0 foldcolumn=0' \
 			-c 'runtime! macros/less.vim' \
 			-c 'map <space> <c-d>' \
 			-c 'hi RedundantSpaces none'"

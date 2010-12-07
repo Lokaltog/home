@@ -1,48 +1,48 @@
 [submodule "vimplugins/vim-fugitive"]
 	path = vimplugins/vim-fugitive
-	url = http://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vimplugins/vim-git"]
 	path = vimplugins/vim-git
-	url = http://github.com/tpope/vim-git.git
+	url = https://github.com/tpope/vim-git.git
 [submodule "vimplugins/vim-haml"]
 	path = vimplugins/vim-haml
-	url = http://github.com/tpope/vim-haml.git
+	url = https://github.com/tpope/vim-haml.git
 [submodule "vimplugins/vim-markdown"]
 	path = vimplugins/vim-markdown
-	url = http://github.com/tpope/vim-markdown.git
+	url = https://github.com/tpope/vim-markdown.git
 [submodule "vimplugins/snipmate"]
 	path = vimplugins/snipmate
-	url = http://github.com/msanders/snipmate.vim.git
+	url = https://github.com/msanders/snipmate.vim.git
 [submodule "vimplugins/delimitmate"]
 	path = vimplugins/delimitmate
-	url = http://github.com/Raimondi/delimitMate.git
+	url = https://github.com/Raimondi/delimitMate.git
 [submodule "vimplugins/nerdtree"]
 	path = vimplugins/nerdtree
-	url = http://github.com/scrooloose/nerdtree.git
+	url = https://github.com/scrooloose/nerdtree.git
 [submodule "vimplugins/vim-javascript"]
 	path = vimplugins/vim-javascript
-	url = http://github.com/pangloss/vim-javascript.git
+	url = https://github.com/pangloss/vim-javascript.git
 [submodule "vimplugins/lusty"]
 	path = vimplugins/lusty
-	url = http://github.com/sjbach/lusty.git
+	url = https://github.com/sjbach/lusty.git
 [submodule "vimplugins/vim-easytags"]
 	path = vimplugins/vim-easytags
-	url = http://github.com/xolox/vim-easytags.git
+	url = https://github.com/xolox/vim-easytags.git
 [submodule "vimplugins/supertab"]
 	path = vimplugins/supertab
-	url = http://github.com/ervandew/supertab.git
+	url = https://github.com/ervandew/supertab.git
 [submodule "vimplugins/piv"]
 	path = vimplugins/piv
-	url = http://github.com/spf13/PIV.git
+	url = https://github.com/spf13/PIV.git
 [submodule "vimplugins/syntastic"]
 	path = vimplugins/syntastic
-	url = http://github.com/scrooloose/syntastic.git
+	url = https://github.com/scrooloose/syntastic.git
 [submodule "vimplugins/phpcomplete"]
 	path = vimplugins/phpcomplete
-	url = http://github.com/shawncplus/phpcomplete.vim.git
-[submodule "vimplugins/vim-taglist"]
-	path = vimplugins/vim-taglist
-	url = http://github.com/bronson/vim-taglist.git
+	url = https://github.com/shawncplus/phpcomplete.vim.git
 [submodule "vimplugins/nerdcommenter"]
 	path = vimplugins/nerdcommenter
-	url = http://github.com/scrooloose/nerdcommenter.git
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "vimplugins/vim-taglist"]
+	path = vimplugins/vim-taglist
+	url = https://github.com/mexpolk/vim-taglist.git

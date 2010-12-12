@@ -27,7 +27,7 @@ xmodmap \
 # set background
 xsetroot -bg "#121212" -mod 3 3 &
 xrdb -merge ~/.Xresources &
-feh --bg-center ~/.sync/eos.png &
+feh --bg-scale ~/.sync/eos.png &
 
 # set mouse/keyboard speed
 xset m 2 0 &

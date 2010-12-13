@@ -59,6 +59,9 @@
 		export PATH="$HOME/sync/bin:$PATH"
 	# }}}
 # }}}
+# load plugins {{{
+	source ~/.zsh/git-flow-completion.zsh
+# }}}
 # zsh options {{{
 	typeset -g -A key
 	typeset -U path cdpath fpath manpath

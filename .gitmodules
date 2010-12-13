@@ -46,3 +46,6 @@
 [submodule "vimplugins/vim-taglist"]
 	path = vimplugins/vim-taglist
 	url = https://github.com/mexpolk/vim-taglist.git
+[submodule "zshplugins/git-flow-completion"]
+	path = zshplugins/git-flow-completion
+	url = https://github.com/bobthecow/git-flow-completion.git

@@ -9,11 +9,10 @@
 	set vb t_vb=
 
 	set nocompatible
-	set mouse=ar
 	set tags=tags;.vimtags;
 	" General options {{{
 		set nobackup
-		set swapfile
+		set noswapfile
 		set updatecount=200
 		set directory=~/.vim/tmp
 		set autochdir
@@ -29,7 +28,7 @@
 	" Wild menu {{{
 		set wildmenu
 		set wildignore=*.bak,*~,*.jpg,*.gif,*.png
-		set wildmode=list:longest
+		set wildmode=full
 	" }}}
 " }}}
 " UI options {{{
@@ -48,7 +47,8 @@
 	set textwidth=0
 	set confirm
 	set updatetime=1500
-	set history=100
+	set history=1000
+	set undolevels=1000
 	set list listchars=tab:Ë\ ,trail:í,eol:î
 
 	colo lokaltog
@@ -142,6 +142,9 @@
 	" Quick edit .vimrc
 	nmap <Leader>v <Esc>:e $MYVIMRC<CR>
 
+	" Enter command mode quickly
+	nnoremap ; :
+
 	" Navigate by visual lines
 	noremap k gk
 	noremap j gj
@@ -156,6 +159,24 @@
 	" Sudo write (:W)
 	command! -bar -nargs=0 W :silent exec "write !sudo tee % >/dev/null" | silent edit!
 
+	" Mouse toggle {{{
+		fun! ToggleMouse()
+			if !exists("old_mouse")
+				let old_mouse = "ar"
+			endif
+
+			if &mouse == ""
+				let &mouse = old_mouse
+				echo "Mouse is for Vim (" . &mouse . ")"
+			else
+				let old_mouse = &mouse
+				let &mouse=""
+				echo "Mouse is for terminal"
+			endif
+		endfunction
+
+		nnoremap <F12> :call ToggleMouse()<CR>
+	" }}}
 	" Line moving {{{
 		function! MoveLineUp()
 			call MoveLineOrVisualUp(".", "")

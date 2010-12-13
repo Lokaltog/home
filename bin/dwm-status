@@ -58,6 +58,9 @@ def get_acpi():
 			has_temp = True
 			temperature = int(float(split[3]))
 
+	if not has_bat and not has_temp:
+		return ''
+
 	baticon = "\x06Ï\x01"
 	batpadding = ""
 

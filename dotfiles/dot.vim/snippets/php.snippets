@@ -7,6 +7,8 @@ snippet redir
 	Request::instance()->redirect(${1})
 snippet uri
 	Route::get('default')->uri(array('controller' => '${1}', 'action' => '${2}'${3}))${4}
+snippet url
+	Route::url('${1:default}')->url(array('lang' => I18n::$lang, 'controller' => '${1}', 'action' => '${2}'${3}))${4}
 snippet fi
 	'${1}' => Jelly::field('${2}'${3}),
 snippet w
@@ -126,11 +128,11 @@ snippet pe
 	<?php echo ${1}; ?>
 snippet pfe
 	<?php foreach ($${1} as $${2}): ?>
-		${3}
+	${3}
 	<?php endforeach; ?>
 snippet pi
 	<?php if ($${1}): ?>
-		${2}
+	${2}
 	<?php endif; ?>
 snippet globals
 	$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}${5}

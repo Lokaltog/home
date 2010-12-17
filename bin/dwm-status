@@ -3,6 +3,9 @@
 
 import re
 import sys
+import os
+import urllib.request
+import xml.dom.minidom
 from datetime import datetime
 from subprocess import *
 
@@ -136,6 +139,34 @@ def get_volume():
 
 	return "\x06{icon}\x01{volume} ".format(icon=icon, volume=draw_bar(volume))
 
+def get_mail():
+	unread = []
+	hl = False
+
+	for account in open(os.environ['HOME'] + '/.gmailaccounts', encoding='utf-8'):
+		(url, user, passwd) = account.split('|')
+
+		auth_handler = urllib.request.HTTPBasicAuthHandler()
+		auth_handler.add_password(realm='New mail feed', uri='https://mail.google.com/', user=user, passwd=passwd)
+		opener = urllib.request.build_opener(auth_handler)
+		urllib.request.install_opener(opener)
+
+		request = urllib.request.urlopen(url)
+		dom = xml.dom.minidom.parseString(request.read())
+		count = dom.getElementsByTagName('fullcount')[0].childNodes[0].data
+
+		if int(count) > 0:
+			hl = True
+
+		unread.append(count)
+
+	if hl:
+		icon = "\x02 Ê "
+	else:
+		icon = "\x06Ê\x01"
+
+	return icon + ' / '.join(unread) + ' '
+
 def get_date():
 	date = datetime.now().strftime("%Y-%m-%d %R").split(" ")
 
@@ -152,6 +183,7 @@ print(
 	get_volume() +
 	get_wifi()   +
 	get_acpi()   +
+	get_mail()   +
 	get_date()   +
 	get_notification()
 )

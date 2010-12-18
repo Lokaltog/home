@@ -143,25 +143,28 @@ def get_mail():
 	unread = []
 	hl = False
 
-	for account in open(os.environ['HOME'] + '/.gmailaccounts', encoding='utf-8'):
-		(url, user, passwd) = account.split('|')
+	try:
+		for account in open(os.environ['XDG_CONFIG_HOME'] + '/gmailaccounts', encoding='utf-8'):
+			(url, user, passwd) = account.split('|')
 
-		auth_handler = urllib.request.HTTPBasicAuthHandler()
-		auth_handler.add_password(realm='New mail feed', uri='https://mail.google.com/', user=user, passwd=passwd)
-		opener = urllib.request.build_opener(auth_handler)
-		urllib.request.install_opener(opener)
+			auth_handler = urllib.request.HTTPBasicAuthHandler()
+			auth_handler.add_password(realm='New mail feed', uri='https://mail.google.com/', user=user, passwd=passwd)
+			opener = urllib.request.build_opener(auth_handler)
+			urllib.request.install_opener(opener)
 
-		request = urllib.request.urlopen(url)
-		dom = xml.dom.minidom.parseString(request.read())
-		count = dom.getElementsByTagName('fullcount')[0].childNodes[0].data
+			request = urllib.request.urlopen(url)
+			dom = xml.dom.minidom.parseString(request.read())
+			count = dom.getElementsByTagName('fullcount')[0].childNodes[0].data
 
-		if int(count) > 0:
-			hl = True
+			if int(count) > 0:
+				hl = True
 
-		unread.append(count)
+			unread.append(count)
+	except (IOError, ValueError, KeyError):
+		return ''
 
 	if hl:
-		icon = "\x02 Ê "
+		icon = "\x04 Ê "
 	else:
 		icon = "\x06Ê\x01"
 

@@ -2,3 +2,4 @@
 fonts.dir
 .netrwhist
 tags
+*.pyc

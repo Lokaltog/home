@@ -27,8 +27,8 @@
 	" }}}
 	" Wild menu {{{
 		set wildmenu
-		set wildignore=*.bak,*~,*.jpg,*.gif,*.png
-		set wildmode=full
+		set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
+		set wildmode=full:longest
 	" }}}
 " }}}
 " UI options {{{

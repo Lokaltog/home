@@ -13,8 +13,10 @@
 	" General options {{{
 		set nobackup
 		set noswapfile
+		set undofile
 		set updatecount=200
 		set directory=~/.vim/tmp
+		set undodir=~/.vim/tmp
 		set autochdir
 		set backspace=indent,eol,start
 		set fileformats=unix,dos
@@ -24,11 +26,13 @@
 		set iskeyword+=_,$,@,%,#
 		set whichwrap=b,s,[,]
 		set hidden
+		set encoding=utf-8
+		set termencoding=utf-8
 	" }}}
 	" Wild menu {{{
 		set wildmenu
 		set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-		set wildmode=full:longest
+		set wildmode=full
 	" }}}
 " }}}
 " UI options {{{
@@ -49,7 +53,7 @@
 	set updatetime=1500
 	set history=1000
 	set undolevels=1000
-	set list listchars=tab:Ë\ ,trail:í,eol:î
+	set listchars=tab:Ë\ ,trail:í,eol:î
 
 	colo lokaltog
 	" Change cursor color in insert mode {{{
@@ -122,14 +126,12 @@
 	au FileType vim set foldlevel=0 foldtext=VimFold()
 " }}}
 " Mappings {{{
-	nmap <silent><F7> :LustyJuggler<CR>
-	nmap <silent><F8> :TlistToggle<CR>
-	nmap <silent><F9> :LustyBufferExplorer<CR>
-	nmap <silent><F10> :NERDTreeToggle<CR>
-
-	" Buffer swithing
-	nnoremap <silent> <Tab> :bnext<CR>
-	nnoremap <silent> <S-Tab> :bprevious<CR>
+	" F key mappings
+	nnoremap <silent><F7> :LustyJuggler<CR>
+	nnoremap <silent><F8> :TlistToggle<CR>
+	nnoremap <silent><F9> :LustyBufferExplorer<CR>
+	nnoremap <silent><F10> :NERDTreeToggle<CR>
+	nnoremap <silent><F11> :GundoToggle<CR>
 
 	" Folding/unfolding
 	nnoremap <S-Left> zc
@@ -140,7 +142,7 @@
 	inoremap <S-Right> <C-O>zo
 
 	" Quick edit .vimrc
-	nmap <Leader>v <Esc>:e $MYVIMRC<CR>
+	nnoremap <Leader>v <Esc>:e $MYVIMRC<CR>
 
 	" Enter command mode quickly
 	nnoremap ; :
@@ -150,14 +152,31 @@
 	noremap j gj
 
 	" Tab indenting in visual mode
-	vmap <Tab> >gv
-	vmap <S-Tab> <gv
+	vnoremap <Tab> >gv
+	vnoremap <S-Tab> <gv
 
 	" Clear search highlighting
-	nmap <silent> <Leader>n :silent noh<cr>
+	nnoremap <silent> <Leader>n :silent noh<cr>
 
 	" Sudo write (:W)
 	command! -bar -nargs=0 W :silent exec "write !sudo tee % >/dev/null" | silent edit!
+
+	" Fix broken vim regexes when searching
+	" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
+	nnoremap / /\v
+	vnoremap / /\v
+
+	" Easier bracket matching
+	nnoremap <Tab> %
+
+	" Vertically split window and select it with ,w
+	nnoremap <Leader>w <C-w>v<C-w>l
+
+	" Easier split window navigation
+	nnoremap H <C-w>h
+	nnoremap J <C-w>j
+	nnoremap K <C-w>k
+	nnoremap L <C-w>l
 
 	" Mouse toggle {{{
 		fun! ToggleMouse()
@@ -275,6 +294,13 @@
 			hi def link VimModeline     special
 		" }}}
 	augroup END
+	augroup list
+		autocmd!
+
+		" Set list on selected filetypes
+		au filetype vim setl list
+		au filetype html,css,javascript,php,python,ruby setl list
+	augroup END
 	augroup whitespace
 		autocmd!
 
@@ -331,7 +357,7 @@
 		let g:delimitMate_unbalanced_parens=1
 		let g:delimitMate_balance_matchpairs=1
 
-		au FileType mail,text let b:delimitMate_autoclose=0
+		au FileType mail,text,vim let b:delimitMate_autoclose=0
 	" }}}
 	" Disable annoying sql bindings {{{
 		let g:ftplugin_sql_omni_key_right="<C-S-M-Right>"
@@ -346,6 +372,7 @@
 		let g:NERDTreeShowBookmarks=1
 	" }}}
 	" Taglist settings {{{
+		let g:Tlist_WinWidth=50
 		let g:Tlist_Close_On_Select=1
 		let g:Tlist_Compact_Format=1
 		let g:Tlist_Display_Tag_Scope=1

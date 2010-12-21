@@ -33,6 +33,10 @@ feh --bg-scale ~/.sync/eos.png &
 xset m 2 0 &
 xset r rate 300 30 &
 
+# load fonts
+xset +fp /home/kim/.fonts/bdf
+xset +fp /usr/share/fonts/artwiz-latin1-fonts
+
 # start statnot
 statnot ~/sync/conf/statnot.py &
 

@@ -8,7 +8,7 @@ snippet redir
 snippet uri
 	Route::get('default')->uri(array('controller' => '${1}', 'action' => '${2}'${3}))${4}
 snippet url
-	Route::url('${1:default}')->url(array('lang' => I18n::$lang, 'controller' => '${1}', 'action' => '${2}'${3}))${4}
+	Route::url('${1:default}', array('lang' => I18n::$lang, 'controller' => '${2}', 'action' => '${3}'${4}))${5}
 snippet fi
 	'${1}' => Jelly::field('${2}'${3}),
 snippet w

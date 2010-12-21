@@ -49,3 +49,6 @@
 [submodule "zshplugins/git-flow-completion"]
 	path = zshplugins/git-flow-completion
 	url = https://github.com/bobthecow/git-flow-completion.git
+[submodule "vimplugins/gundo"]
+	path = vimplugins/gundo
+	url = https://github.com/sjl/gundo.vim.git

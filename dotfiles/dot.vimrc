@@ -359,4 +359,8 @@
 		let g:syntastic_enable_signs=1
 		let g:syntastic_auto_loc_list=1
 	" }}}
+	" Gundo settings {{{
+		let g:gundo_right=1
+		let g:gundo_width=50
+	" }}}
 " }}}

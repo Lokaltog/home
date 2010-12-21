@@ -76,7 +76,7 @@ hi Function ctermfg=221 cterm=none
 hi Include ctermfg=173 cterm=none
 hi PreCondit ctermfg=173 cterm=none
 hi Keyword ctermfg=173 cterm=none
-hi Search ctermbg=25 ctermfg=153 cterm=bold
+hi Search ctermbg=227 ctermfg=16 cterm=bold,underline
 hi Title ctermfg=15
 
 hi TODO ctermbg=94 ctermfg=228 cterm=bold

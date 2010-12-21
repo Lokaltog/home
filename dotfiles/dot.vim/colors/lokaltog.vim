@@ -60,7 +60,7 @@ hi TabLineClose ctermbg=238 ctermfg=245 cterm=bold
 
 hi SpecialKey ctermfg=239 ctermbg=none cterm=none
 hi NonText ctermfg=88 ctermbg=none cterm=none
-hi MatchParen ctermfg=231 ctermbg=61 cterm=bold
+hi MatchParen ctermfg=196 ctermbg=88 cterm=bold
 
 hi Constant ctermfg=137 cterm=bold
 hi Special ctermfg=150

@@ -305,9 +305,6 @@
 	augroup END
 " }}}
 " Plugin settings {{{
-	" Disable matchparens (slow and useless) {{{
-		let loaded_matchparen=1
-	" }}}
 	" EasyTags settings {{{
 		let g:easytags_cmd='/usr/bin/ctags'
 		let g:easytags_resolve_links=1

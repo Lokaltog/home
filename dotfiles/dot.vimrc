@@ -13,6 +13,7 @@
 	" General options {{{
 		set nobackup
 		set noswapfile
+		set nomodeline
 		set undofile
 		set updatecount=200
 		set directory=~/.vim/tmp
@@ -292,17 +293,8 @@
 		" Disable whitespace trimming on patch files
 		au FileType diff au! whitespace
 
-		" Enable Syntastic {{{
-			au BufNewFile,BufRead * SyntasticEnable
-		" }}}
-		" Highlight vim modeline in all files {{{
-			au Syntax *
-				\ syn match VimModelineLine /^.\{-1,}vim:[^:]\{-1,}:.*/ contains=VimModeline |
-				\ syn match VimModeline contained /vim:[^:]\{-1,}:/
-
-			hi def link VimModelineLine comment
-			hi def link VimModeline     special
-		" }}}
+		" Enable Syntastic
+		au BufNewFile,BufRead * SyntasticEnable
 	augroup END
 	augroup list
 		autocmd!

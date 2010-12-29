@@ -56,6 +56,7 @@
 	set history=1000
 	set undolevels=1000
 	set listchars=tab:Ë\ ,trail:í,eol:î
+	set pumheight=10
 
 	colo lokaltog
 	" Change cursor color in insert mode {{{

@@ -55,6 +55,3 @@
 [submodule "vimplugins/current-func-info"]
 	path = vimplugins/current-func-info
 	url = https://github.com/vim-scripts/current-func-info.vim.git
-[submodule "vimplugins/autocomplpop"]
-	path = vimplugins/autocomplpop
-	url = https://github.com/Lokaltog/AutoComplPop.git

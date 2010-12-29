@@ -173,7 +173,9 @@
 	nnoremap <silent> <Leader>n :silent noh<cr>
 
 	" Sudo write (:W)
-	command! -bar -nargs=0 W :silent exec "write !sudo tee % >/dev/null" | silent edit!
+	command! -bar -nargs=0 W  silent! exec "write !sudo tee % >/dev/null"  | silent! edit!
+	" Write and make file executable (:WX)
+	command! -bar -nargs=0 WX silent! exec "write !chmod a+x % >/dev/null" | silent! edit!
 
 	" Fix broken vim regexes when searching
 	" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
@@ -270,10 +272,6 @@
 
 		" Nginx highlighting
 		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
-
-		" Make .sh/.py files executable on write
-		au BufWritePost *.sh silent !chmod a+x %
-		au BufWritePost *.py silent !chmod a+x %
 
 		" Script templates
 		au BufNewFile *.sh  so ~/.vim/templates/tpl.sh

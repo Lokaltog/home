@@ -1,0 +1,1 @@
+../../../vimplugins/current-func-info/doc/cfi.txt

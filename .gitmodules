@@ -52,3 +52,6 @@
 [submodule "vimplugins/gundo"]
 	path = vimplugins/gundo
 	url = https://github.com/sjl/gundo.vim.git
+[submodule "vimplugins/current-func-info"]
+	path = vimplugins/current-func-info
+	url = https://github.com/vim-scripts/current-func-info.vim.git

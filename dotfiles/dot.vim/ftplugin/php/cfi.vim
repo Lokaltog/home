@@ -1,0 +1,1 @@
+../../../../vimplugins/current-func-info/ftplugin/php/cfi.vim

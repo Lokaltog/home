@@ -76,11 +76,21 @@
 			return substitute(fugitive#statusline(), 'GIT(\([a-z0-9\-_\.]\+\))', ' Í \1 │', 'gi')
 		endfunction
 	" }}}
+	" Function name wrapper {{{
+		function! FunctionName()
+			let fname = cfi#get_func_name()
+			if fname == ""
+				return ""
+			else
+				return " in ".fname
+			endif
+		endfunction
+	" }}}
 	set statusline=
 	set statusline+=%(%1*%{GitBranch()}%*%) " Git branch (User1)
 	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
-	set statusline+=%6*%(\ @\ %{Tlist_Get_Tagname_By_Line()}%)%*
+	set statusline+=%6*%(%{FunctionName()}%)%*
 	set statusline+=%2*%(\ %{SyntasticStatuslineFlag()}%)%*
 	set statusline+=%2*%(\ %M%)%* " Modified (+, -) (User2)
 	set statusline+=%3*%(\ [%R%H%W]%)%* " RO,HLP,PRV (User3)

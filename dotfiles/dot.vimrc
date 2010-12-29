@@ -155,7 +155,8 @@
 	inoremap <S-Right> <C-O>zo
 
 	" Quick edit .vimrc
-	nnoremap <Leader>v <Esc>:e $MYVIMRC<CR>
+	nnoremap <Leader>ev :e $MYVIMRC<CR>
+	nnoremap <Leader>sv :so $MYVIMRC<CR>
 
 	" Enter command mode quickly
 	nnoremap ; :
@@ -269,9 +270,6 @@
 
 		" Nginx highlighting
 		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
-
-		" Source .vimrc on write
-		au BufWritePost .vimrc source %
 
 		" Make .sh/.py files executable on write
 		au BufWritePost *.sh silent !chmod a+x %

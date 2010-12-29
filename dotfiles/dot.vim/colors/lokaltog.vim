@@ -33,7 +33,7 @@ hi User3 cterm=bold ctermfg=244 ctermbg=236
 hi User4 cterm=bold ctermfg=130 ctermbg=236
 hi User5 cterm=bold ctermfg=214 ctermbg=236
 hi User6 cterm=none ctermfg=242 ctermbg=236
-hi User7 cterm=bold ctermfg=242 ctermbg=236
+hi User7 cterm=none ctermfg=247 ctermbg=236
 
 hi WildMenu cterm=bold ctermfg=234 ctermbg=231
 

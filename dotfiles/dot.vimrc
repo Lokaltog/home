@@ -6,7 +6,7 @@
 	let mapleader=','
 
 	" Disable all bells
-	set vb t_vb=
+	set noerrorbells visualbell t_vb=
 
 	set nocompatible
 	set tags=tags;.vimtags;

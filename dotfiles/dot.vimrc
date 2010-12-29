@@ -339,9 +339,11 @@
 		let g:easytags_on_cursorhold=0
 		let g:easytags_always_enabled=1
 	" }}}
-	" Supertab settings {{{
-		let g:SuperTabLongestEnhanced=1
-		let g:SuperTabContextDefaultCompletionType='<C-x><C-u>'
+	" AutoComplPop settings {{{
+		let g:acp_completeOption='.,w,b,u,k,i,d,t'
+		let g:acp_behaviorKeywordLength=3
+		let g:acp_behaviorPhpOmniLength=3
+		let g:acp_completeoptPreview=0
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding=0

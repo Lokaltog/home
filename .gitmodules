@@ -40,9 +40,6 @@
 [submodule "vimplugins/phpcomplete"]
 	path = vimplugins/phpcomplete
 	url = https://github.com/shawncplus/phpcomplete.vim.git
-[submodule "vimplugins/nerdcommenter"]
-	path = vimplugins/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "vimplugins/vim-taglist"]
 	path = vimplugins/vim-taglist
 	url = https://github.com/mexpolk/vim-taglist.git

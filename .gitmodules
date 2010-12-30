@@ -28,9 +28,6 @@
 [submodule "vimplugins/vim-easytags"]
 	path = vimplugins/vim-easytags
 	url = https://github.com/xolox/vim-easytags.git
-[submodule "vimplugins/supertab"]
-	path = vimplugins/supertab
-	url = https://github.com/ervandew/supertab.git
 [submodule "vimplugins/piv"]
 	path = vimplugins/piv
 	url = https://github.com/spf13/PIV.git

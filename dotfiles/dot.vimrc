@@ -29,7 +29,6 @@
 		set hidden
 		set encoding=utf-8
 		set termencoding=utf-8
-		set lazyredraw
 	" }}}
 	" Wild menu {{{
 		set wildmenu

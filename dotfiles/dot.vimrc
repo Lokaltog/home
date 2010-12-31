@@ -68,11 +68,6 @@
 	" }}}
 " }}}
 " Status line {{{
-	" Get syntax item {{{
-		function! SyntaxItem()
-			return synIDattr(synID(line("."),col("."),1),"name")
-		endfunction
-	" }}}
 	set statusline=
 	set statusline+=%1*%(%{substitute(fugitive#statusline(),'GIT\(\\([a-z0-9\\-_\\.]\\+\\)\)','\ Í\ \\1\ │','gi')}%*%) " Git branch (User1)
 	set statusline+=%< " Separator, truncate
@@ -88,7 +83,7 @@
 	set statusline+=\ %1*│%* " Group end
 	set statusline+=%4*%(%{strlen(&ft)?'\ '.&ft.'\ ':''}%1*│%)%* " File type (User4)
 	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
-"	set statusline+=\ %{SyntaxItem()}
+"	set statusline+=\ %{synIDattr(synID(line('.'),col('.'),1),'name')}
 " }}}
 " Layout / Text formatting {{{
 	set autoindent

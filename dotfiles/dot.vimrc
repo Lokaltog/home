@@ -91,7 +91,7 @@
 	set statusline+=%6*%(\ %{(&fenc==''?&enc:&fenc)}%)%* " File encoding
 	set statusline+=\ %(%l:%c%V%)
 	set statusline+=\ %1*│%* " Group end
-	set statusline+=%4*%(\ %{strlen(&ft)?&ft:''}\ %1*│%)%* " File type (User4)
+	set statusline+=%4*%(%{strlen(&ft)?'\ '.&ft.'\ ':''}%1*│%)%* " File type (User4)
 	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
 "	set statusline+=\ %{SyntaxItem()}
 " }}}

@@ -73,13 +73,8 @@
 			return synIDattr(synID(line("."),col("."),1),"name")
 		endfunction
 	" }}}
-	" Git branch wrapper {{{
-		function! GitBranch()
-			return substitute(fugitive#statusline(), 'GIT(\([a-z0-9\-_\.]\+\))', ' Í \1 │', 'gi')
-		endfunction
-	" }}}
 	set statusline=
-	set statusline+=%(%1*%{GitBranch()}%*%) " Git branch (User1)
+	set statusline+=%1*%(%{substitute(fugitive#statusline(),'GIT\(\\([a-z0-9\\-_\\.]\\+\\)\)','\ Í\ \\1\ │','gi')}%*%) " Git branch (User1)
 	set statusline+=%< " Separator, truncate
 	set statusline+=\ %f " File (relative path)
 	set statusline+=%7*%(%{cfi#format('\ in\ %s','')}%)%*

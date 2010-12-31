@@ -69,20 +69,20 @@
 " }}}
 " Status line {{{
 	set statusline=
-	set statusline+=%1*%(%{substitute(fugitive#statusline(),'GIT\(\\([a-z0-9\\-_\\.]\\+\\)\)','\ Í\ \\1\ │','gi')}%*%) " Git branch (User1)
-	set statusline+=%< " Separator, truncate
-	set statusline+=\ %f " File (relative path)
-	set statusline+=%7*%(%{cfi#format('\ in\ %s','')}%)%*
-	set statusline+=%2*%(\ %{SyntasticStatuslineFlag()}%)%*
+	set statusline+=%1*%(%{substitute(fugitive#statusline(),'GIT\(\\([a-z0-9\\-_\\.]\\+\\)\)','\ Í\ \\1\ │\ ','gi')}%*%) " Git branch (User1)
+	set statusline+=%< " [Truncate right]
+	set statusline+=%t " File name
+	set statusline+=%7*%(%{cfi#format('\ in\ %s','')}%)%* " Function name
+	set statusline+=%2*%(\ %{SyntasticStatuslineFlag()}%)%* " Syntastic error flag
 	set statusline+=%2*%(\ %M%)%* " Modified (+, -) (User2)
 	set statusline+=%3*%(\ [%R%H%W]%)%* " RO,HLP,PRV (User3)
-	set statusline+=\ %= " Separator, left/right
+	set statusline+=\ %= " [Right align]
 	set statusline+=%6*%(\ %{&fileformat}%)%* " File format
 	set statusline+=%6*%(\ %{(&fenc==''?&enc:&fenc)}%)%* " File encoding
-	set statusline+=\ %(%l:%c%V%)
-	set statusline+=\ %1*│%* " Group end
-	set statusline+=%4*%(%{strlen(&ft)?'\ '.&ft.'\ ':''}%1*│%)%* " File type (User4)
-	set statusline+=\ %5*%P\ %* " Percentage (User5) (always 3 in length)
+	set statusline+=\ %(%l:%c%V%) " Line/column/virtual column
+	set statusline+=\ %1*│%* " [Separator]
+	set statusline+=%4*%(%{strlen(&ft)?'\ '.toupper(&ft).'\ ':''}%1*│%)%* " File type (User4)
+	set statusline+=\ %5*%p%%%* " Line percentage (User5)
 "	set statusline+=\ %{synIDattr(synID(line('.'),col('.'),1),'name')}
 " }}}
 " Layout / Text formatting {{{

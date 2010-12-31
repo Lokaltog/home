@@ -236,71 +236,72 @@
 	" }}}
 " }}}
 " Autocommands {{{
-	augroup general
+	augroup general " {{{
 		autocmd!
-
-		" Custom psql highlighting
-		au BufNewFile,BufRead *.sql set ft=psql foldmethod=marker
-
-		" Nginx highlighting
-		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
-
-		" Script templates
-		au BufNewFile *.sh  so ~/.vim/templates/tpl.sh
-		au BufNewFile *.py  so ~/.vim/templates/tpl.py
-		au BufNewFile *.php so ~/.vim/templates/tpl.php
-
-		" Help file settings
-		au FileType help setl nonumber statusline=%f%<
-		au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
-		au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
-		au FileType help wincmd L
-		au FileType help vertical resize 80
-
-		" Override SASS defaults
-		au FileType sass set sw=6 ts=6 noet
-
-		" Disable whitespace trimming on patch files
-		au FileType diff au! whitespace
-
-		" Enable Syntastic
-		au BufNewFile,BufRead * SyntasticEnable
-	augroup END
-	augroup list
+		" Custom psql highlighting {{{
+			au BufNewFile,BufRead *.sql set ft=psql foldmethod=marker
+		" }}}
+		" Nginx highlighting {{{
+			au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
+		" }}}
+		" Script templates {{{
+			au BufNewFile *.sh  so ~/.vim/templates/tpl.sh
+			au BufNewFile *.py  so ~/.vim/templates/tpl.py
+			au BufNewFile *.php so ~/.vim/templates/tpl.php
+		" }}}
+		" Help file settings {{{
+			au FileType help setl nonumber statusline=%f%<
+			au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
+			au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
+			au FileType help wincmd L
+			au FileType help vertical resize 80
+		" }}}
+		" Override SASS defaults {{{
+			au FileType sass set sw=6 ts=6 noet
+		" }}}
+		" Disable whitespace trimming on patch files {{{
+			au FileType diff au! whitespace
+		" }}}
+		" Enable Syntastic for selected filetypes {{{
+			au BufNewFile,BufRead php,html,javascript,python,ruby,sh SyntasticEnable
+		" }}}
+	augroup END " }}}
+	augroup list " {{{
 		autocmd!
-
-		" Set list on selected filetypes
-		au filetype vim setl list
-		au filetype html,css,javascript,php,python,ruby setl list
-	augroup END
-	augroup whitespace
+		" Set list on selected filetypes {{{
+			au filetype vim setl list
+			au filetype html,css,javascript,php,python,ruby setl list
+		" }}}
+	augroup END " }}}
+	augroup whitespace " {{{
 		autocmd!
-
-		" Remove trailing whitespace on write
-		au BufWritePre * :call setline(1, map(getline(1, "$"), 'substitute(v:val, "\\s\\+$", "","")'))
-	augroup END
-	augroup mail
+		" Remove trailing whitespace on write {{{
+			au BufWritePre * :call setline(1, map(getline(1, "$"), 'substitute(v:val, "\\s\\+$", "","")'))
+		" }}}
+	augroup END " }}}
+	augroup mail " {{{
 		autocmd!
+		" Fix mutt mail formatting {{{
+			fun! MuttMail()
+				set tw=72 wrap fo+=tcqan1
+				au! whitespace
 
-		fun! MuttMail()
-			set tw=72 wrap fo+=tcqan1
-			au! whitespace
+				if getline(1) == ""
+					" Write new mail
+					norm O
+					startinsert
+				else
+					" Reply to mail
+					silent %!~/sync/bin/mail-filter reply
+					norm jgqapO
+					norm o
+					startinsert
+				endif
+			endfun
 
-			if getline(1) == ""
-				" Write new mail
-				norm O
-				startinsert
-			else
-				" Reply to mail
-				silent %!~/sync/bin/mail-filter reply
-				norm jgqapO
-				norm o
-				startinsert
-			endif
-		endfun
-
-		au BufRead /tmp/mutt-* call MuttMail()
-	augroup END
+			au BufRead /tmp/mutt-* call MuttMail()
+		" }}}
+	augroup END " }}}
 " }}}
 " Plugin settings {{{
 	" EasyTags settings {{{

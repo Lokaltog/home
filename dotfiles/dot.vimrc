@@ -118,58 +118,54 @@
 	au FileType vim set foldlevel=0 foldtext=VimFold()
 " }}}
 " Mappings {{{
-	" F key mappings
-	nnoremap <silent><F7> :LustyJuggler<CR>
-	nnoremap <silent><F8> :TlistToggle<CR>
-	nnoremap <silent><F9> :LustyBufferExplorer<CR>
-	nnoremap <silent><F10> :NERDTreeToggle<CR>
-	nnoremap <silent><F11> :GundoToggle<CR>
-
-	" Folding/unfolding
-	nnoremap <Leader>h zc
-	nnoremap <Leader>l zo
-
-	" Quick edit .vimrc
-	nnoremap <Leader>ev :e $MYVIMRC<CR>
-	nnoremap <Leader>sv :so $MYVIMRC<CR>
-
-	" Enter command mode quickly
-	nnoremap ; :
-
-	" Navigate by visual lines
-	noremap k gk
-	noremap j gj
-
-	" Tab indenting in visual mode
-	vnoremap <Tab> >gv
-	vnoremap <S-Tab> <gv
-
-	" Clear search highlighting
-	nnoremap <silent> <Leader>/ :silent noh<cr>
-
-	" Sudo write (:W)
-	command! -bar -nargs=0 W  silent! exec "write !sudo tee % >/dev/null"  | silent! edit!
-
-	" Write and make file executable (:WX)
-	command! -bar -nargs=0 WX silent! exec "write !chmod a+x % >/dev/null" | silent! edit!
-
-	" Fix broken vim regexes when searching
-	" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
-	nnoremap / /\v
-	vnoremap / /\v
-
-	" Easier bracket matching
-	nnoremap <Tab> %
-
-	" Vertically split window and select it with ,w
-	nnoremap <Leader>w <C-w>v<C-w>l
-
-	" Easier split window navigation
-	nnoremap H <C-w>h
-	nnoremap J <C-w>j
-	nnoremap K <C-w>k
-	nnoremap L <C-w>l
-
+	" F key mappings {{{
+		nnoremap <silent><F7> :LustyJuggler<CR>
+		nnoremap <silent><F8> :TlistToggle<CR>
+		nnoremap <silent><F9> :LustyBufferExplorer<CR>
+		nnoremap <silent><F10> :NERDTreeToggle<CR>
+		nnoremap <silent><F11> :GundoToggle<CR>
+	" }}}
+	" Quick edit .vimrc {{{
+		nnoremap <Leader>ev :e $MYVIMRC<CR>
+		nnoremap <Leader>sv :so $MYVIMRC<CR>
+	" }}}
+	" Enter command mode quickly {{{
+		nnoremap ; :
+	" }}}
+	" Navigate by visual lines {{{
+		noremap k gk
+		noremap j gj
+	" }}}
+	" Tab indenting in visual mode {{{
+		vnoremap <Tab> >gv
+		vnoremap <S-Tab> <gv
+	" }}}
+	" Clear search highlighting {{{
+		nnoremap <silent> <Leader>/ :silent noh<cr>
+	" }}}
+	" Sudo write {{{
+		command! -bar -nargs=0 W  silent! exec "write !sudo tee % >/dev/null"  | silent! edit!
+	" }}}
+	" Write and make file executable {{{
+		command! -bar -nargs=0 WX silent! exec "write !chmod a+x % >/dev/null" | silent! edit!
+	" }}}
+	" Fix broken vim regexes when searching {{{
+		" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
+		nnoremap / /\v
+		vnoremap / /\v
+	" }}}
+	" Easier bracket matching {{{
+		nnoremap <Tab> %
+	" }}}
+	" Vertically split window and select it  {{{
+		nnoremap <Leader>w <C-w>v<C-w>l
+	" }}}
+	" Easier split window navigation {{{
+		nnoremap H <C-w>h
+		nnoremap J <C-w>j
+		nnoremap K <C-w>k
+		nnoremap L <C-w>l
+	" }}}
 	" Mouse toggle {{{
 		fun! ToggleMouse()
 			if !exists("old_mouse")

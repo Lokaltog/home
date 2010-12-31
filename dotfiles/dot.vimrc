@@ -167,7 +167,7 @@
 		nnoremap L <C-w>l
 	" }}}
 	" Mouse toggle {{{
-		fun! ToggleMouse()
+		function! s:ToggleMouse()
 			if !exists("old_mouse")
 				let old_mouse = "ar"
 			endif
@@ -182,57 +182,57 @@
 			endif
 		endfunction
 
-		nnoremap <F12> :call ToggleMouse()<CR>
+		nnoremap <F12> :call <SID>ToggleMouse()<CR>
 	" }}}
 	" Line moving {{{
-		function! MoveLineUp()
-			call MoveLineOrVisualUp(".", "")
+		function! s:MoveLineUp()
+			call <SID>MoveLineOrVisualUp(".", "")
 		endfunction
 
-		function! MoveLineDown()
-			call MoveLineOrVisualDown(".", "")
+		function! s:MoveLineDown()
+			call <SID>MoveLineOrVisualDown(".", "")
 		endfunction
 
-		function! MoveVisualUp()
-			call MoveLineOrVisualUp("'<", "'<,'>")
+		function! s:MoveVisualUp()
+			call <SID>MoveLineOrVisualUp("'<", "'<,'>")
 			normal gv
 		endfunction
 
-		function! MoveVisualDown()
-			call MoveLineOrVisualDown("'>", "'<,'>")
+		function! s:MoveVisualDown()
+			call <SID>MoveLineOrVisualDown("'>", "'<,'>")
 			normal gv
 		endfunction
 
-		function! MoveLineOrVisualUp(line_getter, range)
+		function! s:MoveLineOrVisualUp(line_getter, range)
 			let l_num=line(a:line_getter)
 			if l_num - v:count1 - 1 < 0
 				let move_arg="0"
 			else
 				let move_arg=a:line_getter." -".(v:count1 + 1)
 			endif
-			call MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
+			call <SID>MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
 		endfunction
 
-		function! MoveLineOrVisualDown(line_getter, range)
+		function! s:MoveLineOrVisualDown(line_getter, range)
 			let l_num=line(a:line_getter)
 			if l_num + v:count1 > line("$")
 				let move_arg="$"
 			else
 				let move_arg=a:line_getter." +".v:count1
 			endif
-			call MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
+			call <SID>MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
 		endfunction
 
-		function! MoveLineOrVisualUpOrDown(move_arg)
+		function! s:MoveLineOrVisualUpOrDown(move_arg)
 			let col_num=virtcol(".")
 			execute "silent! ".a:move_arg
 			execute "normal! ".col_num."|"
 		endfunction
 
-		nnoremap <silent> <Leader>k :<C-u>call MoveLineUp()<CR>
-		nnoremap <silent> <Leader>j :<C-u>call MoveLineDown()<CR>
-		vnoremap <silent> <Leader>k :<C-u>call MoveVisualUp()<CR>
-		vnoremap <silent> <Leader>j :<C-u>call MoveVisualDown()<CR>
+		nnoremap <silent> <Leader>k :<C-u>call <SID>MoveLineUp()<CR>
+		nnoremap <silent> <Leader>j :<C-u>call <SID>MoveLineDown()<CR>
+		vnoremap <silent> <Leader>k :<C-u>call <SID>MoveVisualUp()<CR>
+		vnoremap <silent> <Leader>j :<C-u>call <SID>MoveVisualDown()<CR>
 	" }}}
 " }}}
 " Autocommands {{{

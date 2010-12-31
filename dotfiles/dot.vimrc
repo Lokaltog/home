@@ -126,12 +126,8 @@
 	nnoremap <silent><F11> :GundoToggle<CR>
 
 	" Folding/unfolding
-	nnoremap <S-Left> zc
 	nnoremap <Leader>h zc
-	inoremap <S-Left> <C-O>zc
-	nnoremap <S-Right> zo
 	nnoremap <Leader>l zo
-	inoremap <S-Right> <C-O>zo
 
 	" Quick edit .vimrc
 	nnoremap <Leader>ev :e $MYVIMRC<CR>

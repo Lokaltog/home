@@ -145,10 +145,11 @@
 	vnoremap <S-Tab> <gv
 
 	" Clear search highlighting
-	nnoremap <silent> <Leader>n :silent noh<cr>
+	nnoremap <silent> <Leader>/ :silent noh<cr>
 
 	" Sudo write (:W)
 	command! -bar -nargs=0 W  silent! exec "write !sudo tee % >/dev/null"  | silent! edit!
+
 	" Write and make file executable (:WX)
 	command! -bar -nargs=0 WX silent! exec "write !chmod a+x % >/dev/null" | silent! edit!
 
@@ -232,10 +233,10 @@
 			execute "normal! ".col_num."|"
 		endfunction
 
-		nnoremap <silent> <Leader><Up> :<C-u>call MoveLineUp()<CR>
-		nnoremap <silent> <Leader><Down> :<C-u>call MoveLineDown()<CR>
-		vnoremap <silent> <Leader><Up> :<C-u>call MoveVisualUp()<CR>
-		vnoremap <silent> <Leader><Down> :<C-u>call MoveVisualDown()<CR>
+		nnoremap <silent> <Leader>k :<C-u>call MoveLineUp()<CR>
+		nnoremap <silent> <Leader>j :<C-u>call MoveLineDown()<CR>
+		vnoremap <silent> <Leader>k :<C-u>call MoveVisualUp()<CR>
+		vnoremap <silent> <Leader>j :<C-u>call MoveVisualDown()<CR>
 	" }}}
 " }}}
 " Autocommands {{{

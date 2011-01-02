@@ -89,21 +89,18 @@
 			let my_stl  = ""
 
 			if a:current
-				let my_stl .= "%#StatusLine".flag."Mode".current."#õ %{substitute(mode(), '', '^V', 'g')} %#StatusLine".flag."Separator".current."#│ "
+				let my_stl .= "%#StatusLine".flag."Mode".current."#õ %{substitute(mode(), '', '^V', 'g')} "
 			endif
 
-			let my_stl .= "%#StatusLine".flag."Branch".current."#%(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1 │ ', 'gi')}%)" " Git branch
-			let my_stl .= "%<" " [Truncate right]
-			let my_stl .= "%#StatusLine".flag."FileName".current."#%t" " File name
+			let my_stl .= "%#StatusLine".flag."Branch".current."#%(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', ' Í \\1', 'gi')}%#StatusLine".flag."Separator".current."# │%)" " Git branch
+			let my_stl .= "%#StatusLine".flag."FileName".current."# %<%t" " Truncate right/File name
 			let my_stl .= "%#StatusLine".flag."FunctionName".current."#%(%{cfi#format(' in %s', '')}%)" " Function name
 			let my_stl .= "%#StatusLine".flag."Error".current."#%( %{SyntasticStatuslineFlag()}%)" " Syntastic error flag
-			let my_stl .= "%#StatusLine".flag."ModFlag".current."#%( %M%)" " Modified (+, -)
-			let my_stl .= "%#StatusLine".flag."BufFlag".current."#%( [%R%H%W]%)" " RO,HLP,PRV
-			let my_stl .= " %=" " [Right align]
+			let my_stl .= "%#StatusLine".flag."ModFlag".current."#%( %M%)" " Modified flag
+			let my_stl .= "%#StatusLine".flag."BufFlag".current."#%( [%R%H%W]%) %=" " RO,HLP,PRV flags/Right align
 			let my_stl .= "%#StatusLine".flag."FileFormat".current."#%( %{&fileformat}%)" " File format
 			let my_stl .= "%#StatusLine".flag."FileEncoding".current."#%( %{(&fenc == '' ? &enc : &fenc)}%)" " File encoding
-			let my_stl .= "%#StatusLine".flag."LineNumber".current."# %(%l:%c%V%)" " Line/column/virtual column
-			let my_stl .= "%#StatusLine".flag."Separator".current."# │" " [Separator]
+			let my_stl .= "%#StatusLine".flag."LineNumber".current."# %(%l:%c%V%)%#StatusLine".flag."Separator".current."# │" " Line/column/virtual column
 			let my_stl .= "%#StatusLine".flag."FileType".current."#%(%{strlen(&ft)?' '.toupper(&ft).' ':''}%#StatusLine".flag."Separator".current."#│%)" " File type
 			let my_stl .= "%#StatusLine".flag."LinePercent".current."# %p%%" " Line percentage
 			"let my_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
@@ -131,7 +128,7 @@
 		endfunction
 	" }}}
 	" Set normal mode current and non-current statusline colors {{{
-		call <SID>StatusLineColor('Normal', 'Mode',         236, 112, 'bold')
+		call <SID>StatusLineColor('Normal', 'Mode',          22, 112, 'bold')
 		call <SID>StatusLineColor('Normal', 'Branch',       236, 244, 'bold') | call <SID>StatusLineColorNC('Normal', 'Branch',       'none', 239, 'none')
 		call <SID>StatusLineColor('Normal', 'FileName',     236, 231, 'bold') | call <SID>StatusLineColorNC('Normal', 'FileName',     'none', 244, 'bold')
 		call <SID>StatusLineColor('Normal', 'FunctionName', 236, 247, 'none') | call <SID>StatusLineColorNC('Normal', 'FunctionName', 'none', 239, 'none')
@@ -146,19 +143,19 @@
 		call <SID>StatusLineColor('Normal', 'LinePercent',  236, 214, 'bold') | call <SID>StatusLineColorNC('Normal', 'LinePercent',  'none', 239, 'none')
 	" }}}
 	" Set insert mode current statusline colors {{{
-		call <SID>StatusLineColor('Insert', 'Mode',         52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'Branch',       52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'FileName',     52, 231, 'bold')
-		call <SID>StatusLineColor('Insert', 'FunctionName', 52, 209, 'none')
-		call <SID>StatusLineColor('Insert', 'Error',        52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'ModFlag',      52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'BufFlag',      52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'FileFormat',   52, 160, 'none')
-		call <SID>StatusLineColor('Insert', 'FileEncoding', 52, 160, 'none')
-		call <SID>StatusLineColor('Insert', 'LineNumber',   52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'Separator',    52,  88, 'none')
-		call <SID>StatusLineColor('Insert', 'FileType',     52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'LinePercent',  52, 209, 'bold')
+		call <SID>StatusLineColor('Insert', 'Mode',         124, 209, 'bold')
+		call <SID>StatusLineColor('Insert', 'Branch',        52, 160, 'bold')
+		call <SID>StatusLineColor('Insert', 'FileName',      52, 231, 'bold')
+		call <SID>StatusLineColor('Insert', 'FunctionName',  52, 209, 'none')
+		call <SID>StatusLineColor('Insert', 'Error',         52, 160, 'bold')
+		call <SID>StatusLineColor('Insert', 'ModFlag',       52, 160, 'bold')
+		call <SID>StatusLineColor('Insert', 'BufFlag',       52, 160, 'bold')
+		call <SID>StatusLineColor('Insert', 'FileFormat',    52, 160, 'none')
+		call <SID>StatusLineColor('Insert', 'FileEncoding',  52, 160, 'none')
+		call <SID>StatusLineColor('Insert', 'LineNumber',    52, 160, 'bold')
+		call <SID>StatusLineColor('Insert', 'Separator',     52, 124, 'none')
+		call <SID>StatusLineColor('Insert', 'FileType',      52, 160, 'bold')
+		call <SID>StatusLineColor('Insert', 'LinePercent',   52, 209, 'bold')
 	" }}}
 	augroup StatusLineHighlight " {{{
 		autocmd!

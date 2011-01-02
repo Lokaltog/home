@@ -475,8 +475,6 @@
 	" delimitMate settings {{{
 		let g:delimitMate_unbalanced_parens = 1
 		let g:delimitMate_balance_matchpairs = 1
-
-		au FileType mail,text,vim let b:delimitMate_autoclose = 0
 	" }}}
 	" Disable annoying sql bindings {{{
 		let g:ftplugin_sql_omni_key_right = "<C-S-M-Right>"

@@ -25,16 +25,6 @@ hi FoldColumn ctermbg=none ctermfg=239 cterm=none
 hi SignColumn ctermbg=none cterm=bold
 hi Visual ctermbg=247 ctermfg=16 cterm=bold
 
-hi StatusLineNC cterm=bold ctermfg=240 ctermbg=234
-hi StatusLine cterm=bold ctermfg=231 ctermbg=236
-hi User1 cterm=bold ctermfg=244 ctermbg=236
-hi User2 cterm=bold ctermfg=196 ctermbg=236
-hi User3 cterm=bold ctermfg=244 ctermbg=236
-hi User4 cterm=bold ctermfg=130 ctermbg=236
-hi User5 cterm=bold ctermfg=214 ctermbg=236
-hi User6 cterm=none ctermfg=242 ctermbg=236
-hi User7 cterm=none ctermfg=247 ctermbg=236
-
 hi WildMenu cterm=bold ctermfg=234 ctermbg=231
 
 hi Directory ctermfg=143 cterm=bold

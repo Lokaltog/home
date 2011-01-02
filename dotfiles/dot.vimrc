@@ -85,12 +85,12 @@
 	" Inspired by StatusLineHighlight by Ingo Karkat
 	" Define default regular statusline color {{{
 		function! s:StatusLineColor(flag, name, ctermbg, ctermfg, cterm)
-			exec 'hi def StatusLine'.a:flag.a:name.' ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
+			exec 'hi StatusLine'.a:flag.a:name.' ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
 		endfunction
 	" }}}
 	" Define default non-current statusline color {{{
 		function! s:StatusLineColorNC(flag, name, ctermbg, ctermfg, cterm)
-			exec 'hi def StatusLine'.a:flag.a:name.'NC ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
+			exec 'hi StatusLine'.a:flag.a:name.'NC ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
 		endfunction
 	" }}}
 	" Update statusline {{{
@@ -138,6 +138,9 @@
 				let &l:stl = my_stl
 			endif
 		endfunction
+	" }}}
+	" Set default statusline colors {{{
+		call <SID>StatusLineColor('',       '',             236, 231, 'bold') | call <SID>StatusLineColorNC('',       '',             'none', 244, 'none')
 	" }}}
 	" Set normal mode current and non-current statusline colors {{{
 		call <SID>StatusLineColor('Normal', 'Mode',          22, 112, 'bold')

@@ -2,7 +2,7 @@
 syn region phpRegion matchgroup=phpDelimiter start="<?\(php\)\=" end="?>" contains=@phpClTop keepend
 
 " Dim semicolons
-syn match phpEOL ";\s*$" contained containedin=phpRegion
+syn match phpEOL ";\+$" contained containedin=phpRegion
 
 " Dim string delimiters
 syn region phpStringDouble matchgroup=phpStringDelim start=+"+ skip=+\\\\\|\\"+ end=+"+  contains=@phpAddStrings,phpIdentifier,phpSpecialChar,phpIdentifierSimply,phpIdentifierComplex contained keepend
@@ -25,13 +25,9 @@ if !exists("php_ignore_phpdoc")
 
 	syn case match
 
-	command! -nargs=+ PhpHiLink hi def link <args>
-
-	PhpHiLink phpCommentTitle SpecialComment
-	PhpHiLink phpDocComment   Comment
-	PhpHiLink phpDocTags      Special
-	PhpHiLink phpDocParam     Function
-	PhpHiLink phpCommentStar  Comment
-
-	delcommand PhpHiLink
+	hi def link phpCommentTitle SpecialComment
+	hi def link phpDocComment   Comment
+	hi def link phpDocTags      Special
+	hi def link phpDocParam     Function
+	hi def link phpCommentStar  Comment
 endif

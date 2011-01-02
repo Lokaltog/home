@@ -83,7 +83,6 @@
 	set showcmd
 	set noshowmode
 	set virtualedit=all
-	set textwidth=0
 	set confirm
 	set updatetime=1500
 	set history=1000
@@ -222,7 +221,8 @@
 " Layout / Text formatting {{{
 	set autoindent
 	set wrap
-	set formatoptions=tcroqn1
+	set textwidth=72
+	set formatoptions=croqwanl1
 	set ignorecase
 	set linebreak
 	set shiftwidth=6
@@ -429,6 +429,16 @@
 			au BufNewFile,BufRead php,html,javascript,python,ruby,sh SyntasticEnable
 		" }}}
 	augroup END " }}}
+	augroup formatting " {{{
+		autocmd!
+		" Fix gitcommit formatting {{{
+			au FileType gitcommit setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
+		" }}}
+		" Format plain text and e-mails correctly {{{
+			au BufNewFile,BufRead *.txt setl ft=text
+			au FileType mail,text setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
+		" }}}
+	augroup END" }}}
 	augroup list " {{{
 		autocmd!
 		" Set list on selected filetypes {{{

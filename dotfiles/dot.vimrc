@@ -90,37 +90,8 @@
 	set undolevels=1000
 	set pumheight=10
 " }}}
-" Status line {{{
-	" Set default status line {{{
-		let g:default_stl  = ""
-		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS]õ#/CUR#"
-		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1', 'gi')}#[BranchS] ó %)" " Git branch
-		let g:default_stl .= "%<" " Truncate right
-		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "#[Error]%(%{SyntasticStatuslineFlag()} %)" " Syntastic error flag
-		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
-		let g:default_stl .= "#[BufFlag]%([%R%H%W] %)" " RO,HLP,PRV flags
-		let g:default_stl .= "#[FileNameS]õ" " Separator
-		let g:default_stl .= "#[FunctionName] %(%{cfi#format('%s', '')} %)" " Function name
-		let g:default_stl .= "%=" " Right align
-		let g:default_stl .= "#[FileFormat] %{&fileformat}" " File format
-		let g:default_stl .= "#[FileEncoding] %{(&fenc == '' ? &enc : &fenc)}" " File encoding
-		let g:default_stl .= "#[LineNumber]%( %l:%c%V%) " " Line/column/virtual column
-		let g:default_stl .= "#[Separator]ò ð #[FileType]%{strlen(&ft) ? toupper(&ft) : 'N/A'} " " File type
-		let g:default_stl .= "#[LinePercentS]ô#[LinePercent] %p%% " " Line percentage
-		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
-	" }}}"
-	" Define default regular statusline color {{{
-		function! s:StatusLineColor(type, name, ctermbg, ctermfg, cterm)
-			exec 'hi StatusLine'.a:type.a:name.' ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
-		endfunction
-	" }}}
-	" Define default non-current statusline color {{{
-		function! s:StatusLineColorNC(type, name, ctermbg, ctermfg, cterm)
-			exec 'hi StatusLine'.a:type.a:name.'NC ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
-		endfunction
-	" }}}
-	" Update statusline {{{
+" Statusline {{{
+	" Statusline update function {{{
 		" Inspired by StatusLineHighlight by Ingo Karkat
 		function! s:StatusLine(new_stl, type, current)
 			let current = (a:current ? "" : "NC")
@@ -157,46 +128,88 @@
 			endif
 		endfunction
 	" }}}
-	" Set default statusline colors {{{
-		call <SID>StatusLineColor('',       '',             236, 231, 'bold') | call <SID>StatusLineColorNC('',       '',             232, 244, 'none')
+	" Set default statusline {{{
+		let g:default_stl  = ""
+		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS]õ#/CUR#"
+		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1', 'gi')}#[BranchS] ó %)" " Git branch
+		let g:default_stl .= "%<" " Truncate right
+		let g:default_stl .= "#[FileName]%t " " File name
+		let g:default_stl .= "#[Error]%(%{SyntasticStatuslineFlag()} %)" " Syntastic error flag
+		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
+		let g:default_stl .= "#[BufFlag]%([%R%H%W] %)" " RO,HLP,PRV flags
+		let g:default_stl .= "#[FileNameS]õ" " Separator
+		let g:default_stl .= "#[FunctionName] %(%{cfi#format('%s', '')} %)" " Function name
+		let g:default_stl .= "%=" " Right align
+		let g:default_stl .= "#[FileFormat] %{&fileformat}" " File format
+		let g:default_stl .= "#[FileEncoding] %{(&fenc == '' ? &enc : &fenc)}" " File encoding
+		let g:default_stl .= "#[LineNumber]%( %l:%c%V%) " " Line/column/virtual column
+		let g:default_stl .= "#[Separator]ò ð #[FileType]%{strlen(&ft) ? toupper(&ft) : 'N/A'} " " File type
+		let g:default_stl .= "#[LinePercentS]ô#[LinePercent] %p%% " " Line percentage
+		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
 	" }}}
-	" Set normal mode current and non-current statusline colors {{{
-		call <SID>StatusLineColor('Normal', 'Mode',         214, 235, 'bold')
-		call <SID>StatusLineColor('Normal', 'ModeS',        214, 240, 'bold')
-		call <SID>StatusLineColor('Normal', 'Branch',       240, 250, 'none') | call <SID>StatusLineColorNC('Normal', 'Branch',       234, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'BranchS',      240, 246, 'none') | call <SID>StatusLineColorNC('Normal', 'BranchS',      234, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'FileName',     240, 231, 'bold') | call <SID>StatusLineColorNC('Normal', 'FileName',     234, 244, 'bold')
-		call <SID>StatusLineColor('Normal', 'FileNameS',    240, 236, 'bold') | call <SID>StatusLineColorNC('Normal', 'FileNameS',    234, 232, 'bold')
-		call <SID>StatusLineColor('Normal', 'Error',        240, 196, 'bold') | call <SID>StatusLineColorNC('Normal', 'Error',        232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'ModFlag',      240, 196, 'bold') | call <SID>StatusLineColorNC('Normal', 'ModFlag',      232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'BufFlag',      240, 244, 'bold') | call <SID>StatusLineColorNC('Normal', 'BufFlag',      232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'FunctionName', 236, 247, 'none') | call <SID>StatusLineColorNC('Normal', 'FunctionName', 232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'FileFormat',   236, 244, 'none') | call <SID>StatusLineColorNC('Normal', 'FileFormat',   232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'FileEncoding', 236, 244, 'none') | call <SID>StatusLineColorNC('Normal', 'FileEncoding', 232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'LineNumber',   236, 248, 'bold') | call <SID>StatusLineColorNC('Normal', 'LineNumber',   232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'Separator',    236, 244, 'none') | call <SID>StatusLineColorNC('Normal', 'Separator',    232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'FileType',     236, 248, 'bold') | call <SID>StatusLineColorNC('Normal', 'FileType',     232, 239, 'none')
-		call <SID>StatusLineColor('Normal', 'LinePercentS', 252, 236, 'bold') | call <SID>StatusLineColorNC('Normal', 'LinePercentS', 234, 232, 'none')
-		call <SID>StatusLineColor('Normal', 'LinePercent',  252, 236, 'bold') | call <SID>StatusLineColorNC('Normal', 'LinePercent',  234, 239, 'none')
-	" }}}
-	" Set insert mode current statusline colors {{{
-		call <SID>StatusLineColor('Insert', 'Mode',         153,  23, 'bold')
-		call <SID>StatusLineColor('Insert', 'ModeS',        153,  31, 'bold')
-		call <SID>StatusLineColor('Insert', 'Branch',        31, 117, 'none')
-		call <SID>StatusLineColor('Insert', 'BranchS',       31, 117, 'none')
-		call <SID>StatusLineColor('Insert', 'FileName',      31, 231, 'bold')
-		call <SID>StatusLineColor('Insert', 'FileNameS',     31,  24, 'bold')
-		call <SID>StatusLineColor('Insert', 'Error',         31, 196, 'bold')
-		call <SID>StatusLineColor('Insert', 'ModFlag',       31, 196, 'bold')
-		call <SID>StatusLineColor('Insert', 'BufFlag',       31,  75, 'bold')
-		call <SID>StatusLineColor('Insert', 'FunctionName',  24, 117, 'none')
-		call <SID>StatusLineColor('Insert', 'FileFormat',    24,  75, 'none')
-		call <SID>StatusLineColor('Insert', 'FileEncoding',  24,  75, 'none')
-		call <SID>StatusLineColor('Insert', 'LineNumber',    24,  75, 'bold')
-		call <SID>StatusLineColor('Insert', 'Separator',     24,  37, 'none')
-		call <SID>StatusLineColor('Insert', 'FileType',      24,  81, 'bold')
-		call <SID>StatusLineColor('Insert', 'LinePercentS', 117,  24, 'bold')
-		call <SID>StatusLineColor('Insert', 'LinePercent',  117,  23, 'bold')
+	" Set statusline colors {{{
+		" Statusline color dict parser {{{
+			function! s:StatusLineColors(colors)
+				for type in keys(a:colors)
+					for name in keys(a:colors[type])
+						let colors = {'c': a:colors[type][name][0], 'nc': a:colors[type][name][1]}
+						let type = (type == 'NONE' ? '' : type)
+						let name = (name == 'NONE' ? '' : name)
+
+						if exists("colors['c'][0]")
+							exec 'hi StatusLine'.type.name.' ctermbg='.colors['c'][0].' ctermfg='.colors['c'][1].' cterm='.colors['c'][2]
+						endif
+
+						if exists("colors['nc'][0]")
+							exec 'hi StatusLine'.type.name.'NC ctermbg='.colors['nc'][0].' ctermfg='.colors['nc'][1].' cterm='.colors['nc'][2]
+						endif
+					endfor
+				endfor
+			endfunction
+		" }}}
+		call <SID>StatusLineColors({
+			\   'NONE': {
+				\   'NONE'         : [[ 236, 231, 'bold'], [ 232, 244, 'none']]
+			\ }
+			\ , 'Normal': {
+				\   'Mode'         : [[ 214, 235, 'bold'], [                 ]]
+				\ , 'ModeS'        : [[ 214, 240, 'bold'], [                 ]]
+				\ , 'Branch'       : [[ 240, 250, 'none'], [ 234, 239, 'none']]
+				\ , 'BranchS'      : [[ 240, 246, 'none'], [ 234, 239, 'none']]
+				\ , 'FileName'     : [[ 240, 231, 'bold'], [ 234, 244, 'bold']]
+				\ , 'FileNameS'    : [[ 240, 236, 'bold'], [ 234, 232, 'bold']]
+				\ , 'Error'        : [[ 240, 196, 'bold'], [ 232, 239, 'none']]
+				\ , 'ModFlag'      : [[ 240, 196, 'bold'], [ 232, 239, 'none']]
+				\ , 'BufFlag'      : [[ 240, 244, 'bold'], [ 232, 239, 'none']]
+				\ , 'FunctionName' : [[ 236, 247, 'none'], [ 232, 239, 'none']]
+				\ , 'FileFormat'   : [[ 236, 244, 'none'], [ 232, 239, 'none']]
+				\ , 'FileEncoding' : [[ 236, 244, 'none'], [ 232, 239, 'none']]
+				\ , 'LineNumber'   : [[ 236, 248, 'bold'], [ 232, 239, 'none']]
+				\ , 'Separator'    : [[ 236, 244, 'none'], [ 232, 239, 'none']]
+				\ , 'FileType'     : [[ 236, 248, 'bold'], [ 232, 239, 'none']]
+				\ , 'LinePercentS' : [[ 252, 236, 'bold'], [ 234, 232, 'none']]
+				\ , 'LinePercent'  : [[ 252, 236, 'bold'], [ 234, 239, 'none']]
+			\ }
+			\ , 'Insert': {
+				\   'Mode'         : [[ 153,  23, 'bold'], [                 ]]
+				\ , 'ModeS'        : [[ 153,  31, 'bold'], [                 ]]
+				\ , 'Branch'       : [[  31, 117, 'none'], [                 ]]
+				\ , 'BranchS'      : [[  31, 117, 'none'], [                 ]]
+				\ , 'FileName'     : [[  31, 231, 'bold'], [                 ]]
+				\ , 'FileNameS'    : [[  31,  24, 'bold'], [                 ]]
+				\ , 'Error'        : [[  31, 196, 'bold'], [                 ]]
+				\ , 'ModFlag'      : [[  31, 196, 'bold'], [                 ]]
+				\ , 'BufFlag'      : [[  31,  75, 'bold'], [                 ]]
+				\ , 'FunctionName' : [[  24, 117, 'none'], [                 ]]
+				\ , 'FileFormat'   : [[  24,  75, 'none'], [                 ]]
+				\ , 'FileEncoding' : [[  24,  75, 'none'], [                 ]]
+				\ , 'LineNumber'   : [[  24,  75, 'bold'], [                 ]]
+				\ , 'Separator'    : [[  24,  37, 'none'], [                 ]]
+				\ , 'FileType'     : [[  24,  81, 'bold'], [                 ]]
+				\ , 'LinePercentS' : [[ 117,  24, 'bold'], [                 ]]
+				\ , 'LinePercent'  : [[ 117,  23, 'bold'], [                 ]]
+			\ }
+		\ })
 	" }}}
 	augroup StatusLineHighlight " {{{
 		autocmd!

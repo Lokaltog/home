@@ -75,7 +75,7 @@
 	set laststatus=2
 	set hlsearch
 	set incsearch
-	set number
+	set nonumber
 	set numberwidth=4
 	set ruler
 	set scrolloff=10
@@ -142,9 +142,9 @@
 		let g:default_stl .= "%=" " Right align
 		let g:default_stl .= "#[FileFormat] %{&fileformat}" " File format
 		let g:default_stl .= "#[FileEncoding] %{(&fenc == '' ? &enc : &fenc)}" " File encoding
-		let g:default_stl .= "#[LineNumber]%( %l:%c%V%) " " Line/column/virtual column
-		let g:default_stl .= "#[Separator]ò ð #[FileType]%{strlen(&ft) ? toupper(&ft) : 'N/A'} " " File type
-		let g:default_stl .= "#[LinePercentS]ô#[LinePercent] %p%% " " Line percentage
+		let g:default_stl .= "#[Separator] ò ð #[FileType]%{strlen(&ft) ? toupper(&ft) : 'N/A'} " " File type
+		let g:default_stl .= "#[LinePercentS]ô#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
+		let g:default_stl .= "#[LineNumberS]ô#[LineNumber] Ý %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
 		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
 	" }}}
 	" Set statusline colors {{{
@@ -184,11 +184,13 @@
 				\ , 'FunctionName' : [[ 236, 247, 'none'], [ 232, 239, 'none']]
 				\ , 'FileFormat'   : [[ 236, 244, 'none'], [ 232, 239, 'none']]
 				\ , 'FileEncoding' : [[ 236, 244, 'none'], [ 232, 239, 'none']]
-				\ , 'LineNumber'   : [[ 236, 248, 'bold'], [ 232, 239, 'none']]
 				\ , 'Separator'    : [[ 236, 244, 'none'], [ 232, 239, 'none']]
-				\ , 'FileType'     : [[ 236, 248, 'bold'], [ 232, 239, 'none']]
-				\ , 'LinePercentS' : [[ 252, 236, 'bold'], [ 234, 232, 'none']]
-				\ , 'LinePercent'  : [[ 252, 236, 'bold'], [ 234, 239, 'none']]
+				\ , 'FileType'     : [[ 236, 248, 'none'], [ 232, 239, 'none']]
+				\ , 'LinePercentS' : [[ 240, 236, 'none'], [ 234, 232, 'none']]
+				\ , 'LinePercent'  : [[ 240, 250, 'none'], [ 234, 239, 'none']]
+				\ , 'LineNumberS'  : [[ 252, 240, 'bold'], [ 234, 234, 'bold']]
+				\ , 'LineNumber'   : [[ 252, 236, 'bold'], [ 234, 244, 'bold']]
+				\ , 'LineColumn'   : [[ 252, 240, 'none'], [ 234, 239, 'none']]
 			\ }
 			\ , 'Insert': {
 				\   'Mode'         : [[ 153,  23, 'bold'], [                 ]]
@@ -203,11 +205,13 @@
 				\ , 'FunctionName' : [[  24, 117, 'none'], [                 ]]
 				\ , 'FileFormat'   : [[  24,  75, 'none'], [                 ]]
 				\ , 'FileEncoding' : [[  24,  75, 'none'], [                 ]]
-				\ , 'LineNumber'   : [[  24,  75, 'bold'], [                 ]]
 				\ , 'Separator'    : [[  24,  37, 'none'], [                 ]]
-				\ , 'FileType'     : [[  24,  81, 'bold'], [                 ]]
-				\ , 'LinePercentS' : [[ 117,  24, 'bold'], [                 ]]
-				\ , 'LinePercent'  : [[ 117,  23, 'bold'], [                 ]]
+				\ , 'FileType'     : [[  24,  81, 'none'], [                 ]]
+				\ , 'LinePercentS' : [[  31,  24, 'none'], [                 ]]
+				\ , 'LinePercent'  : [[  31, 117, 'none'], [                 ]]
+				\ , 'LineNumberS'  : [[ 117,  31, 'bold'], [                 ]]
+				\ , 'LineNumber'   : [[ 117,  23, 'bold'], [                 ]]
+				\ , 'LineColumn'   : [[ 117,  31, 'none'], [                 ]]
 			\ }
 		\ })
 	" }}}
@@ -254,6 +258,7 @@
 " }}}
 " Mappings {{{
 	" F key mappings {{{
+		nnoremap <silent><F6> :set number!<CR>
 		nnoremap <silent><F7> :LustyJuggler<CR>
 		nnoremap <silent><F8> :TlistToggle<CR>
 		nnoremap <silent><F9> :LustyBufferExplorer<CR>

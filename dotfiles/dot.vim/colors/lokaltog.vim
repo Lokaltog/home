@@ -24,6 +24,7 @@ hi Folded ctermbg=235 ctermfg=249 cterm=bold
 hi FoldColumn ctermbg=none ctermfg=239 cterm=none
 hi SignColumn ctermbg=none cterm=bold
 hi Visual ctermbg=247 ctermfg=16 cterm=bold
+hi ColorColumn ctermbg=235
 
 hi WildMenu cterm=bold ctermfg=234 ctermbg=231
 

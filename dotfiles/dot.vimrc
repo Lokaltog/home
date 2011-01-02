@@ -500,6 +500,8 @@
 		let g:Tlist_GainFocus_On_ToggleOpen = 1
 		let g:Tlist_Use_Right_Window = 1
 		let g:Tlist_Process_File_Always = 1
+
+		au FileType taglist if bufname(bufnr("$")) == "__Tag_list__" | let b:stl = "#[FileName]%< Tag list #[FileNameS]õ%* %=" | endif " Set custom statusline
 	" }}}
 	" Syntastic settings {{{
 		let g:syntastic_enable_signs = 1
@@ -508,6 +510,9 @@
 	" Gundo settings {{{
 		let g:gundo_right = 1
 		let g:gundo_width = 50
+
+		au FileType gundo if bufname(bufnr("$")) == "__Gundo__" | let b:stl = "#[Branch]GUNDO#[BranchS] ó #[FileName]%<Undo tree #[FileNameS]õ%* %=" | endif " Set custom statusline
+		au FileType diff if bufname(bufnr("$")) == "__Gundo_Preview__" | let b:stl = "#[Branch]GUNDO#[BranchS] ó #[FileName]%<Diff preview #[FileNameS]õ%* %=" | endif " Set custom statusline
 	" }}}
 	" current-func-info settings {{{
 		let g:cfi_php_show_params = 1

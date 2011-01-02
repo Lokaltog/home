@@ -142,7 +142,7 @@
 		let g:default_stl .= "%=" " Right align
 		let g:default_stl .= "#[FileFormat] %{&fileformat}" " File format
 		let g:default_stl .= "#[FileEncoding] %{(&fenc == '' ? &enc : &fenc)}" " File encoding
-		let g:default_stl .= "#[Separator] ò ð #[FileType]%{strlen(&ft) ? toupper(&ft) : 'N/A'} " " File type
+		let g:default_stl .= "#[Separator] ò ð #[FileType]%{strlen(&ft) ? &ft : 'n/a'} " " File type
 		let g:default_stl .= "#[LinePercentS]ô#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
 		let g:default_stl .= "#[LineNumberS]ô#[LineNumber] Ý %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
 		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group

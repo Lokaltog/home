@@ -415,7 +415,7 @@
 			au FileType help wincmd L
 			au FileType help vertical resize 80
 			au FileType help setl nonumber winfixwidth
-			au FileType help let b:stl = "#[Branch]HELP#[BranchS] ó #[FileName]%<%t #[FileNameS]õ%* %=#[LinePercentS]ô#[LinePercent] %p%%" " Set custom statusline
+			au FileType help let b:stl = "#[Branch] HELP#[BranchS] ó #[FileName]%<%t #[FileNameS]õ%* %=#[LinePercentS]ô#[LinePercent] %p%% " " Set custom statusline
 			au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
 			au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
 		" }}}
@@ -534,8 +534,8 @@
 		let g:gundo_right = 1
 		let g:gundo_width = 50
 
-		au FileType gundo if bufname(bufnr("$")) == "__Gundo__" | let b:stl = "#[Branch]GUNDO#[BranchS] ó #[FileName]%<Undo tree #[FileNameS]õ%* %=" | endif " Set custom statusline
-		au FileType diff if bufname(bufnr("$")) == "__Gundo_Preview__" | let b:stl = "#[Branch]GUNDO#[BranchS] ó #[FileName]%<Diff preview #[FileNameS]õ%* %=" | endif " Set custom statusline
+		au FileType gundo if bufname(bufnr("$")) == "__Gundo__" | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Undo tree #[FileNameS]õ%* %=" | endif " Set custom statusline
+		au FileType diff if bufname(bufnr("$")) == "__Gundo_Preview__" | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Diff preview #[FileNameS]õ%* %=" | endif " Set custom statusline
 	" }}}
 	" current-func-info settings {{{
 		let g:cfi_php_show_params = 1

@@ -18,10 +18,10 @@ hi Normal ctermbg=none ctermfg=231
 
 hi LineNr ctermbg=235 ctermfg=243
 hi CursorLine ctermbg=88 cterm=bold
-hi VertSplit ctermbg=none ctermfg=237 cterm=none
+hi VertSplit ctermbg=232 ctermfg=237 cterm=none
 
 hi Folded ctermbg=235 ctermfg=249 cterm=bold
-hi FoldColumn ctermbg=none ctermfg=239 cterm=none
+hi FoldColumn ctermbg=235 ctermfg=243 cterm=none
 hi SignColumn ctermbg=none cterm=bold
 hi Visual ctermbg=247 ctermfg=16 cterm=bold
 hi ColorColumn ctermbg=235

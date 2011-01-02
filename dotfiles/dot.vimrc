@@ -1,15 +1,15 @@
 " Basic configuration {{{
 	syntax on
 	filetype plugin indent on
-
-	" Define , as map leader
-	let mapleader=','
-
-	" Disable all bells
-	set noerrorbells visualbell t_vb=
-
 	set nocompatible
 	set tags=tags;.vimtags;
+
+	" Define , as map leader {{{
+		let mapleader=','
+	" }}}
+	" Disable all bells {{{
+		set noerrorbells visualbell t_vb=
+	" }}}
 	" General options {{{
 		set nobackup
 		set noswapfile
@@ -37,6 +37,8 @@
 	" }}}
 " }}}
 " UI options {{{
+	colo lokaltog
+
 	set laststatus=2
 	set fillchars=vert:║,fold:Û
 	set hlsearch
@@ -56,8 +58,6 @@
 	set undolevels=1000
 	set listchars=tab:Ë\ ,trail:í,eol:î
 	set pumheight=10
-
-	colo lokaltog
 	" Change cursor color in insert mode {{{
 		if &term =~ "xterm\\|rxvt"
 			silent !echo -ne "]12;\#dd4010\x7"

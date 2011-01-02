@@ -29,6 +29,7 @@
 			autocmd!
 
 			set notimeout
+			set ttimeout
 			set timeoutlen=50
 
 			au InsertEnter * set timeout

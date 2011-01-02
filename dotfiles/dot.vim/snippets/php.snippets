@@ -11,7 +11,7 @@ snippet url
 	Route::url('${1:default}', array('lang' => I18n::$lang, 'controller' => '${2}', 'action' => '${3}'${4}))${5}
 snippet fi
 	'${1}' => Jelly::field('${2}'${3}),
-snippet w
+snippet /
 	// ${1}
 	${2}
 snippet ec
@@ -20,10 +20,6 @@ snippet req
 	require_once('${1}');${2}
 snippet _
 	$_${1:POST}['${2}']${3}
-snippet /
-	/**
-	 * ${1}
-	 */
 snippet class
 	class ${3}
 	{

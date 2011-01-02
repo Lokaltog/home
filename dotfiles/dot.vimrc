@@ -442,8 +442,8 @@
 	augroup list " {{{
 		autocmd!
 		" Set list on selected filetypes {{{
-			au filetype vim setl list
-			au filetype html,css,javascript,php,python,ruby setl list
+			au FileType vim setl list
+			au FileType html,css,sass,javascript,php,python,ruby setl list
 		" }}}
 	augroup END " }}}
 	augroup whitespace " {{{

@@ -143,19 +143,19 @@
 		call <SID>StatusLineColor('Normal', 'LinePercent',  236, 214, 'bold') | call <SID>StatusLineColorNC('Normal', 'LinePercent',  'none', 239, 'none')
 	" }}}
 	" Set insert mode current statusline colors {{{
-		call <SID>StatusLineColor('Insert', 'Mode',         124, 209, 'bold')
-		call <SID>StatusLineColor('Insert', 'Branch',        52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'FileName',      52, 231, 'bold')
-		call <SID>StatusLineColor('Insert', 'FunctionName',  52, 209, 'none')
-		call <SID>StatusLineColor('Insert', 'Error',         52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'ModFlag',       52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'BufFlag',       52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'FileFormat',    52, 160, 'none')
-		call <SID>StatusLineColor('Insert', 'FileEncoding',  52, 160, 'none')
-		call <SID>StatusLineColor('Insert', 'LineNumber',    52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'Separator',     52, 124, 'none')
-		call <SID>StatusLineColor('Insert', 'FileType',      52, 160, 'bold')
-		call <SID>StatusLineColor('Insert', 'LinePercent',   52, 209, 'bold')
+		call <SID>StatusLineColor('Insert', 'Mode',         231,  24, 'bold')
+		call <SID>StatusLineColor('Insert', 'Branch',        24,  75, 'bold')
+		call <SID>StatusLineColor('Insert', 'FileName',      24, 231, 'bold')
+		call <SID>StatusLineColor('Insert', 'FunctionName',  24, 117, 'none')
+		call <SID>StatusLineColor('Insert', 'Error',         88, 196, 'bold')
+		call <SID>StatusLineColor('Insert', 'ModFlag',       24, 196, 'bold')
+		call <SID>StatusLineColor('Insert', 'BufFlag',       24,  75, 'bold')
+		call <SID>StatusLineColor('Insert', 'FileFormat',    24,  75, 'none')
+		call <SID>StatusLineColor('Insert', 'FileEncoding',  24,  75, 'none')
+		call <SID>StatusLineColor('Insert', 'LineNumber',    24,  75, 'bold')
+		call <SID>StatusLineColor('Insert', 'Separator',     24,  37, 'none')
+		call <SID>StatusLineColor('Insert', 'FileType',      24,  81, 'bold')
+		call <SID>StatusLineColor('Insert', 'LinePercent',   24, 117, 'bold')
 	" }}}
 	augroup StatusLineHighlight " {{{
 		autocmd!

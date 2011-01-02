@@ -40,7 +40,7 @@
 	colo lokaltog
 
 	set laststatus=2
-	set fillchars=vert:║,fold:Û
+	set fillchars=vert:║,fold:Û,diff:░
 	set hlsearch
 	set incsearch
 	set number

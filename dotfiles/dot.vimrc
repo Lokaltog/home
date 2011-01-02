@@ -420,7 +420,7 @@
 		" Help file settings {{{
 			au FileType help wincmd L
 			au FileType help vertical resize 80
-			au FileType help setl nonumber winfixwidth
+			au FileType help setl nonumber winfixwidth colorcolumn=
 			au FileType help let b:stl = "#[Branch] HELP#[BranchS] ó #[FileName]%<%t #[FileNameS]õ%* %=#[LinePercentS]ô#[LinePercent] %p%% " " Set custom statusline
 			au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
 			au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back

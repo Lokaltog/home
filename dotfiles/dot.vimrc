@@ -3,7 +3,19 @@
 	filetype plugin indent on
 	set nocompatible
 	set tags=tags;.vimtags;
+	" Instantly leave insert mode when pressing <Esc> {{{
+		" This works by disabling the mapping timeout completely in normal mode,
+		" and enabling it in insert mode with a very low timeout length.
+		augroup fastescape
+			autocmd!
 
+			set notimeout
+			set timeoutlen=50
+
+			au InsertEnter * set timeout
+			au InsertLeave * set notimeout
+		augroup END
+	" }}}
 	" Define , as map leader {{{
 		let mapleader=','
 	" }}}

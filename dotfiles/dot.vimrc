@@ -91,49 +91,55 @@
 	set pumheight=10
 " }}}
 " Status line {{{
-	" Inspired by StatusLineHighlight by Ingo Karkat
+	" Define default status line {{{
+		let g:default_stl  = ""
+		let g:default_stl .= "#CUR##[Mode]õ %{substitute(mode(), '', '^V', 'g')} #[Separator] #/CUR#"
+		let g:default_stl .= "#[Branch]%(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1', 'gi')}#[Separator] │ %)" " Git branch
+		let g:default_stl .= "#[FileName]%<%t" " Truncate right/File name
+		let g:default_stl .= "#[FunctionName]%(%{cfi#format(' in %s', '')}%)" " Function name
+		let g:default_stl .= "#[Error]%( %{SyntasticStatuslineFlag()}%)" " Syntastic error flag
+		let g:default_stl .= "#[ModFlag]%( %M%)" " Modified flag
+		let g:default_stl .= "#[BufFlag]%( [%R%H%W]%) %=" " RO,HLP,PRV flags/Right align
+		let g:default_stl .= "#[FileFormat]%( %{&fileformat}%)" " File format
+		let g:default_stl .= "#[FileEncoding]%( %{(&fenc == '' ? &enc : &fenc)}%)" " File encoding
+		let g:default_stl .= "#[LineNumber] %(%l:%c%V%)#[Separator] │" " Line/column/virtual column
+		let g:default_stl .= "#[FileType]%(%{strlen(&ft)?' '.toupper(&ft).' ':''}#[Separator]│%)" " File type
+		let g:default_stl .= "#[LinePercent] %p%%" " Line percentage
+		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
+	" }}}"
 	" Define default regular statusline color {{{
-		function! s:StatusLineColor(flag, name, ctermbg, ctermfg, cterm)
-			exec 'hi StatusLine'.a:flag.a:name.' ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
+		function! s:StatusLineColor(type, name, ctermbg, ctermfg, cterm)
+			exec 'hi StatusLine'.a:type.a:name.' ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
 		endfunction
 	" }}}
 	" Define default non-current statusline color {{{
-		function! s:StatusLineColorNC(flag, name, ctermbg, ctermfg, cterm)
-			exec 'hi StatusLine'.a:flag.a:name.'NC ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
+		function! s:StatusLineColorNC(type, name, ctermbg, ctermfg, cterm)
+			exec 'hi StatusLine'.a:type.a:name.'NC ctermbg='.a:ctermbg.' ctermfg='.a:ctermfg.' cterm='.a:cterm
 		endfunction
 	" }}}
 	" Update statusline {{{
-		function! s:StatusLine(flag, current)
+		" Inspired by StatusLineHighlight by Ingo Karkat
+		function! s:StatusLine(new_stl, type, current)
 			let current = (a:current ? "" : "NC")
-			let flag = a:flag
+			let type = a:type
+			let new_stl = a:new_stl
 
-			let my_stl  = ""
+			" Prepare current buffer specific text
+			" Syntax: #CUR# ... #/CUR#
+			let new_stl = substitute(new_stl, '#CUR#\(.\{-,}\)#/CUR#', (a:current ? '\1' : ''), 'g')
 
-			if a:current
-				let my_stl .= "%#StatusLine".flag."Mode".current."#õ %{substitute(mode(), '', '^V', 'g')} "
-			endif
+			" Prepare statusline colors
+			" Syntax: #[ ... ]
+			let new_stl = substitute(new_stl, '#\[\(\w\+\)\]', '%#StatusLine'.type.'\1'.current.'#', 'g')
 
-			let my_stl .= "%#StatusLine".flag."Branch".current."#%(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', ' Í \\1', 'gi')}%#StatusLine".flag."Separator".current."# │%)" " Git branch
-			let my_stl .= "%#StatusLine".flag."FileName".current."# %<%t" " Truncate right/File name
-			let my_stl .= "%#StatusLine".flag."FunctionName".current."#%(%{cfi#format(' in %s', '')}%)" " Function name
-			let my_stl .= "%#StatusLine".flag."Error".current."#%( %{SyntasticStatuslineFlag()}%)" " Syntastic error flag
-			let my_stl .= "%#StatusLine".flag."ModFlag".current."#%( %M%)" " Modified flag
-			let my_stl .= "%#StatusLine".flag."BufFlag".current."#%( [%R%H%W]%) %=" " RO,HLP,PRV flags/Right align
-			let my_stl .= "%#StatusLine".flag."FileFormat".current."#%( %{&fileformat}%)" " File format
-			let my_stl .= "%#StatusLine".flag."FileEncoding".current."#%( %{(&fenc == '' ? &enc : &fenc)}%)" " File encoding
-			let my_stl .= "%#StatusLine".flag."LineNumber".current."# %(%l:%c%V%)%#StatusLine".flag."Separator".current."# │" " Line/column/virtual column
-			let my_stl .= "%#StatusLine".flag."FileType".current."#%(%{strlen(&ft)?' '.toupper(&ft).' ':''}%#StatusLine".flag."Separator".current."#│%)" " File type
-			let my_stl .= "%#StatusLine".flag."LinePercent".current."# %p%%" " Line percentage
-			"let my_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
-
-			if &l:stl ==# my_stl
+			if &l:stl ==# new_stl
 				" Statusline already set, nothing to do
 				return
 			endif
 
 			if empty(&l:stl)
 				" No statusline is set, use my_stl
-				let &l:stl = my_stl
+				let &l:stl = new_stl
 			else
 				" Check if a custom statusline is set
 				let plain_stl = substitute(&l:stl, '%#StatusLine\w\+#', '', 'g')
@@ -144,7 +150,7 @@
 				endif
 
 				" No custom statusline is set, use my_stl
-				let &l:stl = my_stl
+				let &l:stl = new_stl
 			endif
 		endfunction
 	" }}}
@@ -184,9 +190,9 @@
 	augroup StatusLineHighlight " {{{
 		autocmd!
 
-		autocmd BufWinEnter,WinEnter,CmdwinEnter,CursorHold,BufWritePost,InsertLeave * call <SID>StatusLine('Normal', 1)
-		autocmd WinLeave * call <SID>StatusLine('Normal', 0)
-		autocmd InsertEnter,CursorHoldI * call <SID>StatusLine('Insert', 1)
+		au BufWinEnter,WinEnter,CmdwinEnter,CursorHold,BufWritePost,InsertLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 1)
+		au WinLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 0)
+		au InsertEnter,CursorHoldI * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Insert', 1)
 	augroup END " }}}
 " }}}
 " Layout / Text formatting {{{

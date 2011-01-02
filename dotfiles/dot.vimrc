@@ -47,10 +47,31 @@
 	" }}}
 " }}}
 " UI options {{{
-	colo lokaltog
+	" Set colorscheme {{{
+		if &t_Co == 256
+			colo lokaltog
+		else
+			colo pablo
+		endif
+	" }}}
+	" URxvt-specific settings {{{
+		if &term =~ "rxvt"
+			" Change cursor color in insert mode {{{
+				silent !echo -ne "]12;\#dd4010\x7"
 
+				let &t_SI="]12;\#89b6e2\x7"
+				let &t_EI="]12;\#dd4010\x7"
+
+				au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
+			" }}}
+			" Use custom fillchars/listchars/showbreak icons {{{
+				set fillchars=vert:║,fold:Û,diff:░
+				set listchars=tab:Ë\ ,trail:í,eol:î
+				set showbreak=Ì
+			" }}}
+		endif
+	" }}}
 	set laststatus=2
-	set fillchars=vert:║,fold:Û,diff:░
 	set hlsearch
 	set incsearch
 	set number
@@ -60,7 +81,6 @@
 	set sidescrolloff=20
 	set scrolljump=10
 	set showcmd
-	set showbreak=Ì
 	set noshowmode
 	set virtualedit=all
 	set textwidth=0
@@ -68,16 +88,7 @@
 	set updatetime=1500
 	set history=1000
 	set undolevels=1000
-	set listchars=tab:Ë\ ,trail:í,eol:î
 	set pumheight=10
-	" Change cursor color in insert mode {{{
-		if &term =~ "xterm\\|rxvt"
-			silent !echo -ne "]12;\#dd4010\x7"
-			let &t_SI="]12;\#89b6e2\x7"
-			let &t_EI="]12;\#dd4010\x7"
-			au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
-		endif
-	" }}}
 " }}}
 " Status line {{{
 	" Inspired by StatusLineHighlight by Ingo Karkat

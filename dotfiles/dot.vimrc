@@ -452,29 +452,6 @@
 			au BufWritePre * :call setline(1, map(getline(1, "$"), 'substitute(v:val, "\\s\\+$", "","")'))
 		" }}}
 	augroup END " }}}
-	augroup mail " {{{
-		autocmd!
-		" Fix mutt mail formatting {{{
-			fun! MuttMail()
-				set tw=72 wrap fo+=tcqan1
-				au! whitespace
-
-				if getline(1) == ""
-					" Write new mail
-					norm O
-					startinsert
-				else
-					" Reply to mail
-					silent %!~/sync/bin/mail-filter reply
-					norm jgqapO
-					norm o
-					startinsert
-				endif
-			endfun
-
-			au BufRead /tmp/mutt-* call MuttMail()
-		" }}}
-	augroup END " }}}
 " }}}
 " Plugin settings {{{
 	" EasyTags settings {{{

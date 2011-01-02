@@ -48,6 +48,7 @@
 	set ruler
 	set scrolloff=10
 	set sidescrolloff=20
+	set scrolljump=10
 	set showcmd
 	set showbreak=Ì
 	set noshowmode

@@ -37,7 +37,7 @@
 		augroup END
 	" }}}
 	" Define , as map leader {{{
-		let mapleader=','
+		let mapleader = ','
 	" }}}
 	" Disable all bells {{{
 		set noerrorbells visualbell t_vb=
@@ -198,11 +198,11 @@
 	set foldcolumn=0
 
 	function! VimFold()
-		let t=getline(v:foldstart)
-		let w=strlen(matchstr(t, '^\s*'))
-		let t=substitute(t, '^\W*', '', '')
-		let t=substitute(t, '\W*$', '', '')
-		let n=v:foldend - v:foldstart + 1
+		let t = getline(v:foldstart)
+		let w = strlen(matchstr(t, '^\s*'))
+		let t = substitute(t, '^\W*', '', '')
+		let t = substitute(t, '\W*$', '', '')
+		let n = v:foldend - v:foldstart + 1
 
 		return repeat(repeat(' ', &tabstop), w).t.' Î'.n.' ÝÏ '
 	endfunction
@@ -279,27 +279,27 @@
 		endfunction
 
 		function! s:MoveLineOrVisualUp(line_getter, range)
-			let l_num=line(a:line_getter)
+			let l_num = line(a:line_getter)
 			if l_num - v:count1 - 1 < 0
-				let move_arg="0"
+				let move_arg = "0"
 			else
-				let move_arg=a:line_getter." -".(v:count1 + 1)
+				let move_arg = a:line_getter." -".(v:count1 + 1)
 			endif
 			call <SID>MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
 		endfunction
 
 		function! s:MoveLineOrVisualDown(line_getter, range)
-			let l_num=line(a:line_getter)
+			let l_num = line(a:line_getter)
 			if l_num + v:count1 > line("$")
-				let move_arg="$"
+				let move_arg = "$"
 			else
-				let move_arg=a:line_getter." +".v:count1
+				let move_arg = a:line_getter." +".v:count1
 			endif
 			call <SID>MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
 		endfunction
 
 		function! s:MoveLineOrVisualUpOrDown(move_arg)
-			let col_num=virtcol(".")
+			let col_num = virtcol(".")
 			execute "silent! ".a:move_arg
 			execute "normal! ".col_num."|"
 		endfunction
@@ -347,7 +347,7 @@
 				echo "Mouse is for Vim (" . &mouse . ")"
 			else
 				let old_mouse = &mouse
-				let &mouse=""
+				let &mouse = ""
 				echo "Mouse is for terminal"
 			endif
 		endfunction
@@ -425,61 +425,61 @@
 " }}}
 " Plugin settings {{{
 	" EasyTags settings {{{
-		let g:easytags_cmd='/usr/bin/ctags'
-		let g:easytags_resolve_links=1
-		let g:easytags_on_cursorhold=0
-		let g:easytags_always_enabled=1
+		let g:easytags_cmd = '/usr/bin/ctags'
+		let g:easytags_resolve_links = 1
+		let g:easytags_on_cursorhold = 0
+		let g:easytags_always_enabled = 1
 	" }}}
 	" PHP highlighting settings {{{
-		let g:php_folding=0
-		let g:php_html_in_strings=1
-		let g:php_parent_error_close=1
-		let g:php_parent_error_open=1
-		let g:php_no_shorttags=1
+		let g:php_folding = 0
+		let g:php_html_in_strings = 1
+		let g:php_parent_error_close = 1
+		let g:php_parent_error_open = 1
+		let g:php_no_shorttags = 1
 	" }}}
 	" Python highlighting settings {{{
-		let g:python_highlight_all=1
-		let g:python_show_sync=1
-		let g:python_print_as_function=1
+		let g:python_highlight_all = 1
+		let g:python_show_sync = 1
+		let g:python_print_as_function = 1
 	" }}}
 	" delimitMate settings {{{
-		let g:delimitMate_unbalanced_parens=1
-		let g:delimitMate_balance_matchpairs=1
+		let g:delimitMate_unbalanced_parens = 1
+		let g:delimitMate_balance_matchpairs = 1
 
-		au FileType mail,text,vim let b:delimitMate_autoclose=0
+		au FileType mail,text,vim let b:delimitMate_autoclose = 0
 	" }}}
 	" Disable annoying sql bindings {{{
-		let g:ftplugin_sql_omni_key_right="<C-S-M-Right>"
-		let g:ftplugin_sql_omni_key_left="<C-S-M-Left>"
+		let g:ftplugin_sql_omni_key_right = "<C-S-M-Right>"
+		let g:ftplugin_sql_omni_key_left = "<C-S-M-Left>"
 	" }}}
 	" NERD tree settings {{{
-		let g:NERDTreeChristmasTree=1
-		let g:NERDTreeCaseSensitiveSort=1
-		let g:NERDTreeQuitOnOpen=1
-		let g:NERDTreeWinPos='right'
-		let g:NERDTreeWinSize=50
-		let g:NERDTreeShowBookmarks=1
+		let g:NERDTreeChristmasTree = 1
+		let g:NERDTreeCaseSensitiveSort = 1
+		let g:NERDTreeQuitOnOpen = 1
+		let g:NERDTreeWinPos = 'right'
+		let g:NERDTreeWinSize = 50
+		let g:NERDTreeShowBookmarks = 1
 	" }}}
 	" Taglist settings {{{
-		let g:Tlist_WinWidth=50
-		let g:Tlist_Close_On_Select=1
-		let g:Tlist_Compact_Format=1
-		let g:Tlist_Display_Tag_Scope=1
-		let g:Tlist_Exit_OnlyWindow=1
-		let g:Tlist_File_Fold_Auto_Close=1
-		let g:Tlist_GainFocus_On_ToggleOpen=1
-		let g:Tlist_Use_Right_Window=1
-		let g:Tlist_Process_File_Always=1
+		let g:Tlist_WinWidth = 50
+		let g:Tlist_Close_On_Select = 1
+		let g:Tlist_Compact_Format = 1
+		let g:Tlist_Display_Tag_Scope = 1
+		let g:Tlist_Exit_OnlyWindow = 1
+		let g:Tlist_File_Fold_Auto_Close = 1
+		let g:Tlist_GainFocus_On_ToggleOpen = 1
+		let g:Tlist_Use_Right_Window = 1
+		let g:Tlist_Process_File_Always = 1
 	" }}}
 	" Syntastic settings {{{
-		let g:syntastic_enable_signs=1
-		let g:syntastic_auto_loc_list=1
+		let g:syntastic_enable_signs = 1
+		let g:syntastic_auto_loc_list = 1
 	" }}}
 	" Gundo settings {{{
-		let g:gundo_right=1
-		let g:gundo_width=50
+		let g:gundo_right = 1
+		let g:gundo_width = 50
 	" }}}
 	" current-func-info settings {{{
-		let g:cfi_php_show_params=1
+		let g:cfi_php_show_params = 1
 	" }}}
 " }}}

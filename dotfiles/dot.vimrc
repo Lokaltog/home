@@ -1,8 +1,27 @@
 " Basic configuration {{{
 	syntax on
 	filetype plugin indent on
+
 	set nocompatible
 	set tags=tags;.vimtags;
+	set nobackup
+	set noswapfile
+	set nomodeline
+	set undofile
+	set updatecount=200
+	set directory=~/.vim/tmp
+	set undodir=~/.vim/tmp
+	set autochdir
+	set backspace=indent,eol,start
+	set fileformats=unix,dos
+	set fileformat=unix
+	set matchpairs+=<:>
+	set shortmess=atToOI
+	set iskeyword+=_,$,@,%,#
+	set whichwrap=b,s,[,]
+	set hidden
+	set encoding=utf-8
+	set termencoding=utf-8
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.
@@ -21,26 +40,6 @@
 	" }}}
 	" Disable all bells {{{
 		set noerrorbells visualbell t_vb=
-	" }}}
-	" General options {{{
-		set nobackup
-		set noswapfile
-		set nomodeline
-		set undofile
-		set updatecount=200
-		set directory=~/.vim/tmp
-		set undodir=~/.vim/tmp
-		set autochdir
-		set backspace=indent,eol,start
-		set fileformats=unix,dos
-		set fileformat=unix
-		set matchpairs+=<:>
-		set shortmess=atToOI
-		set iskeyword+=_,$,@,%,#
-		set whichwrap=b,s,[,]
-		set hidden
-		set encoding=utf-8
-		set termencoding=utf-8
 	" }}}
 	" Wild menu {{{
 		set wildmenu

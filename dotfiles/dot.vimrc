@@ -20,6 +20,7 @@
 	set hidden
 	set encoding=utf-8
 	set termencoding=utf-8
+	set title
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.

@@ -8,8 +8,6 @@
 	set noswapfile
 	set nomodeline
 	set undofile
-	set updatecount=200
-	set directory=~/.vim/tmp
 	set undodir=~/.vim/tmp
 	set autochdir
 	set backspace=indent,eol,start

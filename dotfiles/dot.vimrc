@@ -388,11 +388,12 @@
 			au BufNewFile *.php so ~/.vim/templates/tpl.php
 		" }}}
 		" Help file settings {{{
-			au FileType help setl nonumber statusline=%f%<
-			au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
-			au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
 			au FileType help wincmd L
 			au FileType help vertical resize 80
+			au FileType help setl nonumber winfixwidth
+			au FileType help let b:stl = "#[Branch]HELP#[Separator] │ #[FileName]%<%t %=#[LinePercent] %p%%" " Set custom statusline
+			au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
+			au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
 		" }}}
 		" Override SASS defaults {{{
 			au FileType sass set sw=6 ts=6 noet

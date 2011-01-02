@@ -246,25 +246,8 @@
 		nnoremap K <C-w>k
 		nnoremap L <C-w>l
 	" }}}
-	" Mouse toggle {{{
-		function! s:ToggleMouse()
-			if !exists("old_mouse")
-				let old_mouse = "ar"
-			endif
-
-			if &mouse == ""
-				let &mouse = old_mouse
-				echo "Mouse is for Vim (" . &mouse . ")"
-			else
-				let old_mouse = &mouse
-				let &mouse=""
-				echo "Mouse is for terminal"
-			endif
-		endfunction
-
-		nnoremap <F12> :call <SID>ToggleMouse()<CR>
-	" }}}
-	" Line moving {{{
+	" Repurpose arrow keys to move lines {{{
+		" Inspired by http://jeetworks.com/node/89
 		function! s:MoveLineUp()
 			call <SID>MoveLineOrVisualUp(".", "")
 		endfunction
@@ -309,10 +292,55 @@
 			execute "normal! ".col_num."|"
 		endfunction
 
-		nnoremap <silent> <Leader>k :<C-u>call <SID>MoveLineUp()<CR>
-		nnoremap <silent> <Leader>j :<C-u>call <SID>MoveLineDown()<CR>
-		vnoremap <silent> <Leader>k :<C-u>call <SID>MoveVisualUp()<CR>
-		vnoremap <silent> <Leader>j :<C-u>call <SID>MoveVisualDown()<CR>
+		" Arrow key remapping:
+		" Up/Dn = move line up/dn
+		" Left/Right = indent/unindent
+		function! SetArrowKeysAsTextShifters()
+			" Normal mode
+			nnoremap <silent> <Left> <<
+			nnoremap <silent> <Right> >>
+			nnoremap <silent> <Up> <Esc>:call <SID>MoveLineUp()<CR>
+			nnoremap <silent> <Down> <Esc>:call <SID>MoveLineDown()<CR>
+
+			" Visual mode
+			vnoremap <silent> <Left> <gv
+			vnoremap <silent> <Right> >gv
+			vnoremap <silent> <S-Up> <Esc>:call <SID>MoveVisualUp()<CR>
+			vnoremap <silent> <S-Down> <Esc>:call <SID>MoveVisualDown()<CR>
+
+			" Insert mode
+			inoremap <silent> <Left> <C-D>
+			inoremap <silent> <Right> <C-T>
+			inoremap <silent> <Up> <C-O>:call <SID>MoveLineUp()<CR>
+			inoremap <silent> <Down> <C-O>:call <SID>MoveLineDown()<CR>
+		endfunction
+
+		call SetArrowKeysAsTextShifters()
+	" }}}
+	" Disable insert mode movement keys {{{
+		noremap <Home> <NOP>
+		noremap <End>  <NOP>
+
+		inoremap <Home> <NOP>
+		inoremap <End>  <NOP>
+	" }}}
+	" Mouse toggle {{{
+		function! s:ToggleMouse()
+			if !exists("old_mouse")
+				let old_mouse = "ar"
+			endif
+
+			if &mouse == ""
+				let &mouse = old_mouse
+				echo "Mouse is for Vim (" . &mouse . ")"
+			else
+				let old_mouse = &mouse
+				let &mouse=""
+				echo "Mouse is for terminal"
+			endif
+		endfunction
+
+		nnoremap <F12> :call <SID>ToggleMouse()<CR>
 	" }}}
 " }}}
 " Autocommands {{{

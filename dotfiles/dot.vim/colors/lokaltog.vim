@@ -30,10 +30,11 @@ hi WildMenu cterm=bold ctermfg=234 ctermbg=231
 hi Directory ctermfg=143 cterm=bold
 hi Underlined ctermfg=130
 
-hi ModeMsg ctermfg=214 cterm=bold
-hi MoreMsg ctermfg=216 cterm=bold
-hi Question ctermfg=218 cterm=bold
-hi WarningMsg ctermfg=160 cterm=bold
+hi ModeMsg ctermbg=none ctermfg=214 cterm=bold
+hi MoreMsg ctermbg=none ctermfg=105 cterm=bold
+hi Question ctermbg=none ctermfg=245 cterm=bold
+hi WarningMsg ctermbg=none ctermfg=202 cterm=bold,underline
+hi ErrorMsg ctermbg=none ctermfg=196 cterm=bold,underline
 
 hi Comment ctermfg=243 cterm=none
 hi vimCommentTitle ctermfg=250

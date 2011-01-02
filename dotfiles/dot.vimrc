@@ -88,7 +88,7 @@
 			let my_stl  = ""
 
 			if a:current
-				let my_stl .= "%#StatusLine".flag."Mode".current."#õ %{mode(0)} %#StatusLine".flag."Separator".current."#│ "
+				let my_stl .= "%#StatusLine".flag."Mode".current."#õ %{substitute(mode(), '', '^V', 'g')} %#StatusLine".flag."Separator".current."#│ "
 			endif
 
 			let my_stl .= "%#StatusLine".flag."Branch".current."#%(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1 │ ', 'gi')}%)" " Git branch

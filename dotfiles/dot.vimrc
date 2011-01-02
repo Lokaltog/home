@@ -425,8 +425,8 @@
 		" Disable whitespace trimming on patch files {{{
 			au FileType diff au! whitespace
 		" }}}
-		" Enable Syntastic for selected filetypes {{{
-			au BufNewFile,BufRead php,html,javascript,python,ruby,sh SyntasticEnable
+		" Disable Syntastic for selected filetypes {{{
+			au FileType sass SyntasticDisable
 		" }}}
 	augroup END " }}}
 	augroup formatting " {{{

@@ -538,7 +538,4 @@
 		let g:gundo_right = 1
 		let g:gundo_width = 50
 	" }}}
-	" current-func-info settings {{{
-		let g:cfi_php_show_params = 1
-	" }}}
 " }}}

@@ -138,11 +138,11 @@
 		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
 		let g:default_stl .= "#[BufFlag]%([%R%H%W] %)" " RO,HLP,PRV flags
 		let g:default_stl .= "#[FileNameS]õ" " Separator
-		let g:default_stl .= "#[FunctionName] %(%{cfi#format('%s', '')} %)" " Function name
-		let g:default_stl .= "%=" " Right align
-		let g:default_stl .= "#[FileFormat] %{&fileformat}" " File format
-		let g:default_stl .= "#[FileEncoding] %{(&fenc == '' ? &enc : &fenc)}" " File encoding
-		let g:default_stl .= "#[Separator] ò ð #[FileType]%{strlen(&ft) ? &ft : 'n/a'} " " File type
+		let g:default_stl .= "#[FunctionName]#CUR# %(%{cfi#format('%s', '')} %)#/CUR#" " Function name
+		let g:default_stl .= "%= " " Right align
+		let g:default_stl .= "#CUR##[FileFormat]%{&fileformat} #/CUR#" " File format
+		let g:default_stl .= "#CUR##[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} #/CUR#" " File encoding
+		let g:default_stl .= "#CUR##[Separator]ò ð #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
 		let g:default_stl .= "#[LinePercentS]ô#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
 		let g:default_stl .= "#[LineNumberS]ô#[LineNumber] Ý %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
 		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
@@ -176,8 +176,8 @@
 				\ , 'ModeS'        : [[ 214, 240, 'bold'], [                 ]]
 				\ , 'Branch'       : [[ 240, 250, 'none'], [ 234, 239, 'none']]
 				\ , 'BranchS'      : [[ 240, 246, 'none'], [ 234, 239, 'none']]
-				\ , 'FileName'     : [[ 240, 231, 'bold'], [ 234, 244, 'bold']]
-				\ , 'FileNameS'    : [[ 240, 236, 'bold'], [ 234, 232, 'bold']]
+				\ , 'FileName'     : [[ 240, 231, 'bold'], [ 234, 244, 'none']]
+				\ , 'FileNameS'    : [[ 240, 236, 'bold'], [ 234, 232, 'none']]
 				\ , 'Error'        : [[ 240, 196, 'bold'], [ 234, 239, 'none']]
 				\ , 'ModFlag'      : [[ 240, 196, 'bold'], [ 234, 239, 'none']]
 				\ , 'BufFlag'      : [[ 240, 244, 'bold'], [ 234, 239, 'none']]
@@ -188,8 +188,8 @@
 				\ , 'FileType'     : [[ 236, 248, 'none'], [ 232, 239, 'none']]
 				\ , 'LinePercentS' : [[ 240, 236, 'none'], [ 234, 232, 'none']]
 				\ , 'LinePercent'  : [[ 240, 250, 'none'], [ 234, 239, 'none']]
-				\ , 'LineNumberS'  : [[ 252, 240, 'bold'], [ 234, 234, 'bold']]
-				\ , 'LineNumber'   : [[ 252, 236, 'bold'], [ 234, 244, 'bold']]
+				\ , 'LineNumberS'  : [[ 252, 240, 'bold'], [ 234, 234, 'none']]
+				\ , 'LineNumber'   : [[ 252, 236, 'bold'], [ 234, 244, 'none']]
 				\ , 'LineColumn'   : [[ 252, 240, 'none'], [ 234, 239, 'none']]
 			\ }
 			\ , 'Insert': {

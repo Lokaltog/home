@@ -180,7 +180,7 @@
 				\ , 'FileNameS'    : [[ 240, 236, 'bold'], [ 234, 232, 'none']]
 				\ , 'Error'        : [[ 240, 202, 'bold'], [ 234, 239, 'none']]
 				\ , 'ModFlag'      : [[ 240, 196, 'bold'], [ 234, 239, 'none']]
-				\ , 'BufFlag'      : [[ 240, 244, 'none'], [ 234, 239, 'none']]
+				\ , 'BufFlag'      : [[ 240, 250, 'none'], [ 234, 239, 'none']]
 				\ , 'FunctionName' : [[ 236, 247, 'none'], [ 232, 239, 'none']]
 				\ , 'FileFormat'   : [[ 236, 244, 'none'], [ 232, 239, 'none']]
 				\ , 'FileEncoding' : [[ 236, 244, 'none'], [ 232, 239, 'none']]

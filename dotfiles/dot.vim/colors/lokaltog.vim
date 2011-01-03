@@ -22,7 +22,7 @@ hi VertSplit ctermbg=232 ctermfg=237 cterm=none
 
 hi Folded ctermbg=235 ctermfg=249 cterm=bold
 hi FoldColumn ctermbg=235 ctermfg=243 cterm=none
-hi SignColumn ctermbg=none cterm=bold
+hi SignColumn ctermbg=233 ctermfg=231 cterm=bold
 hi Visual ctermbg=247 ctermfg=16 cterm=bold
 hi ColorColumn ctermbg=235
 

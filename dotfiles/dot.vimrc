@@ -452,7 +452,19 @@
 	augroup whitespace " {{{
 		autocmd!
 		" Remove trailing whitespace from selected filetypes {{{
-			au FileType html,css,sass,javascript,php,python,ruby au BufWritePre <buffer> :%s/\s\+$//e
+			function! s:StripTrailingWhitespace()
+				normal mZ
+
+				%s/\s\+$//e
+
+				if line("'Z") != line(".")
+					echom "Stripped whitespace"
+				endif
+
+				normal `Z
+			endfunction
+
+			au FileType html,css,sass,javascript,php,python,ruby au BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
 		" }}}
 	augroup END " }}}
 	augroup statuslines " {{{

@@ -134,9 +134,9 @@
 		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1', 'gi')}#[BranchS] ó %)" " Git branch
 		let g:default_stl .= "%<" " Truncate right
 		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "#[Error]%(%{SyntasticStatuslineFlag()} %)" " Syntastic error flag
+		let g:default_stl .= "#CUR##[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', 'óóó SYNTAX Ý \\1\\2 óóó', 'i')} %)#/CUR#" " Syntastic error flag
 		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
-		let g:default_stl .= "#[BufFlag]%([%R%H%W] %)" " RO,HLP,PRV flags
+		let g:default_stl .= "#[BufFlag]%(%R%H%W %)" " RO,HLP,PRV flags
 		let g:default_stl .= "#[FileNameS]õ" " Separator
 		let g:default_stl .= "#[FunctionName]#CUR# %(%{cfi#format('%s', '')} %)#/CUR#" " Function name
 		let g:default_stl .= "%= " " Right align
@@ -178,9 +178,9 @@
 				\ , 'BranchS'      : [[ 240, 246, 'none'], [ 234, 239, 'none']]
 				\ , 'FileName'     : [[ 240, 231, 'bold'], [ 234, 244, 'none']]
 				\ , 'FileNameS'    : [[ 240, 236, 'bold'], [ 234, 232, 'none']]
-				\ , 'Error'        : [[ 240, 196, 'bold'], [ 234, 239, 'none']]
+				\ , 'Error'        : [[ 240, 202, 'bold'], [ 234, 239, 'none']]
 				\ , 'ModFlag'      : [[ 240, 196, 'bold'], [ 234, 239, 'none']]
-				\ , 'BufFlag'      : [[ 240, 244, 'bold'], [ 234, 239, 'none']]
+				\ , 'BufFlag'      : [[ 240, 244, 'none'], [ 234, 239, 'none']]
 				\ , 'FunctionName' : [[ 236, 247, 'none'], [ 232, 239, 'none']]
 				\ , 'FileFormat'   : [[ 236, 244, 'none'], [ 232, 239, 'none']]
 				\ , 'FileEncoding' : [[ 236, 244, 'none'], [ 232, 239, 'none']]
@@ -199,9 +199,9 @@
 				\ , 'BranchS'      : [[  31, 117, 'none'], [                 ]]
 				\ , 'FileName'     : [[  31, 231, 'bold'], [                 ]]
 				\ , 'FileNameS'    : [[  31,  24, 'bold'], [                 ]]
-				\ , 'Error'        : [[  31, 196, 'bold'], [                 ]]
+				\ , 'Error'        : [[  31, 202, 'bold'], [                 ]]
 				\ , 'ModFlag'      : [[  31, 196, 'bold'], [                 ]]
-				\ , 'BufFlag'      : [[  31,  75, 'bold'], [                 ]]
+				\ , 'BufFlag'      : [[  31,  75, 'none'], [                 ]]
 				\ , 'FunctionName' : [[  24, 117, 'none'], [                 ]]
 				\ , 'FileFormat'   : [[  24,  75, 'none'], [                 ]]
 				\ , 'FileEncoding' : [[  24,  75, 'none'], [                 ]]
@@ -464,11 +464,23 @@
 			au BufEnter * if bufname("%") == "[LustyExplorer-Buffers]" | let b:stl = "#[Branch] LustyExplorer#[BranchS] ó #[FileName]%<Buffer List #[FileNameS]õ%* %=" | endif " Set custom statusline
 		" }}}
 		" Tag list {{{
-			au BufEnter * if bufname("%") == "__Tag_list__" | let b:stl = "#[FileName]%< Tag list #[FileNameS]õ%* %=" | endif " Set custom statusline
+			au BufEnter * if bufname("%") == "__Tag_list__"
+				\ | let b:stl = "#[FileName]%< Tag list #[FileNameS]õ%* %="
+				\ | endif
 		" }}}
 		" Gundo {{{
-			au BufEnter * if bufname("%") == "__Gundo__" | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Undo tree #[FileNameS]õ%* %=" | endif " Set custom statusline
-			au BufEnter * if bufname("%") == "__Gundo_Preview__" | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Diff preview #[FileNameS]õ%* %=" | endif " Set custom statusline
+			au BufEnter * if bufname("%") == "__Gundo__"
+				\ | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Undo tree #[FileNameS]õ%* %="
+				\ | endif
+
+			au BufEnter * if bufname("%") == "__Gundo_Preview__"
+				\ | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Diff preview #[FileNameS]õ%* %="
+				\ | endif
+		" }}}
+		" Syntastic location list {{{
+			au BufEnter * if bufname("%") == "[Location List]"
+				\ | let b:stl = "#[FileName]%< Location List #[FileNameS]õ%* %="
+				\ | endif
 		" }}}
 	augroup END " }}}
 " }}}
@@ -520,7 +532,7 @@
 	" }}}
 	" Syntastic settings {{{
 		let g:syntastic_enable_signs = 1
-		let g:syntastic_auto_loc_list = 1
+		let g:syntastic_auto_loc_list = 0
 	" }}}
 	" Gundo settings {{{
 		let g:gundo_right = 1

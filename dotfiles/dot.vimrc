@@ -428,9 +428,6 @@
 		" Override SASS defaults {{{
 			au FileType sass set sw=6 ts=6 noet
 		" }}}
-		" Disable whitespace trimming on patch files {{{
-			au FileType diff au! whitespace
-		" }}}
 		" Disable Syntastic for selected filetypes {{{
 			au FileType sass SyntasticDisable
 		" }}}
@@ -454,8 +451,8 @@
 	augroup END " }}}
 	augroup whitespace " {{{
 		autocmd!
-		" Remove trailing whitespace on write {{{
-			au BufWritePre * :call setline(1, map(getline(1, "$"), 'substitute(v:val, "\\s\\+$", "","")'))
+		" Remove trailing whitespace from selected filetypes {{{
+			au FileType html,css,sass,javascript,php,python,ruby au BufWritePre <buffer> :%s/\s\+$//e
 		" }}}
 	augroup END " }}}
 	augroup statuslines " {{{

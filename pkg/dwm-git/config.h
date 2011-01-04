@@ -77,7 +77,7 @@ static const char terminal[]  = "urxvtc";
 
 // Commands
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
-static const char *chromium[] = { "chromium", NULL };
+static const char *chromium[] = { "/home/kim/sync/bin/chromium", NULL };
 static const char *termcmd[]  = { terminal, NULL };
 static const char *vim[]      = { terminal, "-name", "vim",     "-e", "vim",            NULL };
 static const char *ncmpcpp[]  = { terminal, "-name", "ncmpcpp", "-e", "ncmpcpp",        NULL };

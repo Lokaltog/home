@@ -418,12 +418,16 @@
 			au BufNewFile *.php so ~/.vim/templates/tpl.php
 		" }}}
 		" Help file settings {{{
-			au FileType help wincmd L
-			au FileType help vertical resize 80
-			au FileType help setl nonumber winfixwidth colorcolumn=
-			au FileType help let b:stl = "#[Branch] HELP#[BranchS] ó #[FileName]%<%t #[FileNameS]õ%* %=#[LinePercentS]ô#[LinePercent] %p%% " " Set custom statusline
-			au FileType help nnoremap <buffer><space> <c-]> " Space selects subject
-			au FileType help nnoremap <buffer><bs> <c-T> " Backspace to go back
+			function! s:SetupHelpWindow()
+				wincmd L
+				vertical resize 80
+				setl nonumber winfixwidth colorcolumn=
+				let b:stl = "#[Branch] HELP#[BranchS] ó #[FileName]%<%t #[FileNameS]õ%* %=#[LinePercentS]ô#[LinePercent] %p%% " " Set custom statusline
+				nnoremap <buffer><space> <c-]> " Space selects subject
+				nnoremap <buffer><bs> <c-T> " Backspace to go back
+			endfunction
+
+			au FileType help au BufEnter,BufWinEnter <buffer> call <SID>SetupHelpWindow()
 		" }}}
 		" Override SASS defaults {{{
 			au FileType sass set sw=6 ts=6 noet

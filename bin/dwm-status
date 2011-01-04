@@ -96,15 +96,15 @@ def get_mpd():
 		status = status.split("\n")
 		playing = status[0]
 		percent = int(re.search("(\d+)%", status[1]).groups()[0])
-		progress = draw_bar(percent, bar_len=30)
+		progress = draw_bar(percent)
 		trim_len = 60
 
 		if len(playing) > trim_len:
 			playing = playing[:trim_len] + "..."
 
-		total = re.search("/(\d+:\d+)", status[1]).groups()[0]
+		(current, total) = re.findall("(\d+:\d+)", status[1])
 
-		status = "{playing} {progress} {total}".format(playing=playing, progress=progress, total=total)
+		status = "{playing} ({total}) {progress} {current}".format(playing=playing, progress=progress, total=total, current=current)
 
 	return "\x06î\x01{status} ".format(status=status)
 

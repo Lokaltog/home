@@ -29,7 +29,7 @@
 
 			set notimeout
 			set ttimeout
-			set timeoutlen=50
+			set timeoutlen=10
 
 			au InsertEnter * set timeout
 			au InsertLeave * set notimeout

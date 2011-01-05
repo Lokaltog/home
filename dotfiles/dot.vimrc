@@ -132,13 +132,14 @@
 		let g:default_stl  = ""
 		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS]õ#/CUR#"
 		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1', 'gi')}#[BranchS] ó %)" " Git branch
-		let g:default_stl .= "%<" " Truncate right
 		let g:default_stl .= "#[FileName]%t " " File name
 		let g:default_stl .= "#CUR##[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', 'óóó SYNTAX Ý \\1\\2 óóó', 'i')} %)#/CUR#" " Syntastic error flag
 		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
 		let g:default_stl .= "#[BufFlag]%(%R%H%W %)" " RO,HLP,PRV flags
 		let g:default_stl .= "#[FileNameS]õ" " Separator
-		let g:default_stl .= "#[FunctionName]#CUR# %(%{cfi#format('%s', '')} %)#/CUR#" " Function name
+		let g:default_stl .= "#[FunctionName] " " Padding/HL group
+		let g:default_stl .= "%<" " Truncate right
+		let g:default_stl .= "#CUR#%(%{cfi#format('%s', '')} %)#/CUR#" " Function name
 		let g:default_stl .= "%= " " Right align
 		let g:default_stl .= "#CUR##[FileFormat]%{&fileformat} #/CUR#" " File format
 		let g:default_stl .= "#CUR##[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} #/CUR#" " File encoding

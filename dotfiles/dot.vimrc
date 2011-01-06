@@ -451,7 +451,8 @@
 		autocmd!
 		" Set list on selected filetypes {{{
 			au FileType vim setl list
-			au FileType html,css,sass,javascript,php,python,ruby setl list
+			au FileType sh,zsh,bash setl list
+			au FileType html,css,sass,javascript,php,python,ruby,psql setl list
 		" }}}
 	augroup END " }}}
 	augroup whitespace " {{{
@@ -469,7 +470,7 @@
 				normal `Z
 			endfunction
 
-			au FileType html,css,sass,javascript,php,python,ruby au BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
+			au FileType html,css,sass,javascript,php,python,ruby,psql au BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
 		" }}}
 	augroup END " }}}
 	augroup statuslines " {{{

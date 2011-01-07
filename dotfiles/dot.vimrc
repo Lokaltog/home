@@ -21,6 +21,7 @@
 	set encoding=utf-8
 	set termencoding=utf-8
 	set title
+	set mouse=ar
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.
@@ -404,11 +405,13 @@
 
 			if &mouse == ""
 				let &mouse = old_mouse
-				echo "Mouse is for Vim (" . &mouse . ")"
+				set nopaste
+				echo "Mouse is for VIM (" . &mouse . "), paste mode OFF"
 			else
 				let old_mouse = &mouse
 				let &mouse = ""
-				echo "Mouse is for terminal"
+				set paste
+				echo "Mouse is for TERMINAL, paste mode ON"
 			endif
 		endfunction
 

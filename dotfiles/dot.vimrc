@@ -488,13 +488,15 @@
 				normal `Z
 			endfunction
 
-			au FileType html,css,sass,javascript,php,python,ruby,psql au BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
+			au FileType html,css,sass,javascript,php,python,ruby,psql,vim au BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
 		" }}}
 	augroup END " }}}
 	augroup statuslines " {{{
 		autocmd!
 		" Lusty buffer list {{{
-			au BufEnter * if bufname("%") == "[LustyExplorer-Buffers]" | let b:stl = "#[Branch] LustyExplorer#[BranchS] [>] #[FileName]%<Buffer List #[FileNameS][>>]%* %=" | endif " Set custom statusline
+			au BufEnter * if bufname("%") == "[LustyExplorer-Buffers]"
+				\ | let b:stl = "#[Branch] LustyExplorer#[BranchS] [>] #[FileName]%<Buffer List #[FileNameS][>>]%* %="
+				\ | endif
 		" }}}
 		" Tag list {{{
 			au BufEnter * if bufname("%") == "__Tag_list__"
@@ -541,8 +543,8 @@
 		let g:delimitMate_balance_matchpairs = 1
 	" }}}
 	" Disable annoying sql bindings {{{
-		let g:ftplugin_sql_omni_key_right = "<C-S-M-Right>"
-		let g:ftplugin_sql_omni_key_left = "<C-S-M-Left>"
+		let g:ftplugin_sql_omni_key_right = ""
+		let g:ftplugin_sql_omni_key_left = ""
 	" }}}
 	" NERD tree settings {{{
 		let g:NERDTreeChristmasTree = 1

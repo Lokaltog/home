@@ -151,9 +151,9 @@
 		let g:default_stl .= "%= " " Right align
 		let g:default_stl .= "#CUR##[FileFormat]%{&fileformat} #/CUR#" " File format
 		let g:default_stl .= "#CUR##[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} #/CUR#" " File encoding
-		let g:default_stl .= "#CUR##[Separator][<] Ĩĩ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
+		let g:default_stl .= "#CUR##[Separator][<] ħĨ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
 		let g:default_stl .= "#[LinePercentS][<<]#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
-		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] ĥ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
+		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] Ĥ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
 		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
 	" }}}
 	" Set statusline colors {{{

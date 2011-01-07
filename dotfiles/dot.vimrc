@@ -271,16 +271,16 @@
 " }}}
 " Mappings {{{
 	" F key mappings {{{
-		nnoremap <silent><F6> :set number!<CR>
-		nnoremap <silent><F7> :LustyJuggler<CR>
-		nnoremap <silent><F8> :TlistToggle<CR>
-		nnoremap <silent><F9> :LustyBufferExplorer<CR>
-		nnoremap <silent><F10> :NERDTreeToggle<CR>
-		nnoremap <silent><F11> :GundoToggle<CR>
+		nnoremap <silent> <F6>  :set number!<CR>
+		nnoremap <silent> <F7>  :LustyJuggler<CR>
+		nnoremap <silent> <F8>  :TlistToggle<CR>
+		nnoremap <silent> <F9>  :LustyBufferExplorer<CR>
+		nnoremap <silent> <F10> :NERDTreeToggle<CR>
+		nnoremap <silent> <F11> :GundoToggle<CR>
 	" }}}
 	" Quick edit .vimrc {{{
-		nnoremap <Leader>ev :e $MYVIMRC<CR>
-		nnoremap <Leader>sv :so $MYVIMRC<CR>
+		nnoremap <silent> <Leader>ev :edit   $MYVIMRC<CR>
+		nnoremap <silent> <Leader>sv :source $MYVIMRC<CR>
 	" }}}
 	" Enter command mode quickly {{{
 		nnoremap ; :
@@ -290,11 +290,11 @@
 		noremap j gj
 	" }}}
 	" Tab indenting in visual mode {{{
-		vnoremap <Tab> >gv
+		vnoremap <Tab>   >gv
 		vnoremap <S-Tab> <gv
 	" }}}
 	" Clear search highlighting {{{
-		nnoremap <silent> <Leader>/ :silent noh<cr>
+		nnoremap <silent> <Leader>/ :nohlsearch<CR>
 	" }}}
 	" Sudo write {{{
 		command! -bar -nargs=0 W  silent! exec "write !sudo tee % >/dev/null"  | silent! edit!
@@ -370,30 +370,29 @@
 		" Left/Right = indent/unindent
 		function! SetArrowKeysAsTextShifters()
 			" Normal mode
-			nnoremap <silent> <Left> <<
-			nnoremap <silent> <Right> >>
-			nnoremap <silent> <Up> <Esc>:call <SID>MoveLineUp()<CR>
-			nnoremap <silent> <Down> <Esc>:call <SID>MoveLineDown()<CR>
+			nnoremap <silent> <Left>   <<
+			nnoremap <silent> <Right>  >>
+			nnoremap <silent> <Up>     <Esc>:call <SID>MoveLineUp()<CR>
+			nnoremap <silent> <Down>   <Esc>:call <SID>MoveLineDown()<CR>
 
 			" Visual mode
-			vnoremap <silent> <Left> <gv
-			vnoremap <silent> <Right> >gv
-			vnoremap <silent> <S-Up> <Esc>:call <SID>MoveVisualUp()<CR>
+			vnoremap <silent> <Left>   <gv
+			vnoremap <silent> <Right>  >gv
+			vnoremap <silent> <S-Up>   <Esc>:call <SID>MoveVisualUp()<CR>
 			vnoremap <silent> <S-Down> <Esc>:call <SID>MoveVisualDown()<CR>
 
 			" Insert mode
-			inoremap <silent> <Left> <C-D>
-			inoremap <silent> <Right> <C-T>
-			inoremap <silent> <Up> <C-O>:call <SID>MoveLineUp()<CR>
-			inoremap <silent> <Down> <C-O>:call <SID>MoveLineDown()<CR>
+			inoremap <silent> <Left>   <C-D>
+			inoremap <silent> <Right>  <C-T>
+			inoremap <silent> <Up>     <C-O>:call <SID>MoveLineUp()<CR>
+			inoremap <silent> <Down>   <C-O>:call <SID>MoveLineDown()<CR>
 		endfunction
 
 		call SetArrowKeysAsTextShifters()
 	" }}}
 	" Disable insert mode movement keys {{{
-		noremap <Home> <NOP>
-		noremap <End>  <NOP>
-
+		noremap  <Home> <NOP>
+		noremap  <End>  <NOP>
 		inoremap <Home> <NOP>
 		inoremap <End>  <NOP>
 	" }}}
@@ -413,7 +412,7 @@
 			endif
 		endfunction
 
-		nnoremap <F12> :call <SID>ToggleMouse()<CR>
+		nnoremap <silent> <F12> :call <SID>ToggleMouse()<CR>
 	" }}}
 " }}}
 " Autocommands {{{
@@ -436,8 +435,8 @@
 				vertical resize 80
 				setl nonumber winfixwidth colorcolumn=
 				let b:stl = "#[Branch] HELP#[BranchS] [>] #[FileName]%<%t #[FileNameS][>>]%* %=#[LinePercentS][<<]#[LinePercent] %p%% " " Set custom statusline
-				nnoremap <buffer><space> <c-]> " Space selects subject
-				nnoremap <buffer><bs> <c-T> " Backspace to go back
+				nnoremap <buffer> <Space> <C-]> " Space selects subject
+				nnoremap <buffer> <BS>    <C-T> " Backspace to go back
 			endfunction
 
 			au FileType help au BufEnter,BufWinEnter <buffer> call <SID>SetupHelpWindow()
@@ -488,7 +487,7 @@
 				normal `Z
 			endfunction
 
-			au FileType html,css,sass,javascript,php,python,ruby,psql,vim au BufWritePre <buffer> :call <SID>StripTrailingWhitespace()
+			au FileType html,css,sass,javascript,php,python,ruby,psql,vim au BufWritePre <buffer> :silent! call <SID>StripTrailingWhitespace()
 		" }}}
 	augroup END " }}}
 	augroup statuslines " {{{

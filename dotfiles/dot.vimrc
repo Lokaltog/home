@@ -246,6 +246,10 @@
 	set smarttab
 	set startofline
 	set completeopt=menu,menuone,longest,preview
+	" Highlight problematic whitespace (spaces before tabs) {{{
+		hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
+		match RedundantSpaces / \+\ze\t/
+	" }}}
 " }}}
 " Folding {{{
 	set foldenable
@@ -444,6 +448,11 @@
 		" Disable Syntastic for selected filetypes {{{
 			au FileType sass SyntasticDisable
 		" }}}
+		" Fix space highlighting in diff files {{{
+			au FileType diff hi clear RedundantSpaces
+				\ | hi DiffCol ctermbg=238 cterm=bold
+				\ | match DiffCol /^[ +-]\([+-]\)\@!/
+		" }}}
 	augroup END " }}}
 	augroup formatting " {{{
 		autocmd!
@@ -459,6 +468,7 @@
 		autocmd!
 		" Set list on selected filetypes {{{
 			au FileType vim setl list
+			au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
 			au FileType sh,zsh,bash setl list
 			au FileType html,css,sass,javascript,php,python,ruby,psql setl list
 		" }}}

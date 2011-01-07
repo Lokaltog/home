@@ -102,7 +102,3 @@ hi link diffRemoved DiffDelete
 hi diffLine ctermbg=none ctermfg=68 cterm=bold
 hi diffFile ctermbg=none ctermfg=242 cterm=none
 hi diffNewFile ctermbg=none ctermfg=242 cterm=none
-
-" Highlight problematic whitespace (spaces before tabs)
-hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
-match RedundantSpaces / \+\ze\t/

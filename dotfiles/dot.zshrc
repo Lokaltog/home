@@ -213,7 +213,7 @@
 	autoload -Uz vcs_info
 
 	zstyle ':vcs_info:*' enable git svn hg
-	zstyle ':vcs_info:*' formats '%F{5}%s%f %F{7}%BÍ %b'
+	zstyle ':vcs_info:*' formats '%F{5}%s%f %F{7}%Bģ %b'
 
 	precmd(){
 		vcs_info
@@ -224,8 +224,8 @@
 		PR_SSH='SSH'
 		PR_START='%%'
 	else
-		PR_SSH='ê'
-		PR_START='ý'
+		PR_SSH='Ħ'
+		PR_START='ć'
 	fi
 	# regular prompt {{{
 		PROMPTDIR='%b%F{6}%3~%f'

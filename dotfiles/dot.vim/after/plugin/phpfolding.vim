@@ -569,7 +569,7 @@ function! PHPFoldText() " {{{
 	endif
 
 	" Return the foldtext
-	return repeat(repeat(' ', &tabstop), strlen(matchstr(getline(v:foldstart), '^\s*'))).lineString.' Î'.lines.' ÝÏ '
+	return repeat(repeat(' ', &tabstop), strlen(matchstr(getline(v:foldstart), '^\s*'))).lineString.' Ĉ '.lines.' Ĥ ĉ'
 endfunction
 " }}}
 function! SkipMatch() " {{{

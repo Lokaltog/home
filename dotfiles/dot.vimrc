@@ -66,9 +66,9 @@
 				au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
 			" }}}
 			" Use custom fillchars/listchars/showbreak icons {{{
-				set fillchars=vert:┆,fold:Û,diff:░
-				set listchars=tab:Ë\ ,trail:í,eol:î
-				set showbreak=Ì
+				set fillchars=vert:┆,fold:Ĕ,diff:Đ
+				set listchars=tab:Ā\ ,trail:Ć,eol:Ą
+				set showbreak=Ģ
 			" }}}
 		endif
 	" }}}
@@ -106,6 +106,13 @@
 			" Syntax: #[ ... ]
 			let new_stl = substitute(new_stl, '#\[\(\w\+\)\]', '%#StatusLine'.type.'\1'.current.'#', 'g')
 
+			" Prepare statusline arrows
+			" Syntax: [>] [>>] [<] [<<]
+			let new_stl = substitute(new_stl, '\[>\]',  'č', 'g')
+			let new_stl = substitute(new_stl, '\[>>\]', 'ď', 'g')
+			let new_stl = substitute(new_stl, '\[<\]',  'Č', 'g')
+			let new_stl = substitute(new_stl, '\[<<\]', 'Ď', 'g')
+
 			if &l:stl ==# new_stl
 				" Statusline already set, nothing to do
 				return
@@ -130,22 +137,23 @@
 	" }}}
 	" Set default statusline {{{
 		let g:default_stl  = ""
-		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS]õ#/CUR#"
-		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Í \\1', 'gi')}#[BranchS] ó %)" " Git branch
+		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]#/CUR#"
+		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'ģ \\1', 'gi')}#[BranchS] [>] %)" " Git branch
+		let g:default_stl .= "#[ModFlag]%{&readonly ? 'Ġ ' : ''}" " RO flag
 		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "#CUR##[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', 'óóó SYNTAX Ý \\1\\2 óóó', 'i')} %)#/CUR#" " Syntastic error flag
+		let g:default_stl .= "#CUR##[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX Ĥ \\1\\2 [>][>][>]', 'i')} %)#/CUR#" " Syntastic error flag
 		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
-		let g:default_stl .= "#[BufFlag]%(%R%H%W %)" " RO,HLP,PRV flags
-		let g:default_stl .= "#[FileNameS]õ" " Separator
+		let g:default_stl .= "#[BufFlag]%(%H%W %)" " HLP,PRV flags
+		let g:default_stl .= "#[FileNameS][>>]" " Separator
 		let g:default_stl .= "#[FunctionName] " " Padding/HL group
 		let g:default_stl .= "%<" " Truncate right
 		let g:default_stl .= "#CUR#%(%{cfi#format('%s', '')} %)#/CUR#" " Function name
 		let g:default_stl .= "%= " " Right align
 		let g:default_stl .= "#CUR##[FileFormat]%{&fileformat} #/CUR#" " File format
 		let g:default_stl .= "#CUR##[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} #/CUR#" " File encoding
-		let g:default_stl .= "#CUR##[Separator]ò ð #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
-		let g:default_stl .= "#[LinePercentS]ô#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
-		let g:default_stl .= "#[LineNumberS]ô#[LineNumber] Ý %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
+		let g:default_stl .= "#CUR##[Separator][<] Ĩĩ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
+		let g:default_stl .= "#[LinePercentS][<<]#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
+		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] ĥ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
 		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
 	" }}}
 	" Set statusline colors {{{
@@ -252,7 +260,7 @@
 		let t = substitute(t, '\W*$', '', '')
 		let n = v:foldend - v:foldstart + 1
 
-		return repeat(repeat(' ', &tabstop), w).t.' Î'.n.' ÝÏ '
+		return repeat(repeat(' ', &tabstop), w).t.' Ĉ '.n.' Ĥ ĉ'
 	endfunction
 
 	au FileType vim set foldlevel=0 foldtext=VimFold()
@@ -423,7 +431,7 @@
 				wincmd L
 				vertical resize 80
 				setl nonumber winfixwidth colorcolumn=
-				let b:stl = "#[Branch] HELP#[BranchS] ó #[FileName]%<%t #[FileNameS]õ%* %=#[LinePercentS]ô#[LinePercent] %p%% " " Set custom statusline
+				let b:stl = "#[Branch] HELP#[BranchS] [>] #[FileName]%<%t #[FileNameS][>>]%* %=#[LinePercentS][<<]#[LinePercent] %p%% " " Set custom statusline
 				nnoremap <buffer><space> <c-]> " Space selects subject
 				nnoremap <buffer><bs> <c-T> " Backspace to go back
 			endfunction
@@ -476,25 +484,25 @@
 	augroup statuslines " {{{
 		autocmd!
 		" Lusty buffer list {{{
-			au BufEnter * if bufname("%") == "[LustyExplorer-Buffers]" | let b:stl = "#[Branch] LustyExplorer#[BranchS] ó #[FileName]%<Buffer List #[FileNameS]õ%* %=" | endif " Set custom statusline
+			au BufEnter * if bufname("%") == "[LustyExplorer-Buffers]" | let b:stl = "#[Branch] LustyExplorer#[BranchS] [>] #[FileName]%<Buffer List #[FileNameS][>>]%* %=" | endif " Set custom statusline
 		" }}}
 		" Tag list {{{
 			au BufEnter * if bufname("%") == "__Tag_list__"
-				\ | let b:stl = "#[FileName]%< Tag list #[FileNameS]õ%* %="
+				\ | let b:stl = "#[FileName]%< Tag list #[FileNameS][>>]%* %="
 				\ | endif
 		" }}}
 		" Gundo {{{
 			au BufEnter * if bufname("%") == "__Gundo__"
-				\ | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Undo tree #[FileNameS]õ%* %="
+				\ | let b:stl = "#[Branch] GUNDO#[BranchS] [>] #[FileName]%<Undo tree #[FileNameS][>>]%* %="
 				\ | endif
 
 			au BufEnter * if bufname("%") == "__Gundo_Preview__"
-				\ | let b:stl = "#[Branch] GUNDO#[BranchS] ó #[FileName]%<Diff preview #[FileNameS]õ%* %="
+				\ | let b:stl = "#[Branch] GUNDO#[BranchS] [>] #[FileName]%<Diff preview #[FileNameS][>>]%* %="
 				\ | endif
 		" }}}
 		" Syntastic location list {{{
 			au BufEnter * if bufname("%") == "[Location List]"
-				\ | let b:stl = "#[FileName]%< Location List #[FileNameS]õ%* %="
+				\ | let b:stl = "#[FileName]%< Location List #[FileNameS][>>]%* %="
 				\ | endif
 		" }}}
 	augroup END " }}}

@@ -483,10 +483,6 @@
 
 				%s/\s\+$//e
 
-				if line("'Z") != line(".")
-					echom "Stripped whitespace"
-				endif
-
 				normal `Z
 			endfunction
 

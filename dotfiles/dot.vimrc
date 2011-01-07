@@ -193,7 +193,7 @@
 				\ , 'FunctionName' : [[ 236, 247, 'none'], [ 232, 239, 'none']]
 				\ , 'FileFormat'   : [[ 236, 244, 'none'], [ 232, 239, 'none']]
 				\ , 'FileEncoding' : [[ 236, 244, 'none'], [ 232, 239, 'none']]
-				\ , 'Separator'    : [[ 236, 244, 'none'], [ 232, 239, 'none']]
+				\ , 'Separator'    : [[ 236, 242, 'none'], [ 232, 239, 'none']]
 				\ , 'FileType'     : [[ 236, 248, 'none'], [ 232, 239, 'none']]
 				\ , 'LinePercentS' : [[ 240, 236, 'none'], [ 234, 232, 'none']]
 				\ , 'LinePercent'  : [[ 240, 250, 'none'], [ 234, 239, 'none']]

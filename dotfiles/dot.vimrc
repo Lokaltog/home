@@ -109,10 +109,17 @@
 
 			" Prepare statusline arrows
 			" Syntax: [>] [>>] [<] [<<]
-			let new_stl = substitute(new_stl, '\[>\]',  'č', 'g')
-			let new_stl = substitute(new_stl, '\[>>\]', 'ď', 'g')
-			let new_stl = substitute(new_stl, '\[<\]',  'Č', 'g')
-			let new_stl = substitute(new_stl, '\[<<\]', 'Ď', 'g')
+			if s:round_stl
+				let new_stl = substitute(new_stl, '\[>\]',  'ĝ', 'g')
+				let new_stl = substitute(new_stl, '\[>>\]', 'ğ', 'g')
+				let new_stl = substitute(new_stl, '\[<\]',  'Ĝ', 'g')
+				let new_stl = substitute(new_stl, '\[<<\]', 'Ğ', 'g')
+			else
+				let new_stl = substitute(new_stl, '\[>\]',  'č', 'g')
+				let new_stl = substitute(new_stl, '\[>>\]', 'ď', 'g')
+				let new_stl = substitute(new_stl, '\[<\]',  'Č', 'g')
+				let new_stl = substitute(new_stl, '\[<<\]', 'Ď', 'g')
+			endif
 
 			if &l:stl ==# new_stl
 				" Statusline already set, nothing to do
@@ -227,6 +234,8 @@
 	" }}}
 	augroup StatusLineHighlight " {{{
 		autocmd!
+
+		let s:round_stl = 0
 
 		au BufWinEnter,WinEnter,CmdwinEnter,CursorHold,BufWritePost,InsertLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 1)
 		au WinLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 0)

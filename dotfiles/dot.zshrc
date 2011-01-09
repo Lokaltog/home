@@ -209,39 +209,69 @@
 		export TMOUT=180
 	fi
 # }}}
-# vcs info {{{
-	autoload -Uz vcs_info
-
-	zstyle ':vcs_info:*' enable git svn hg
-	zstyle ':vcs_info:*' formats '%F{5}%s%f %F{7}%Bģ %b'
-
-	precmd(){
-		vcs_info
-	}
-# }}}
 # prompt {{{
-	if [[ "$TERM" == "linux" ]]; then
-		PR_SSH='SSH'
-		PR_START='%%'
-	else
-		PR_SSH='Ħ'
-		PR_START='ć'
+	if [[ "$TERM" == "rxvt-256color" ]]; then
+		CLEAR='%{[0m%}'
+		# regular prompt {{{
+			typeset -A \
+				C_SSH \
+				C_USER \
+				C_DIR
+
+			# default colors {{{
+				C_SSH[BG]=166
+				C_SSH[FG]=214
+
+				C_USER[BG]=22
+				C_USER[FG]=40
+
+				C_DIR[BG]=235
+				C_DIR[FG]=248
+			# }}}
+			# root colors {{{
+				if [[ $UID == 0 ]]; then
+					C_USER[BG]=88
+					C_USER[FG]=196
+				fi
+			# }}}
+			# ssh host section {{{
+				if [[ ! -z "$SSH_CLIENT" ]]; then
+					SSHPROMPT='%{[(48;5;${C_SSH[BG]});(38;5;${C_SSH[FG]})m%} Ġ %M '
+					SSHPROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_SSH[BG]})m%}ċ'
+				fi
+			# }}}
+
+			PROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_USER[FG]})m%} %n '
+			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_USER[BG]})m%}ċ '
+			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_DIR[FG]})m%}%3~ '
+			PROMPT=$PROMPT'${CLEAR}%{[38;5;${C_DIR[BG]}m%}ċ${CLEAR} '
+		# }}}
+		# right prompt {{{
+			# vcs colors {{{
+				typeset -A \
+					C_VCS
+
+				C_VCS[BG]=53
+				C_VCS[FG_VCS]=162
+				C_VCS[FG_BRANCH]=219
+				
+				VCSPROMPT='%{[38;5;'${C_VCS[BG]}'m%}Ċ'
+				VCSPROMPT=$VCSPROMPT'%{[(48;5;'${C_VCS[BG]}');(38;5;'${C_VCS[FG_VCS]}')m%} %s'
+				VCSPROMPT=$VCSPROMPT'%{[38;5;'${C_VCS[FG_BRANCH]}'m%} ģ %b '${CLEAR}
+			# }}}
+			# vcs info {{{
+				autoload -Uz vcs_info
+
+				zstyle ':vcs_info:*' enable git svn hg
+				zstyle ':vcs_info:*' formats $VCSPROMPT
+
+				precmd(){
+					vcs_info
+				}
+			# }}}
+			RPROMPT='${vcs_info_msg_0_}'
+		# }}}
 	fi
-	# regular prompt {{{
-		PROMPTDIR='%b%F{6}%3~%f'
-
-		if [[ $UID == 0 ]]; then
-			PROMPT='%B%F{1}%n%f '$PROMPTDIR' %B%F{1}${PR_START}%f%b '
-		else
-			PROMPT='%B%F{4}%n%f '$PROMPTDIR' %B%F{7}${PR_START}%f%b '
-		fi
-
-		# check if user is logged in via ssh
-		[[ ! -z "$SSH_CLIENT" ]] && PROMPT='%F{3}${PR_SSH} %M%f %F{0}%B│%b%f '$PROMPT
-	# }}}
-	# right prompt {{{
-		RPROMPT='${vcs_info_msg_0_}'
-	# }}}
 	# list prompt - don't ask 'do you want to see all ...' in menu selection {{{
 		LISTPROMPT=''
 	# }}}

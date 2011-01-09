@@ -20,8 +20,8 @@ hi LineNr ctermbg=235 ctermfg=243
 hi CursorLine ctermbg=88 cterm=bold
 hi VertSplit ctermbg=none ctermfg=238 cterm=none
 
-hi Folded ctermbg=235 ctermfg=249 cterm=bold
-hi FoldColumn ctermbg=235 ctermfg=243 cterm=none
+hi Folded ctermbg=234 ctermfg=249 cterm=none
+hi FoldColumn ctermbg=234 ctermfg=243 cterm=none
 hi SignColumn ctermbg=233 ctermfg=231 cterm=bold
 hi Visual ctermbg=247 ctermfg=16 cterm=bold
 hi ColorColumn ctermbg=235
@@ -37,7 +37,7 @@ hi Question ctermbg=none ctermfg=245 cterm=bold
 hi WarningMsg ctermbg=none ctermfg=202 cterm=bold,underline
 hi ErrorMsg ctermbg=none ctermfg=196 cterm=bold,underline
 
-hi Comment ctermfg=243 cterm=none
+hi Comment ctermbg=233 ctermfg=243 cterm=none
 hi vimCommentTitle ctermfg=250
 hi vimCommentString ctermfg=245
 hi link phpCommentTitle vimCommentTitle

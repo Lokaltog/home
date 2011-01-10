@@ -40,14 +40,14 @@
 	# applications {{{
 		export LESS_VIM="vim -R \
 			-c 'let no_plugin_maps = 1' \
-			-c 'set foldlevel=999 scrolloff=999 mouse=h nolist nonumber nowrap laststatus=0 foldcolumn=0' \
-			-c 'runtime! macros/less.vim' \
-			-c 'map <space> <c-d>' \
+			-c 'set foldlevel=999 scrolloff=999 nolist noma nomod nonumber nowrap laststatus=2 foldcolumn=0 viminfo=' \
+			-c 'map <Space> <C-D>' \
+			-c 'noremap q :q<CR>' \
 			-c 'hi RedundantSpaces none'"
 		export PAGER="sed 's/\x1b\[[0-9]\{0,2\}\(;[0-9]\{1,2\}\)\{0,2\}m//g' | $LESS_VIM -" # remove ansi colors with sed
 		export MANPAGER="sh -c \"unset PAGER; col -b -x | $LESS_VIM \
 			-c 'set ft=man' \
-			-c 'map K :Man <c-r>=expand(\\\"<cword>\\\")<cr><cr>' \
+			-c 'map K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' \
 			-\""
 		export EDITOR="vim"
 		export VISUAL="vim"

@@ -465,6 +465,9 @@
 				\ | hi DiffCol ctermbg=238 cterm=bold
 				\ | match DiffCol /^[ +-]\([+-]\)\@!/
 		" }}}
+		" Load .Xdefaults/.Xresources on save {{{
+			au BufWritePost,FileWritePost ~/.Xdefaults,~/.Xresources silent! !xrdb -load % >/dev/null 2>&1
+		" }}}
 	augroup END " }}}
 	augroup formatting " {{{
 		autocmd!

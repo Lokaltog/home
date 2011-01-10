@@ -91,9 +91,10 @@ hi phpFunctionsTag ctermfg=222 cterm=bold
 
 hi cssImportant ctermfg=166 cterm=bold
 
-hi DiffAdd ctermfg=76 ctermbg=none cterm=none
-hi DiffChange ctermfg=220 ctermbg=none cterm=none
-hi DiffDelete ctermfg=160 ctermbg=none cterm=none
+hi DiffAdd ctermbg=22 ctermfg=112 cterm=none
+hi DiffChange ctermbg=94 ctermfg=220 cterm=none
+hi DiffDelete ctermbg=none ctermfg=124 cterm=none
+hi DiffText ctermbg=227 ctermfg=16 cterm=bold,underline
 
 hi link diffAdded DiffAdd
 hi link diffChanged DiffChange

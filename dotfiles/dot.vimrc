@@ -70,7 +70,7 @@
 			" Use custom fillchars/listchars/showbreak icons {{{
 				set fillchars=vert:┆,fold:Ĕ,diff:Ę
 				set listchars=tab:Ā\ ,trail:Ć,eol:Ą
-				set showbreak=Ģ
+				set showbreak=ĩĪ
 			" }}}
 		endif
 	" }}}

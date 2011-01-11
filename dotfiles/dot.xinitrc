@@ -25,7 +25,6 @@ xmodmap \
 	-e 'keycode 20 = exclam        percent exclamdown'
 
 # set background
-xsetroot -bg "#121212" -mod 3 3 &
 xrdb -merge ~/.Xresources &
 feh --bg-scale ~/.sync/eos.png &
 

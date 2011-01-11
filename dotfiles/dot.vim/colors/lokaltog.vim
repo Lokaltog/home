@@ -93,8 +93,8 @@ hi cssImportant ctermfg=166 cterm=bold
 
 hi DiffAdd ctermbg=22 ctermfg=112 cterm=none
 hi DiffChange ctermbg=94 ctermfg=220 cterm=none
-hi DiffDelete ctermbg=none ctermfg=124 cterm=none
-hi DiffText ctermbg=227 ctermfg=16 cterm=bold,underline
+hi DiffDelete ctermbg=none ctermfg=160 cterm=none
+hi DiffText ctermbg=94 ctermfg=220 cterm=bold,reverse
 
 hi link diffAdded DiffAdd
 hi link diffChanged DiffChange

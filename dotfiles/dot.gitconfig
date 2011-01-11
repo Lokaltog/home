@@ -33,6 +33,10 @@
 [push]
 	default = current
 [alias]
+	d = diff
+	sd = diff --staged
+	dt = difftool
+	sdt = difftool --staged
 	co = checkout
 	br = branch
 	ci = commit

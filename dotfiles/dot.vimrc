@@ -5,6 +5,7 @@
 	set nocompatible
 	set tags=tags;.vimtags;
 	set nobackup
+	set nowritebackup
 	set noswapfile
 	set nomodeline
 	set undofile

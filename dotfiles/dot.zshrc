@@ -1,21 +1,17 @@
-# Lokaltog's .zshrc
-# -----------------
-# vim:set ft=zsh:
-
-# show dopefish {{{
+# Show dopefish {{{
 	cat ~/sync/etc/dopefish
 # }}}
-# environment variables {{{
-	# command history {{{
+# Environment variables {{{
+	# Command history {{{
 		export HISTFILE=~/.zshhist
 		export HISTSIZE=10000
 		export SAVEHIST=$HISTSIZE
 	# }}}
-	# colors {{{
+	# Colors {{{
 		export GREP_COLORS="38;5;230:sl=38;5;240:cs=38;5;100:mt=38;5;161:fn=38;5;197:ln=38;5;212:bn=38;5;44:se=38;5;166"
 		export LS_COLORS="*.tar.bz2=38;5;226:*.tar.xz=38;5;130:*PKGBUILD=48;5;233;38;5;160:*.html=38;5;213:*.htm=38;5;213:*.vim=38;5;142:*.css=38;5;209:*.screenrc=38;5;120:*.procmailrc=38;5;120:*.zshrc=38;5;120:*.bashrc=38;5;120:*.xinitrc=38;5;120:*.vimrc=38;5;120:*.htoprc=38;5;120:*.muttrc=38;5;120:*.gtkrc-2.0=38;5;120:*.fehrc=38;5;120:*.rc=38;5;120:*.md=38;5;130:*.markdown=38;5;130:*.conf=38;5;148:*.h=38;5;81:*.rb=38;5;192:*.c=38;5;110:*.diff=38;5;31:*.yml=38;5;208:*.pl=38;5;178:*.csv=38;5;136:tw=38;5;003:*.chm=38;5;144:*.bin=38;5;249:*.pdf=38;5;203:*.mpg=38;5;38:*.ts=38;5;39:*.sfv=38;5;191:*.m3u=38;5;172:*.txt=38;5;192:*.log=38;5;190:*.swp=38;5;241:*.swo=38;5;240:*.theme=38;5;109:*.zsh=38;5;173:*.nfo=38;5;113:mi=38;5;124:or=38;5;160:ex=38;5;197:ln=target:pi=38;5;130:ow=38;5;208:fi=38;5;007:so=38;5;167:di=38;5;30:*.pm=38;5;197:*.pl=38;5;166:*.sh=38;5;243:*.patch=38;5;37:*.tar=38;5;118:*.tar.gz=38;5;172:*.zip=38;5;11::*.rar=38;5;11:*.tgz=38;5;11:*.7z=38;5;11:*.mp3=38;5;173:*.flac=38;5;166:*.mkv=38;5;115:*.avi=38;5;114:*.wmv=38;5;113:*.jpg=38;5;66:*.jpeg=38;5;67:*.png=38;5;68:*.pacnew=38;5;33"
 	# }}}
-	# locale {{{
+	# Locale {{{
 		export LANG="en_US.utf8"
 		export LC_CTYPE="nb_NO.utf8"
 		export LC_NUMERIC="nb_NO.utf8"
@@ -31,13 +27,13 @@
 		export LC_IDENTIFICATION="nb_NO.utf8"
 		export LC_ALL=""
 	# }}}
-	# build settings {{{
+	# Build settings {{{
 		export CFLAGS="-march=native -mtune=native -O3 -pipe"
 		export CXXFLAGS="$CFLAGS"
 		export LDFLAGS="-Wl,--hash-style=gnu -Wl,--as-needed"
 		export MAKEFLAGS="-j6"
 	# }}}
-	# applications {{{
+	# Applications {{{
 		export LESS_VIM="vim -R \
 			-c 'let no_plugin_maps = 1' \
 			-c 'set foldlevel=999 scrolloff=999 nolist noma nomod nonumber nowrap laststatus=2 foldcolumn=0 viminfo=' \
@@ -54,41 +50,41 @@
 		export BROWSER="chromium"
 		export WINEARCH="win32"
 	# }}}
-	# path {{{
-		# add sync/bin to path
+	# Path {{{
+		# Add sync/bin to path
 		export PATH="$HOME/sync/bin:$PATH"
 	# }}}
 # }}}
-# load plugins {{{
+# Load plugins {{{
 	source ~/.zsh/git-flow-completion.zsh
 # }}}
-# zsh options {{{
+# Zsh options {{{
 	typeset -g -A key
 	typeset -U path cdpath fpath manpath
 
-	setopt auto_cd # change dir without cd
-	setopt extended_glob # regex globbing
-	setopt print_exit_value # print exit value of programs with non-zero exit status
-	setopt notify # report the status if background jobs immediately
-	setopt complete_in_word # not just at the end
-	setopt always_to_end # when complete from middle, move cursor
-	setopt no_match # show error if pattern has no matches
-	setopt no_beep # disable beeps
-	setopt list_packed # compact completion lists
-	setopt list_types # show types in completion
-	setopt rec_exact # recognize exact, ambiguous matches
-	setopt hist_verify # when using ! cmds, confirm first
-	setopt hist_ignore_all_dups # ignore dups in command history
-	setopt hist_ignore_space # don't add commands prepended by whitespace to history
-	setopt append_history # allow multiple sessions to append to the history file
-	setopt extended_history # save additional info to history file
-	setopt inc_append_history # append commands to history immediately
-	setopt prompt_subst # enable variable substitution in prompt
-	setopt correct # command correction
-	setopt dvorak # correkt dvorak typing mistakes
-	setopt short_loops # allow short loops
+	setopt auto_cd # Change dir without cd
+	setopt extended_glob # Regex globbing
+	setopt print_exit_value # Print exit value of programs with non-zero exit status
+	setopt notify # Report the status if background jobs immediately
+	setopt complete_in_word # Not just at the end
+	setopt always_to_end # When complete from middle, move cursor
+	setopt no_match # Show error if pattern has no matches
+	setopt no_beep # Disable beeps
+	setopt list_packed # Compact completion lists
+	setopt list_types # Show types in completion
+	setopt rec_exact # Recognize exact, ambiguous matches
+	setopt hist_verify # When using ! cmds, confirm first
+	setopt hist_ignore_all_dups # Ignore dups in command history
+	setopt hist_ignore_space # Don't add commands prepended by whitespace to history
+	setopt append_history # Allow multiple sessions to append to the history file
+	setopt extended_history # Save additional info to history file
+	setopt inc_append_history # Append commands to history immediately
+	setopt prompt_subst # Enable variable substitution in prompt
+	setopt correct # Command correction
+	setopt dvorak # Correkt dvorak typing mistakes
+	setopt short_loops # Allow short loops
 # }}}
-# keybindings {{{
+# Keybindings {{{
 	bindkey -v
 
 	bindkey '^?' backward-delete-char
@@ -106,8 +102,8 @@
 	bindkey "^[OH" beginning-of-line
 	bindkey "^[OF" end-of-line
 # }}}
-# aliases {{{
-	# general aliases {{{
+# Aliases {{{
+	# General aliases {{{
 		alias sudo="sudo -E"
 		alias -- +="sudo"
 		alias sv="+ vim"
@@ -131,12 +127,12 @@
 		alias chmod="chmod -v"
 		alias chown="chown -v"
 	# }}}
-	# default sudo commands {{{
+	# Default sudo commands {{{
 		for cmd in mount ifconfig pacman chmod chown; do
 			alias $cmd="+ $cmd"
 		done
 	# }}}
-	# multitail aliases {{{
+	# Multitail aliases {{{
 		alias tsys="+ multitail \
 			-n 200 -t Daemons /var/log/daemon.log \
 			-n 200 -t Kernel /var/log/kernel.log \
@@ -151,23 +147,21 @@
 			-n 200 -t \"Squid Access\" /var/log/squid/access.log \
 			-n 200 -t \"Squid Cache\" -wh 20 /var/log/squid/cache.log"
 	# }}}
-	# suffix aliases {{{
+	# Suffix aliases {{{
 		alias -s html=$BROWSER
 		alias -s {php,tpl,txt,PKGBUILD}=$EDITOR
 		alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}="feh -FZd"
 		alias -s {mpg,mpeg,avi,ogm,wmv,m4v,mp4,mov}="mplayer -idx"
 	# }}}
 # }}}
-# completion {{{
+# Completion {{{
 	autoload -Uz compinit && compinit
-
-	# ssh hosts completion {{{
+	# SSH hosts completion {{{
 		[ -f ~/.ssh/config ] && : ${(A)ssh_config_hosts:=${${${${(@M)${(f)"$(<~/.ssh/config)"}:#Host *}#Host }:#*\**}:#*\?*}}
 		[ -f ~/.ssh/known_hosts ] && : ${(A)ssh_known_hosts:=${${${(f)"$(<$HOME/.ssh/known_hosts)"}%%\ *}%%,*}}
 		zstyle ':completion:*:*:*' hosts $ssh_config_hosts $ssh_known_hosts
 	# }}}
-	# general rules {{{
-		# enable completion cache
+	# General rules {{{
 		zstyle ':completion:*' completer _complete _ignored
 		zstyle ':completion:*' expand prefix suffix
 		zstyle ':completion:*' group-name ''
@@ -199,26 +193,25 @@
 		zstyle ':completion:*:cp:*' ignore-line yes
 		zstyle ':completion:*:mv:*' ignore-line yes
 	# }}}
-
-	# generic gnu completions for apps that understang long options (--option)
-	compdef _gnu_generic slrnpull make df du mv cp makepkg packer
+	# Generic GNU compl. for apps that understang long options {{{
+		compdef _gnu_generic slrnpull make df du mv cp makepkg packer
+	# }}}
 # }}}
-# root settings {{{
+# Root settings {{{
 	if [[ $UID == 0 ]]; then
-		# close root shell after 180 seconds
+		# Close root shell after 180 seconds
 		export TMOUT=180
 	fi
 # }}}
-# prompt {{{
+# Prompt {{{
 	if [[ "$TERM" == "rxvt-256color" ]]; then
 		CLEAR='%{[0m%}'
-		# regular prompt {{{
+		# Regular prompt {{{
 			typeset -A \
 				C_SSH \
 				C_USER \
 				C_DIR
-
-			# default colors {{{
+			# Default colors {{{
 				C_SSH[BG]=166
 				C_SSH[FG]=214
 
@@ -228,26 +221,25 @@
 				C_DIR[BG]=235
 				C_DIR[FG]=248
 			# }}}
-			# root colors {{{
+			# Root colors {{{
 				if [[ $UID == 0 ]]; then
 					C_USER[BG]=88
 					C_USER[FG]=196
 				fi
 			# }}}
-			# ssh host section {{{
+			# SSH host section {{{
 				if [[ ! -z "$SSH_CLIENT" ]]; then
 					SSHPROMPT='%{[(48;5;${C_SSH[BG]});(38;5;${C_SSH[FG]})m%} Ĥ %M '
 					SSHPROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_SSH[BG]})m%}ǡ'
 				fi
 			# }}}
-
 			PROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_USER[FG]})m%} %n '
 			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_USER[BG]})m%}ǡ '
 			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_DIR[FG]})m%}%3~ '
 			PROMPT=$PROMPT'${CLEAR}%{[38;5;${C_DIR[BG]}m%}ǡ${CLEAR} '
 		# }}}
-		# right prompt {{{
-			# vcs colors {{{
+		# Right prompt {{{
+			# VCS colors {{{
 				typeset -A \
 					C_VCS
 
@@ -259,7 +251,7 @@
 				VCSPROMPT=$VCSPROMPT'%{[(48;5;'${C_VCS[BG]}');(38;5;'${C_VCS[FG_VCS]}')m%} %s'
 				VCSPROMPT=$VCSPROMPT'%{[38;5;'${C_VCS[FG_BRANCH]}'m%} Đ %b '${CLEAR}
 			# }}}
-			# vcs info {{{
+			# VCS info {{{
 				autoload -Uz vcs_info
 
 				zstyle ':vcs_info:*' enable git svn hg
@@ -272,15 +264,15 @@
 			RPROMPT='${vcs_info_msg_0_}'
 		# }}}
 	fi
-	# list prompt - don't ask 'do you want to see all ...' in menu selection {{{
+	# List prompt - don't ask 'do you want to see all ...' in menu selection {{{
 		LISTPROMPT=''
 	# }}}
-	# spelling prompt {{{
+	# Spelling prompt {{{
 		SPROMPT='zsh: correct '%R' to '%r'? ([Y]es/[N]o/[E]dit/[A]bort) '
 	# }}}
 # }}}
-# zle stuff {{{
-	# smart dot (e.g. enter ..../dir) {{{
+# ZLE stuff {{{
+	# Smart dot (e.g. enter ..../dir) {{{
 		smartdot(){
 			if [[ $LBUFFER = *.. ]]; then
 				LBUFFER+=/..
@@ -291,7 +283,7 @@
 		zle -N smartdot smartdot
 		bindkey . smartdot
 	# }}}
-	# quick add sudo {{{
+	# Quick add sudo {{{
 		insert_sudo(){
 			if [[ $LBUFFER != "sudo "* && $LBUFFER != '+ '* ]]; then
 				LBUFFER="+ $LBUFFER"
@@ -300,7 +292,7 @@
 		zle -N insert-sudo insert_sudo
 		bindkey "^[r" insert-sudo
 	# }}}
-	# integrate ranger {{{
+	# Integrate ranger {{{
 		integrate_ranger(){
 			local before="$(pwd)"
 			ranger $before <$TTY
@@ -317,8 +309,8 @@
 		bindkey "^F" integrated-ranger
 	# }}}
 # }}}
-# functions {{{
-	# service control {{{
+# Functions {{{
+	# Service control {{{
 		service(){
 			for s in ${*[2,-1]}; do
 				if [[ -n $1 ]]; then

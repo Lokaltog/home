@@ -249,6 +249,7 @@
 	set history=1000
 	set undolevels=1000
 	set pumheight=10
+	set diffopt+=context:3
 " }}}
 " Layout / Text formatting {{{
 	set autoindent

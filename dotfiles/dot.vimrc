@@ -435,7 +435,7 @@
 	" }}}
 " }}}
 " Autocommands {{{
-	augroup general " {{{
+	augroup General " {{{
 		autocmd!
 		" Custom psql highlighting {{{
 			au BufNewFile,BufRead *.sql set ft=psql foldmethod=marker
@@ -453,7 +453,9 @@
 				wincmd L
 				vertical resize 80
 				setl nonumber winfixwidth colorcolumn=
+
 				let b:stl = "#[Branch] HELP#[BranchS] [>] #[FileName]%<%t #[FileNameS][>>]%* %=#[LinePercentS][<<]#[LinePercent] %p%% " " Set custom statusline
+
 				nnoremap <buffer> <Space> <C-]> " Space selects subject
 				nnoremap <buffer> <BS>    <C-T> " Backspace to go back
 			endfunction
@@ -475,7 +477,7 @@
 			au BufWritePost,FileWritePost ~/.Xdefaults,~/.Xresources silent! !xrdb -load % >/dev/null 2>&1
 		" }}}
 	augroup END " }}}
-	augroup formatting " {{{
+	augroup Formatting " {{{
 		autocmd!
 		" Fix gitcommit formatting {{{
 			au FileType gitcommit setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
@@ -485,7 +487,7 @@
 			au FileType mail,text setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
 		" }}}
 	augroup END" }}}
-	augroup list " {{{
+	augroup List " {{{
 		autocmd!
 		" Set list on selected filetypes {{{
 			au FileType vim setl list
@@ -494,7 +496,7 @@
 			au FileType html,css,sass,javascript,php,python,ruby,psql setl list
 		" }}}
 	augroup END " }}}
-	augroup whitespace " {{{
+	augroup Whitespace " {{{
 		autocmd!
 		" Remove trailing whitespace from selected filetypes {{{
 			function! s:StripTrailingWhitespace()
@@ -508,7 +510,7 @@
 			au FileType html,css,sass,javascript,php,python,ruby,psql,vim au BufWritePre <buffer> :silent! call <SID>StripTrailingWhitespace()
 		" }}}
 	augroup END " }}}
-	augroup statuslines " {{{
+	augroup CustomStatuslines " {{{
 		autocmd!
 		" Lusty buffer list {{{
 			au BufEnter * if bufname("%") == "[LustyExplorer-Buffers]"

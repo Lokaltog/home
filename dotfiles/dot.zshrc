@@ -236,15 +236,15 @@
 			# }}}
 			# ssh host section {{{
 				if [[ ! -z "$SSH_CLIENT" ]]; then
-					SSHPROMPT='%{[(48;5;${C_SSH[BG]});(38;5;${C_SSH[FG]})m%} Ġ %M '
-					SSHPROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_SSH[BG]})m%}ċ'
+					SSHPROMPT='%{[(48;5;${C_SSH[BG]});(38;5;${C_SSH[FG]})m%} Ĥ %M '
+					SSHPROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_SSH[BG]})m%}ǡ'
 				fi
 			# }}}
 
 			PROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_USER[FG]})m%} %n '
-			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_USER[BG]})m%}ċ '
+			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_USER[BG]})m%}ǡ '
 			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_DIR[FG]})m%}%3~ '
-			PROMPT=$PROMPT'${CLEAR}%{[38;5;${C_DIR[BG]}m%}ċ${CLEAR} '
+			PROMPT=$PROMPT'${CLEAR}%{[38;5;${C_DIR[BG]}m%}ǡ${CLEAR} '
 		# }}}
 		# right prompt {{{
 			# vcs colors {{{
@@ -255,9 +255,9 @@
 				C_VCS[FG_VCS]=162
 				C_VCS[FG_BRANCH]=219
 				
-				VCSPROMPT='%{[38;5;'${C_VCS[BG]}'m%}Ċ'
+				VCSPROMPT='%{[38;5;'${C_VCS[BG]}'m%}Ǡ'
 				VCSPROMPT=$VCSPROMPT'%{[(48;5;'${C_VCS[BG]}');(38;5;'${C_VCS[FG_VCS]}')m%} %s'
-				VCSPROMPT=$VCSPROMPT'%{[38;5;'${C_VCS[FG_BRANCH]}'m%} ģ %b '${CLEAR}
+				VCSPROMPT=$VCSPROMPT'%{[38;5;'${C_VCS[FG_BRANCH]}'m%} Đ %b '${CLEAR}
 			# }}}
 			# vcs info {{{
 				autoload -Uz vcs_info

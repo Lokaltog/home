@@ -49,124 +49,61 @@
 		set wildmode=full
 	" }}}
 " }}}
-" UI options {{{
-	" Set colorscheme {{{
-		if &t_Co == 256
-			colo lokaltog
-		else
-			colo pablo
-		endif
-	" }}}
-	" URxvt-specific settings {{{
-		if &term =~ "rxvt"
-			" Change cursor color in insert mode {{{
-				silent !echo -ne "]12;\#dd4010\x7"
-
-				let &t_SI="]12;\#89b6e2\x7"
-				let &t_EI="]12;\#dd4010\x7"
-
-				au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
-			" }}}
-			" Use custom fillchars/listchars/showbreak icons {{{
-				set fillchars=vert:┆,fold:Ĕ,diff:Ę
-				set listchars=tab:Ā\ ,trail:Ć,eol:Ą
-				set showbreak=ĩĪ
-			" }}}
-		endif
-	" }}}
-	set laststatus=2
-	set hlsearch
-	set incsearch
-	set nonumber
-	set numberwidth=4
-	set ruler
-	set scrolloff=10
-	set sidescrolloff=20
-	set scrolljump=10
-	set showcmd
-	set noshowmode
-	set virtualedit=all
-	set confirm
-	set updatetime=1500
-	set history=1000
-	set undolevels=1000
-	set pumheight=10
-" }}}
 " Statusline {{{
-	" Statusline update function {{{
-		" Inspired by StatusLineHighlight by Ingo Karkat
-		function! s:StatusLine(new_stl, type, current)
-			let current = (a:current ? "" : "NC")
-			let type = a:type
-			let new_stl = a:new_stl
+	" Functions {{{
+		" Statusline updater {{{
+			" Inspired by StatusLineHighlight by Ingo Karkat
+			function! s:StatusLine(new_stl, type, current)
+				let current = (a:current ? "" : "NC")
+				let type = a:type
+				let new_stl = a:new_stl
 
-			" Prepare current buffer specific text
-			" Syntax: #CUR# ... #/CUR#
-			let new_stl = substitute(new_stl, '#CUR#\(.\{-,}\)#/CUR#', (a:current ? '\1' : ''), 'g')
+				" Prepare current buffer specific text
+				" Syntax: #CUR# ... #/CUR#
+				let new_stl = substitute(new_stl, '#CUR#\(.\{-,}\)#/CUR#', (a:current ? '\1' : ''), 'g')
 
-			" Prepare statusline colors
-			" Syntax: #[ ... ]
-			let new_stl = substitute(new_stl, '#\[\(\w\+\)\]', '%#StatusLine'.type.'\1'.current.'#', 'g')
+				" Prepare statusline colors
+				" Syntax: #[ ... ]
+				let new_stl = substitute(new_stl, '#\[\(\w\+\)\]', '%#StatusLine'.type.'\1'.current.'#', 'g')
 
-			" Prepare statusline arrows
-			" Syntax: [>] [>>] [<] [<<]
-			if s:round_stl
-				let new_stl = substitute(new_stl, '\[>\]',  'ĝ', 'g')
-				let new_stl = substitute(new_stl, '\[>>\]', 'ğ', 'g')
-				let new_stl = substitute(new_stl, '\[<\]',  'Ĝ', 'g')
-				let new_stl = substitute(new_stl, '\[<<\]', 'Ğ', 'g')
-			else
-				let new_stl = substitute(new_stl, '\[>\]',  'č', 'g')
-				let new_stl = substitute(new_stl, '\[>>\]', 'ď', 'g')
-				let new_stl = substitute(new_stl, '\[<\]',  'Č', 'g')
-				let new_stl = substitute(new_stl, '\[<<\]', 'Ď', 'g')
-			endif
+				" Prepare statusline arrows
+				" Syntax: [>] [>>] [<] [<<]
+				if s:round_stl
 
-			if &l:stl ==# new_stl
-				" Statusline already set, nothing to do
-				return
-			endif
+					let new_stl = substitute(new_stl, '\[>\]',  'ǳ', 'g')
+					let new_stl = substitute(new_stl, '\[>>\]', 'ǵ', 'g')
+					let new_stl = substitute(new_stl, '\[<\]',  'ǲ', 'g')
+					let new_stl = substitute(new_stl, '\[<<\]', 'Ǵ', 'g')
+				else
+					let new_stl = substitute(new_stl, '\[>\]',  'ǣ', 'g')
+					let new_stl = substitute(new_stl, '\[>>\]', 'ǥ', 'g')
+					let new_stl = substitute(new_stl, '\[<\]',  'Ǣ', 'g')
+					let new_stl = substitute(new_stl, '\[<<\]', 'Ǥ', 'g')
+				endif
 
-			if empty(&l:stl)
-				" No statusline is set, use my_stl
-				let &l:stl = new_stl
-			else
-				" Check if a custom statusline is set
-				let plain_stl = substitute(&l:stl, '%#StatusLine\w\+#', '', 'g')
-
-				if &l:stl ==# plain_stl
-					" A custom statusline is set, don't modify
+				if &l:stl ==# new_stl
+					" Statusline already set, nothing to do
 					return
 				endif
 
-				" No custom statusline is set, use my_stl
-				let &l:stl = new_stl
-			endif
-		endfunction
-	" }}}
-	" Set default statusline {{{
-		let g:default_stl  = ""
-		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]#/CUR#"
-		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'ģ \\1', 'gi')}#[BranchS] [>] %)" " Git branch
-		let g:default_stl .= "#[ModFlag]%{&readonly ? 'Ġ ' : ''}" " RO flag
-		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "#CUR##[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX Ĥ \\1\\2 [>][>][>]', 'i')} %)#/CUR#" " Syntastic error flag
-		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
-		let g:default_stl .= "#[BufFlag]%(%H%W %)" " HLP,PRV flags
-		let g:default_stl .= "#[FileNameS][>>]" " Separator
-		let g:default_stl .= "#[FunctionName] " " Padding/HL group
-		let g:default_stl .= "%<" " Truncate right
-		let g:default_stl .= "#CUR#%(%{cfi#format('%s', '')} %)#/CUR#" " Function name
-		let g:default_stl .= "%= " " Right align
-		let g:default_stl .= "#CUR##[FileFormat]%{&fileformat} #/CUR#" " File format
-		let g:default_stl .= "#CUR##[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} #/CUR#" " File encoding
-		let g:default_stl .= "#CUR##[Separator][<] ħĨ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
-		let g:default_stl .= "#[LinePercentS][<<]#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
-		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] Ĥ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
-		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
-	" }}}
-	" Set statusline colors {{{
-		" Statusline color dict parser {{{
+				if empty(&l:stl)
+					" No statusline is set, use my_stl
+					let &l:stl = new_stl
+				else
+					" Check if a custom statusline is set
+					let plain_stl = substitute(&l:stl, '%#StatusLine\w\+#', '', 'g')
+
+					if &l:stl ==# plain_stl
+						" A custom statusline is set, don't modify
+						return
+					endif
+
+					" No custom statusline is set, use my_stl
+					let &l:stl = new_stl
+				endif
+			endfunction
+		" }}}
+		" Color dict parser {{{
 			function! s:StatusLineColors(colors)
 				for type in keys(a:colors)
 					for name in keys(a:colors[type])
@@ -185,7 +122,30 @@
 				endfor
 			endfunction
 		" }}}
-		call <SID>StatusLineColors({
+	" }}}
+	" Default statusline {{{
+		let g:default_stl  = ""
+		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]#/CUR#"
+		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Đ \\1', 'gi')}#[BranchS] [>] %)" " Git branch
+		let g:default_stl .= "#[ModFlag]%{&readonly ? 'Ĥ ' : ''}" " RO flag
+		let g:default_stl .= "#[FileName]%t " " File name
+		let g:default_stl .= "#CUR##[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1\\2 [>][>][>]', 'i')} %)#/CUR#" " Syntastic error flag
+		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
+		let g:default_stl .= "#[BufFlag]%(%H%W %)" " HLP,PRV flags
+		let g:default_stl .= "#[FileNameS][>>]" " Separator
+		let g:default_stl .= "#[FunctionName] " " Padding/HL group
+		let g:default_stl .= "%<" " Truncate right
+		let g:default_stl .= "#CUR#%(%{cfi#format('%s', '')} %)#/CUR#" " Function name
+		let g:default_stl .= "%= " " Right align
+		let g:default_stl .= "#CUR##[FileFormat]%{&fileformat} #/CUR#" " File format
+		let g:default_stl .= "#CUR##[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} #/CUR#" " File encoding
+		let g:default_stl .= "#CUR##[Separator][<] Ġġ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
+		let g:default_stl .= "#[LinePercentS][<<]#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
+		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] đ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
+		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
+	" }}}
+	" Color dict {{{
+		let s:statuscolors = {
 			\   'NONE': {
 				\   'NONE'         : [[ 236, 231, 'bold'], [ 232, 244, 'none']]
 			\ }
@@ -231,17 +191,63 @@
 				\ , 'LineNumber'   : [[ 117,  23, 'bold'], [                 ]]
 				\ , 'LineColumn'   : [[ 117,  31, 'none'], [                 ]]
 			\ }
-		\ })
+		\ }
 	" }}}
-	augroup StatusLineHighlight " {{{
-		autocmd!
+" }}}
+" UI options {{{
+	" URxvt-specific settings {{{
+		if &term =~ "rxvt-256color"
+			" Statusline highlighting {{{
+				augroup StatusLineHighlight
+					autocmd!
 
-		let s:round_stl = 0
+					let s:round_stl = 0
 
-		au BufWinEnter,WinEnter,CmdwinEnter,CursorHold,BufWritePost,InsertLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 1)
-		au WinLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 0)
-		au InsertEnter,CursorHoldI * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Insert', 1)
-	augroup END " }}}
+					au ColorScheme * call <SID>StatusLineColors(s:statuscolors)
+					au BufWinEnter,WinEnter,CmdwinEnter,CursorHold,BufWritePost,InsertLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 1)
+					au WinLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 0)
+					au InsertEnter,CursorHoldI * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Insert', 1)
+				augroup END
+			" }}}
+			" Change cursor color in insert mode {{{
+				silent !echo -ne "]12;\#dd4010\x7"
+
+				let &t_SI="]12;\#89b6e2\x7"
+				let &t_EI="]12;\#dd4010\x7"
+
+				au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
+			" }}}
+			" Use custom fillchars/listchars/showbreak icons {{{
+				set fillchars=vert:ā,fold:Ć,diff:Ď
+				set listchars=tab:Ā\ ,trail:Ė,eol:ĕ
+				set showbreak=Ģģ
+			" }}}
+		endif
+	" }}}
+	" Set colorscheme {{{
+		if &t_Co == 256
+			colo lokaltog
+		else
+			colo pablo
+		endif
+	" }}}
+	set laststatus=2
+	set hlsearch
+	set incsearch
+	set nonumber
+	set numberwidth=4
+	set ruler
+	set scrolloff=10
+	set sidescrolloff=20
+	set scrolljump=10
+	set showcmd
+	set noshowmode
+	set virtualedit=all
+	set confirm
+	set updatetime=1500
+	set history=1000
+	set undolevels=1000
+	set pumheight=10
 " }}}
 " Layout / Text formatting {{{
 	set autoindent
@@ -275,7 +281,7 @@
 		let t = substitute(t, '\W*$', '', '')
 		let n = v:foldend - v:foldstart + 1
 
-		return repeat(repeat(' ', &tabstop), w).t.' Ĉ '.n.' Ĥ ĉ'
+		return repeat(repeat(' ', &tabstop), w).t.' ǒ '.n.' đ Ǔ'
 	endfunction
 
 	au FileType vim set foldlevel=0 foldtext=VimFold()

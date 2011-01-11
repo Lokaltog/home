@@ -272,20 +272,40 @@
 " Folding {{{
 	set foldenable
 	set foldmethod=marker
-	set foldlevel=1
+	set foldlevel=0
 	set foldcolumn=0
+	set foldtext=UniversalFoldText()
 
-	function! VimFold()
-		let t = getline(v:foldstart)
-		let w = strlen(matchstr(t, '^\s*'))
-		let t = substitute(t, '^\W*', '', '')
-		let t = substitute(t, '\W*$', '', '')
-		let n = v:foldend - v:foldstart + 1
+	function! UniversalFoldText()
+		" Prepare detail variables
+		let l:line = getline(v:foldstart)
+		let l:line_count = v:foldend - v:foldstart + 1
+		let l:indent = strlen(matchstr(l:line, '^\t*'))
+		let l:indent_str = repeat(repeat(' ', &tabstop), l:indent)
 
-		return repeat(repeat(' ', &tabstop), w).t.' ǒ '.n.' đ Ǔ'
+		let l:w_win = winwidth(0)
+		let l:w_num = getwinvar(0, '&number') * getwinvar(0, '&numberwidth')
+		let l:w_fold = getwinvar(0, '&foldcolumn')
+
+		if &fdm == 'marker'
+			" foldmethod==marker
+			" Remove all non-word characters
+			let l:text = l:line
+			let l:text = substitute(l:text, '^\W*', '', '')
+			let l:text = substitute(l:text, '\W*$', '', '')
+
+			" Prepare fold text
+			let l:fnum = printf('ǒ %s đ Ǔ', l:line_count)
+			let l:ftext = printf('%s%s ', l:indent_str, l:text)
+
+			return l:ftext . repeat('Ć', l:w_win - strchars(l:fnum) - strchars(l:ftext) - l:w_num - l:w_fold - 1) . l:fnum
+		endif
+
+		if &fdm == 'diff'
+			" foldmethod==diff
+			return printf('ǒ %s matching lines Ǔ', l:line_count)
+		endif
 	endfunction
-
-	au FileType vim set foldlevel=0 foldtext=VimFold()
 " }}}
 " Mappings {{{
 	" F key mappings {{{

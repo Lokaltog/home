@@ -398,7 +398,7 @@
 		let g:DisableAutoPHPFolding = 1
 
 		au FileType php EnableFastPHPFolds
-		au FileType php setl foldtext=FoldText_PHP()
+		au FileType php set foldtext=FoldText() | setl foldtext=FoldText_PHP()
 	" }}}
 " }}}
 " Mappings {{{

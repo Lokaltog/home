@@ -331,6 +331,11 @@
 				" Remove surrounding whitespace {{{
 					let l:text = substitute(l:text, '^\s*\(.\{-}\)\s*$', '\1', '')
 				" }}}
+				" Make unmatched block delimiters prettier {{{
+					let l:text = substitute(l:text, '([^)]*$',   '(...)', '')
+					let l:text = substitute(l:text, '{[^}]*$',   '{...}', '')
+					let l:text = substitute(l:text, '\[[^\]]*$', '[...]', '')
+				" }}}
 				" Add arrows when indent level > 2 spaces {{{
 					if indent(v:foldstart) > 2
 						let l:cline = substitute(l:line, '^\s*', '', '')

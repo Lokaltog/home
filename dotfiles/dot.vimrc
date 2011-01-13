@@ -219,7 +219,7 @@
 				au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
 			" }}}
 			" Use custom fillchars/listchars/showbreak icons {{{
-				set fillchars=vert:ā,fold:Ć,diff:Ď
+				set fillchars=vert:ā,fold:Ķ,diff:Ď
 				set listchars=tab:Ā\ ,trail:Ė,eol:ĕ
 				set showbreak=Ģģ
 			" }}}
@@ -344,7 +344,7 @@
 					let l:fnum = printf(' %s đ ', l:line_count)
 					let l:ftext = printf('%s%s ', l:indent, l:text)
 				" }}}
-				return l:ftext . repeat('Ć', l:w_win - strchars(l:fnum) - strchars(l:ftext) - l:w_num - l:w_fold) . l:fnum
+				return l:ftext . repeat('Ķ', l:w_win - strchars(l:fnum) - strchars(l:ftext) - l:w_num - l:w_fold) . l:fnum
 			" }}}
 		endfunction
 	" }}}

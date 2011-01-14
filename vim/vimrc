@@ -716,4 +716,7 @@
 		let g:gundo_right = 1
 		let g:gundo_width = 50
 	" }}}
+	" SnipMate settings {{{
+		let g:snippets_dir = '$HOME/.vim/snippets'
+	" }}}"
 " }}}

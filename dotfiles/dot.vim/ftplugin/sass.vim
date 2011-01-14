@@ -1,1 +1,0 @@
-../../../vimplugins/vim-haml/ftplugin/sass.vim

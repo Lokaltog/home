@@ -1,1 +1,0 @@
-../../../../vimplugins/current-func-info/ftplugin/python/cfi.vim

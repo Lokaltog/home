@@ -1,1 +1,0 @@
-../../../vimplugins/phpcomplete/phpcomplete.vim

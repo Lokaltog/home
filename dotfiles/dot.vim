@@ -1,1 +1,1 @@
-../vim/dot.vim
+../vim/vim

@@ -1,1 +1,1 @@
-../zsh/dot.zsh
+../zsh/zsh

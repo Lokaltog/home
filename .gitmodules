@@ -1,51 +1,57 @@
-[submodule "vimplugins/vim-fugitive"]
-	path = vimplugins/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vimplugins/vim-git"]
-	path = vimplugins/vim-git
-	url = https://github.com/tpope/vim-git.git
-[submodule "vimplugins/vim-haml"]
-	path = vimplugins/vim-haml
-	url = https://github.com/tpope/vim-haml.git
-[submodule "vimplugins/vim-markdown"]
-	path = vimplugins/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
-[submodule "vimplugins/snipmate"]
-	path = vimplugins/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
-[submodule "vimplugins/delimitmate"]
-	path = vimplugins/delimitmate
-	url = https://github.com/Raimondi/delimitMate.git
-[submodule "vimplugins/nerdtree"]
-	path = vimplugins/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vimplugins/vim-javascript"]
-	path = vimplugins/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
-[submodule "vimplugins/lusty"]
-	path = vimplugins/lusty
-	url = https://github.com/sjbach/lusty.git
-[submodule "vimplugins/vim-easytags"]
-	path = vimplugins/vim-easytags
-	url = https://github.com/xolox/vim-easytags.git
-[submodule "vimplugins/piv"]
-	path = vimplugins/piv
-	url = https://github.com/spf13/PIV.git
-[submodule "vimplugins/syntastic"]
-	path = vimplugins/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-[submodule "vimplugins/phpcomplete"]
-	path = vimplugins/phpcomplete
-	url = https://github.com/shawncplus/phpcomplete.vim.git
-[submodule "vimplugins/vim-taglist"]
-	path = vimplugins/vim-taglist
-	url = https://github.com/mexpolk/vim-taglist.git
-[submodule "zshplugins/git-flow-completion"]
-	path = zshplugins/git-flow-completion
+[submodule "zsh/modules/git-flow-completion"]
+	path = zsh/modules/git-flow-completion
 	url = https://github.com/bobthecow/git-flow-completion.git
-[submodule "vimplugins/gundo"]
-	path = vimplugins/gundo
+[submodule "vim/modules/vim-fugitive"]
+	path = vim/modules/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/modules/vim-git"]
+	path = vim/modules/vim-git
+	url = https://github.com/tpope/vim-git.git
+[submodule "vim/modules/vim-haml"]
+	path = vim/modules/vim-haml
+	url = https://github.com/tpope/vim-haml.git
+[submodule "vim/modules/vim-markdown"]
+	path = vim/modules/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git
+[submodule "vim/modules/snipmate"]
+	path = vim/modules/snipmate
+	url = https://github.com/msanders/snipmate.vim.git
+[submodule "vim/modules/delimitmate"]
+	path = vim/modules/delimitmate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "vim/modules/nerdtree"]
+	path = vim/modules/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/modules/vim-javascript"]
+	path = vim/modules/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vim/modules/lusty"]
+	path = vim/modules/lusty
+	url = https://github.com/sjbach/lusty.git
+[submodule "vim/modules/vim-easytags"]
+	path = vim/modules/vim-easytags
+	url = https://github.com/xolox/vim-easytags.git
+[submodule "vim/modules/syntastic"]
+	path = vim/modules/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/modules/phpcomplete"]
+	path = vim/modules/phpcomplete
+	url = https://github.com/shawncplus/phpcomplete.vim.git
+[submodule "vim/modules/vim-taglist"]
+	path = vim/modules/vim-taglist
+	url = https://github.com/mexpolk/vim-taglist.git
+[submodule "vim/modules/gundo"]
+	path = vim/modules/gundo
 	url = https://github.com/sjl/gundo.vim.git
-[submodule "vimplugins/current-func-info"]
-	path = vimplugins/current-func-info
+[submodule "vim/modules/current-func-info"]
+	path = vim/modules/current-func-info
 	url = https://github.com/vim-scripts/current-func-info.vim.git
+[submodule "vim/modules/pathogen"]
+	path = vim/modules/pathogen
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "vim/modules/php53-syntax"]
+	path = vim/modules/php53-syntax
+	url = https://github.com/vim-scripts/php.vim--Garvin.git
+[submodule "vim/modules/phpfolding"]
+	path = vim/modules/phpfolding
+	url = https://github.com/vim-scripts/phpfolding.vim.git

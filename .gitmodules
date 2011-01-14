@@ -52,3 +52,6 @@
 [submodule "vim/modules/php53-syntax"]
 	path = vim/modules/php53-syntax
 	url = https://github.com/vim-scripts/php.vim--Garvin.git
+[submodule "vim/modules/phpfolding"]
+	path = vim/modules/phpfolding
+	url = https://github.com/vim-scripts/phpfolding.vim.git

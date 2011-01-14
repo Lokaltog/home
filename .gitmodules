@@ -31,9 +31,6 @@
 [submodule "vim/modules/vim-easytags"]
 	path = vim/modules/vim-easytags
 	url = https://github.com/xolox/vim-easytags.git
-[submodule "vim/modules/piv"]
-	path = vim/modules/piv
-	url = https://github.com/spf13/PIV.git
 [submodule "vim/modules/syntastic"]
 	path = vim/modules/syntastic
 	url = https://github.com/scrooloose/syntastic.git

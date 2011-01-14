@@ -61,7 +61,7 @@
 
 				" Prepare current buffer specific text
 				" Syntax: #CUR# ... #/CUR#
-				let new_stl = substitute(new_stl, '#CUR#\(.\{-,}\)#/CUR#', (a:current ? '\1' : ''), 'g')
+				let new_stl = substitute(new_stl, '<CUR>\(.\{-,}\)</CUR>', (a:current ? '\1' : ''), 'g')
 
 				" Prepare statusline colors
 				" Syntax: #[ ... ]
@@ -126,21 +126,21 @@
 	" }}}
 	" Default statusline {{{
 		let g:default_stl  = ""
-		let g:default_stl .= "#CUR##[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]#/CUR#"
+		let g:default_stl .= "<CUR>#[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]</CUR>"
 		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\.]\\+\\))', 'Đ \\1', 'gi')}#[BranchS] [>] %)" " Git branch
 		let g:default_stl .= "#[ModFlag]%{&readonly ? 'Ĥ ' : ''}" " RO flag
 		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "#CUR##[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1\\2 [>][>][>]', 'i')} %)#/CUR#" " Syntastic error flag
+		let g:default_stl .= "<CUR>#[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1\\2 [>][>][>]', 'i')} %)</CUR>" " Syntastic error flag
 		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
 		let g:default_stl .= "#[BufFlag]%(%H%W %)" " HLP,PRV flags
 		let g:default_stl .= "#[FileNameS][>>]" " Separator
 		let g:default_stl .= "#[FunctionName] " " Padding/HL group
 		let g:default_stl .= "%<" " Truncate right
-		let g:default_stl .= "#CUR#%(%{cfi#format('%s', '')} %)#/CUR#" " Function name
+		let g:default_stl .= "<CUR>%(%{cfi#format('%s', '')} %)</CUR>" " Function name
 		let g:default_stl .= "%= " " Right align
-		let g:default_stl .= "#CUR##[FileFormat]%{&fileformat} #/CUR#" " File format
-		let g:default_stl .= "#CUR##[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} #/CUR#" " File encoding
-		let g:default_stl .= "#CUR##[Separator][<] Ġġ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} #/CUR#" " File type
+		let g:default_stl .= "<CUR>#[FileFormat]%{&fileformat} </CUR>" " File format
+		let g:default_stl .= "<CUR>#[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} </CUR>" " File encoding
+		let g:default_stl .= "<CUR>#[Separator][<] Ġġ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} </CUR>" " File type
 		let g:default_stl .= "#[LinePercentS][<<]#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
 		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] đ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
 		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group

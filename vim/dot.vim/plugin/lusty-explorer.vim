@@ -1,1 +1,0 @@
-../../../vimplugins/lusty/plugin/lusty-explorer.vim

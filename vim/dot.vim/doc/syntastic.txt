@@ -1,1 +1,0 @@
-../../../vimplugins/syntastic/doc/syntastic.txt

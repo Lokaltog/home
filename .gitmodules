@@ -49,3 +49,6 @@
 [submodule "vim/modules/pathogen"]
 	path = vim/modules/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
+[submodule "vim/modules/php53-syntax"]
+	path = vim/modules/php53-syntax
+	url = https://github.com/vim-scripts/php.vim--Garvin.git

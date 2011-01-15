@@ -688,10 +688,6 @@
 		let g:delimitMate_unbalanced_parens = 1
 		let g:delimitMate_balance_matchpairs = 1
 	" }}}
-	" Disable annoying sql bindings {{{
-		let g:ftplugin_sql_omni_key_right = ""
-		let g:ftplugin_sql_omni_key_left = ""
-	" }}}
 	" NERD tree settings {{{
 		let g:NERDTreeChristmasTree = 1
 		let g:NERDTreeCaseSensitiveSort = 1

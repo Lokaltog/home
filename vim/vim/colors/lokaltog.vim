@@ -17,7 +17,7 @@ hi xmlEndTag ctermfg=209 cterm=bold
 hi Normal ctermbg=none ctermfg=231
 
 hi LineNr ctermbg=235 ctermfg=243
-hi CursorLine ctermbg=88 cterm=bold
+hi CursorLine ctermfg=231 ctermbg=237 cterm=bold
 hi VertSplit ctermbg=234 ctermfg=240 cterm=none
 
 hi Folded ctermbg=234 ctermfg=249 cterm=none

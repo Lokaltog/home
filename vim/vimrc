@@ -718,4 +718,9 @@
 	" SnipMate settings {{{
 		let g:snippets_dir = '$HOME/.vim/snippets'
 	" }}}"
+	" SuperTab settings {{{
+		let g:SuperTabLongestEnhanced = 1
+		let g:SuperTabMappingForward = '<S-Tab>'
+		let g:SuperTabMappingBackward = '<Tab>'
+	" }}}
 " }}}

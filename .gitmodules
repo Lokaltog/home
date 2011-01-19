@@ -55,3 +55,6 @@
 [submodule "vim/modules/phpfolding"]
 	path = vim/modules/phpfolding
 	url = https://github.com/vim-scripts/phpfolding.vim.git
+[submodule "vim/modules/html5"]
+	path = vim/modules/html5
+	url = https://github.com/othree/html5.vim.git

@@ -433,10 +433,6 @@
 		noremap k gk
 		noremap j gj
 	" }}}
-	" Tab indenting in visual mode {{{
-		vnoremap <Tab>   >gv
-		vnoremap <S-Tab> <gv
-	" }}}
 	" Clear search highlighting {{{
 		nnoremap <silent> <Leader>/ :nohlsearch<CR>
 	" }}}
@@ -719,5 +715,17 @@
 		let g:SuperTabLongestEnhanced = 1
 		let g:SuperTabMappingForward = '<S-Tab>'
 		let g:SuperTabMappingBackward = '<Tab>'
+	" }}}
+	" XPTemplate settings {{{
+		let g:xptemplate_brace_complete = 0
+		let g:xptemplate_strict = 0
+		let g:xptemplate_highlight_nested = 1
+		" Make XPTemplate work with Supertab {{{
+			let g:SuperTabMappingForward = '<Plug>supertabKey'
+			let g:xptemplate_fallback = '<Plug>supertabKey'
+			let g:xptemplate_key = '<Tab>'
+			let g:xptemplate_pum_tab_nav = 1
+			let g:xptemplate_minimal_prefix = 'full'
+		" }}}
 	" }}}
 " }}}

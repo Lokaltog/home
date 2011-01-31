@@ -74,7 +74,6 @@
 				" Prepare statusline arrows
 				" Syntax: [>] [>>] [<] [<<]
 				if s:round_stl
-
 					let new_stl = substitute(new_stl, '\[>\]',  'ǳ', 'g')
 					let new_stl = substitute(new_stl, '\[>>\]', 'ǵ', 'g')
 					let new_stl = substitute(new_stl, '\[<\]',  'ǲ', 'g')

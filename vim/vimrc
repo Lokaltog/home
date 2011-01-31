@@ -85,25 +85,25 @@
 					let new_stl = substitute(new_stl, '\[<<\]', 'Ǥ', 'g')
 				endif
 
-				if &l:stl ==# new_stl
+				if &l:statusline ==# new_stl
 					" Statusline already set, nothing to do
 					return
 				endif
 
-				if empty(&l:stl)
+				if empty(&l:statusline)
 					" No statusline is set, use my_stl
-					let &l:stl = new_stl
+					let &l:statusline = new_stl
 				else
 					" Check if a custom statusline is set
-					let plain_stl = substitute(&l:stl, '%#StatusLine\w\+#', '', 'g')
+					let plain_stl = substitute(&l:statusline, '%#StatusLine\w\+#', '', 'g')
 
-					if &l:stl ==# plain_stl
+					if &l:statusline ==# plain_stl
 						" A custom statusline is set, don't modify
 						return
 					endif
 
 					" No custom statusline is set, use my_stl
-					let &l:stl = new_stl
+					let &l:statusline = new_stl
 				endif
 			endfunction
 		" }}}

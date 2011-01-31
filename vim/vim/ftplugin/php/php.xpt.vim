@@ -20,7 +20,7 @@ XPTvar $SPfun         ' '
 XPTvar $SPop          ' '
 
 XPT fun synonym=function
-`public ^function `function_name^`$SPfun^(`params^)`$BRfun^{
+`public ^function `function_name^(`params^)`$BRfun^{
 	`cursor^
 }
 

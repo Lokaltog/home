@@ -1,7 +1,7 @@
 XPTemplate priority=personal
 
 XPT de
-echo Debug::vars(`variables^); `die;^`cursor^
+echo Debug::vars($`variable^); `die;^`cursor^
 
 XPT fi
 '`field^' => Jelly::field('`type^'`^),`cursor^

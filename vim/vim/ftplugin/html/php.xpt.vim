@@ -16,3 +16,19 @@ XPT els synonym=else
 
 XPT de
 <?php echo Debug::vars($`variable^); `die;^ ?>
+
+XPT e
+<?php echo `cursor^; ?>
+
+XPT ev
+<?php echo $`variable^; ?>
+
+XPT ph wrap
+<?php
+
+`cursor^
+
+?>
+
+XPT php wrap
+<?php `cursor^ ?>

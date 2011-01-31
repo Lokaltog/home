@@ -13,9 +13,6 @@
 [submodule "vim/modules/vim-markdown"]
 	path = vim/modules/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
-[submodule "vim/modules/snipmate"]
-	path = vim/modules/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
 [submodule "vim/modules/delimitmate"]
 	path = vim/modules/delimitmate
 	url = https://github.com/Raimondi/delimitMate.git

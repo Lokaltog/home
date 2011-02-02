@@ -5,8 +5,8 @@ XPTvar $FALSE         FALSE
 XPTvar $NULL          NULL
 XPTvar $UNDEFINED     NULL
 
-XPTvar $CURSOR_PH     // cursor
-XPTvar $VOID_LINE     // void
+XPTvar $CURSOR_PH     /* cursor */
+XPTvar $VOID_LINE     /* void */;
 
 XPTvar $BRel          \n
 XPTvar $BRfun         \n
@@ -57,9 +57,18 @@ array(
 XPT ak
 '`key^' => `value^,`cursor^
 
-XPT try wrap
-try`$BRfun^{
-	`cursor^
+XPT try wrap " try {..} catch {..}
+XSET dealError=/* error handling */
+XSET job=$VOID_LINE
+try`$BRif^{
+    `cursor^
 }
-catch`$SPfun^(`Exception^ `evar^$e^)`$BRfun^{
-}
+catch (`Exception^ `evar^$e^)`$BRif^{
+    `dealError^
+}`...^
+catch (`Exception^ `evar^$e^)`$BRif^{
+    `dealError^
+}`...^`
+
+XPT doc
+`Include:commentDoc^

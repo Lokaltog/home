@@ -17,3 +17,6 @@ XSET req=\$this->request
 
 XPT iredir alias=_redir
 XSET req=Request::instance\()
+
+XPT jq
+Jelly::query('`model^')

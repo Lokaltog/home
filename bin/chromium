@@ -5,4 +5,5 @@
 	--enable-extension-timeline-api \
 	--omnibox-popup-count=15 \
 	--enable-preparsed-js-caching \
-	--disable-enforced-throttling
+	--disable-enforced-throttling \
+	--proxy-server="http://127.0.0.1:8000"

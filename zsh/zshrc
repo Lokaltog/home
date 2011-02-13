@@ -54,6 +54,9 @@
 		# Add sync/bin to path
 		export PATH="$HOME/sync/bin:$PATH"
 	# }}}
+	# Proxy {{{
+		export http_proxy="http://127.0.0.1:8000/"
+	# }}}
 # }}}
 # Load plugins {{{
 	source ~/.zsh/git-flow-completion.zsh

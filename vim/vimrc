@@ -265,7 +265,6 @@
 	set tabstop=6
 	set smartcase
 	set smartindent
-	set smarttab
 	set startofline
 	set completeopt=menu,menuone,longest,preview
 	" Highlight problematic whitespace (spaces before tabs) {{{

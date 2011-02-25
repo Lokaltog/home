@@ -1,6 +1,7 @@
 [user]
 	name = Kim Silkebækken
 	email = kim.silkebaekken@gmail.com
+	editor = vim
 [merge]
 	tool = meld
 	log = true
@@ -33,17 +34,15 @@
 [push]
 	default = current
 [alias]
-	d = diff
-	sd = diff --staged
+	d = diff --patience --find-renames --find-copies
+	sd = diff --patience --find-renames --find-copies --staged
 	dt = difftool
 	sdt = difftool --staged
 	co = checkout
 	br = branch
 	ci = commit
-	st = status -sb
+	st = status -sb --ignore-submodules=all
 	pa = push --all
-	cbr = checkout -b
-	dbr = branch -d
 	unstage = reset HEAD --
 	origin = remote show origin
 	sdiff = diff --staged
@@ -52,3 +51,8 @@
 	commit-submodules = "!subs=$(git ls-files --error-unmatch --stage -- $(git ls-files --modified) | grep \"^160000\" | cut -f2-); msg=$(echo Update submodules: $subs; echo; git submodule summary); git commit -e -m \"$msg\" --only $(echo $subs | tr \"\n\" \" \")"
 	mkpatch = diff-tree -p --pretty
 	unmerged = ls-files --unmerged
+	lg = !GIT_PAGER=less git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lp = !GIT_PAGER=less git log -p --patience
+	l = !GIT_PAGER=less git log --pretty=oneline --abbrev-commit --decorate
+	subdo = submodule foreach git
+	top = !eval cd "$(pwd)/$(git rev-parse --show-cdup)" && pwd

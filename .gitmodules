@@ -64,3 +64,6 @@
 [submodule "vim/modules/vim-extradite"]
 	path = vim/modules/vim-extradite
 	url = https://github.com/int3/vim-extradite.git
+[submodule "vim/modules/tagbar"]
+	path = vim/modules/tagbar
+	url = https://github.com/majutsushi/tagbar.git

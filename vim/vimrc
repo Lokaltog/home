@@ -416,7 +416,7 @@
 		nnoremap <silent> <F5>  :UpdateTags!<CR>:HighlightTags<CR>
 		nnoremap <silent> <F6>  :set number!<CR>
 		nnoremap <silent> <F7>  :LustyJuggler<CR>
-		nnoremap <silent> <F8>  :TlistToggle<CR>
+		nnoremap <silent> <F8>  :TagbarToggle<CR>
 		nnoremap <silent> <F9>  :LustyBufferExplorer<CR>
 		nnoremap <silent> <F10> :NERDTreeToggle<CR>
 		nnoremap <silent> <F11> :GundoToggle<CR>
@@ -639,9 +639,9 @@
 				\ | let b:stl = "#[Branch] LustyExplorer#[BranchS] [>] #[FileName]%<Buffer List #[FileNameS][>>]%* %="
 				\ | endif
 		" }}}
-		" Tag list {{{
-			au BufEnter * if bufname("%") == "__Tag_list__"
-				\ | let b:stl = "#[FileName]%< Tag list #[FileNameS][>>]%* %="
+		" Tagbar {{{
+			au BufEnter * if bufname("%") == "__Tagbar__"
+				\ | let b:stl = "#[FileName]%< Tagbar #[FileNameS][>>]%* %="
 				\ | endif
 		" }}}
 		" Gundo {{{
@@ -688,16 +688,11 @@
 		let g:NERDTreeWinSize = 50
 		let g:NERDTreeShowBookmarks = 1
 	" }}}
-	" Taglist settings {{{
-		let g:Tlist_WinWidth = 50
-		let g:Tlist_Close_On_Select = 1
-		let g:Tlist_Compact_Format = 1
-		let g:Tlist_Display_Tag_Scope = 1
-		let g:Tlist_Exit_OnlyWindow = 1
-		let g:Tlist_File_Fold_Auto_Close = 1
-		let g:Tlist_GainFocus_On_ToggleOpen = 1
-		let g:Tlist_Use_Right_Window = 1
-		let g:Tlist_Process_File_Always = 1
+	" Tagbar settings {{{
+		let g:tagbar_width = 50
+		let g:tagbar_autoclose = 1
+		let g:tagbar_autofocus = 1
+		let g:tagbar_compact = 1
 	" }}}
 	" Syntastic settings {{{
 		let g:syntastic_enable_signs = 1

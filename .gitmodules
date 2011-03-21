@@ -60,4 +60,4 @@
 	url = https://github.com/ervandew/supertab.git
 [submodule "vim/modules/xptemplate"]
 	path = vim/modules/xptemplate
-	url = https://github.com/vim-scripts/xptemplate.git
+	url = https://github.com/drmingdrmer/xptemplate-dist.git

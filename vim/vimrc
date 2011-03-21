@@ -678,10 +678,6 @@
 		let g:python_show_sync = 1
 		let g:python_print_as_function = 1
 	" }}}
-	" delimitMate settings {{{
-		let g:delimitMate_unbalanced_parens = 1
-		let g:delimitMate_balance_matchpairs = 1
-	" }}}
 	" NERD tree settings {{{
 		let g:NERDTreeChristmasTree = 1
 		let g:NERDTreeCaseSensitiveSort = 1
@@ -711,8 +707,6 @@
 	" }}}
 	" SuperTab settings {{{
 		let g:SuperTabLongestEnhanced = 1
-		let g:SuperTabMappingForward = '<S-Tab>'
-		let g:SuperTabMappingBackward = '<Tab>'
 	" }}}
 	" XPTemplate settings {{{
 		let g:xptemplate_brace_complete = 0

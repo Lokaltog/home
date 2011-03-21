@@ -133,7 +133,7 @@
 		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\./:]\\+\\))', 'Đ \\1', 'gi')}#[BranchS] [>] %)" " Git branch
 		let g:default_stl .= "#[ModFlag]%{&readonly ? 'Ĥ ' : ''}" " RO flag
 		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "<CUR>#[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1\\2 [>][>][>]', 'i')} %)</CUR>" " Syntastic error flag
+		let g:default_stl .= "<CUR>#[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[Syntax: line:\\(\\d\\+\\) \\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1 \\2 [>][>][>]', 'i')} %)</CUR>" " Syntastic error flag
 		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
 		let g:default_stl .= "#[BufFlag]%(%H%W %)" " HLP,PRV flags
 		let g:default_stl .= "#[FileNameS][>>]" " Separator

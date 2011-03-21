@@ -58,6 +58,3 @@
 [submodule "vim/modules/supertab"]
 	path = vim/modules/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "vim/modules/xptemplate"]
-	path = vim/modules/xptemplate
-	url = https://github.com/vim-scripts/xptemplate.git

@@ -34,9 +34,6 @@
 [submodule "vim/modules/phpcomplete"]
 	path = vim/modules/phpcomplete
 	url = https://github.com/shawncplus/phpcomplete.vim.git
-[submodule "vim/modules/vim-taglist"]
-	path = vim/modules/vim-taglist
-	url = https://github.com/mexpolk/vim-taglist.git
 [submodule "vim/modules/gundo"]
 	path = vim/modules/gundo
 	url = https://github.com/sjl/gundo.vim.git

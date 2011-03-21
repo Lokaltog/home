@@ -197,7 +197,7 @@
 		zstyle ':completion:*:mv:*' ignore-line yes
 	# }}}
 	# Generic GNU compl. for apps that understang long options {{{
-		compdef _gnu_generic slrnpull make df du mv cp makepkg packer
+		compdef _gnu_generic slrnpull make df du mv cp makepkg
 	# }}}
 # }}}
 # Root settings {{{

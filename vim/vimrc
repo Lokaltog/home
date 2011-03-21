@@ -235,6 +235,9 @@
 			colo pablo
 		endif
 	" }}}
+	if exists('+breakindent')
+		set breakindent
+	endif
 	set laststatus=2
 	set hlsearch
 	set incsearch

@@ -61,3 +61,6 @@
 [submodule "vim/modules/xptemplate"]
 	path = vim/modules/xptemplate
 	url = https://github.com/drmingdrmer/xptemplate-dist.git
+[submodule "vim/modules/vim-extradite"]
+	path = vim/modules/vim-extradite
+	url = https://github.com/int3/vim-extradite.git

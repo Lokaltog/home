@@ -703,6 +703,8 @@
 		let g:gundo_width = 50
 	" }}}
 	" SuperTab settings {{{
+		let g:SuperTabDefaultCompletionType = 'context'
+		let g:SuperTabContextDefaultCompletionType = '<c-n>'
 		let g:SuperTabLongestEnhanced = 1
 	" }}}
 	" XPTemplate settings {{{

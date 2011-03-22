@@ -64,3 +64,6 @@
 [submodule "vim/modules/tagbar"]
 	path = vim/modules/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+[submodule "vim/modules/precisejump"]
+	path = vim/modules/precisejump
+	url = git://github.com/Lokaltog/PreciseJump.git

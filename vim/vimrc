@@ -670,6 +670,11 @@
 	augroup END " }}}
 " }}}
 " Plugin settings {{{
+	" PreciseJump settings {{{
+		let g:cmodShade = 1
+		let g:cmodMatchTargetHi = 'PreciseJumpHi'
+		let g:cmodMatchTargetShade = 'PreciseJumpShade'
+	" }}}
 	" EasyTags settings {{{
 		let g:easytags_cmd = '/usr/bin/ctags'
 		let g:easytags_resolve_links = 1

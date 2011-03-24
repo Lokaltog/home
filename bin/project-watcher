@@ -6,9 +6,10 @@ BASE_DIR="$1"
 LOCK_FILE="${BASE_DIR}/TAGS.lock"
 
 # Init LiveReload
-/usr/bin/sudo gem list --local | grep -qi livereload
-[[ $? -eq 1 ]] && echo 'LiveReload gem is missing!' && /usr/bin/sudo gem install livereload rb-inotify;
+sudo gem list --local | grep -qi livereload
+[[ $? -eq 1 ]] && echo 'LiveReload gem is missing!' && sudo gem install livereload rb-inotify;
 (echo 'Starting LiveReload...'; livereload ${BASE_DIR}) &
+(echo 'Starting Compass watcher...'; compass watch ${BASE_DIR}/application/assets/source/sass/*) &
 
 # Watch for PHP file updates
 inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do

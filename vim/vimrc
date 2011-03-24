@@ -7,7 +7,7 @@
 	filetype plugin indent on
 
 	set nocompatible
-	set tags=tags;.vimtags;
+	set tags=./TAGS;
 	set nobackup
 	set nowritebackup
 	set noswapfile

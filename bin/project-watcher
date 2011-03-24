@@ -1,0 +1,78 @@
+#!/bin/bash
+# TODO Create script which generates vim syntax file from tags file
+
+# Prepare variables
+BASE_DIR="$1"
+LOCK_FILE="${BASE_DIR}/TAGS.lock"
+
+# Init LiveReload
+/usr/bin/sudo gem list --local | grep -qi livereload
+[[ $? -eq 1 ]] && echo 'LiveReload gem is missing!' && /usr/bin/sudo gem install livereload rb-inotify;
+(echo 'Starting LiveReload...'; livereload ${BASE_DIR}) &
+
+# Watch for PHP file updates
+inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
+	FILE_EXT="${LINE##*.}"
+
+	# Validate file extension
+	[[ -z ${FILE_EXT} ]] && continue
+
+	# Check that no lock file exists
+	[[ -e ${LOCK_FILE} ]] && continue
+
+	# Loop through valid extensions, no reason to run the script if the 
+	# changed file isn't a PHP/JS file
+	VALID_EXT=
+	for EXT in php; do
+		[[ ${FILE_EXT} == ${EXT} ]] && VALID_EXT=true
+	done
+	[[ ! ${VALID_EXT} ]] && continue
+
+	# Create lock file
+	touch ${LOCK_FILE}
+
+	# Generate ctags file
+	find ${BASE_DIR} \
+		     ! -wholename './.git/*' \
+		-and ! -wholename './.svn/*' \
+		-and ! -wholename '*logs*' \
+		-and ! -wholename '*tmp*' \
+		-and ! -name '*~' \
+		-and ! -name '*#' \
+		-name '*.php' \
+		-print0 | \
+		xargs -0 \
+		/usr/bin/ctags \
+			-f ${BASE_DIR}/TAGS \
+			--format=2 \
+			--excmd=pattern \
+			--fields=+inksSazl \
+			--extra=+q \
+			--totals=yes \
+			--sort=yes \
+			--php-kinds=cidfj \
+			--tag-relative=yes \
+			--regex-php='/abstract\s+class\s+([^ ]+)/\1/c/' \
+			--regex-php='/interface\s+([^ ]+)/\1/c/' \
+			--regex-php='/(public\s+|static\s+|abstract\s+|protected\s+|private\s+)function\s+\&?\s*([^ (]+)/\2/f/'
+
+	# Generate cscope file
+	find ${BASE_DIR} \
+		     ! -wholename './.git/*' \
+		-and ! -wholename './.svn/*' \
+		-and ! -wholename '*logs*' \
+		-and ! -wholename '*tmp*' \
+		-and ! -name '*~' \
+		-and ! -name '*#' \
+		-and   -name '*.php' \
+		-print > ${BASE_DIR}/cscope.files
+
+	/usr/bin/cscope \
+		-i ${BASE_DIR}/cscope.files \
+		-f ${BASE_DIR}/cscope.out \
+		-b
+
+	# Remove temp files
+	rm ${BASE_DIR}/cscope.files
+	rm ${LOCK_FILE}
+done

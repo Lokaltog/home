@@ -671,6 +671,11 @@
 				\ | endif
 		" }}}
 	augroup END " }}}
+	augroup VimFiles " {{{
+		autocmd!
+
+		au Filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
+	augroup END " }}}
 " }}}
 " Plugin settings {{{
 	" PreciseJump settings {{{

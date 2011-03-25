@@ -1,5 +1,7 @@
 #!/bin/sh
 
+export http_proxy="http://127.0.0.1:8000/"
+
 /usr/bin/chromium \
 	--enable-extension-timeline-api \
 	--omnibox-popup-count=15 \

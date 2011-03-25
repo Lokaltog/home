@@ -25,9 +25,6 @@
 [submodule "vim/modules/lusty"]
 	path = vim/modules/lusty
 	url = https://github.com/sjbach/lusty.git
-[submodule "vim/modules/vim-easytags"]
-	path = vim/modules/vim-easytags
-	url = https://github.com/xolox/vim-easytags.git
 [submodule "vim/modules/syntastic"]
 	path = vim/modules/syntastic
 	url = https://github.com/scrooloose/syntastic.git

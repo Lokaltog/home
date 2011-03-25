@@ -415,7 +415,6 @@
 " }}}
 " Mappings {{{
 	" F key mappings {{{
-		nnoremap <silent> <F5>  :UpdateTags!<CR>:HighlightTags<CR>
 		nnoremap <silent> <F6>  :set number!<CR>
 		nnoremap <silent> <F7>  :LustyJuggler<CR>
 		nnoremap <silent> <F8>  :TagbarToggle<CR>
@@ -673,13 +672,6 @@
 		let g:cmodShade = 1
 		let g:cmodMatchTargetHi = 'PreciseJumpHi'
 		let g:cmodMatchTargetShade = 'PreciseJumpShade'
-	" }}}
-	" EasyTags settings {{{
-		let g:easytags_cmd = '/usr/bin/ctags'
-		let g:easytags_resolve_links = 1
-		let g:easytags_on_cursorhold = 0
-		let g:easytags_always_enabled = 0
-		let g:easytags_suppress_ctags_warning = 1
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0

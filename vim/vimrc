@@ -25,7 +25,7 @@
 	set encoding=utf-8
 	set termencoding=utf-8
 	set title
-	set mouse=ar
+	set clipboard=unnamed,unnamedplus,autoselect
 	set autoread
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,

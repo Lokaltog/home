@@ -536,11 +536,9 @@
 
 		call SetArrowKeysAsTextShifters()
 	" }}}
-	" Disable insert mode movement keys {{{
+	" Disable normal mode movement keys {{{
 		noremap  <Home> <NOP>
 		noremap  <End>  <NOP>
-		inoremap <Home> <NOP>
-		inoremap <End>  <NOP>
 	" }}}
 	" Mouse toggle {{{
 		function! s:ToggleMouse()
@@ -722,6 +720,9 @@
 			let g:xptemplate_pum_tab_nav = 1
 			let g:xptemplate_minimal_prefix = 'full'
 		" }}}
+	" }}}
+	" delimitMate settings {{{
+		let g:delimitMate_balance_matchpairs = 1
 	" }}}
 " }}}
 " Project-specific settings {{{

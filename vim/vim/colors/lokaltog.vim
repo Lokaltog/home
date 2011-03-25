@@ -86,8 +86,9 @@ hi phpOperator ctermfg=215
 hi phpMemberSelector ctermfg=138 cterm=bold
 hi phpParent ctermfg=227
 
-hi phpClassesTag ctermfg=253
-hi phpFunctionsTag ctermfg=222 cterm=bold
+hi PHPClassTag ctermfg=253
+hi PHPInterfaceTag ctermfg=253
+hi PHPFunctionTag ctermfg=222 cterm=bold
 
 hi cssImportant ctermfg=166 cterm=bold
 

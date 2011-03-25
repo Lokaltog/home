@@ -1,7 +1,7 @@
 #!/bin/bash
-# TODO Create script which generates vim syntax file from tags file
 
 # Prepare variables
+SCRIPT_DIR=`dirname $0`
 BASE_DIR="$1"
 LOCK_FILE="${BASE_DIR}/TAGS.lock"
 
@@ -10,6 +10,14 @@ sudo gem list --local | grep -qi livereload
 [[ $? -eq 1 ]] && echo 'LiveReload gem is missing!' && sudo gem install livereload rb-inotify;
 (echo 'Starting LiveReload...'; livereload ${BASE_DIR}) &
 (echo 'Starting Compass watcher...'; compass watch ${BASE_DIR}/application/assets/source/sass/*) &
+
+# Make sure $XDG_CONFIG_HOME/projectpath is correct
+echo -n ${BASE_DIR} > ${XDG_CONFIG_HOME}/projectpath
+
+# Cleanup
+trap "echo 'Cleaning up temporary files...'; \
+	rm -f ${XDG_CONFIG_HOME}/projectpath ${BASE_DIR}/cscope.files ${LOCK_FILE}; \
+	exit" SIGHUP SIGINT SIGTERM
 
 # Watch for PHP file updates
 inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
@@ -73,7 +81,8 @@ inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
 		-f ${BASE_DIR}/cscope.out \
 		-b
 
-	# Remove temp files
-	rm ${BASE_DIR}/cscope.files
+	${SCRIPT_DIR}/project-highlight ${BASE_DIR}
+
+	# Remove lock file
 	rm ${LOCK_FILE}
 done

@@ -1,0 +1,90 @@
+#!/usr/bin/env php
+<?php
+
+if ($_SERVER['argc'] != 2)
+{
+	exit('Usage: project-highlight <project-dir>');
+}
+
+list(, $dir) = $_SERVER['argv'];
+
+if ( ! is_dir($dir) || ! is_readable($dir) || ! is_writable($dir))
+{
+	exit('Cannot read/write to project directory');
+}
+
+$tagfile = "$dir/TAGS";
+
+if ( ! is_readable($tagfile))
+{
+	exit('Cannot read tag file');
+}
+
+$kinds = array(
+	'c' => 'Class',
+	'i' => 'Interface',
+	'd' => 'Constant',
+	'f' => 'Function',
+	'v' => 'Variable',
+);
+
+$tags = array(
+	'PHP' => array(),
+);
+
+$pattern = array(
+	'PHP' => array(
+		'f' => array(
+			'suffix' => '(\\@=',
+		),
+	),
+);
+
+foreach (file($tagfile) as $line)
+{
+	if (substr($line, 0, 1) == '!')
+	{
+		continue;
+	}
+
+	preg_match_all('/(\w+).*?kind:(\w+).*?language:(\w+)/', $line, $matches);
+
+	$tag_name = $matches[1][0];
+	$tag_kind = $matches[2][0];
+	$tag_language = $matches[3][0];
+
+	if ( ! array_key_exists($tag_kind, $kinds))
+	{
+		continue;
+	}
+
+	if ( ! array_key_exists($tag_language, $tags))
+	{
+		continue;
+	}
+
+	$tags[$tag_language][$kinds[$tag_kind]][$tag_name] = preg_quote($tag_name);
+}
+
+foreach ($tags as $language => $kinds)
+{
+	$hl = '';
+
+	foreach ($kinds as $kind => $tags)
+	{
+		$group = "{$language}{$kind}Tag";
+
+		$pattern_prefix = isset($patten[$language][$kind]['prefix']) ?: '\\C\\<';
+		$pattern_suffix = isset($patten[$language][$kind]['suffix']) ?: '\>';
+
+		$hl .= "try | syntax clear $group | catch | endtry\n";
+		$hl .= "highlight def link $group $kind\n";
+		$hl .= "syntax match $group /{$pattern_prefix}\\%(";
+		$hl .= implode('\|', $tags);
+		$hl .= "\\){$pattern_suffix}/ containedin=ALLBUT,.*String.*,.*Comment.*,cIncluded\n";
+	}
+
+	file_put_contents("$dir/TAGS.$language.hl.vim", $hl);
+}
+
+

@@ -7,7 +7,6 @@
 	filetype plugin indent on
 
 	set nocompatible
-	set tags=./TAGS;
 	set nobackup
 	set nowritebackup
 	set noswapfile
@@ -732,4 +731,22 @@
 			let g:xptemplate_minimal_prefix = 'full'
 		" }}}
 	" }}}
+" }}}
+" Project-specific settings {{{
+	let s:projectpath = system("cat $XDG_CONFIG_HOME/projectpath 2&>/dev/null")
+
+	if ! empty(s:projectpath) && isdirectory(s:projectpath)
+		let &path = s:projectpath . "/**," . &path
+		let &tags = s:projectpath . "/TAGS," . &tags
+		let g:NERDTreeBookmarksFile = s:projectpath . "/.bookmarks"
+
+		silent! exec "cd " . s:projectpath
+		silent! exec "cscope add " . s:projectpath . "/cscope.out"
+
+		augroup ProjectHighlight " {{{
+			autocmd!
+
+			au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/TAGS.PHP.hl.vim"
+		augroup END " }}}
+	endif
 " }}}

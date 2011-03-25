@@ -677,6 +677,9 @@
 		au Filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
 	augroup END " }}}
 " }}}
+" Abbreviations {{{
+	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
+" }}}
 " Plugin settings {{{
 	" PreciseJump settings {{{
 		let g:cmodShade = 1

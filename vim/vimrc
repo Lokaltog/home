@@ -273,6 +273,13 @@
 		hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
 		match RedundantSpaces / \+\ze\t/
 	" }}}
+	" Conflict markers {{{
+		" Highlight conflict markers
+		match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+		" Shortcut to jump to next conflict marker
+		nmap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
+	" }}}
 " }}}
 " Folding {{{
 	set foldenable

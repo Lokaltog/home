@@ -435,6 +435,10 @@
 		nnoremap <silent> w :call JumpW()<cr>
 		nnoremap <silent> e :call JumpE()<cr>
 	" }}}}
+	" Tabularize mappings {{{
+		vnoremap <silent> <Leader>ta :Tabularize /=><CR>
+		vnoremap <silent> <Leader>tc :Tabularize /,<CR>
+	" }}}
 	" Quick edit .vimrc {{{
 		nnoremap <silent> <Leader>ev :edit   $MYVIMRC<CR>
 		nnoremap <silent> <Leader>sv :source $MYVIMRC<CR>

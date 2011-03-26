@@ -64,3 +64,6 @@
 [submodule "vim/modules/precisejump"]
 	path = vim/modules/precisejump
 	url = git://github.com/Lokaltog/PreciseJump.git
+[submodule "vim/modules/tabular"]
+	path = vim/modules/tabular
+	url = https://github.com/godlygeek/tabular.git

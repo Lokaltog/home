@@ -36,7 +36,7 @@
 	url = https://github.com/sjl/gundo.vim.git
 [submodule "vim/modules/current-func-info"]
 	path = vim/modules/current-func-info
-	url = https://github.com/vim-scripts/current-func-info.vim.git
+	url = https://github.com/tyru/current-func-info.vim.git
 [submodule "vim/modules/pathogen"]
 	path = vim/modules/pathogen
 	url = https://github.com/tpope/vim-pathogen.git

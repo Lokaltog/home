@@ -1,0 +1,4 @@
+*.bak
+*.old
+*~
+doc/tags

@@ -12,5 +12,5 @@ fi
 cd $FROM
 
 for FILE in dot.*; do
-	ln -s "$FROM/$FILE" "$TO/${FILE:3}"
+	ln -sT "$FROM/$FILE" "$TO/${FILE:3}"
 done

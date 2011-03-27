@@ -1,9 +1,8 @@
 #!/bin/sh
 
+export http_proxy="http://127.0.0.1:8000/"
+
 /usr/bin/chromium \
-	--disable-ipv6 \
 	--enable-extension-timeline-api \
 	--omnibox-popup-count=15 \
-	--enable-preparsed-js-caching \
-	--disable-enforced-throttling \
-	--proxy-server="http://127.0.0.1:8000"
+	--disable-enforced-throttling

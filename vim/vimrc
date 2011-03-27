@@ -7,7 +7,6 @@
 	filetype plugin indent on
 
 	set nocompatible
-	set tags=tags;.vimtags;
 	set nobackup
 	set nowritebackup
 	set noswapfile
@@ -21,13 +20,13 @@
 	set matchpairs+=<:>
 	set shortmess=atToOI
 	set iskeyword+=_,$,@,%,#
-	set whichwrap=b,s,[,]
 	set hidden
 	set encoding=utf-8
 	set termencoding=utf-8
 	set title
-	set mouse=ar
+	set clipboard=unnamed,unnamedplus,autoselect
 	set autoread
+	set report=0
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.
@@ -129,11 +128,11 @@
 	" }}}
 	" Default statusline {{{
 		let g:default_stl  = ""
-		let g:default_stl .= "<CUR>#[Mode] %{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]</CUR>"
+		let g:default_stl .= "<CUR>#[Mode] %{&paste ? 'PASTE [>] ' : ''}%{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]</CUR>"
 		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\./:]\\+\\))', 'Đ \\1', 'gi')}#[BranchS] [>] %)" " Git branch
 		let g:default_stl .= "#[ModFlag]%{&readonly ? 'Ĥ ' : ''}" " RO flag
 		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "<CUR>#[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[syntax:\\(\\d\\+\\)\\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1\\2 [>][>][>]', 'i')} %)</CUR>" " Syntastic error flag
+		let g:default_stl .= "<CUR>#[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[Syntax: line:\\(\\d\\+\\) \\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1 \\2 [>][>][>]', 'i')} %)</CUR>" " Syntastic error flag
 		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
 		let g:default_stl .= "#[BufFlag]%(%H%W %)" " HLP,PRV flags
 		let g:default_stl .= "#[FileNameS][>>]" " Separator
@@ -146,7 +145,7 @@
 		let g:default_stl .= "<CUR>#[Separator][<] Ġġ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} </CUR>" " File type
 		let g:default_stl .= "#[LinePercentS][<<]#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
 		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] đ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
-		"let g:default_stl .= " %{synIDattr(synID(line('.'),col('.'),1),'name')}" " Current syntax group
+		let g:default_stl .= "%{exists('g:synid') && g:synid ? '[<] '.synIDattr(synID(line('.'), col('.'), 1), 'name').' ' : ''}" " Current syntax group
 	" }}}
 	" Color dict {{{
 		let s:statuscolors = {
@@ -235,6 +234,9 @@
 			colo pablo
 		endif
 	" }}}
+	if exists('+breakindent')
+		set breakindent
+	endif
 	set laststatus=2
 	set hlsearch
 	set incsearch
@@ -243,6 +245,7 @@
 	set ruler
 	set scrolloff=10
 	set sidescrolloff=20
+	set lazyredraw
 	set scrolljump=10
 	set showcmd
 	set noshowmode
@@ -265,11 +268,18 @@
 	set tabstop=6
 	set smartcase
 	set smartindent
-	set startofline
-	set completeopt=menu,menuone,longest,preview
+	set nostartofline
+	set completeopt=menu,menuone,longest
 	" Highlight problematic whitespace (spaces before tabs) {{{
 		hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
 		match RedundantSpaces / \+\ze\t/
+	" }}}
+	" Conflict markers {{{
+		" Highlight conflict markers
+		match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+		" Shortcut to jump to next conflict marker
+		nmap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 	" }}}
 " }}}
 " Folding {{{
@@ -415,10 +425,14 @@
 	" F key mappings {{{
 		nnoremap <silent> <F6>  :set number!<CR>
 		nnoremap <silent> <F7>  :LustyJuggler<CR>
-		nnoremap <silent> <F8>  :TlistToggle<CR>
+		nnoremap <silent> <F8>  :TagbarToggle<CR>
 		nnoremap <silent> <F9>  :LustyBufferExplorer<CR>
 		nnoremap <silent> <F10> :NERDTreeToggle<CR>
 		nnoremap <silent> <F11> :GundoToggle<CR>
+	" }}}
+	" Tabularize mappings {{{
+		vnoremap <silent> <Leader>ta :Tabularize /=><CR>
+		vnoremap <silent> <Leader>tc :Tabularize /,<CR>
 	" }}}
 	" Quick edit .vimrc {{{
 		nnoremap <silent> <Leader>ev :edit   $MYVIMRC<CR>
@@ -528,11 +542,9 @@
 
 		call SetArrowKeysAsTextShifters()
 	" }}}
-	" Disable insert mode movement keys {{{
+	" Disable normal mode movement keys {{{
 		noremap  <Home> <NOP>
 		noremap  <End>  <NOP>
-		inoremap <Home> <NOP>
-		inoremap <End>  <NOP>
 	" }}}
 	" Mouse toggle {{{
 		function! s:ToggleMouse()
@@ -638,9 +650,9 @@
 				\ | let b:stl = "#[Branch] LustyExplorer#[BranchS] [>] #[FileName]%<Buffer List #[FileNameS][>>]%* %="
 				\ | endif
 		" }}}
-		" Tag list {{{
-			au BufEnter * if bufname("%") == "__Tag_list__"
-				\ | let b:stl = "#[FileName]%< Tag list #[FileNameS][>>]%* %="
+		" Tagbar {{{
+			au BufEnter * if bufname("%") == "__Tagbar__"
+				\ | let b:stl = "#[FileName]%< Tagbar #[FileNameS][>>]%* %="
 				\ | endif
 		" }}}
 		" Gundo {{{
@@ -658,13 +670,21 @@
 				\ | endif
 		" }}}
 	augroup END " }}}
+	augroup VimFiles " {{{
+		autocmd!
+
+		au Filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
+	augroup END " }}}
+" }}}
+" Abbreviations {{{
+	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
 " }}}
 " Plugin settings {{{
-	" EasyTags settings {{{
-		let g:easytags_cmd = '/usr/bin/ctags'
-		let g:easytags_resolve_links = 1
-		let g:easytags_on_cursorhold = 0
-		let g:easytags_always_enabled = 1
+	" PreciseJump settings {{{
+		let g:PreciseJump_target_keys  = ''
+		let g:PreciseJump_target_keys .= 'abcdefghijklmnopqrstuwxz'
+		let g:PreciseJump_target_keys .= 'ABCDEFGHIJKLMNOPQRSTUWXZ'
+		let g:PreciseJump_I_am_brave = 1
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
@@ -678,10 +698,6 @@
 		let g:python_show_sync = 1
 		let g:python_print_as_function = 1
 	" }}}
-	" delimitMate settings {{{
-		let g:delimitMate_unbalanced_parens = 1
-		let g:delimitMate_balance_matchpairs = 1
-	" }}}
 	" NERD tree settings {{{
 		let g:NERDTreeChristmasTree = 1
 		let g:NERDTreeCaseSensitiveSort = 1
@@ -690,16 +706,11 @@
 		let g:NERDTreeWinSize = 50
 		let g:NERDTreeShowBookmarks = 1
 	" }}}
-	" Taglist settings {{{
-		let g:Tlist_WinWidth = 50
-		let g:Tlist_Close_On_Select = 1
-		let g:Tlist_Compact_Format = 1
-		let g:Tlist_Display_Tag_Scope = 1
-		let g:Tlist_Exit_OnlyWindow = 1
-		let g:Tlist_File_Fold_Auto_Close = 1
-		let g:Tlist_GainFocus_On_ToggleOpen = 1
-		let g:Tlist_Use_Right_Window = 1
-		let g:Tlist_Process_File_Always = 1
+	" Tagbar settings {{{
+		let g:tagbar_width = 50
+		let g:tagbar_autoclose = 1
+		let g:tagbar_autofocus = 1
+		let g:tagbar_compact = 1
 	" }}}
 	" Syntastic settings {{{
 		let g:syntastic_enable_signs = 1
@@ -710,9 +721,9 @@
 		let g:gundo_width = 50
 	" }}}
 	" SuperTab settings {{{
+		let g:SuperTabDefaultCompletionType = 'context'
+		let g:SuperTabContextDefaultCompletionType = '<c-n>'
 		let g:SuperTabLongestEnhanced = 1
-		let g:SuperTabMappingForward = '<S-Tab>'
-		let g:SuperTabMappingBackward = '<Tab>'
 	" }}}
 	" XPTemplate settings {{{
 		let g:xptemplate_brace_complete = 0
@@ -725,4 +736,30 @@
 			let g:xptemplate_minimal_prefix = 'full'
 		" }}}
 	" }}}
+	" delimitMate settings {{{
+		let g:delimitMate_balance_matchpairs = 1
+	" }}}
+" }}}
+" Project-specific settings {{{
+	let s:projectpath = system("cat $XDG_CONFIG_HOME/projectpath 2&>/dev/null")
+
+	if ! empty(s:projectpath) && isdirectory(s:projectpath)
+		let &path = s:projectpath . "/**," . &path
+		let &tags = s:projectpath . "/TAGS," . &tags
+		let g:NERDTreeBookmarksFile = s:projectpath . "/.bookmarks"
+
+		set nocsverb
+		silent! exec "cd " . s:projectpath
+		silent! exec "cscope add " . s:projectpath . "/cscope.out"
+		set csverb
+
+		set cscopetag
+		set cscopetagorder=0
+
+		augroup ProjectHighlight " {{{
+			autocmd!
+
+			au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/TAGS.PHP.hl.vim"
+		augroup END " }}}
+	endif
 " }}}

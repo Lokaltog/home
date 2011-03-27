@@ -31,11 +31,10 @@ hi WildMenu cterm=bold ctermfg=234 ctermbg=231
 hi Directory ctermfg=143 cterm=bold
 hi Underlined ctermfg=130
 
-hi ModeMsg ctermbg=none ctermfg=214 cterm=bold
-hi MoreMsg ctermbg=none ctermfg=105 cterm=bold
-hi Question ctermbg=none ctermfg=245 cterm=bold
-hi WarningMsg ctermbg=none ctermfg=202 cterm=bold,underline
-hi ErrorMsg ctermbg=none ctermfg=196 cterm=bold,underline
+hi Question ctermbg=none ctermfg=74 cterm=bold
+hi MoreMsg ctermbg=none ctermfg=214 cterm=bold
+hi WarningMsg ctermbg=none ctermfg=202 cterm=bold
+hi ErrorMsg ctermbg=none ctermfg=196 cterm=bold
 
 hi Comment ctermbg=233 ctermfg=243 cterm=none
 hi vimCommentTitle ctermfg=250
@@ -86,8 +85,9 @@ hi phpOperator ctermfg=215
 hi phpMemberSelector ctermfg=138 cterm=bold
 hi phpParent ctermfg=227
 
-hi phpClassesTag ctermfg=253
-hi phpFunctionsTag ctermfg=222 cterm=bold
+hi PHPClassTag ctermfg=253
+hi PHPInterfaceTag ctermfg=253
+hi PHPFunctionTag ctermfg=222 cterm=bold
 
 hi cssImportant ctermfg=166 cterm=bold
 
@@ -103,3 +103,6 @@ hi link diffRemoved DiffDelete
 hi diffLine ctermbg=none ctermfg=68 cterm=bold
 hi diffFile ctermbg=none ctermfg=242 cterm=none
 hi diffNewFile ctermbg=none ctermfg=242 cterm=none
+
+hi PreciseJumpTarget ctermbg=none ctermfg=196 cterm=bold
+hi PreciseJumpShade ctermbg=none ctermfg=242 cterm=none

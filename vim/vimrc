@@ -682,14 +682,16 @@
 	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
 " }}}
 " Plugin settings {{{
-	" PreciseJump settings {{{
-		let g:PreciseJump_target_keys  = ''
-		let g:PreciseJump_target_keys .= 'abcdefghijklmnopqrstuwxz'
-		let g:PreciseJump_target_keys .= 'ABCDEFGHIJKLMNOPQRSTUWXZ'
+	" EasyMotion settings {{{
+		nnoremap <silent> f :call EasyMotionF(0)<CR>
+		nnoremap <silent> F :call EasyMotionF(1)<CR>
 
-		nmap F :call PreciseJumpF(0, 0, 0)<CR>
-		nmap f :call PreciseJumpF(-1, -1, 0)<CR>
-		nmap t :call PreciseJumpT(-1, -1, 0)<CR>
+		nnoremap <silent> t :call EasyMotionT(0)<CR>
+		nnoremap <silent> T :call EasyMotionT(1)<CR>
+
+		nnoremap <silent> w :call EasyMotionW()<CR>
+		nnoremap <silent> e :call EasyMotionE()<CR>
+		nnoremap <silent> b :call EasyMotionB()<CR>
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0

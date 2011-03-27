@@ -61,12 +61,12 @@
 [submodule "vim/modules/tagbar"]
 	path = vim/modules/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-[submodule "vim/modules/precisejump"]
-	path = vim/modules/precisejump
-	url = git://github.com/Lokaltog/PreciseJump.git
 [submodule "vim/modules/tabular"]
 	path = vim/modules/tabular
 	url = https://github.com/godlygeek/tabular.git
 [submodule "vim/modules/nginx"]
 	path = vim/modules/nginx
 	url = https://github.com/vim-scripts/nginx.vim.git
+[submodule "vim/modules/easymotion"]
+	path = vim/modules/easymotion
+	url = https://github.com/Lokaltog/EasyMotion.git

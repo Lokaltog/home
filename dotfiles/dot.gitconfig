@@ -14,6 +14,7 @@
 [core]
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
+	excludesfile = ~/.gitignore
 [color]
 	ui = auto
 [color "branch"]

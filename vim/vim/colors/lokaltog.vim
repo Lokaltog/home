@@ -104,5 +104,5 @@ hi diffLine ctermbg=none ctermfg=68 cterm=bold
 hi diffFile ctermbg=none ctermfg=242 cterm=none
 hi diffNewFile ctermbg=none ctermfg=242 cterm=none
 
-hi PreciseJumpHi ctermbg=none ctermfg=196 cterm=bold
-hi PreciseJumpShade ctermbg=none ctermfg=245 cterm=none
+hi PreciseJumpTarget ctermbg=none ctermfg=196 cterm=bold
+hi PreciseJumpShade ctermbg=none ctermfg=242 cterm=none

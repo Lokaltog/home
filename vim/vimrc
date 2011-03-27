@@ -430,12 +430,6 @@
 		nnoremap <silent> <F10> :NERDTreeToggle<CR>
 		nnoremap <silent> <F11> :GundoToggle<CR>
 	" }}}
-	" PreciseJump mappings {{{
-		nnoremap <silent> f :call JumpF()<cr>
-		nnoremap <silent> t :call JumpT()<cr>
-		nnoremap <silent> w :call JumpW()<cr>
-		nnoremap <silent> e :call JumpE()<cr>
-	" }}}}
 	" Tabularize mappings {{{
 		vnoremap <silent> <Leader>ta :Tabularize /=><CR>
 		vnoremap <silent> <Leader>tc :Tabularize /,<CR>
@@ -687,9 +681,10 @@
 " }}}
 " Plugin settings {{{
 	" PreciseJump settings {{{
-		let g:cmodShade = 1
-		let g:cmodMatchTargetHi = 'PreciseJumpHi'
-		let g:cmodMatchTargetShade = 'PreciseJumpShade'
+		let g:PreciseJump_target_keys  = ''
+		let g:PreciseJump_target_keys .= 'abcdefghijklmnopqrstuwxz'
+		let g:PreciseJump_target_keys .= 'ABCDEFGHIJKLMNOPQRSTUWXZ'
+		let g:PreciseJump_I_am_brave = 1
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0

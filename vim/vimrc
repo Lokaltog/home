@@ -753,8 +753,13 @@
 		let &tags = s:projectpath . "/TAGS," . &tags
 		let g:NERDTreeBookmarksFile = s:projectpath . "/.bookmarks"
 
+		set nocsverb
 		silent! exec "cd " . s:projectpath
 		silent! exec "cscope add " . s:projectpath . "/cscope.out"
+		set csverb
+
+		set cscopetag
+		set cscopetagorder=0
 
 		augroup ProjectHighlight " {{{
 			autocmd!

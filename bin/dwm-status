@@ -1,4 +1,7 @@
 #!/usr/bin/python
+# Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
+# Source: https://github.com/Lokaltog/sync
+
 """Lokaltog's status script for dwm"""
 
 import re

@@ -20,13 +20,13 @@
 	set matchpairs+=<:>
 	set shortmess=atToOI
 	set iskeyword+=_,$,@,%,#
-	set whichwrap=b,s,[,]
 	set hidden
 	set encoding=utf-8
 	set termencoding=utf-8
 	set title
 	set clipboard=unnamed,unnamedplus,autoselect
 	set autoread
+	set report=0
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.
@@ -245,6 +245,7 @@
 	set ruler
 	set scrolloff=10
 	set sidescrolloff=20
+	set lazyredraw
 	set scrolljump=10
 	set showcmd
 	set noshowmode
@@ -267,8 +268,8 @@
 	set tabstop=6
 	set smartcase
 	set smartindent
-	set startofline
-	set completeopt=menu,menuone,longest,preview
+	set nostartofline
+	set completeopt=menu,menuone,longest
 	" Highlight problematic whitespace (spaces before tabs) {{{
 		hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
 		match RedundantSpaces / \+\ze\t/

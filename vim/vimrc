@@ -686,7 +686,10 @@
 		let g:PreciseJump_target_keys  = ''
 		let g:PreciseJump_target_keys .= 'abcdefghijklmnopqrstuwxz'
 		let g:PreciseJump_target_keys .= 'ABCDEFGHIJKLMNOPQRSTUWXZ'
-		let g:PreciseJump_I_am_brave = 1
+
+		nmap F :call PreciseJumpF(0, 0, 0)<CR>
+		nmap f :call PreciseJumpF(-1, -1, 0)<CR>
+		nmap t :call PreciseJumpT(-1, -1, 0)<CR>
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0

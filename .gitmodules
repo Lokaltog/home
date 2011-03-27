@@ -67,3 +67,6 @@
 [submodule "vim/modules/tabular"]
 	path = vim/modules/tabular
 	url = https://github.com/godlygeek/tabular.git
+[submodule "vim/modules/nginx"]
+	path = vim/modules/nginx
+	url = https://github.com/vim-scripts/nginx.vim.git

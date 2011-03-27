@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+// Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
+// Source: https://github.com/Lokaltog/sync
+
 if ($_SERVER['argc'] != 2)
 {
 	exit('Usage: project-highlight <project-dir>');

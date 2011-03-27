@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
+# Source: https://github.com/Lokaltog/sync
 
 # Prepare variables
 SCRIPT_DIR=`dirname $0`

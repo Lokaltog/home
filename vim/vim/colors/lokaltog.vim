@@ -103,6 +103,3 @@ hi link diffRemoved DiffDelete
 hi diffLine ctermbg=none ctermfg=68 cterm=bold
 hi diffFile ctermbg=none ctermfg=242 cterm=none
 hi diffNewFile ctermbg=none ctermfg=242 cterm=none
-
-hi EasyMotionTarget ctermbg=none ctermfg=196 cterm=bold
-hi EasyMotionShade ctermbg=none ctermfg=240 cterm=none

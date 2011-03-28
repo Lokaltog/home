@@ -465,7 +465,7 @@
 		nnoremap <Tab> %
 	" }}}
 	" Vertically split window and select it  {{{
-		nnoremap <Leader>w <C-w>v<C-w>l
+		nnoremap <Leader>v <C-w>v<C-w>l
 	" }}}
 	" Easier split window navigation {{{
 		nnoremap H <C-w>h

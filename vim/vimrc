@@ -682,17 +682,6 @@
 	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
 " }}}
 " Plugin settings {{{
-	" EasyMotion settings {{{
-		nnoremap <silent> f :call EasyMotionF(0)<CR>
-		nnoremap <silent> F :call EasyMotionF(1)<CR>
-
-		nnoremap <silent> t :call EasyMotionT(0)<CR>
-		nnoremap <silent> T :call EasyMotionT(1)<CR>
-
-		nnoremap <silent> w :call EasyMotionW()<CR>
-		nnoremap <silent> e :call EasyMotionE()<CR>
-		nnoremap <silent> b :call EasyMotionB()<CR>
-	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
 		let g:php_html_in_strings = 1

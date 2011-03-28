@@ -2,8 +2,8 @@
 
 - Author: Kim Silkebækken (kim.silkebaekken+github@gmail.com)
 - Source: <https://github.com/Lokaltog/sync>
-- Version: **1.0.1**
-- Updated: **2011-03-27**.
+- Version: **1.0.2**
+- Updated: **2011-03-28**.
 
 ## Important notes
 

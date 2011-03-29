@@ -65,7 +65,7 @@
 				let new_stl = a:new_stl
 
 				" Prepare current buffer specific text
-				" Syntax: #CUR# ... #/CUR#
+				" Syntax: <CUR> ... </CUR>
 				let new_stl = substitute(new_stl, '<CUR>\(.\{-,}\)</CUR>', (a:current ? '\1' : ''), 'g')
 
 				" Prepare statusline colors

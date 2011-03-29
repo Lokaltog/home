@@ -67,6 +67,6 @@
 [submodule "vim/modules/nginx"]
 	path = vim/modules/nginx
 	url = https://github.com/vim-scripts/nginx.vim.git
-[submodule "vim/modules/easymotion"]
-	path = vim/modules/easymotion
-	url = https://github.com/Lokaltog/EasyMotion.git
+[submodule "vim/modules/vim-easymotion"]
+	path = vim/modules/vim-easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git

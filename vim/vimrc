@@ -231,7 +231,7 @@
 	" }}}
 	" Set colorscheme {{{
 		if &t_Co == 256
-			colo lokaltog
+			colo distinguished
 		else
 			colo pablo
 		endif

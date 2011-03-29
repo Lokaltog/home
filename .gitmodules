@@ -70,3 +70,6 @@
 [submodule "vim/modules/vim-easymotion"]
 	path = vim/modules/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "vim/modules/vim-distinguished"]
+	path = vim/modules/vim-distinguished
+	url = https://github.com/Lokaltog/vim-distinguished.git

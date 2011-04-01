@@ -227,6 +227,15 @@
 				set listchars=tab:Ā\ ,trail:Ė,eol:ĕ
 				set showbreak=Ģģ
 			" }}}
+			augroup List " {{{
+				autocmd!
+				" Set list on selected filetypes {{{
+					au FileType vim setl list
+					au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
+					au FileType sh,zsh,bash setl list
+					au FileType html,css,sass,javascript,php,python,ruby,psql setl list
+				" }}}
+			augroup END " }}}
 		endif
 	" }}}
 	" Set colorscheme {{{
@@ -623,15 +632,6 @@
 			au FileType mail,text setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
 		" }}}
 	augroup END" }}}
-	augroup List " {{{
-		autocmd!
-		" Set list on selected filetypes {{{
-			au FileType vim setl list
-			au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
-			au FileType sh,zsh,bash setl list
-			au FileType html,css,sass,javascript,php,python,ruby,psql setl list
-		" }}}
-	augroup END " }}}
 	augroup Whitespace " {{{
 		autocmd!
 		" Remove trailing whitespace from selected filetypes {{{

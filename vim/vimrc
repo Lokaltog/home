@@ -433,8 +433,9 @@
 		nnoremap <silent> <F11> :GundoToggle<CR>
 	" }}}
 	" Tabularize mappings {{{
-		vnoremap <silent> <Leader>ta :Tabularize /=><CR>
-		vnoremap <silent> <Leader>tc :Tabularize /,<CR>
+		vnoremap <silent> <Leader>t> :Tabularize /=><CR>
+		vnoremap <silent> <Leader>t= :Tabularize /=<CR>
+		vnoremap <silent> <Leader>t, :Tabularize /,<CR>
 	" }}}
 	" Quick edit .vimrc {{{
 		nnoremap <silent> <Leader>ev :edit   $MYVIMRC<CR>

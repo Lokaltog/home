@@ -73,3 +73,6 @@
 [submodule "vim/modules/vim-distinguished"]
 	path = vim/modules/vim-distinguished
 	url = https://github.com/Lokaltog/vim-distinguished.git
+[submodule "vim/modules/vim-surround"]
+	path = vim/modules/vim-surround
+	url = https://github.com/tpope/vim-surround.git

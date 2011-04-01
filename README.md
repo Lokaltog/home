@@ -2,8 +2,8 @@
 
 - Author: Kim Silkebækken (kim.silkebaekken+github@gmail.com)
 - Source: <https://github.com/Lokaltog/sync>
-- Version: **1.0.5**
-- Updated: **2011-03-30**.
+- Version: **1.0.6**
+- Updated: **2011-04-01**.
 
 ## Vim statusbar
 

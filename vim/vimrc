@@ -227,6 +227,15 @@
 				set listchars=tab:Ā\ ,trail:Ė,eol:ĕ
 				set showbreak=Ģģ
 			" }}}
+			augroup List " {{{
+				autocmd!
+				" Set list on selected filetypes {{{
+					au FileType vim setl list
+					au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
+					au FileType sh,zsh,bash setl list
+					au FileType html,css,sass,javascript,php,python,ruby,psql setl list
+				" }}}
+			augroup END " }}}
 		endif
 	" }}}
 	" Set colorscheme {{{
@@ -433,8 +442,9 @@
 		nnoremap <silent> <F11> :GundoToggle<CR>
 	" }}}
 	" Tabularize mappings {{{
-		vnoremap <silent> <Leader>ta :Tabularize /=><CR>
-		vnoremap <silent> <Leader>tc :Tabularize /,<CR>
+		vnoremap <silent> <Leader>t> :Tabularize /=><CR>
+		vnoremap <silent> <Leader>t= :Tabularize /=<CR>
+		vnoremap <silent> <Leader>t, :Tabularize /,<CR>
 	" }}}
 	" Quick edit .vimrc {{{
 		nnoremap <silent> <Leader>ev :edit   $MYVIMRC<CR>
@@ -622,15 +632,6 @@
 			au FileType mail,text setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
 		" }}}
 	augroup END" }}}
-	augroup List " {{{
-		autocmd!
-		" Set list on selected filetypes {{{
-			au FileType vim setl list
-			au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
-			au FileType sh,zsh,bash setl list
-			au FileType html,css,sass,javascript,php,python,ruby,psql setl list
-		" }}}
-	augroup END " }}}
 	augroup Whitespace " {{{
 		autocmd!
 		" Remove trailing whitespace from selected filetypes {{{
@@ -682,6 +683,9 @@
 	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
 " }}}
 " Plugin settings {{{
+	" EasyMotion settings {{{
+		let g:EasyMotion_mapping_e = '<Leader>ee'
+	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
 		let g:php_html_in_strings = 1

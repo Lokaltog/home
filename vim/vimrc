@@ -683,6 +683,9 @@
 	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
 " }}}
 " Plugin settings {{{
+	" EasyMotion settings {{{
+		let g:EasyMotion_mapping_e = '<Leader>ee'
+	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
 		let g:php_html_in_strings = 1

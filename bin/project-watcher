@@ -5,7 +5,8 @@
 # Prepare variables
 SCRIPT_DIR=`dirname $0`
 BASE_DIR="$1"
-LOCK_FILE="${BASE_DIR}/TAGS.lock"
+VIM_DIR="${BASE_DIR}/vim"
+LOCK_FILE="${BASE_DIR}/tags.lock"
 
 # Init LiveReload
 sudo gem list --local | grep -qi livereload
@@ -18,7 +19,7 @@ echo -n ${BASE_DIR} > ${XDG_CONFIG_HOME}/projectpath
 
 # Cleanup
 trap "echo 'Cleaning up temporary files...'; \
-	rm -f ${XDG_CONFIG_HOME}/projectpath ${BASE_DIR}/cscope.files ${LOCK_FILE}; \
+	rm -f ${XDG_CONFIG_HOME}/projectpath ${VIM_DIR}/cscope.files ${LOCK_FILE}; \
 	exit" SIGHUP SIGINT SIGTERM
 
 # Watch for PHP file updates
@@ -54,7 +55,7 @@ inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
 		-print0 | \
 		xargs -0 \
 		/usr/bin/ctags \
-			-f ${BASE_DIR}/TAGS \
+			-f ${VIM_DIR}/tags \
 			--format=2 \
 			--excmd=pattern \
 			--fields=+inksSazl \
@@ -76,11 +77,11 @@ inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
 		-and ! -name '*~' \
 		-and ! -name '*#' \
 		-and   -name '*.php' \
-		-print > ${BASE_DIR}/cscope.files
+		-print > ${VIM_DIR}/cscope.files
 
 	/usr/bin/cscope \
-		-i ${BASE_DIR}/cscope.files \
-		-f ${BASE_DIR}/cscope.out \
+		-i ${VIM_DIR}/cscope.files \
+		-f ${VIM_DIR}/cscope.out \
 		-b
 
 	${SCRIPT_DIR}/project-highlight ${BASE_DIR}

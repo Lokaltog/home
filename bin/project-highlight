@@ -11,12 +11,14 @@ if ($_SERVER['argc'] != 2)
 
 list(, $dir) = $_SERVER['argv'];
 
+$dir = "$dir/vim";
+
 if ( ! is_dir($dir) || ! is_readable($dir) || ! is_writable($dir))
 {
 	exit('Cannot read/write to project directory');
 }
 
-$tagfile = "$dir/TAGS";
+$tagfile = "$dir/tags";
 
 if ( ! is_readable($tagfile))
 {
@@ -87,7 +89,7 @@ foreach ($tags as $language => $kinds)
 		$hl .= "\\){$pattern_suffix}/ containedin=ALLBUT,.*String.*,.*Comment.*,cIncluded\n";
 	}
 
-	file_put_contents("$dir/TAGS.$language.hl.vim", $hl);
+	file_put_contents($tagfile.'.'.strtolower($language).'-hl.vim', $hl);
 }
 
 

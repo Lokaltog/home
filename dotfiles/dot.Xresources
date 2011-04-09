@@ -29,7 +29,8 @@ URxvt.boldItalicFont : -*-lokaltog-bold-r-*-*-12-*-*-*-*-*-*-*
 ! }}}
 ! }}}
 ! URxvt/vim settings {{{
-vim.saveLines: 0
+vim.saveLines  : 0
+vim.transparent: false
 ! }}}
 ! URxvt/ncmpcpp settings {{{
 ncmpcpp.saveLines: 0

@@ -29,14 +29,8 @@ URxvt.boldItalicFont : -*-lokaltog-bold-r-*-*-12-*-*-*-*-*-*-*
 ! }}}
 ! }}}
 ! URxvt/vim settings {{{
-vim.saveLines     : 0
-vim.transparent   : false
-! URxvt/vim fonts {{{
-vim.font          : -*-lokaltog-medium-r-*-*-10-*-*-*-*-*-*-*
-vim.boldFont      : -*-lokaltog-bold-r-*-*-10-*-*-*-*-*-*-*
-vim.italicFont    : -*-lokaltog-medium-r-*-*-10-*-*-*-*-*-*-*
-vim.boldItalicFont: -*-lokaltog-bold-r-*-*-10-*-*-*-*-*-*-*
-! }}}
+vim.saveLines  : 0
+vim.transparent: false
 ! }}}
 ! URxvt/ncmpcpp settings {{{
 ncmpcpp.saveLines: 0

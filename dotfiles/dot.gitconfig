@@ -57,3 +57,4 @@
 	l = !GIT_PAGER=less git log --pretty=oneline --abbrev-commit --decorate
 	subdo = submodule foreach git
 	top = !eval cd "$(pwd)/$(git rev-parse --show-cdup)" && pwd
+	rmd = "!for f in $(git status | grep deleted | awk '{print $3}'); do git rm $f; done"

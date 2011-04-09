@@ -446,6 +446,9 @@
 		vnoremap <silent> <Leader>t= :Tabularize /=<CR>
 		vnoremap <silent> <Leader>t, :Tabularize /,<CR>
 	" }}}
+	" Buffer mappings {{{
+		nnoremap <silent> <Leader>d :bd<CR>
+	" }}}
 	" Quick edit .vimrc {{{
 		nnoremap <silent> <Leader>ev :edit   $MYVIMRC<CR>
 		nnoremap <silent> <Leader>sv :source $MYVIMRC<CR>
@@ -542,8 +545,8 @@
 			" Visual mode
 			vnoremap <silent> <Left>   <gv
 			vnoremap <silent> <Right>  >gv
-			vnoremap <silent> <S-Up>   <Esc>:call <SID>MoveVisualUp()<CR>
-			vnoremap <silent> <S-Down> <Esc>:call <SID>MoveVisualDown()<CR>
+			vnoremap <silent> <Up>     <Esc>:call <SID>MoveVisualUp()<CR>
+			vnoremap <silent> <Down>   <Esc>:call <SID>MoveVisualDown()<CR>
 
 			" Insert mode
 			inoremap <silent> <Left>   <C-D>
@@ -685,6 +688,19 @@
 " Plugin settings {{{
 	" EasyMotion settings {{{
 		let g:EasyMotion_mapping_e = '<Leader>ee'
+		let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+		" Extra normal mode mappings {{{
+			nnoremap <silent> f  :call EasyMotionF(  0, 0)<CR>
+			nnoremap <silent> F  :call EasyMotionF(  0, 1)<CR>
+			nnoremap <silent> w  :call EasyMotionWB( 0, 0)<CR>
+			nnoremap <silent> W  :call EasyMotionWBW(0, 0)<CR>
+			nnoremap <silent> b  :call EasyMotionWB( 0, 1)<CR>
+			nnoremap <silent> B  :call EasyMotionWBW(0, 1)<CR>
+			nnoremap <silent> e  :call EasyMotionE(  0, 0)<CR>
+			nnoremap <silent> E  :call EasyMotionEW( 0, 0)<CR>
+			nnoremap <silent> ge :call EasyMotionE(  0, 1)<CR>
+			nnoremap <silent> gE :call EasyMotionEW( 0, 1)<CR>
+		" }}}
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
@@ -740,26 +756,80 @@
 		let g:delimitMate_balance_matchpairs = 1
 	" }}}
 " }}}
-" Project-specific settings {{{
+" Handle vim projects {{{
 	let s:projectpath = system("cat $XDG_CONFIG_HOME/projectpath 2&>/dev/null")
 
 	if ! empty(s:projectpath) && isdirectory(s:projectpath)
+		let s:projectsessionfile = s:projectpath . "/vim/session.vim"
+
 		let &path = s:projectpath . "/**," . &path
-		let &tags = s:projectpath . "/TAGS," . &tags
-		let g:NERDTreeBookmarksFile = s:projectpath . "/.bookmarks"
+		let &tags = s:projectpath . "/vim/tags," . &tags
+		let g:NERDTreeBookmarksFile = s:projectpath . "/vim/bookmarks"
 
-		set nocsverb
-		silent! exec "cd " . s:projectpath
-		silent! exec "cscope add " . s:projectpath . "/cscope.out"
-		set csverb
+		" CScope preferences {{{
+			set nocsverb
+			silent! exec "cd " . s:projectpath
+			silent! exec "cscope add " . s:projectpath . "/vim/cscope.out"
+			set csverb
 
-		set cscopetag
-		set cscopetagorder=0
+			set cscopetag
+			set cscopetagorder=0
+		" }}}
+		" Session options {{{
+			set sessionoptions=blank,buffers,folds
+			" Session handling functions {{{
+				function! s:SessionException()
+					" Vim called with arguments
+					if argc() != 0
+						return 1
+					endif
 
-		augroup ProjectHighlight " {{{
+					" Git commit messages
+					if match(expand("%"), "\.git\/COMMIT") >= 0
+						return 1
+					endif
+
+					return 0
+				endfunction
+
+				function! s:MakeSession()
+					if s:SessionException() == 1
+						return
+					endif
+
+					exec "mksession! " . s:projectsessionfile
+
+					call writefile(
+						\ [
+							\ 'colorscheme ' . g:colors_name
+						\ ],
+						\ fnamemodify(s:projectsessionfile, ':p:r') . 'x.vim'
+					\ )
+				endfunction
+
+				function! s:LoadSession()
+					if s:SessionException()
+						return
+					endif
+
+					" Check that file is readable
+					if ! filereadable(s:projectsessionfile)
+						return
+					endif
+
+					exec "source " . s:projectsessionfile
+				endfunction
+			" }}}
+		" }}}
+		augroup Project " {{{
 			autocmd!
-
-			au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/TAGS.PHP.hl.vim"
+			" Highlight project tags {{{
+				au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/vim/tags.php-hl.vim"
+			" }}}
+			" Write/source session file {{{
+				au VimEnter * nested call s:LoadSession()
+				au VimLeave * call s:MakeSession()
+			" }}}
 		augroup END " }}}
 	endif
 " }}}

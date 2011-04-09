@@ -685,6 +685,19 @@
 " Plugin settings {{{
 	" EasyMotion settings {{{
 		let g:EasyMotion_mapping_e = '<Leader>ee'
+		let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+		" Extra normal mode mappings {{{
+			nnoremap <silent> f  :call EasyMotionF(  0, 0)<CR>
+			nnoremap <silent> F  :call EasyMotionF(  0, 1)<CR>
+			nnoremap <silent> w  :call EasyMotionWB( 0, 0)<CR>
+			nnoremap <silent> W  :call EasyMotionWBW(0, 0)<CR>
+			nnoremap <silent> b  :call EasyMotionWB( 0, 1)<CR>
+			nnoremap <silent> B  :call EasyMotionWBW(0, 1)<CR>
+			nnoremap <silent> e  :call EasyMotionE(  0, 0)<CR>
+			nnoremap <silent> E  :call EasyMotionEW( 0, 0)<CR>
+			nnoremap <silent> ge :call EasyMotionE(  0, 1)<CR>
+			nnoremap <silent> gE :call EasyMotionEW( 0, 1)<CR>
+		" }}}
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0

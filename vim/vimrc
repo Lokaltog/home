@@ -542,8 +542,8 @@
 			" Visual mode
 			vnoremap <silent> <Left>   <gv
 			vnoremap <silent> <Right>  >gv
-			vnoremap <silent> <S-Up>   <Esc>:call <SID>MoveVisualUp()<CR>
-			vnoremap <silent> <S-Down> <Esc>:call <SID>MoveVisualDown()<CR>
+			vnoremap <silent> <Up>     <Esc>:call <SID>MoveVisualUp()<CR>
+			vnoremap <silent> <Down>   <Esc>:call <SID>MoveVisualDown()<CR>
 
 			" Insert mode
 			inoremap <silent> <Left>   <C-D>

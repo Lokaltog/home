@@ -11,14 +11,19 @@ LOCK_FILE="${BASE_DIR}/tags.lock"
 # Init LiveReload
 sudo gem list --local | grep -qi livereload
 [[ $? -eq 1 ]] && echo 'LiveReload gem is missing!' && sudo gem install livereload rb-inotify;
-(echo 'Starting LiveReload...'; livereload ${BASE_DIR}) &
-(echo 'Starting Compass watcher...'; compass watch ${BASE_DIR}/application/assets/source/sass/*) &
+(echo '[!!] Starting LiveReload...'; livereload ${BASE_DIR}) &
+
+# Init compass
+for D in ${BASE_DIR}/application/assets/source/sass/*; do
+	echo "[!!] Starting Compass watcher for $D..."
+	compass watch $D &
+done
 
 # Make sure $XDG_CONFIG_HOME/projectpath is correct
 echo -n ${BASE_DIR} > ${XDG_CONFIG_HOME}/projectpath
 
 # Cleanup
-trap "echo 'Cleaning up temporary files...'; \
+trap "echo '[!!] Cleaning up temporary files...'; \
 	rm -f ${XDG_CONFIG_HOME}/projectpath ${VIM_DIR}/cscope.files ${LOCK_FILE}; \
 	exit" SIGHUP SIGINT SIGTERM
 

@@ -586,7 +586,7 @@
 	augroup General " {{{
 		autocmd!
 		" Custom psql highlighting {{{
-			au BufNewFile,BufRead *.sql set ft=psql foldmethod=marker
+			au BufNewFile,BufRead *.sql set ft=psql
 		" }}}
 		" Nginx highlighting {{{
 			au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
@@ -633,6 +633,9 @@
 		" Format plain text and e-mails correctly {{{
 			au BufNewFile,BufRead *.txt setl ft=text
 			au FileType mail,text setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
+		" }}}
+		" Use foldmarkers for specific filetypes {{{
+			au FileType sass,javascript,psql,vim setl foldmethod=marker foldlevel=0
 		" }}}
 	augroup END" }}}
 	augroup Whitespace " {{{

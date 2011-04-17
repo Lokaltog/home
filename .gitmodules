@@ -76,3 +76,6 @@
 [submodule "vim/modules/vim-surround"]
 	path = vim/modules/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/modules/mustache"]
+	path = vim/modules/mustache
+	url = https://github.com/jc00ke/mustache.vim.git

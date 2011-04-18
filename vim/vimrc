@@ -743,9 +743,6 @@
 			let g:xptemplate_minimal_prefix = 'full'
 		" }}}
 	" }}}
-	" delimitMate settings {{{
-		let g:delimitMate_balance_matchpairs = 1
-	" }}}
 " }}}
 " Handle vim projects {{{
 	let s:projectpath = system("cat $XDG_CONFIG_HOME/projectpath 2&>/dev/null")

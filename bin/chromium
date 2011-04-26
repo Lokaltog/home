@@ -3,4 +3,5 @@
 /usr/bin/chromium \
 	--enable-extension-timeline-api \
 	--omnibox-popup-count=15 \
-	--disable-enforced-throttling
+	--disable-enforced-throttling \
+	"$@"

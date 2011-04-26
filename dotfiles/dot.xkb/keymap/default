@@ -1,0 +1,7 @@
+xkb_keymap {
+	xkb_keycodes  { include "evdev+aliases(qwerty)"	};
+	xkb_types     { include "complete"	};
+	xkb_compat    { include "complete"	};
+	xkb_symbols   { include "pc+us(dvp)+inet(evdev)+level3(ralt_switch)+keypad(ops)+keypad(hex)+keypad(atm)+terminate(ctrl_alt_bksp)+capslock(swapescape)+lokaltog(menu_mod4)+lokaltog(group2_symbols)"	};
+	xkb_geometry  { include "pc(pc104)"	};
+};

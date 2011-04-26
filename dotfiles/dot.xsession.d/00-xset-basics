@@ -1,0 +1,13 @@
+# Disable bell
+xset b 0 &
+
+# Set mouse speed
+xset m 2 0 &
+
+# Set keyboard repeat rate
+xset r rate 300 40 &
+
+# Set font paths
+for FONTPATH in "$HOME/.fonts/bdf" "/usr/share/fonts/artwiz-latin1-fonts"; do
+	[[ -d $FONTPATH ]] && xset +fp $FONTPATH 
+done

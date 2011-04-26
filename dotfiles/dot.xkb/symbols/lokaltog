@@ -1,0 +1,16 @@
+// Trigger Mod4 with menu key
+partial modifier_keys
+xkb_symbols "menu_mod4" {
+	key <MENU> {
+		symbols[Group1] = [ Mode_switch, Multi_key ],
+		virtualmods = AltGr
+	};
+};
+
+// International/various symbols
+partial modifier_keys alphanumeric_keys
+xkb_symbols "group2_symbols" {
+	key <AC11> {
+		symbols[Group2] = [ endash, emdash ]
+	};
+};

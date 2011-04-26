@@ -1,0 +1,2 @@
+# Disable bluetooth
+echo disable | sudo tee -a /proc/acpi/ibm/bluetooth

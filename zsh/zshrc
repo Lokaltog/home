@@ -133,7 +133,7 @@
 		alias chown="chown -v"
 	# }}}
 	# Default sudo commands {{{
-		for cmd in mount ifconfig pacman chmod chown; do
+		for cmd in mount ifconfig pacman chmod chown rc; do
 			alias $cmd="+ $cmd"
 		done
 	# }}}
@@ -312,22 +312,5 @@
 		}
 		zle -N integrated-ranger integrate_ranger
 		bindkey "^F" integrated-ranger
-	# }}}
-# }}}
-# Functions {{{
-	# Service control {{{
-		service(){
-			for s in ${*[2,-1]}; do
-				if [[ -n $1 ]]; then
-					[[ ! -r /etc/rc.d/$s ]] && echo "Cannot control service '$s'" && continue
-					sudo /etc/rc.d/$s $1
-				else
-					/etc/rc.d/$s
-				fi
-			done
-		}
-		start()  { service start $*   }
-		stop()   { service stop $*    }
-		restart(){ service restart $* }
 	# }}}
 # }}}

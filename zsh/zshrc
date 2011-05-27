@@ -56,9 +56,6 @@
 		# Add sync/bin to path
 		export PATH="$HOME/sync/bin:$PATH"
 	# }}}
-	# Proxy {{{
-		export http_proxy="http://127.0.0.1:8000/"
-	# }}}
 # }}}
 # Load plugins {{{
 	source ~/.zsh/git-flow-completion.zsh
@@ -133,7 +130,7 @@
 		alias chown="chown -v"
 	# }}}
 	# Default sudo commands {{{
-		for cmd in mount ifconfig pacman chmod chown rc; do
+		for cmd in mount ifconfig pacman chmod chown rc.d; do
 			alias $cmd="+ $cmd"
 		done
 	# }}}

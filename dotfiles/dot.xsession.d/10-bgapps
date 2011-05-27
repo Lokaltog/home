@@ -1,4 +1,4 @@
 # Start background applications
 
-urxvtd -q -o -f
+(sleep 1 && urxvtd -q -o -f) &
 statnot $HOME/sync/conf/statnot.py &

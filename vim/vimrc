@@ -472,6 +472,7 @@
 		" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
 		nnoremap / /\v
 		vnoremap / /\v
+		cnoremap s/ s/\v
 	" }}}
 	" Easier bracket matching {{{
 		nnoremap <Tab> %

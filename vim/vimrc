@@ -73,17 +73,10 @@
 
 				" Prepare statusline arrows
 				" Syntax: [>] [>>] [<] [<<]
-				if s:round_stl
-					let new_stl = substitute(new_stl, '\[>\]',  'ǳ', 'g')
-					let new_stl = substitute(new_stl, '\[>>\]', 'ǵ', 'g')
-					let new_stl = substitute(new_stl, '\[<\]',  'ǲ', 'g')
-					let new_stl = substitute(new_stl, '\[<<\]', 'Ǵ', 'g')
-				else
-					let new_stl = substitute(new_stl, '\[>\]',  'ǣ', 'g')
-					let new_stl = substitute(new_stl, '\[>>\]', 'ǥ', 'g')
-					let new_stl = substitute(new_stl, '\[<\]',  'Ǣ', 'g')
-					let new_stl = substitute(new_stl, '\[<<\]', 'Ǥ', 'g')
-				endif
+				let new_stl = substitute(new_stl, '\[>\]',  'ǣ', 'g')
+				let new_stl = substitute(new_stl, '\[>>\]', 'ǥ', 'g')
+				let new_stl = substitute(new_stl, '\[<\]',  'Ǣ', 'g')
+				let new_stl = substitute(new_stl, '\[<<\]', 'Ǥ', 'g')
 
 				if &l:statusline ==# new_stl
 					" Statusline already set, nothing to do
@@ -204,8 +197,6 @@
 			" Statusline highlighting {{{
 				augroup StatusLineHighlight
 					autocmd!
-
-					let s:round_stl = 0
 
 					au ColorScheme * call <SID>StatusLineColors(s:statuscolors)
 					au BufEnter,BufWinEnter,WinEnter,CmdwinEnter,CursorHold,BufWritePost,InsertLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 1)
@@ -742,9 +733,6 @@
 			let g:xptemplate_pum_tab_nav = 1
 			let g:xptemplate_minimal_prefix = 'full'
 		" }}}
-	" }}}
-	" delimitMate settings {{{
-		let g:delimitMate_balance_matchpairs = 1
 	" }}}
 " }}}
 " Handle vim projects {{{

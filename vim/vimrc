@@ -16,6 +16,7 @@
 	set undofile
 	set undodir=~/.vim/tmp
 	set autochdir
+	set backspace=indent,eol,start
 	set fileformats=unix,dos
 	set fileformat=unix
 	set matchpairs+=<:>

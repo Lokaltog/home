@@ -6,7 +6,7 @@
 SCRIPT_DIR=`dirname $0`
 BASE_DIR="$1"
 VIM_DIR="${BASE_DIR}/vim"
-LOCK_FILE="${BASE_DIR}/tags.lock"
+LOCK_FILE="${BASE_DIR}/vim/tags.lock"
 
 # Init LiveReload
 sudo gem list --local | grep -qi livereload

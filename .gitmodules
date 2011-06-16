@@ -13,6 +13,9 @@
 [submodule "vim/modules/vim-markdown"]
 	path = vim/modules/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
+[submodule "vim/modules/delimitmate"]
+	path = vim/modules/delimitmate
+	url = https://github.com/Raimondi/delimitMate.git
 [submodule "vim/modules/nerdtree"]
 	path = vim/modules/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -73,6 +76,3 @@
 [submodule "vim/modules/vim-surround"]
 	path = vim/modules/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "vim/modules/vim-pairtools"]
-	path = vim/modules/vim-pairtools
-	url = https://github.com/MartinLafreniere/vim-PairTools.git

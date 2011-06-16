@@ -251,7 +251,7 @@
 	set scrolljump=10
 	set showcmd
 	set noshowmode
-	set virtualedit=all
+	set virtualedit=block
 	set confirm
 	set updatetime=1500
 	set history=1000
@@ -262,7 +262,7 @@
 " Layout / Text formatting {{{
 	set autoindent
 	set wrap
-	set textwidth=72
+	set textwidth=1000
 	set formatoptions=croqwanl1
 	set ignorecase
 	set linebreak
@@ -677,9 +677,6 @@
 		au Filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
 	augroup END " }}}
 " }}}
-" Abbreviations {{{
-	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
-" }}}
 " Plugin settings {{{
 	" EasyMotion settings {{{
 		let g:EasyMotion_mapping_e = '<Leader>ee'
@@ -724,16 +721,10 @@
 		let g:SuperTabContextDefaultCompletionType = '<c-n>'
 		let g:SuperTabLongestEnhanced = 1
 	" }}}
-	" XPTemplate settings {{{
-		let g:xptemplate_brace_complete = 0
-		let g:xptemplate_highlight_nested = 1
-		" Make XPTemplate work with Supertab {{{
-			let g:SuperTabMappingForward = '<Plug>supertabKey'
-			let g:xptemplate_fallback = '<Plug>supertabKey'
-			let g:xptemplate_key = '<Tab>'
-			let g:xptemplate_pum_tab_nav = 1
-			let g:xptemplate_minimal_prefix = 'full'
-		" }}}
+	" UltiSnips settings {{{
+		let g:UltiSnipsExpandTrigger = '<Tab>'
+		let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+		let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 	" }}}
 " }}}
 " Handle vim projects {{{

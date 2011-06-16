@@ -52,9 +52,6 @@
 [submodule "vim/modules/supertab"]
 	path = vim/modules/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "vim/modules/xptemplate"]
-	path = vim/modules/xptemplate
-	url = https://github.com/drmingdrmer/xptemplate-dist.git
 [submodule "vim/modules/vim-extradite"]
 	path = vim/modules/vim-extradite
 	url = https://github.com/int3/vim-extradite.git
@@ -76,3 +73,6 @@
 [submodule "vim/modules/vim-surround"]
 	path = vim/modules/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/modules/ultisnips"]
+	path = vim/modules/ultisnips
+	url = https://github.com/rygwdn/ultisnips.git

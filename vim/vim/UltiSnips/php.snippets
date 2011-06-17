@@ -1,4 +1,3 @@
-
 # Kohana snippets {{{
 snippet de "Debug variable" !b
 echo Debug::vars(${1:$variable});${2: die;}$0
@@ -15,7 +14,7 @@ Route::url('${1:default}', array('controller' => '$2', 'action' => '$3'${4:, 'id
 endsnippet
 
 snippet redir "Redirect to URL" !b
-`!v match(expand("%:p"), 'controller') == -1 ? '$this->request' : 'Request::current()'`->redirect($0);
+`!v match(expand("%:p"), 'controller') == -1 ? '$this->request' : 'Request::current()'`->redirect($1);$0
 endsnippet
 # }}}
 # PHP snippets {{{
@@ -24,6 +23,15 @@ if ($1)
 {
 	$0
 }
+endsnippet
+
+snippet if "if (...) else { ... }" !b
+if ($1)
+{
+	$0
+}
+else
+{}
 endsnippet
 
 snippet eli "elseif (...) { ... }" !b
@@ -81,10 +89,23 @@ endsnippet
 snippet try "try { ... } catch { ... }" !b
 try
 {
-	$0
+	$4
 }
 catch (${1:$2Exception} ${3:$e})
 {
+	$0
 }
+endsnippet
+
+snippet ag "Get from array" w
+Arr::get(${1:$array}, '${2:key}'${3:, '${4:default}'})$0
+endsnippet
+
+snippet $_ "POST superglobal" w
+$_POST['${1:key}']$0
+endsnippet
+
+snippet $_ "GET superglobal" w
+$_GET['${1:key}']$0
 endsnippet
 # }}}

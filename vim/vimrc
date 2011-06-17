@@ -221,7 +221,7 @@
 			augroup List " {{{
 				autocmd!
 				" Set list on selected filetypes {{{
-					au FileType vim setl list
+					au FileType vim,snippet setl list
 					au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
 					au FileType sh,zsh,bash setl list
 					au FileType html,css,sass,javascript,php,python,ruby,psql setl list

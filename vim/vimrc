@@ -247,11 +247,10 @@
 	set ruler
 	set scrolloff=10
 	set sidescrolloff=20
-	set lazyredraw
 	set scrolljump=10
 	set showcmd
 	set noshowmode
-	set virtualedit=block
+	set virtualedit=block,onemore
 	set confirm
 	set updatetime=1500
 	set history=1000
@@ -262,7 +261,7 @@
 " Layout / Text formatting {{{
 	set autoindent
 	set wrap
-	set textwidth=1000
+	set textwidth=0
 	set formatoptions=croqwanl1
 	set ignorecase
 	set linebreak
@@ -679,7 +678,6 @@
 " }}}
 " Plugin settings {{{
 	" EasyMotion settings {{{
-		let g:EasyMotion_mapping_e = '<Leader>ee'
 		let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
 	" }}}
 	" PHP highlighting settings {{{
@@ -723,8 +721,9 @@
 	" }}}
 	" UltiSnips settings {{{
 		let g:UltiSnipsExpandTrigger = '<Tab>'
-		let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-		let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+		let g:UltiSnipsListSnippets = '<S-Tab>'
+		let g:UltiSnipsJumpForwardTrigger = '<C-l>'
+		let g:UltiSnipsJumpBackwardTrigger = '<C-h>'
 	" }}}
 " }}}
 " Handle vim projects {{{
@@ -798,8 +797,8 @@
 				au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/vim/tags.php-hl.vim"
 			" }}}
 			" Write/source session file {{{
-				au VimEnter * nested call s:LoadSession()
-				au VimLeave * call s:MakeSession()
+				"au VimEnter * nested call s:LoadSession()
+				"au VimLeave * call s:MakeSession()
 			" }}}
 		augroup END " }}}
 	endif

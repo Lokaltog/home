@@ -250,7 +250,7 @@
 	set scrolljump=10
 	set showcmd
 	set noshowmode
-	set virtualedit=block,onemore
+	set virtualedit=block
 	set confirm
 	set updatetime=1500
 	set history=1000
@@ -677,6 +677,13 @@
 	augroup END " }}}
 " }}}
 " Plugin settings {{{
+	" delimitMate settings {{{
+		let g:delimitMate_expand_cr = 1
+		let g:delimitMate_expand_space = 1
+		let g:delimitMate_balance_matchpairs = 1
+		let g:delimitMate_excluded_regions = "Comment,String"
+		let g:delimitMate_excluded_ft = "mail,help"
+	" }}}
 	" EasyMotion settings {{{
 		let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
 	" }}}

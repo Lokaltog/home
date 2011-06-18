@@ -73,3 +73,6 @@
 [submodule "vim/modules/ultisnips"]
 	path = vim/modules/ultisnips
 	url = https://github.com/rygwdn/ultisnips.git
+[submodule "vim/modules/vim-superstatus"]
+	path = vim/modules/vim-superstatus
+	url = https://github.com/Lokaltog/vim-superstatus.git

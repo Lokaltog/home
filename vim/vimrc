@@ -103,7 +103,7 @@
 	set scrolljump=10
 	set showcmd
 	set noshowmode
-	set virtualedit=block
+	set virtualedit=block,onemore
 	set confirm
 	set updatetime=1500
 	set history=1000
@@ -507,7 +507,6 @@
 		let g:delimitMate_expand_cr = 1
 		let g:delimitMate_expand_space = 1
 		let g:delimitMate_balance_matchpairs = 1
-		let g:delimitMate_excluded_regions = "Comment,String"
 		let g:delimitMate_excluded_ft = "mail,help"
 	" }}}
 	" EasyMotion settings {{{
@@ -552,6 +551,10 @@
 		let g:UltiSnipsListSnippets = '<S-Tab>'
 		let g:UltiSnipsJumpForwardTrigger = '<C-l>'
 		let g:UltiSnipsJumpBackwardTrigger = '<C-h>'
+	" }}}
+	" Sparkup settings {{{
+		let g:sparkupExecuteMapping = '<C-E>'
+		let g:sparkupNextMapping = '<C-U>'
 	" }}}
 " }}}
 " Handle vim projects {{{

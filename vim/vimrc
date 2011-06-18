@@ -201,9 +201,9 @@
 					let l:text = substitute(l:text, '^\s*\(.\{-}\)\s*$', '\1', '')
 				" }}}
 				" Make unmatched block delimiters prettier {{{
-					let l:text = substitute(l:text, '([^)]*$',   'ǒ ĵ Ǔ', '')
-					let l:text = substitute(l:text, '{[^}]*$',   'ǒ ĵ Ǔ', '')
-					let l:text = substitute(l:text, '\[[^\]]*$', 'ǒ ĵ Ǔ', '')
+					let l:text = substitute(l:text, '([^)]*$',   'Ę ĵ ę', '')
+					let l:text = substitute(l:text, '{[^}]*$',   'Ę ĵ ę', '')
+					let l:text = substitute(l:text, '\[[^\]]*$', 'Ę ĵ ę', '')
 				" }}}
 				" Add arrows when indent level > 2 spaces {{{
 					if indent(v:foldstart) > 2

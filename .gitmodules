@@ -76,3 +76,6 @@
 [submodule "vim/modules/vim-superstatus"]
 	path = vim/modules/vim-superstatus
 	url = https://github.com/Lokaltog/vim-superstatus.git
+[submodule "vim/modules/nerdcommenter"]
+	path = vim/modules/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git

@@ -100,3 +100,30 @@ snippet $_ "GET superglobal" w
 $_GET['${1:key}']$0
 endsnippet
 # }}}
+# HTML/PHP snippets {{{
+snippet p "<?php ... ?>" !w
+<?php $0; ?>
+endsnippet
+
+snippet pif "if (...) { ... }" !b
+<?php if ($1): ?>
+	$0
+<?php endif; ?>
+endsnippet
+
+snippet peli "elseif (...) { ... }" !b
+<?php elseif ($1): ?>
+	$0
+endsnippet
+
+snippet pels "else { ... }" !b
+<?php else: ?>
+	$0
+endsnippet
+
+snippet pfe "foreach ($var as $key => $value) { ... }" !b
+<?php foreach (${1:$array} as ${2:$key}${3: => ${4:$value}}): ?>
+	$0
+<?php endforeach; ?>
+endsnippet
+# }}}

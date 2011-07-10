@@ -29,6 +29,7 @@
 	set clipboard=unnamed,unnamedplus,autoselect
 	set autoread
 	set report=0
+	set gdefault
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.
@@ -114,7 +115,7 @@
 " Layout / Text formatting {{{
 	set autoindent
 	set wrap
-	set textwidth=0
+	set textwidth=10000
 	set formatoptions=croqwanl1
 	set ignorecase
 	set linebreak

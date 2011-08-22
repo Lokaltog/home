@@ -54,7 +54,7 @@
 	# }}}
 	# Path {{{
 		# Add sync/bin to path
-		export PATH="$HOME/sync/bin:$PATH"
+		export PATH="$HOME/sync/bin:/usr/bin/vendor_perl:$PATH"
 	# }}}
 # }}}
 # Load plugins {{{

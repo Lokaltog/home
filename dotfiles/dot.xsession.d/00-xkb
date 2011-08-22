@@ -1,7 +1,7 @@
 # Load keyboard layout
 
 XKBDIR="$HOME/.xkb"
-XKBMAPFILE="$XKBDIR/keymap/`hostname --fqdn`"
+XKBMAPFILE="$XKBDIR/keymap/$HOST"
 
 [[ -r "$XKBMAPFILE" ]] || XKBMAPFILE="${XKBMAPFILE%/*}/default"
 

@@ -469,6 +469,9 @@
 		" Load .Xdefaults/.Xresources on save {{{
 			au BufWritePost,FileWritePost ~/.Xdefaults,~/.Xresources silent! !xrdb -load % >/dev/null 2>&1
 		" }}}
+		" Support Genshi templates {{{
+			au FileType html set ft=genshi
+		" }}}
 	augroup END " }}}
 	augroup Formatting " {{{
 		autocmd!

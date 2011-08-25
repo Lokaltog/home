@@ -29,6 +29,7 @@
 	set clipboard=unnamed,unnamedplus,autoselect
 	set autoread
 	set report=0
+	set gdefault
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.
@@ -55,165 +56,9 @@
 		set wildmode=full
 	" }}}
 " }}}
-" Statusline {{{
-	" Functions {{{
-		" Statusline updater {{{
-			" Inspired by StatusLineHighlight by Ingo Karkat
-			function! s:StatusLine(new_stl, type, current)
-				let current = (a:current ? "" : "NC")
-				let type = a:type
-				let new_stl = a:new_stl
-
-				" Prepare current buffer specific text
-				" Syntax: <CUR> ... </CUR>
-				let new_stl = substitute(new_stl, '<CUR>\(.\{-,}\)</CUR>', (a:current ? '\1' : ''), 'g')
-
-				" Prepare statusline colors
-				" Syntax: #[ ... ]
-				let new_stl = substitute(new_stl, '#\[\(\w\+\)\]', '%#StatusLine'.type.'\1'.current.'#', 'g')
-
-				" Prepare statusline arrows
-				" Syntax: [>] [>>] [<] [<<]
-				if s:round_stl
-					let new_stl = substitute(new_stl, '\[>\]',  'ǳ', 'g')
-					let new_stl = substitute(new_stl, '\[>>\]', 'ǵ', 'g')
-					let new_stl = substitute(new_stl, '\[<\]',  'ǲ', 'g')
-					let new_stl = substitute(new_stl, '\[<<\]', 'Ǵ', 'g')
-				else
-					let new_stl = substitute(new_stl, '\[>\]',  'ǣ', 'g')
-					let new_stl = substitute(new_stl, '\[>>\]', 'ǥ', 'g')
-					let new_stl = substitute(new_stl, '\[<\]',  'Ǣ', 'g')
-					let new_stl = substitute(new_stl, '\[<<\]', 'Ǥ', 'g')
-				endif
-
-				if &l:statusline ==# new_stl
-					" Statusline already set, nothing to do
-					return
-				endif
-
-				if empty(&l:statusline)
-					" No statusline is set, use my_stl
-					let &l:statusline = new_stl
-				else
-					" Check if a custom statusline is set
-					let plain_stl = substitute(&l:statusline, '%#StatusLine\w\+#', '', 'g')
-
-					if &l:statusline ==# plain_stl
-						" A custom statusline is set, don't modify
-						return
-					endif
-
-					" No custom statusline is set, use my_stl
-					let &l:statusline = new_stl
-				endif
-			endfunction
-		" }}}
-		" Color dict parser {{{
-			function! s:StatusLineColors(colors)
-				for type in keys(a:colors)
-					for name in keys(a:colors[type])
-						let colors = {'c': a:colors[type][name][0], 'nc': a:colors[type][name][1]}
-						let type = (type == 'NONE' ? '' : type)
-						let name = (name == 'NONE' ? '' : name)
-
-						if exists("colors['c'][0]")
-							exec 'hi StatusLine'.type.name.' ctermbg='.colors['c'][0].' ctermfg='.colors['c'][1].' cterm='.colors['c'][2]
-						endif
-
-						if exists("colors['nc'][0]")
-							exec 'hi StatusLine'.type.name.'NC ctermbg='.colors['nc'][0].' ctermfg='.colors['nc'][1].' cterm='.colors['nc'][2]
-						endif
-					endfor
-				endfor
-			endfunction
-		" }}}
-	" }}}
-	" Default statusline {{{
-		let g:default_stl  = ""
-		let g:default_stl .= "<CUR>#[Mode] %{&paste ? 'PASTE [>] ' : ''}%{substitute(mode(), '', '^V', 'g')} #[ModeS][>>]</CUR>"
-		let g:default_stl .= "#[Branch] %(%{substitute(fugitive#statusline(), 'GIT(\\([a-z0-9\\-_\\./:]\\+\\))', 'Đ \\1', 'gi')}#[BranchS] [>] %)" " Git branch
-		let g:default_stl .= "#[ModFlag]%{&readonly ? 'Ĥ ' : ''}" " RO flag
-		let g:default_stl .= "#[FileName]%t " " File name
-		let g:default_stl .= "<CUR>#[Error]%(%{substitute(SyntasticStatuslineFlag(), '\\[Syntax: line:\\(\\d\\+\\) \\((\\(\\d\\+\\))\\)\\?\\]', '[>][>][>] SYNTAX đ \\1 \\2 [>][>][>]', 'i')} %)</CUR>" " Syntastic error flag
-		let g:default_stl .= "#[ModFlag]%(%M %)" " Modified flag
-		let g:default_stl .= "#[BufFlag]%(%H%W %)" " HLP,PRV flags
-		let g:default_stl .= "#[FileNameS][>>]" " Separator
-		let g:default_stl .= "#[FunctionName] " " Padding/HL group
-		let g:default_stl .= "%<" " Truncate right
-		let g:default_stl .= "<CUR>%(%{cfi#format('%s', '')} %)</CUR>" " Function name
-		let g:default_stl .= "%= " " Right align
-		let g:default_stl .= "<CUR>#[FileFormat]%{&fileformat} </CUR>" " File format
-		let g:default_stl .= "<CUR>#[FileEncoding]%{(&fenc == '' ? &enc : &fenc)} </CUR>" " File encoding
-		let g:default_stl .= "<CUR>#[Separator][<] Ġġ #[FileType]%{strlen(&ft) ? &ft : 'n/a'} </CUR>" " File type
-		let g:default_stl .= "#[LinePercentS][<<]#[LinePercent] %p%% " " Line/column/virtual column, Line percentage
-		let g:default_stl .= "#[LineNumberS][<<]#[LineNumber] đ %l#[LineColumn]:%c%V " " Line/column/virtual column, Line percentage
-		let g:default_stl .= "%{exists('g:synid') && g:synid ? '[<] '.synIDattr(synID(line('.'), col('.'), 1), 'name').' ' : ''}" " Current syntax group
-	" }}}
-	" Color dict {{{
-		let s:statuscolors = {
-			\   'NONE': {
-				\   'NONE'         : [[ 236, 231, 'bold'], [ 232, 244, 'none']]
-			\ }
-			\ , 'Normal': {
-				\   'Mode'         : [[ 214, 235, 'bold'], [                 ]]
-				\ , 'ModeS'        : [[ 214, 240, 'bold'], [                 ]]
-				\ , 'Branch'       : [[ 240, 250, 'none'], [ 234, 239, 'none']]
-				\ , 'BranchS'      : [[ 240, 246, 'none'], [ 234, 239, 'none']]
-				\ , 'FileName'     : [[ 240, 231, 'bold'], [ 234, 244, 'none']]
-				\ , 'FileNameS'    : [[ 240, 236, 'bold'], [ 234, 232, 'none']]
-				\ , 'Error'        : [[ 240, 202, 'bold'], [ 234, 239, 'none']]
-				\ , 'ModFlag'      : [[ 240, 196, 'bold'], [ 234, 239, 'none']]
-				\ , 'BufFlag'      : [[ 240, 250, 'none'], [ 234, 239, 'none']]
-				\ , 'FunctionName' : [[ 236, 247, 'none'], [ 232, 239, 'none']]
-				\ , 'FileFormat'   : [[ 236, 244, 'none'], [ 232, 239, 'none']]
-				\ , 'FileEncoding' : [[ 236, 244, 'none'], [ 232, 239, 'none']]
-				\ , 'Separator'    : [[ 236, 242, 'none'], [ 232, 239, 'none']]
-				\ , 'FileType'     : [[ 236, 248, 'none'], [ 232, 239, 'none']]
-				\ , 'LinePercentS' : [[ 240, 236, 'none'], [ 234, 232, 'none']]
-				\ , 'LinePercent'  : [[ 240, 250, 'none'], [ 234, 239, 'none']]
-				\ , 'LineNumberS'  : [[ 252, 240, 'bold'], [ 234, 234, 'none']]
-				\ , 'LineNumber'   : [[ 252, 236, 'bold'], [ 234, 244, 'none']]
-				\ , 'LineColumn'   : [[ 252, 240, 'none'], [ 234, 239, 'none']]
-			\ }
-			\ , 'Insert': {
-				\   'Mode'         : [[ 153,  23, 'bold'], [                 ]]
-				\ , 'ModeS'        : [[ 153,  31, 'bold'], [                 ]]
-				\ , 'Branch'       : [[  31, 117, 'none'], [                 ]]
-				\ , 'BranchS'      : [[  31, 117, 'none'], [                 ]]
-				\ , 'FileName'     : [[  31, 231, 'bold'], [                 ]]
-				\ , 'FileNameS'    : [[  31,  24, 'bold'], [                 ]]
-				\ , 'Error'        : [[  31, 202, 'bold'], [                 ]]
-				\ , 'ModFlag'      : [[  31, 196, 'bold'], [                 ]]
-				\ , 'BufFlag'      : [[  31,  75, 'none'], [                 ]]
-				\ , 'FunctionName' : [[  24, 117, 'none'], [                 ]]
-				\ , 'FileFormat'   : [[  24,  75, 'none'], [                 ]]
-				\ , 'FileEncoding' : [[  24,  75, 'none'], [                 ]]
-				\ , 'Separator'    : [[  24,  37, 'none'], [                 ]]
-				\ , 'FileType'     : [[  24,  81, 'none'], [                 ]]
-				\ , 'LinePercentS' : [[  31,  24, 'none'], [                 ]]
-				\ , 'LinePercent'  : [[  31, 117, 'none'], [                 ]]
-				\ , 'LineNumberS'  : [[ 117,  31, 'bold'], [                 ]]
-				\ , 'LineNumber'   : [[ 117,  23, 'bold'], [                 ]]
-				\ , 'LineColumn'   : [[ 117,  31, 'none'], [                 ]]
-			\ }
-		\ }
-	" }}}
-" }}}
 " UI options {{{
 	" URxvt-specific settings {{{
 		if &term =~ "rxvt-256color"
-			" Statusline highlighting {{{
-				augroup StatusLineHighlight
-					autocmd!
-
-					let s:round_stl = 0
-
-					au ColorScheme * call <SID>StatusLineColors(s:statuscolors)
-					au BufEnter,BufWinEnter,WinEnter,CmdwinEnter,CursorHold,BufWritePost,InsertLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 1)
-					au BufLeave,BufWinLeave,WinLeave,CmdwinLeave * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Normal', 0)
-					au InsertEnter,CursorHoldI * call <SID>StatusLine((exists('b:stl') ? b:stl : g:default_stl), 'Insert', 1)
-				augroup END
-			" }}}
 			" Change cursor color in insert mode {{{
 				silent !echo -ne "]12;\#dd4010\x7"
 
@@ -230,7 +75,7 @@
 			augroup List " {{{
 				autocmd!
 				" Set list on selected filetypes {{{
-					au FileType vim setl list
+					au FileType vim,snippet setl list
 					au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
 					au FileType sh,zsh,bash setl list
 					au FileType html,css,sass,javascript,php,python,ruby,psql setl list
@@ -256,11 +101,10 @@
 	set ruler
 	set scrolloff=10
 	set sidescrolloff=20
-	set lazyredraw
 	set scrolljump=10
 	set showcmd
 	set noshowmode
-	set virtualedit=all
+	set virtualedit=block,onemore
 	set confirm
 	set updatetime=1500
 	set history=1000
@@ -271,7 +115,7 @@
 " Layout / Text formatting {{{
 	set autoindent
 	set wrap
-	set textwidth=72
+	set textwidth=10000
 	set formatoptions=croqwanl1
 	set ignorecase
 	set linebreak
@@ -358,9 +202,9 @@
 					let l:text = substitute(l:text, '^\s*\(.\{-}\)\s*$', '\1', '')
 				" }}}
 				" Make unmatched block delimiters prettier {{{
-					let l:text = substitute(l:text, '([^)]*$',   'ǒ ĵ Ǔ', '')
-					let l:text = substitute(l:text, '{[^}]*$',   'ǒ ĵ Ǔ', '')
-					let l:text = substitute(l:text, '\[[^\]]*$', 'ǒ ĵ Ǔ', '')
+					let l:text = substitute(l:text, '([^)]*$',   'Ę ĵ ę', '')
+					let l:text = substitute(l:text, '{[^}]*$',   'Ę ĵ ę', '')
+					let l:text = substitute(l:text, '\[[^\]]*$', 'Ę ĵ ę', '')
 				" }}}
 				" Add arrows when indent level > 2 spaces {{{
 					if indent(v:foldstart) > 2
@@ -473,6 +317,7 @@
 		" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
 		nnoremap / /\v
 		vnoremap / /\v
+		cnoremap s/ s/\v
 	" }}}
 	" Easier bracket matching {{{
 		nnoremap <Tab> %
@@ -586,7 +431,7 @@
 	augroup General " {{{
 		autocmd!
 		" Custom psql highlighting {{{
-			au BufNewFile,BufRead *.sql set ft=psql foldmethod=marker
+			au BufNewFile,BufRead *.sql set ft=psql
 		" }}}
 		" Nginx highlighting {{{
 			au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
@@ -624,6 +469,9 @@
 		" Load .Xdefaults/.Xresources on save {{{
 			au BufWritePost,FileWritePost ~/.Xdefaults,~/.Xresources silent! !xrdb -load % >/dev/null 2>&1
 		" }}}
+		" Support Genshi templates {{{
+			au FileType html set ft=genshi
+		" }}}
 	augroup END " }}}
 	augroup Formatting " {{{
 		autocmd!
@@ -633,6 +481,9 @@
 		" Format plain text and e-mails correctly {{{
 			au BufNewFile,BufRead *.txt setl ft=text
 			au FileType mail,text setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
+		" }}}
+		" Use foldmarkers for specific filetypes {{{
+			au FileType sass,javascript,psql,vim setl foldmethod=marker foldlevel=0
 		" }}}
 	augroup END" }}}
 	augroup Whitespace " {{{
@@ -649,58 +500,21 @@
 			au FileType html,css,sass,javascript,php,python,ruby,psql,vim au BufWritePre <buffer> :silent! call <SID>StripTrailingWhitespace()
 		" }}}
 	augroup END " }}}
-	augroup CustomStatuslines " {{{
-		autocmd!
-		" Lusty buffer list {{{
-			au BufEnter * if bufname("%") == "[LustyExplorer-Buffers]"
-				\ | let b:stl = "#[Branch] LustyExplorer#[BranchS] [>] #[FileName]%<Buffer List #[FileNameS][>>]%* %="
-				\ | endif
-		" }}}
-		" Tagbar {{{
-			au BufEnter * if bufname("%") == "__Tagbar__"
-				\ | let b:stl = "#[FileName]%< Tagbar #[FileNameS][>>]%* %="
-				\ | endif
-		" }}}
-		" Gundo {{{
-			au BufEnter * if bufname("%") == "__Gundo__"
-				\ | let b:stl = "#[Branch] GUNDO#[BranchS] [>] #[FileName]%<Undo tree #[FileNameS][>>]%* %="
-				\ | endif
-
-			au BufEnter * if bufname("%") == "__Gundo_Preview__"
-				\ | let b:stl = "#[Branch] GUNDO#[BranchS] [>] #[FileName]%<Diff preview #[FileNameS][>>]%* %="
-				\ | endif
-		" }}}
-		" Syntastic location list {{{
-			au BufEnter * if bufname("%") == "[Location List]"
-				\ | let b:stl = "#[FileName]%< Location List #[FileNameS][>>]%* %="
-				\ | endif
-		" }}}
-	augroup END " }}}
 	augroup VimFiles " {{{
 		autocmd!
 
 		au Filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
 	augroup END " }}}
 " }}}
-" Abbreviations {{{
-	iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin quam eget libero pulvinar id condimentum velit sollicitudin. Proin cursus scelerisque dui ac condimentum. Nullam quis tellus leo. Morbi consectetur, lectus a blandit tincidunt, tortor augue tincidunt nisi, sit amet rhoncus tortor velit eu felis.
-" }}}
 " Plugin settings {{{
+	" delimitMate settings {{{
+		let g:delimitMate_expand_cr = 1
+		let g:delimitMate_expand_space = 1
+		let g:delimitMate_balance_matchpairs = 1
+		let g:delimitMate_excluded_ft = "mail,help"
+	" }}}
 	" EasyMotion settings {{{
-		let g:EasyMotion_mapping_e = '<Leader>ee'
-		let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-		" Extra normal mode mappings {{{
-			nnoremap <silent> f  :call EasyMotionF(  0, 0)<CR>
-			nnoremap <silent> F  :call EasyMotionF(  0, 1)<CR>
-			nnoremap <silent> w  :call EasyMotionWB( 0, 0)<CR>
-			nnoremap <silent> W  :call EasyMotionWBW(0, 0)<CR>
-			nnoremap <silent> b  :call EasyMotionWB( 0, 1)<CR>
-			nnoremap <silent> B  :call EasyMotionWBW(0, 1)<CR>
-			nnoremap <silent> e  :call EasyMotionE(  0, 0)<CR>
-			nnoremap <silent> E  :call EasyMotionEW( 0, 0)<CR>
-			nnoremap <silent> ge :call EasyMotionE(  0, 1)<CR>
-			nnoremap <silent> gE :call EasyMotionEW( 0, 1)<CR>
-		" }}}
+		let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
@@ -736,24 +550,15 @@
 		let g:gundo_right = 1
 		let g:gundo_width = 50
 	" }}}
-	" SuperTab settings {{{
-		let g:SuperTabDefaultCompletionType = 'context'
-		let g:SuperTabContextDefaultCompletionType = '<c-n>'
-		let g:SuperTabLongestEnhanced = 1
+	" UltiSnips settings {{{
+		let g:UltiSnipsExpandTrigger = '<Tab>'
+		let g:UltiSnipsListSnippets = '<S-Tab>'
+		let g:UltiSnipsJumpForwardTrigger = '<C-l>'
+		let g:UltiSnipsJumpBackwardTrigger = '<C-h>'
 	" }}}
-	" XPTemplate settings {{{
-		let g:xptemplate_brace_complete = 0
-		let g:xptemplate_highlight_nested = 1
-		" Make XPTemplate work with Supertab {{{
-			let g:SuperTabMappingForward = '<Plug>supertabKey'
-			let g:xptemplate_fallback = '<Plug>supertabKey'
-			let g:xptemplate_key = '<Tab>'
-			let g:xptemplate_pum_tab_nav = 1
-			let g:xptemplate_minimal_prefix = 'full'
-		" }}}
-	" }}}
-	" delimitMate settings {{{
-		let g:delimitMate_balance_matchpairs = 1
+	" Sparkup settings {{{
+		let g:sparkupExecuteMapping = '<C-E>'
+		let g:sparkupNextMapping = '<C-U>'
 	" }}}
 " }}}
 " Handle vim projects {{{
@@ -827,8 +632,8 @@
 				au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/vim/tags.php-hl.vim"
 			" }}}
 			" Write/source session file {{{
-				au VimEnter * nested call s:LoadSession()
-				au VimLeave * call s:MakeSession()
+				"au VimEnter * nested call s:LoadSession()
+				"au VimLeave * call s:MakeSession()
 			" }}}
 		augroup END " }}}
 	endif

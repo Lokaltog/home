@@ -1,0 +1,10 @@
+snippet table "create table" !b
+create table ${1:table} ( -- {{{
+	$0
+);
+-- }}}
+endsnippet
+
+snippet idx "create index" !b
+create index ${1:table}_${2:column}_idx on $1($2);
+endsnippet

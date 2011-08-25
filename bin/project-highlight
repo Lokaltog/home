@@ -86,7 +86,7 @@ foreach ($tags as $language => $kinds)
 		$hl .= "highlight def link $group $kind\n";
 		$hl .= "syntax match $group /{$pattern_prefix}\\%(";
 		$hl .= implode('\|', $tags);
-		$hl .= "\\){$pattern_suffix}/ containedin=ALLBUT,.*String.*,.*Comment.*,cIncluded\n";
+		$hl .= "\\){$pattern_suffix}/ contained containedin=".strtolower($language)."Region\n";
 	}
 
 	file_put_contents($tagfile.'.'.strtolower($language).'-hl.vim', $hl);

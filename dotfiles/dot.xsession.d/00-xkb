@@ -1,0 +1,12 @@
+# Load keyboard layout
+
+XKBDIR="$HOME/.xkb"
+XKBMAPFILE="$XKBDIR/keymap/$HOST"
+
+[[ -r "$XKBMAPFILE" ]] || XKBMAPFILE="${XKBMAPFILE%/*}/default"
+
+info "Loading keymap from $XKBMAPFILE"
+
+xkbcomp -I"$XKBDIR" "$XKBMAPFILE" "${DISPLAY%%.*}"
+
+unset XKBDIR XKBMAPFILE

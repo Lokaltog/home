@@ -1,4 +1,5 @@
 *.bak
 *.old
+*.pyc
 *~
 doc/tags

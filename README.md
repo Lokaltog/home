@@ -2,8 +2,8 @@
 
 - Author: Kim Silkebækken (kim.silkebaekken+github@gmail.com)
 - Source: <https://github.com/Lokaltog/sync>
-- Version: **1.0.7**
-- Updated: **2011-04-10**.
+- Version: **1.0.8**
+- Updated: **2011-08-25**.
 
 ## Vim statusbar
 
@@ -15,9 +15,10 @@ work correctly. It also requires the following vim plugins:
 - [Syntastic](https://github.com/scrooloose/syntastic)
 - [current-func-info](http://www.vim.org/scripts/script.php?script_id=3197)
 
-I'm planning to make the statusbar more portable in the future. In the
-meantime, feel free to play around with the code, and please let me know
-if you have any comments on how I can make the statusbar more portable.
+I'm working on making the statusbar more portable, check out my 
+`vim-superstatus` repo for the current status of the project. Feel free to 
+play around with the code, and please let me know if you have any comments 
+on how I can make the statusbar more portable.
 
 ## Other important notes
 
@@ -48,7 +49,7 @@ everything from that account.
 There's a shell script in `sync/dotfiles` which will automatically
 create symlinks for all dotfiles in this repo.
 
-	/bin/sh ~/sync/dotfiles/setup.sh ~
+	~/sync/dotfiles/setup.sh
 
 ### Step 3 (optional, Arch Linux only): Compile and install dwm
 

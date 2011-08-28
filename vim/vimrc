@@ -125,6 +125,7 @@
 	set smartindent
 	set nostartofline
 	set completeopt=menu,menuone,longest
+	set conceallevel=2
 	" Highlight problematic whitespace (spaces before tabs) {{{
 		hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
 		match RedundantSpaces / \+\ze\t/
@@ -630,6 +631,9 @@
 			autocmd!
 			" Highlight project tags {{{
 				au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/vim/tags.php-hl.vim"
+			" }}}
+			" Highlight project tags {{{
+				au BufReadPost,CursorHold *.py  silent! exec "source " . s:projectpath . "/vim/tags.python-hl.vim"
 			" }}}
 			" Write/source session file {{{
 				"au VimEnter * nested call s:LoadSession()

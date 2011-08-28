@@ -407,25 +407,8 @@
 		noremap  <Home> <NOP>
 		noremap  <End>  <NOP>
 	" }}}
-	" Mouse toggle {{{
-		function! s:ToggleMouse()
-			if !exists("old_mouse")
-				let old_mouse = "ar"
-			endif
-
-			if &mouse == ""
-				let &mouse = old_mouse
-				set nopaste
-				echo "Mouse is for VIM (" . &mouse . "), paste mode OFF"
-			else
-				let old_mouse = &mouse
-				let &mouse = ""
-				set paste
-				echo "Mouse is for TERMINAL, paste mode ON"
-			endif
-		endfunction
-
-		nnoremap <silent> <F12> :call <SID>ToggleMouse()<CR>
+	" Paste mode toggle {{{
+		nnoremap <silent> <F12> :set paste!<CR>
 	" }}}
 " }}}
 " Autocommands {{{
@@ -510,9 +493,10 @@
 " Plugin settings {{{
 	" delimitMate settings {{{
 		let g:delimitMate_expand_cr = 1
-		let g:delimitMate_expand_space = 1
 		let g:delimitMate_balance_matchpairs = 1
 		let g:delimitMate_excluded_ft = "mail,help"
+
+		au FileType python let b:delimitMate_nesting_quotes = ['"']
 	" }}}
 	" EasyMotion settings {{{
 		let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"

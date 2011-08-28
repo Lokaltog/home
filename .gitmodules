@@ -85,3 +85,6 @@
 [submodule "vim/modules/genshi"]
 	path = vim/modules/genshi
 	url = https://github.com/vim-scripts/genshi.vim.git
+[submodule "vim/modules/python-syntax"]
+	path = vim/modules/python-syntax
+	url = https://github.com/Lokaltog/python-syntax.git

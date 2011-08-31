@@ -122,7 +122,6 @@
 	set shiftwidth=6
 	set tabstop=6
 	set smartcase
-	set smartindent
 	set nostartofline
 	set completeopt=menu,menuone,longest
 	set conceallevel=2

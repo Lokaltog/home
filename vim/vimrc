@@ -29,7 +29,6 @@
 	set clipboard=unnamed,unnamedplus,autoselect
 	set autoread
 	set report=0
-	set gdefault
 	" Instantly leave insert mode when pressing <Esc> {{{
 		" This works by disabling the mapping timeout completely in normal mode,
 		" and enabling it in insert mode with a very low timeout length.
@@ -114,17 +113,23 @@
 " }}}
 " Layout / Text formatting {{{
 	set autoindent
+	set copyindent
+	set preserveindent
 	set wrap
-	set textwidth=10000
+	set textwidth=0
 	set formatoptions=croqwanl1
 	set ignorecase
 	set linebreak
-	set shiftwidth=6
-	set tabstop=6
 	set smartcase
 	set nostartofline
 	set completeopt=menu,menuone,longest
 	set conceallevel=2
+	" Set tab width {{{
+		let s:tabwidth = 4
+		exec 'set shiftwidth=' . s:tabwidth
+		exec 'set tabstop=' . s:tabwidth
+		exec 'set softtabstop=' . s:tabwidth
+	" }}}
 	" Highlight problematic whitespace (spaces before tabs) {{{
 		hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
 		match RedundantSpaces / \+\ze\t/
@@ -463,7 +468,7 @@
 		" }}}
 		" Format plain text and e-mails correctly {{{
 			au BufNewFile,BufRead *.txt setl ft=text
-			au FileType mail,text setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
+			au FileType mail,text,tex setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
 		" }}}
 		" Use foldmarkers for specific filetypes {{{
 			au FileType sass,javascript,psql,vim setl foldmethod=marker foldlevel=0
@@ -507,10 +512,13 @@
 		let g:php_parent_error_open = 1
 		let g:php_no_shorttags = 1
 	" }}}
-	" Python highlighting settings {{{
+	" Python settings {{{
 		let g:python_highlight_all = 1
 		let g:python_show_sync = 1
 		let g:python_print_as_function = 1
+
+		let g:pyindent_open_paren = '&sw'
+		let g:pyindent_continue = '&sw'
 	" }}}
 	" NERD tree settings {{{
 		let g:NERDTreeChristmasTree = 1

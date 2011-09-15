@@ -88,3 +88,6 @@
 [submodule "vim/modules/python-syntax"]
 	path = vim/modules/python-syntax
 	url = https://github.com/Lokaltog/python-syntax.git
+[submodule "vim/modules/simpylfold"]
+	path = vim/modules/simpylfold
+	url = https://github.com/tmhedberg/SimpylFold.git

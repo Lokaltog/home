@@ -495,13 +495,6 @@
 	augroup END " }}}
 " }}}
 " Plugin settings {{{
-	" delimitMate settings {{{
-		let g:delimitMate_expand_cr = 1
-		let g:delimitMate_balance_matchpairs = 1
-		let g:delimitMate_excluded_ft = "mail,help"
-
-		au FileType python let b:delimitMate_nesting_quotes = ['"']
-	" }}}
 	" EasyMotion settings {{{
 		let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
 	" }}}

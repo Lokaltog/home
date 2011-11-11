@@ -1,7 +1,7 @@
 # vim:set ft=sh:
 # Contributor: Kim Silkebækken <kim.silkebaekken@gmail.com
 pkgname="dwm-git"
-pkgver=20110426
+pkgver=20111111
 pkgrel=1
 pkgdesc="A dynamic window manager for X"
 url="http://dwm.suckless.org/"
@@ -53,4 +53,4 @@ build() {
 	install -D -m644 LICENSE ${pkgdir}/usr/share/licenses/dwm
 }
 
-md5sums=('8be083c56a770f2f1f27d51190cde4c0')
+md5sums=('405426ed3d2694187bda5154abe42799')

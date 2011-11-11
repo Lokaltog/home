@@ -21,7 +21,6 @@
 	set fileformat=unix
 	set matchpairs+=<:>
 	set shortmess=atToOI
-	set iskeyword+=_,$,@,%,#
 	set hidden
 	set encoding=utf-8
 	set termencoding=utf-8
@@ -67,23 +66,29 @@
 				au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
 			" }}}
 			" Use custom fillchars/listchars/showbreak icons {{{
+				set list
 				set fillchars=vert:ā,fold:Ķ,diff:Ď
 				set listchars=tab:Ā\ ,trail:Ė,eol:ĕ
 				set showbreak=Ģģ
 			" }}}
 			augroup List " {{{
 				autocmd!
-				" Set list on selected filetypes {{{
-					au FileType vim,snippet setl list
-					au FileType diff setl list listchars+=trail:\ " Disable trailing space chars
-					au FileType sh,zsh,bash setl list
-					au FileType html,css,sass,javascript,php,python,ruby,psql setl list
+				" Disable list on selected filetypes {{{
+					au FileType text,tex,latex setl nolist
+					au FileType diff setl listchars+=trail:\ " Disable trailing space chars in diff files
 				" }}}
 			augroup END " }}}
 		endif
 	" }}}
+	" GUI-specific settings {{{
+		set guifont=lokaltog
+		set guioptions=aciM
+		set guicursor+=a:blinkon0
+	" }}}
 	" Set colorscheme {{{
-		if &t_Co == 256
+		if has('gui_running')
+			colo distinguished
+		elseif &t_Co == 256
 			colo distinguished
 		else
 			colo pablo
@@ -110,14 +115,16 @@
 	set undolevels=1000
 	set pumheight=10
 	set diffopt+=context:3
+	set lazyredraw
+	set switchbuf=useopen,usetab
 " }}}
 " Layout / Text formatting {{{
 	set autoindent
 	set copyindent
 	set preserveindent
 	set wrap
-	set textwidth=0
-	set formatoptions=croqwanl1
+	set textwidth=10000
+	set formatoptions=roqwanl1
 	set ignorecase
 	set linebreak
 	set smartcase
@@ -444,7 +451,7 @@
 			au FileType help au BufEnter,BufWinEnter <buffer> call <SID>SetupHelpWindow()
 		" }}}
 		" Override SASS defaults {{{
-			au FileType sass set sw=6 ts=6 noet
+			au FileType sass exec 'set noexpandtab shiftwidth=' . s:tabwidth . ' tabstop=' . s:tabwidth . ' softtabstop=' . s:tabwidth
 		" }}}
 		" Disable Syntastic for selected filetypes {{{
 			au FileType sass SyntasticDisable
@@ -497,6 +504,7 @@
 " Plugin settings {{{
 	" EasyMotion settings {{{
 		let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
+		let g:EasyMotion_leader_key = '<Leader>'
 	" }}}
 	" PHP highlighting settings {{{
 		let g:php_folding = 0
@@ -520,6 +528,7 @@
 		let g:NERDTreeWinPos = 'right'
 		let g:NERDTreeWinSize = 50
 		let g:NERDTreeShowBookmarks = 1
+		let g:NERDTreeIgnore = ['\.pyc$', '^__pycache__$', '\.sock$']
 	" }}}
 	" Tagbar settings {{{
 		let g:tagbar_width = 50

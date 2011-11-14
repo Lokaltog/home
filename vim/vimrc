@@ -334,14 +334,16 @@
 	" Easier bracket matching {{{
 		nnoremap <Tab> %
 	" }}}
-	" Vertically split window and select it  {{{
-		nnoremap <Leader>v <C-w>v<C-w>l
-	" }}}
-	" Easier split window navigation {{{
-		nnoremap H <C-w>h
-		nnoremap J <C-w>j
+	" Split window mappings {{{
 		nnoremap K <C-w>k
+		nnoremap J <C-w>j
+		nnoremap H <C-w>h
 		nnoremap L <C-w>l
+
+		nmap <C-k> <C-w>s
+		nmap <C-j> <C-w>sJ
+		nmap <C-h> <C-w>v
+		nmap <C-l> <C-w>vL
 	" }}}
 	" Repurpose arrow keys to move lines {{{
 		" Inspired by http://jeetworks.com/node/89

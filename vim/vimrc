@@ -1,12 +1,10 @@
 " Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
 " Source: https://github.com/Lokaltog/sync
 " Load pathogen {{{
-	filetype off
-	call pathogen#runtime_append_all_bundles()
+	call pathogen#infect()
 " }}}
 " Basic configuration {{{
 	syntax on
-	filetype plugin indent on
 
 	set nocompatible
 	set nobackup

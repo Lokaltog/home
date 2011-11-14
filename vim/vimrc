@@ -4,6 +4,7 @@
 	call pathogen#infect()
 " }}}
 " Basic configuration {{{
+	filetype plugin indent on
 	syntax on
 
 	set nocompatible

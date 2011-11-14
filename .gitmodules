@@ -25,9 +25,6 @@
 [submodule "vim/modules/syntastic"]
 	path = vim/modules/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/modules/phpcomplete"]
-	path = vim/modules/phpcomplete
-	url = https://github.com/shawncplus/phpcomplete.vim.git
 [submodule "vim/modules/gundo"]
 	path = vim/modules/gundo
 	url = https://github.com/sjl/gundo.vim.git

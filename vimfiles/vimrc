@@ -1,643 +1,84 @@
-" Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
-" Source: https://github.com/Lokaltog/sync
+" Author: Kim Silkebækken <kim.silkebaekken+vim@gmail.com>
+" Source: http://git.io/LS
+
 " Load pathogen {{{
 	call pathogen#infect()
+" }}}
+" Source viminit files {{{
+	for file in split(globpath($HOME . '/sync/vimfiles/viminit', '*.vim'))
+		exec 'source ' . file
+	endfor
 " }}}
 " Basic configuration {{{
 	filetype plugin indent on
 	syntax on
 
-	set nocompatible
-	set nobackup
-	set nowritebackup
-	set noswapfile
-	set nomodeline
-	set undofile
-	set undodir=~/.vim/tmp
 	set autochdir
-	set backspace=indent,eol,start
-	set fileformats=unix,dos
-	set fileformat=unix
-	set matchpairs+=<:>
-	set shortmess=atToOI
-	set hidden
-	set encoding=utf-8
-	set termencoding=utf-8
-	set title
-	set clipboard=unnamed,unnamedplus,autoselect
-	set autoread
-	set report=0
-	" Instantly leave insert mode when pressing <Esc> {{{
-		" This works by disabling the mapping timeout completely in normal mode,
-		" and enabling it in insert mode with a very low timeout length.
-		augroup fastescape
-			autocmd!
-
-			set notimeout
-			set ttimeout
-			set timeoutlen=10
-
-			au InsertEnter * set timeout
-			au InsertLeave * set notimeout
-		augroup END
-	" }}}
-	" Define , as map leader {{{
-		let mapleader = ','
-	" }}}
-	" Disable all bells {{{
-		set noerrorbells visualbell t_vb=
-	" }}}
-	" Wild menu {{{
-		set wildmenu
-		set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
-		set wildmode=full
-	" }}}
-" }}}
-" UI options {{{
-	" URxvt-specific settings {{{
-		if &term =~ "rxvt-256color"
-			" Change cursor color in insert mode {{{
-				silent !echo -ne "]12;\#dd4010\x7"
-
-				let &t_SI="]12;\#89b6e2\x7"
-				let &t_EI="]12;\#dd4010\x7"
-
-				au VimLeave * silent !echo -ne "]12;\#dd4010\x7"
-			" }}}
-			" Use custom fillchars/listchars/showbreak icons {{{
-				set list
-				set fillchars=vert:ā,fold:Ķ,diff:Ď
-				set listchars=tab:Ā\ ,trail:Ė,eol:ĕ
-				set showbreak=Ģģ
-			" }}}
-			augroup List " {{{
-				autocmd!
-				" Disable list on selected filetypes {{{
-					au FileType text,tex,latex setl nolist
-					au FileType diff setl listchars+=trail:\ " Disable trailing space chars in diff files
-				" }}}
-			augroup END " }}}
-		endif
-	" }}}
-	" GUI-specific settings {{{
-		set guifont=lokaltog
-		set guioptions=aciM
-		set guicursor+=a:blinkon0
-	" }}}
-	" Set colorscheme {{{
-		if has('gui_running')
-			colo distinguished
-		elseif &t_Co == 256
-			colo distinguished
-		else
-			colo pablo
-		endif
-	" }}}
-	if exists('+breakindent')
-		set breakindent
-	endif
-	set laststatus=2
-	set hlsearch
-	set incsearch
-	set nonumber
-	set numberwidth=4
-	set ruler
-	set scrolloff=10
-	set sidescrolloff=20
-	set scrolljump=10
-	set showcmd
-	set noshowmode
-	set virtualedit=block,onemore
-	set confirm
-	set updatetime=1500
-	set history=1000
-	set undolevels=1000
-	set pumheight=10
-	set diffopt+=context:3
-	set lazyredraw
-	set switchbuf=useopen,usetab
-" }}}
-" Layout / Text formatting {{{
 	set autoindent
-	set copyindent
-	set preserveindent
-	set wrap
-	set textwidth=10000
-	set formatoptions=roqwanl1
-	set ignorecase
-	set linebreak
-	set smartcase
-	set nostartofline
+	set autoread
+	set backspace=indent,eol,start
+	set nobackup
+	set clipboard=unnamed,unnamedplus,autoselect
+	set nocompatible
 	set completeopt=menu,menuone,longest
 	set conceallevel=2
+	set confirm
+	set copyindent
+	set diffopt+=context:3
+	set encoding=utf-8
+	set noerrorbells visualbell t_vb= " Disable all bells
+	set formatoptions=roqwanl1
+	set hidden
+	set history=1000
+	set hlsearch
+	set ignorecase
+	set incsearch
+	set laststatus=2
+	set lazyredraw
+	set linebreak
+	set nomodeline
+	set nonumber
+	set numberwidth=4
+	set preserveindent
+	set pumheight=10
+	set report=0
+	set ruler
+	set scrolljump=10
+	set scrolloff=10
+	set shortmess=atToOI
+	set showcmd
+	set noshowmode
+	set sidescrolloff=20
+	set smartcase
+	set nostartofline
+	set noswapfile
+	set switchbuf=useopen,usetab
+	set termencoding=utf-8
+	set textwidth=10000
+	set undodir=~/.vim/tmp
+	set undofile
+	set undolevels=1000
+	set updatetime=1500
+	set virtualedit=block,onemore
+	set wrap
+	set nowritebackup
 	" Set tab width {{{
 		let s:tabwidth = 4
-		exec 'set shiftwidth=' . s:tabwidth
-		exec 'set tabstop=' . s:tabwidth
+
+		exec 'set shiftwidth='  . s:tabwidth
 		exec 'set softtabstop=' . s:tabwidth
+		exec 'set tabstop='     . s:tabwidth
 	" }}}
-	" Highlight problematic whitespace (spaces before tabs) {{{
-		hi RedundantSpaces ctermfg=214 ctermbg=160 cterm=bold
-		match RedundantSpaces / \+\ze\t/
+	" Folding settings {{{
+		set foldcolumn=0
+		set foldenable
+		set foldlevel=0
+		set foldmethod=marker
+		set foldtext=FoldText()
 	" }}}
-	" Conflict markers {{{
-		" Highlight conflict markers
-		match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-		" Shortcut to jump to next conflict marker
-		nmap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
+	" Wild menu {{{
+		set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpe?g,*.png,*.xpm,*.gif
+		set wildmenu
+		set wildmode=full
 	" }}}
-" }}}
-" Folding {{{
-	set foldenable
-	set foldmethod=marker
-	set foldlevel=0
-	set foldcolumn=0
-	set foldtext=FoldText()
-	" Universal FoldText function {{{
-		function! FoldText(...)
-			" This function uses code from doy's vim-foldtext: https://github.com/doy/vim-foldtext
-			" Prepare fold variables {{{
-				" Use function argument as line text if provided
-				let l:line = a:0 > 0 ? a:1 : getline(v:foldstart)
-
-				let l:line_count = v:foldend - v:foldstart + 1
-				let l:indent = repeat(' ', indent(v:foldstart))
-
-				let l:w_win = winwidth(0)
-				let l:w_num = getwinvar(0, '&number') * getwinvar(0, '&numberwidth')
-				let l:w_fold = getwinvar(0, '&foldcolumn')
-			" }}}
-			" Handle diff foldmethod {{{
-				if &fdm == 'diff'
-					let l:text = printf('ǒ %s matching lines Ǔ', l:line_count)
-
-					" Center-align the foldtext
-					return repeat('Ć', (l:w_win - strchars(l:text) - l:w_num - l:w_fold) / 2) . l:text
-				endif
-			" }}}
-			" Handle other foldmethods {{{
-				let l:text = l:line
-				" Remove foldmarkers {{{
-					let l:foldmarkers = split(&foldmarker, ',')
-					let l:text = substitute(l:text, '\V' . l:foldmarkers[0] . '\%(\d\+\)\?\s\*', '', '')
-				" }}}
-				" Remove comments {{{
-					let l:comment = split(&commentstring, '%s')
-
-					if l:comment[0] != ''
-						let l:comment_begin = l:comment[0]
-						let l:comment_end = ''
-
-						if len(l:comment) > 1
-							let l:comment_end = l:comment[1]
-						endif
-
-						let l:pattern = '\V' . l:comment_begin . '\s\*' . l:comment_end . '\s\*\$'
-
-						if l:text =~ l:pattern
-							let l:text = substitute(l:text, l:pattern, ' ', '')
-						else
-							let l:text = substitute(l:text, '.*\V' . l:comment_begin, ' ', '')
-
-							if l:comment_end != ''
-								let l:text = substitute(l:text, '\V' . l:comment_end, ' ', '')
-							endif
-						endif
-					endif
-				" }}}
-				" Remove preceding non-word characters {{{
-					let l:text = substitute(l:text, '^\W*', '', '')
-				" }}}
-				" Remove surrounding whitespace {{{
-					let l:text = substitute(l:text, '^\s*\(.\{-}\)\s*$', '\1', '')
-				" }}}
-				" Make unmatched block delimiters prettier {{{
-					let l:text = substitute(l:text, '([^)]*$',   'Ę ĵ ę', '')
-					let l:text = substitute(l:text, '{[^}]*$',   'Ę ĵ ę', '')
-					let l:text = substitute(l:text, '\[[^\]]*$', 'Ę ĵ ę', '')
-				" }}}
-				" Add arrows when indent level > 2 spaces {{{
-					if indent(v:foldstart) > 2
-						let l:cline = substitute(l:line, '^\s*\(.\{-}\)\s*$', '\1', '')
-						let l:clen = strlen(matchstr(l:cline, '^\W*'))
-
-						let l:indent = repeat(' ', indent(v:foldstart) - 2)
-						let l:text = 'ģ ' . l:text
-					endif
-				" }}}
-				" Prepare fold text {{{
-					let l:fnum = printf(' %s đ ', l:line_count)
-					let l:ftext = printf('%s%s ', l:indent, l:text)
-				" }}}
-				return l:ftext . repeat('Ķ', l:w_win - strchars(l:fnum) - strchars(l:ftext) - l:w_num - l:w_fold) . l:fnum
-			" }}}
-		endfunction
-	" }}}
-	" PHP FoldText function {{{
-		function! FoldText_PHP()
-			" This function uses code from phpfolding.vim
-			let l:curline = v:foldstart
-			let l:line = getline(l:curline)
-			" Did we fold a DocBlock? {{{
-				if strridx(l:line, '#@+') != -1
-					if (matchstr(l:line, '^.*#@+..*$') == l:line)
-						let l:line = substitute(l:line, '^.*#@+', '', 'g') . ' ' . g:phpDocBlockIncludedPostfix
-					else
-						let l:line = getline(l:curline + 1) . ' ' . g:phpDocBlockIncludedPostfix
-					endif
-			" }}}
-			" Did we fold an API comment block? {{{
-				elseif strridx(l:line, "\/\*\*") != -1
-					let s:state = 0
-
-					while l:curline < v:foldend
-						let l:loopline = getline(l:curline)
-
-						if s:state == 0 && strridx(l:loopline, "\*\/") != -1
-							let s:state = 1
-						elseif s:state == 1 && (matchstr(l:loopline, '^\s*$') != l:loopline)
-							break
-						endif
-
-						let l:curline = l:curline + 1
-					endwhile
-
-					let l:line = getline(l:curline)
-				endif
-			" }}}
-			" Cleanup {{{
-				let l:line = substitute(l:line, '/\*\|\*/\d\=', '', 'g')
-				let l:line = substitute(l:line, '^\s*\*\?\s*', '', 'g')
-				let l:line = substitute(l:line, '{$', '', 'g')
-				let l:line = substitute(l:line, '($', '(...)', 'g')
-			" }}}
-			" Append postfix if there is PhpDoc in the fold {{{
-				if l:curline != v:foldstart
-					let l:line = l:line . " " . g:phpDocIncludedPostfix . " "
-				endif
-			" }}}
-			return FoldText(l:line)
-		endfunction
-	" }}}
-	" Enable PHP FoldText function {{{
-		let g:DisableAutoPHPFolding = 1
-
-		au FileType php EnableFastPHPFolds
-		au FileType php set foldtext=FoldText() | setl foldtext=FoldText_PHP()
-	" }}}
-" }}}
-" Mappings {{{
-	" F key mappings {{{
-		nnoremap <silent> <F6>  :set number!<CR>
-		nnoremap <silent> <F7>  :LustyJuggler<CR>
-		nnoremap <silent> <F8>  :TagbarToggle<CR>
-		nnoremap <silent> <F9>  :LustyBufferExplorer<CR>
-		nnoremap <silent> <F10> :NERDTreeToggle<CR>
-		nnoremap <silent> <F11> :GundoToggle<CR>
-	" }}}
-	" Tabularize mappings {{{
-		vnoremap <silent> <Leader>t=> :Tabularize /=>/l0l1<CR>
-		vnoremap <silent> <Leader>t=  :Tabularize /=/l0l1<CR>
-		vnoremap <silent> <Leader>t,  :Tabularize /,/l0l1<CR>
-		vnoremap <silent> <Leader>t:  :Tabularize /:/l0l1<CR>
-	" }}}
-	" Buffer mappings {{{
-		nnoremap <silent> <Leader>d :bd<CR>
-	" }}}
-	" Quick edit .vimrc {{{
-		nnoremap <silent> <Leader>ev :edit   $MYVIMRC<CR>
-		nnoremap <silent> <Leader>sv :source $MYVIMRC<CR>
-	" }}}
-	" Enter command mode quickly {{{
-		nnoremap ; :
-	" }}}
-	" Navigate by visual lines {{{
-		noremap k gk
-		noremap j gj
-	" }}}
-	" Clear search highlighting {{{
-		nnoremap <silent> <Leader>/ :nohlsearch<CR>
-	" }}}
-	" Sudo write {{{
-		command! -bar -nargs=0 W  silent! exec "write !sudo tee % >/dev/null"  | silent! edit!
-	" }}}
-	" Write and make file executable {{{
-		command! -bar -nargs=0 WX silent! exec "write !chmod a+x % >/dev/null" | silent! edit!
-	" }}}
-	" Fix broken vim regexes when searching {{{
-		" http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
-		nnoremap / /\v
-		vnoremap / /\v
-		cnoremap s/ s/\v
-	" }}}
-	" Easier bracket matching {{{
-		nnoremap <Tab> %
-	" }}}
-	" Split window mappings {{{
-		nnoremap K <C-w>k
-		nnoremap J <C-w>j
-		nnoremap H <C-w>h
-		nnoremap L <C-w>l
-
-		nmap <C-k> <C-w>s
-		nmap <C-j> <C-w>sJ
-		nmap <C-h> <C-w>v
-		nmap <C-l> <C-w>vL
-	" }}}
-	" Repurpose arrow keys to move lines {{{
-		" Inspired by http://jeetworks.com/node/89
-		function! s:MoveLineUp()
-			call <SID>MoveLineOrVisualUp(".", "")
-		endfunction
-
-		function! s:MoveLineDown()
-			call <SID>MoveLineOrVisualDown(".", "")
-		endfunction
-
-		function! s:MoveVisualUp()
-			call <SID>MoveLineOrVisualUp("'<", "'<,'>")
-			normal gv
-		endfunction
-
-		function! s:MoveVisualDown()
-			call <SID>MoveLineOrVisualDown("'>", "'<,'>")
-			normal gv
-		endfunction
-
-		function! s:MoveLineOrVisualUp(line_getter, range)
-			let l_num = line(a:line_getter)
-			if l_num - v:count1 - 1 < 0
-				let move_arg = "0"
-			else
-				let move_arg = a:line_getter." -".(v:count1 + 1)
-			endif
-			call <SID>MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
-		endfunction
-
-		function! s:MoveLineOrVisualDown(line_getter, range)
-			let l_num = line(a:line_getter)
-			if l_num + v:count1 > line("$")
-				let move_arg = "$"
-			else
-				let move_arg = a:line_getter." +".v:count1
-			endif
-			call <SID>MoveLineOrVisualUpOrDown(a:range."move ".move_arg)
-		endfunction
-
-		function! s:MoveLineOrVisualUpOrDown(move_arg)
-			let col_num = virtcol(".")
-			execute "silent! ".a:move_arg
-			execute "normal! ".col_num."|"
-		endfunction
-
-		" Arrow key remapping:
-		" Up/Dn = move line up/dn
-		" Left/Right = indent/unindent
-		function! SetArrowKeysAsTextShifters()
-			" Normal mode
-			nnoremap <silent> <Left>   <<
-			nnoremap <silent> <Right>  >>
-			nnoremap <silent> <Up>     <Esc>:call <SID>MoveLineUp()<CR>
-			nnoremap <silent> <Down>   <Esc>:call <SID>MoveLineDown()<CR>
-
-			" Visual mode
-			vnoremap <silent> <Left>   <gv
-			vnoremap <silent> <Right>  >gv
-			vnoremap <silent> <Up>     <Esc>:call <SID>MoveVisualUp()<CR>
-			vnoremap <silent> <Down>   <Esc>:call <SID>MoveVisualDown()<CR>
-
-			" Insert mode
-			inoremap <silent> <Left>   <C-D>
-			inoremap <silent> <Right>  <C-T>
-			inoremap <silent> <Up>     <C-O>:call <SID>MoveLineUp()<CR>
-			inoremap <silent> <Down>   <C-O>:call <SID>MoveLineDown()<CR>
-		endfunction
-
-		call SetArrowKeysAsTextShifters()
-	" }}}
-	" Disable normal mode movement keys {{{
-		noremap  <Home> <NOP>
-		noremap  <End>  <NOP>
-	" }}}
-	" Paste mode toggle {{{
-		nnoremap <silent> <F12> :set paste!<CR>
-	" }}}
-" }}}
-" Autocommands {{{
-	augroup General " {{{
-		autocmd!
-		" Custom psql highlighting {{{
-			au BufNewFile,BufRead *.sql set ft=psql
-		" }}}
-		" Nginx highlighting {{{
-			au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
-		" }}}
-		" Script templates {{{
-			au BufNewFile *.sh  so ~/.vim/templates/tpl.sh
-			au BufNewFile *.py  so ~/.vim/templates/tpl.py
-			au BufNewFile *.php so ~/.vim/templates/tpl.php
-		" }}}
-		" Help file settings {{{
-			function! s:SetupHelpWindow()
-				wincmd L
-				vertical resize 80
-				setl nonumber winfixwidth colorcolumn=
-
-				let b:stl = "#[Branch] HELP#[BranchS] [>] #[FileName]%<%t #[FileNameS][>>]%* %=#[LinePercentS][<<]#[LinePercent] %p%% " " Set custom statusline
-
-				nnoremap <buffer> <Space> <C-]> " Space selects subject
-				nnoremap <buffer> <BS>    <C-T> " Backspace to go back
-			endfunction
-
-			au FileType help au BufEnter,BufWinEnter <buffer> call <SID>SetupHelpWindow()
-		" }}}
-		" Override SASS defaults {{{
-			au FileType sass exec 'set noexpandtab shiftwidth=' . s:tabwidth . ' tabstop=' . s:tabwidth . ' softtabstop=' . s:tabwidth
-		" }}}
-		" Disable Syntastic for selected filetypes {{{
-			au FileType sass SyntasticDisable
-		" }}}
-		" Fix space highlighting in diff files {{{
-			au FileType diff hi clear RedundantSpaces
-				\ | hi DiffCol ctermbg=238 cterm=bold
-				\ | match DiffCol /^[ +-]\([+-]\)\@!/
-		" }}}
-		" Load .Xdefaults/.Xresources on save {{{
-			au BufWritePost,FileWritePost ~/.Xdefaults,~/.Xresources silent! !xrdb -load % >/dev/null 2>&1
-		" }}}
-		" Support Genshi templates {{{
-			au FileType html set ft=genshi
-		" }}}
-	augroup END " }}}
-	augroup Formatting " {{{
-		autocmd!
-		" Fix gitcommit formatting {{{
-			au FileType gitcommit setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
-		" }}}
-		" Format plain text and e-mails correctly {{{
-			au BufNewFile,BufRead *.txt setl ft=text
-			au FileType mail,text,tex setl formatoptions+=t formatoptions-=l textwidth=72 colorcolumn=72
-		" }}}
-		" Use foldmarkers for specific filetypes {{{
-			au FileType sass,javascript,psql,vim setl foldmethod=marker foldlevel=0
-		" }}}
-	augroup END" }}}
-	augroup Whitespace " {{{
-		autocmd!
-		" Remove trailing whitespace from selected filetypes {{{
-			function! s:StripTrailingWhitespace()
-				normal mZ
-
-				%s/\s\+$//e
-
-				normal `Z
-			endfunction
-
-			au FileType html,css,sass,javascript,php,python,ruby,psql,vim au BufWritePre <buffer> :silent! call <SID>StripTrailingWhitespace()
-		" }}}
-	augroup END " }}}
-	augroup VimFiles " {{{
-		autocmd!
-
-		au Filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
-	augroup END " }}}
-" }}}
-" Plugin settings {{{
-	" EasyMotion settings {{{
-		let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
-		let g:EasyMotion_leader_key = '<Leader>'
-	" }}}
-	" PHP highlighting settings {{{
-		let g:php_folding = 0
-		let g:php_html_in_strings = 1
-		let g:php_parent_error_close = 1
-		let g:php_parent_error_open = 1
-		let g:php_no_shorttags = 1
-	" }}}
-	" Python settings {{{
-		let g:python_highlight_all = 1
-		let g:python_show_sync = 1
-		let g:python_print_as_function = 1
-
-		let g:pyindent_open_paren = '&sw'
-		let g:pyindent_continue = '&sw'
-	" }}}
-	" NERD tree settings {{{
-		let g:NERDTreeChristmasTree = 1
-		let g:NERDTreeCaseSensitiveSort = 1
-		let g:NERDTreeQuitOnOpen = 1
-		let g:NERDTreeWinPos = 'right'
-		let g:NERDTreeWinSize = 50
-		let g:NERDTreeShowBookmarks = 1
-		let g:NERDTreeIgnore = ['\.pyc$', '^__pycache__$', '\.sock$']
-	" }}}
-	" Tagbar settings {{{
-		let g:tagbar_width = 50
-		let g:tagbar_autoclose = 1
-		let g:tagbar_autofocus = 1
-		let g:tagbar_compact = 1
-	" }}}
-	" Syntastic settings {{{
-		let g:syntastic_enable_signs = 1
-		let g:syntastic_auto_loc_list = 0
-
-		" Disable some syntax checkers
-		let loaded_c_syntax_checker = 1
-		let loaded_javascript_syntax_checker = 1
-	" }}}
-	" Gundo settings {{{
-		let g:gundo_right = 1
-		let g:gundo_width = 50
-	" }}}
-	" UltiSnips settings {{{
-		let g:UltiSnipsExpandTrigger = '<Tab>'
-		let g:UltiSnipsListSnippets = '<S-Tab>'
-		let g:UltiSnipsJumpForwardTrigger = '<C-l>'
-		let g:UltiSnipsJumpBackwardTrigger = '<C-h>'
-	" }}}
-	" Sparkup settings {{{
-		let g:sparkupExecuteMapping = '<C-E>'
-		let g:sparkupNextMapping = '<C-U>'
-	" }}}
-" }}}
-" Handle vim projects {{{
-	let s:projectpath = system("cat $XDG_CONFIG_HOME/projectpath 2&>/dev/null")
-
-	if ! empty(s:projectpath) && isdirectory(s:projectpath)
-		let s:projectsessionfile = s:projectpath . "/vim/session.vim"
-
-		let &path = s:projectpath . "/**," . &path
-		let &tags = s:projectpath . "/vim/tags," . &tags
-		let g:NERDTreeBookmarksFile = s:projectpath . "/vim/bookmarks"
-
-		" CScope preferences {{{
-			set nocsverb
-			silent! exec "cd " . s:projectpath
-			silent! exec "cscope add " . s:projectpath . "/vim/cscope.out"
-			set csverb
-
-			set cscopetag
-			set cscopetagorder=0
-		" }}}
-		" Session options {{{
-			set sessionoptions=blank,buffers,folds
-			" Session handling functions {{{
-				function! s:SessionException()
-					" Vim called with arguments
-					if argc() != 0
-						return 1
-					endif
-
-					" Git commit messages
-					if match(expand("%"), "\.git\/COMMIT") >= 0
-						return 1
-					endif
-
-					return 0
-				endfunction
-
-				function! s:MakeSession()
-					if s:SessionException() == 1
-						return
-					endif
-
-					exec "mksession! " . s:projectsessionfile
-
-					call writefile(
-						\ [
-							\ 'colorscheme ' . g:colors_name
-						\ ],
-						\ fnamemodify(s:projectsessionfile, ':p:r') . 'x.vim'
-					\ )
-				endfunction
-
-				function! s:LoadSession()
-					if s:SessionException()
-						return
-					endif
-
-					" Check that file is readable
-					if ! filereadable(s:projectsessionfile)
-						return
-					endif
-
-					exec "source " . s:projectsessionfile
-				endfunction
-			" }}}
-		" }}}
-		augroup Project " {{{
-			autocmd!
-			" Highlight project tags {{{
-				au BufReadPost,CursorHold *.php silent! exec "source " . s:projectpath . "/vim/tags.php-hl.vim"
-			" }}}
-			" Highlight project tags {{{
-				au BufReadPost,CursorHold *.py  silent! exec "source " . s:projectpath . "/vim/tags.python-hl.vim"
-			" }}}
-			" Write/source session file {{{
-				"au VimEnter * nested call s:LoadSession()
-				"au VimLeave * call s:MakeSession()
-			" }}}
-		augroup END " }}}
-	endif
 " }}}

@@ -54,3 +54,8 @@
 	let g:UltiSnipsJumpForwardTrigger = '<C-l>'
 	let g:UltiSnipsJumpBackwardTrigger = '<C-h>'
 " }}}
+" Powerline settings {{{
+	" Set g:has_cfi - this is necessary for Powerline to recognize that cfi is available
+	let g:has_cfi = 1
+	let g:Powerline_dividers = 'default'
+" }}}

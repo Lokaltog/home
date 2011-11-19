@@ -67,9 +67,6 @@
 [submodule "vimfiles/vim/bundle/ultisnips"]
 	path = vimfiles/vim/bundle/ultisnips
 	url = https://github.com/rygwdn/ultisnips.git
-[submodule "vimfiles/vim/bundle/vim-superstatus"]
-	path = vimfiles/vim/bundle/vim-superstatus
-	url = https://github.com/Lokaltog/vim-superstatus.git
 [submodule "vimfiles/vim/bundle/nerdcommenter"]
 	path = vimfiles/vim/bundle/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
@@ -85,3 +82,6 @@
 [submodule "vimfiles/vim/bundle/simpylfold"]
 	path = vimfiles/vim/bundle/simpylfold
 	url = https://github.com/tmhedberg/SimpylFold.git
+[submodule "vimfiles/vim/bundle/vim-powerline"]
+	path = vimfiles/vim/bundle/vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline.git

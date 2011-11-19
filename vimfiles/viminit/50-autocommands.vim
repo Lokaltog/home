@@ -17,8 +17,6 @@ augroup General " {{{
 			vertical resize 80
 			setl nonumber winfixwidth colorcolumn=
 
-			let b:stl = "#[Branch] HELP#[BranchS] [>] #[FileName]%<%t #[FileNameS][>>]%* %=#[LinePercentS][<<]#[LinePercent] %p%% " " Set custom statusline
-
 			nnoremap <buffer> <Space> <C-]> " Space selects subject
 			nnoremap <buffer> <BS>    <C-T> " Backspace to go back
 		endfunction

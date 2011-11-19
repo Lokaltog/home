@@ -19,6 +19,7 @@
 	set backspace=indent,eol,start
 	set nobackup
 	set clipboard=unnamed,unnamedplus,autoselect
+	set colorcolumn+=76
 	set nocompatible
 	set completeopt=menu,menuone,longest
 	set conceallevel=2

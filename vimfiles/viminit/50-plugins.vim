@@ -6,15 +6,6 @@
 	let g:gundo_right = 1
 	let g:gundo_width = 50
 " }}}
-" NERD tree settings {{{
-	let g:NERDTreeChristmasTree = 1
-	let g:NERDTreeCaseSensitiveSort = 1
-	let g:NERDTreeQuitOnOpen = 1
-	let g:NERDTreeWinPos = 'right'
-	let g:NERDTreeWinSize = 50
-	let g:NERDTreeShowBookmarks = 1
-	let g:NERDTreeIgnore = ['\.pyc$', '^__pycache__$', '\.sock$']
-" }}}
 " PHP highlighting settings {{{
 	let g:php_folding = 0
 	let g:php_html_in_strings = 1

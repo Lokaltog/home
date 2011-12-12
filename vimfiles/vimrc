@@ -13,9 +13,6 @@
 	filetype plugin indent on
 	syntax on
 
-	set autochdir
-	set autoindent
-	set autoread
 	set backspace=indent,eol,start
 	set nobackup
 	set clipboard=unnamed,unnamedplus,autoselect

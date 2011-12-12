@@ -9,10 +9,10 @@ let mapleader = ','
 	nnoremap <silent> <F11> :GundoToggle<CR>
 " }}}
 " Tabularize mappings {{{
-	vnoremap <silent> <Leader>t=> :Tabularize /=>/l0l1<CR>
-	vnoremap <silent> <Leader>t=  :Tabularize /=/l0l1<CR>
-	vnoremap <silent> <Leader>t,  :Tabularize /,/l0l1<CR>
-	vnoremap <silent> <Leader>t:  :Tabularize /:/l0l1<CR>
+	vnoremap <silent> <Leader>a=> :Tabularize /=>/l0l1<CR>
+	vnoremap <silent> <Leader>a=  :Tabularize /=/l0l1<CR>
+	vnoremap <silent> <Leader>a,  :Tabularize /,/l0l1<CR>
+	vnoremap <silent> <Leader>a:  :Tabularize /:/l0l1<CR>
 " }}}
 " Buffer mappings {{{
 	nnoremap <silent> <Leader>d :bd<CR>

@@ -57,7 +57,7 @@
 " Powerline settings {{{
 	" Set g:has_cfi - this is necessary for Powerline to recognize that cfi is available
 	let g:has_cfi = 1
-	let g:Powerline_dividers = 'default'
+	let g:Powerline_symbols = 'fancy'
 " }}}
 " Command-T settings {{{
 	let g:CommandTMaxHeight = 20

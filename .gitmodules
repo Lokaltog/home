@@ -85,3 +85,6 @@
 [submodule "vimfiles/vim/bundle/vim-powerline"]
 	path = vimfiles/vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "vimfiles/vim/bundle/command-t"]
+	path = vimfiles/vim/bundle/command-t
+	url = git://git.wincent.com/command-t.git

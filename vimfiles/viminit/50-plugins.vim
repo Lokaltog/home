@@ -59,3 +59,6 @@
 	let g:has_cfi = 1
 	let g:Powerline_dividers = 'default'
 " }}}
+" Command-T settings {{{
+	let g:CommandTMaxHeight = 20
+" }}}

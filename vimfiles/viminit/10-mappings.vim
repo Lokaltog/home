@@ -2,10 +2,10 @@ let mapleader = ','
 
 " F key mappings {{{
 	nnoremap <silent> <F6>  :set number!<CR>
-	nnoremap <silent> <F7>  :LustyJuggler<CR>
-	nnoremap <silent> <F8>  :TagbarToggle<CR>
-	nnoremap <silent> <F9>  :LustyBufferExplorer<CR>
-	nnoremap <silent> <F10> :NERDTreeToggle<CR>
+	nnoremap <silent> <F7>  :TagbarToggle<CR>
+	nnoremap <silent> <F8>  :CommandT <C-R>=expand('%:h').'/'<CR><CR>
+	nnoremap <silent> <F9>  :CommandTBuffer<CR>
+	nnoremap <silent> <F10> :CommandT<CR>
 	nnoremap <silent> <F11> :GundoToggle<CR>
 " }}}
 " Tabularize mappings {{{

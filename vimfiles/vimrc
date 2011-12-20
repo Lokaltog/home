@@ -46,7 +46,6 @@
 	set shortmess=atToOI
 	set showcmd
 	set noshowmode
-	set sidescrolloff=20
 	set smartcase
 	set nostartofline
 	set noswapfile
@@ -58,7 +57,7 @@
 	set undolevels=1000
 	set updatetime=1500
 	set virtualedit=block,onemore
-	set wrap
+	set nowrap
 	set nowritebackup
 	" Set tab width {{{
 		let s:tabwidth = 4

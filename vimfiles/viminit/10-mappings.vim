@@ -3,10 +3,10 @@ let mapleader = ','
 " F key mappings {{{
 	nnoremap <silent> <F6>  :set number!<CR>
 	nnoremap <silent> <F7>  :TagbarToggle<CR>
-	nnoremap <silent> <F8>  :CommandT <C-R>=expand('%:h').'/'<CR><CR>
+	nnoremap <silent> <F8>  :GundoToggle<CR>
 	nnoremap <silent> <F9>  :CommandTBuffer<CR>
 	nnoremap <silent> <F10> :CommandT<CR>
-	nnoremap <silent> <F11> :GundoToggle<CR>
+	nnoremap <silent> <F11> :CommandT <C-R>=expand('%:h').'/'<CR><CR>
 " }}}
 " Tabularize mappings {{{
 	vnoremap <silent> <Leader>a=> :Tabularize /=>/l0l1<CR>
@@ -23,10 +23,6 @@ let mapleader = ','
 " }}}
 " Enter command mode quickly {{{
 	nnoremap ; :
-" }}}
-" Navigate by visual lines {{{
-	noremap k gk
-	noremap j gj
 " }}}
 " Clear search highlighting {{{
 	nnoremap <silent> <Leader>/ :nohlsearch<CR>

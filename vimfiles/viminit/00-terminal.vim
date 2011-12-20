@@ -28,7 +28,7 @@ if &term =~ "rxvt-256color"
 	" Use custom fillchars/listchars/showbreak icons {{{
 		set list
 		set fillchars=vert:ā,fold:Ķ,diff:Ď
-		set listchars=tab:Ā\ ,trail:Ė,eol:ĕ
+		set listchars=tab:Ā\ ,trail:Ė,eol:ĕ,precedes:Ě,extends:ě
 		set showbreak=Ģģ
 	" }}}
 	" Disable list/listchars on selected filetypes {{{

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+CREDENTIALS=`cat ~/.minecraft/credentials`
+MCPATH="$HOME/.minecraft"
+PATH="$PATH:/opt/java/jre/bin"
+
+java -cp $MCPATH/minecraft.jar -Xmx1024M -Xms1024M net.minecraft.LauncherFrame $CREDENTIALS

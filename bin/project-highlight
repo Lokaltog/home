@@ -31,10 +31,12 @@ $kinds = array(
 	'd' => 'Constant',
 	'f' => 'Function',
 	'v' => 'Variable',
+	'm' => 'Member',
 );
 
 $tags = array(
 	'PHP' => array(),
+	'Python' => array(),
 );
 
 $pattern = array(
@@ -43,6 +45,11 @@ $pattern = array(
 			'suffix' => '(\\@=',
 		),
 	),
+);
+
+$match_properties = array(
+	'PHP' => 'contained containedin=phpRegion',
+	'Python' => '',
 );
 
 foreach (file($tagfile) as $line)
@@ -79,14 +86,14 @@ foreach ($tags as $language => $kinds)
 	{
 		$group = "{$language}{$kind}Tag";
 
-		$pattern_prefix = isset($patten[$language][$kind]['prefix']) ?: '\\C\\<';
-		$pattern_suffix = isset($patten[$language][$kind]['suffix']) ?: '\>';
+		$pattern_prefix = isset($pattern[$language][$kind]['prefix']) ?: '\\C\\<';
+		$pattern_suffix = isset($pattern[$language][$kind]['suffix']) ?: '\>';
 
 		$hl .= "try | syntax clear $group | catch | endtry\n";
 		$hl .= "highlight def link $group $kind\n";
 		$hl .= "syntax match $group /{$pattern_prefix}\\%(";
 		$hl .= implode('\|', $tags);
-		$hl .= "\\){$pattern_suffix}/ contained containedin=".strtolower($language)."Region\n";
+		$hl .= "\\){$pattern_suffix}/ {$match_properties[$language]}\n";
 	}
 
 	file_put_contents($tagfile.'.'.strtolower($language).'-hl.vim', $hl);

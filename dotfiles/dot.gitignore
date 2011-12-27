@@ -3,3 +3,4 @@
 *.pyc
 *~
 doc/tags
+__pycache__

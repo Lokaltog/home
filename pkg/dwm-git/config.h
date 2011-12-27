@@ -84,6 +84,7 @@ static const char *screenshot_cmd[]           = { "scrot", NULL };
 
 static const char *run_chromium[]             = { "/home/kim/sync/bin/chromium",     NULL };
 static const char *run_chromium_tor[]         = { "/home/kim/sync/bin/chromium-tor", NULL };
+static const char *run_minecraft[]            = { "/home/kim/sync/bin/minecraft",    NULL };
 
 static const char *run_vim[]                  = { terminal, "-name", "vim",        "-e", "vim",                NULL };
 static const char *run_ncmpcpp[]              = { terminal, "-name", "ncmpcpp",    "-e", "ncmpcpp",            NULL };
@@ -100,7 +101,8 @@ static Key keys[] = {
 	// modifier               key           function          argument
 	{ MODKEY,                 XK_x,         spawn,            {.v = dmenu_cmd } },
 	{ MODKEY,                 XK_Return,    spawn,            {.v = term_cmd } },
-	{ MODKEY,                 XK_m,         spawn,            {.v = run_ncmpcpp } },
+	{ MODKEY,                 XK_m,         spawn,            {.v = run_minecraft } },
+	{ MODKEY|ShiftMask,       XK_m,         spawn,            {.v = run_ncmpcpp } },
 	{ MODKEY,                 XK_n,         spawn,            {.v = run_chromium } },
 	{ MODKEY|ShiftMask,       XK_n,         spawn,            {.v = run_chromium_tor } },
 	{ MODKEY,                 XK_v,         spawn,            {.v = run_vim } },

@@ -1,1 +1,1 @@
-../zsh/zsh
+../zshfiles/zsh

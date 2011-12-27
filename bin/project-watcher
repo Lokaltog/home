@@ -13,11 +13,13 @@ sudo gem list --local | grep -qi livereload
 [[ $? -eq 1 ]] && echo 'LiveReload gem is missing!' && sudo gem install livereload rb-inotify;
 (echo '[!!] Starting LiveReload...'; livereload ${BASE_DIR}) &
 
-# Init compass
-for D in ${BASE_DIR}/application/assets/source/sass/*; do
-	echo "[!!] Starting Compass watcher for $D..."
-	compass watch $D &
-done
+if [[ "$2" != 'nocompass' ]]; then
+	# Init compass
+	for D in ${BASE_DIR}/application/assets/source/sass/*; do
+		echo "[!!] Starting Compass watcher for $D..."
+		compass watch $D &
+	done
+fi
 
 # Make sure $XDG_CONFIG_HOME/projectpath is correct
 echo -n ${BASE_DIR} > ${XDG_CONFIG_HOME}/projectpath
@@ -27,7 +29,7 @@ trap "echo '[!!] Cleaning up temporary files...'; \
 	rm -f ${XDG_CONFIG_HOME}/projectpath ${VIM_DIR}/cscope.files ${LOCK_FILE}; \
 	exit" SIGHUP SIGINT SIGTERM
 
-# Watch for PHP file updates
+# Watch for PHP and Python file updates
 inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
 	FILE_EXT="${LINE##*.}"
 
@@ -40,7 +42,7 @@ inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
 	# Loop through valid extensions, no reason to run the script if the 
 	# changed file isn't a PHP/JS file
 	VALID_EXT=
-	for EXT in php; do
+	for EXT in php py; do
 		[[ ${FILE_EXT} == ${EXT} ]] && VALID_EXT=true
 	done
 	[[ ! ${VALID_EXT} ]] && continue
@@ -50,13 +52,18 @@ inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
 
 	# Generate ctags file
 	find ${BASE_DIR} \
+		\( \
 		     ! -wholename './.git/*' \
 		-and ! -wholename './.svn/*' \
 		-and ! -wholename '*logs*' \
 		-and ! -wholename '*tmp*' \
 		-and ! -name '*~' \
 		-and ! -name '*#' \
-		-name '*.php' \
+		\) \
+		\( \
+		    -name '*.php' \
+		-or -name '*.py' \
+		\) \
 		-print0 | \
 		xargs -0 \
 		/usr/bin/ctags \

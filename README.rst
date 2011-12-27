@@ -14,16 +14,14 @@ Please see the Powerline_ project.
 
 .. _Powerline: http://git.io/Powerline
 
-Custom fonsts
--------------
+Custom fonts
+------------
 
 Some of the stuff in this repo requires the fonts in ``fonts/bdf`` to work 
 properly. Dwm requires ``cureextra`` for statusline icons, while vim and zsh 
 require ``lokaltog-12`` or ``lokaltog-10`` for icons and various symbols.  
 These symbols are stored in the extended Latin-1 range, which may cause my 
 configuration to appear weird unless you use compatible fonts.
-
------
 
 ==================
 Installation guide

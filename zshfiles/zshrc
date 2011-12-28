@@ -311,3 +311,8 @@
 		bindkey "^F" integrated-ranger
 	# }}}
 # }}}
+# Enable stderred {{{
+	if [[ -f "/usr/lib/stderred.so" ]]; then
+		export LD_PRELOAD="/usr/lib/stderred.so:$LD_PRELOAD"
+	fi
+# }}}

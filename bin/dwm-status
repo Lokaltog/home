@@ -98,7 +98,7 @@ def get_mpd():
 	else:
 		status = status.split("\n")
 		playing = status[0]
-		percent = int(re.search("(\d+)%", status[1]).groups()[0])
+		percent = int(re.search("(\d+)%", status[1]).group(1))
 		progress = draw_bar(percent)
 		trim_len = 60
 
@@ -125,11 +125,13 @@ def get_wifi():
 def get_volume():
 	try:
 		amixer = run_cmd(["amixer", "get", "Master"])
+
+		volume = int(re.search("\[(\d+)%\]", amixer).group(1))
+		muted = re.search("\[(on|off)\]", amixer).group(1) == "off"
 	except OSError:
 		return ''
-
-	volume = int(re.search("\[(\d+)%\]", amixer).groups()[0])
-	muted = re.search("\[(on|off)\]", amixer).groups()[0] == "off"
+	except AttributeError:
+		muted = True
 
 	if muted:
 		return "\x07ê {volume} ".format(volume=draw_bar(0))

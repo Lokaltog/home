@@ -27,7 +27,7 @@ augroup General " {{{
 		au FileType sass au BufEnter,BufWinEnter <buffer> exec 'set noexpandtab shiftwidth=' . g:tabwidth . ' tabstop=' . g:tabwidth . ' softtabstop=' . g:tabwidth
 	" }}}
 	" Disable Syntastic for selected filetypes {{{
-		au FileType sass SyntasticDisable
+		au FileType sass SyntasticToggleMode
 	" }}}
 	" Fix space highlighting in diff files {{{
 		au FileType diff hi clear RedundantSpaces

@@ -24,7 +24,7 @@ augroup General " {{{
 		au FileType help au BufEnter,BufWinEnter <buffer> call <SID>SetupHelpWindow()
 	" }}}
 	" Override SASS defaults {{{
-		au FileType sass exec 'set noexpandtab shiftwidth=' . s:tabwidth . ' tabstop=' . s:tabwidth . ' softtabstop=' . s:tabwidth
+		au FileType sass au BufEnter,BufWinEnter <buffer> exec 'set noexpandtab shiftwidth=' . g:tabwidth . ' tabstop=' . g:tabwidth . ' softtabstop=' . g:tabwidth
 	" }}}
 	" Disable Syntastic for selected filetypes {{{
 		au FileType sass SyntasticDisable

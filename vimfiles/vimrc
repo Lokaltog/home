@@ -60,11 +60,11 @@
 	set nowrap
 	set nowritebackup
 	" Set tab width {{{
-		let s:tabwidth = 4
+		let g:tabwidth = 4
 
-		exec 'set shiftwidth='  . s:tabwidth
-		exec 'set softtabstop=' . s:tabwidth
-		exec 'set tabstop='     . s:tabwidth
+		exec 'set shiftwidth='  . g:tabwidth
+		exec 'set softtabstop=' . g:tabwidth
+		exec 'set tabstop='     . g:tabwidth
 	" }}}
 	" Folding settings {{{
 		set foldcolumn=0

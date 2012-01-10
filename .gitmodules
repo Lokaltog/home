@@ -67,3 +67,6 @@
 [submodule "vimfiles/vim/bundle/command-t"]
 	path = vimfiles/vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
+[submodule "vimfiles/vim/bundle/vim-coffee-script"]
+	path = vimfiles/vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git

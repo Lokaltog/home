@@ -4,9 +4,9 @@ let mapleader = ','
 	nnoremap <silent> <F6>  :set number!<CR>
 	nnoremap <silent> <F7>  :TagbarToggle<CR>
 	nnoremap <silent> <F8>  :GundoToggle<CR>
-	nnoremap <silent> <F9>  :CommandTBuffer<CR>
-	nnoremap <silent> <F10> :CommandT<CR>
-	nnoremap <silent> <F11> :CommandT <C-R>=expand('%:h').'/'<CR><CR>
+	nnoremap <silent> <F9>  :CtrlPBuffer<CR>
+	nnoremap <silent> <F10> :CtrlP<CR>
+	nnoremap <silent> <F11> :CtrlPCurFile<CR>
 " }}}
 " Tabularize mappings {{{
 	vnoremap <silent> <Leader>a=> :Tabularize /=>/l0l1<CR>

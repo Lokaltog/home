@@ -50,18 +50,3 @@
 	let g:has_cfi = 1
 	let g:Powerline_symbols = 'fancy'
 " }}}
-" Command-T settings {{{
-	let g:CommandTMaxHeight = 25
-
-	function! s:FixCommandT() " {{{
-		setl colorcolumn=
-
-		syntax match CommandTNormal ".*"
-
-		hi CommandTNormal    ctermfg=243 ctermbg=none
-		hi CommandTSelection ctermfg=231 ctermbg=238  cterm=bold
-		hi CommandTNoEntries ctermfg=124 ctermbg=none cterm=bold
-	endfunction " }}}
-
-	au BufWinEnter,BufEnter GoToFile :call s:FixCommandT()
-" }}}

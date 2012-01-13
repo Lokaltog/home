@@ -64,9 +64,9 @@
 [submodule "vimfiles/vim/bundle/vim-powerline"]
 	path = vimfiles/vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
-[submodule "vimfiles/vim/bundle/command-t"]
-	path = vimfiles/vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
 [submodule "vimfiles/vim/bundle/vim-coffee-script"]
 	path = vimfiles/vim/bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "vimfiles/vim/bundle/ctrlp"]
+	path = vimfiles/vim/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git

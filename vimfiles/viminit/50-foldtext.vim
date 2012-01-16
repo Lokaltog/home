@@ -14,10 +14,10 @@
 		" }}}
 		" Handle diff foldmethod {{{
 			if &fdm == 'diff'
-				let l:text = printf('ǒ %s matching lines Ǔ', l:line_count)
+				let l:text = printf('┥ %s matching lines ┝', l:line_count)
 
 				" Center-align the foldtext
-				return repeat('Ć', (l:w_win - strchars(l:text) - l:w_num - l:w_fold) / 2) . l:text
+				return repeat('┅', (l:w_win - strchars(l:text) - l:w_num - l:w_fold) / 2) . l:text
 			endif
 		" }}}
 		" Handle other foldmethods {{{
@@ -57,9 +57,9 @@
 				let l:text = substitute(l:text, '^\s*\(.\{-}\)\s*$', '\1', '')
 			" }}}
 			" Make unmatched block delimiters prettier {{{
-				let l:text = substitute(l:text, '([^)]*$',   'Ę ĵ ę', '')
-				let l:text = substitute(l:text, '{[^}]*$',   'Ę ĵ ę', '')
-				let l:text = substitute(l:text, '\[[^\]]*$', 'Ę ĵ ę', '')
+				let l:text = substitute(l:text, '([^)]*$',   '⟯ ⋯ ⟮', '')
+				let l:text = substitute(l:text, '{[^}]*$',   '⟯ ⋯ ⟮', '')
+				let l:text = substitute(l:text, '\[[^\]]*$', '⟯ ⋯ ⟮', '')
 			" }}}
 			" Add arrows when indent level > 2 spaces {{{
 				if indent(v:foldstart) > 2
@@ -67,14 +67,14 @@
 					let l:clen = strlen(matchstr(l:cline, '^\W*'))
 
 					let l:indent = repeat(' ', indent(v:foldstart) - 2)
-					let l:text = 'ģ ' . l:text
+					let l:text = '▸ ' . l:text
 				endif
 			" }}}
 			" Prepare fold text {{{
-				let l:fnum = printf(' %s đ ', l:line_count)
+				let l:fnum = printf(' %s ⭡ ', l:line_count)
 				let l:ftext = printf('%s%s ', l:indent, l:text)
 			" }}}
-			return l:ftext . repeat('Ķ', l:w_win - strchars(l:fnum) - strchars(l:ftext) - l:w_num - l:w_fold) . l:fnum
+			return l:ftext . repeat('┄', l:w_win - strchars(l:fnum) - strchars(l:ftext) - l:w_num - l:w_fold) . l:fnum
 		" }}}
 	endfunction
 " }}}
@@ -130,4 +130,3 @@
 	au FileType php EnableFastPHPFolds
 	au FileType php set foldtext=FoldText() | setl foldtext=FoldText_PHP()
 " }}}
-

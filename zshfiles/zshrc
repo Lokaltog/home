@@ -112,7 +112,7 @@
 		alias regiontog="ssh -t regiontog 'screen -UODRa -p 0'"
 		alias ls="ls --color=auto"
 		alias lsa="ls -AahXBFov --color=auto --indicator-style=file-type --group-directories-first"
-		alias ss="+ -s"
+		alias sus="+ -s"
 		alias grep="grep --color=auto"
 		alias sd="+ shutdown -h now"
 		alias rb="+ reboot"

@@ -70,3 +70,6 @@
 [submodule "vimfiles/vim/bundle/ctrlp"]
 	path = vimfiles/vim/bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vimfiles/vim/bundle/vim-cute-python"]
+	path = vimfiles/vim/bundle/vim-cute-python
+	url = https://github.com/ehamberg/vim-cute-python.git

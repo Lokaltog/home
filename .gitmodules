@@ -73,3 +73,6 @@
 [submodule "vimfiles/vim/bundle/vim-cute-python"]
 	path = vimfiles/vim/bundle/vim-cute-python
 	url = https://github.com/ehamberg/vim-cute-python.git
+[submodule "vimfiles/vim/bundle/sparkup"]
+	path = vimfiles/vim/bundle/sparkup
+	url = https://Lokaltog@github.com/Lokaltog/sparkup.git

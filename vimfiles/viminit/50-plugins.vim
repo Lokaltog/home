@@ -21,10 +21,6 @@
 	let g:pyindent_open_paren = '&sw'
 	let g:pyindent_continue = '&sw'
 " }}}
-" Sparkup settings {{{
-	let g:sparkupExecuteMapping = '<C-E>'
-	let g:sparkupNextMapping = '<C-U>'
-" }}}
 " Syntastic settings {{{
 	let g:syntastic_enable_signs = 1
 	let g:syntastic_auto_loc_list = 0

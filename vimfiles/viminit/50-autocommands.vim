@@ -6,11 +6,6 @@ augroup General " {{{
 	" Nginx highlighting {{{
 		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx
 	" }}}
-	" Script templates {{{
-		au BufNewFile *.sh  so ~/.vim/templates/tpl.sh
-		au BufNewFile *.py  so ~/.vim/templates/tpl.py
-		au BufNewFile *.php so ~/.vim/templates/tpl.php
-	" }}}
 	" Load .Xdefaults/.Xresources on save {{{
 		au BufWritePost,FileWritePost ~/.Xdefaults,~/.Xresources silent! !xrdb -load % >/dev/null 2>&1
 	" }}}

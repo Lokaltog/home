@@ -1,4 +1,0 @@
-:insert
-#!/usr/bin/python
-
-

@@ -109,7 +109,6 @@
 		alias sudo="sudo -E"
 		alias -- +="sudo"
 		alias sv="+ vim"
-		alias regiontog="ssh -t regiontog 'screen -UODRa -p 0'"
 		alias ls="ls --color=auto"
 		alias lsa="ls -AahXBFov --color=auto --indicator-style=file-type --group-directories-first"
 		alias sus="+ -s"
@@ -138,6 +137,7 @@
 		alias tsys="+ multitail \
 			-n 200 -t Daemons /var/log/daemon.log \
 			-n 200 -t Kernel /var/log/kernel.log \
+			-n 200 -t Auth -wh 10 /var/log/auth.log \
 			-n 200 -t Errors -wh 10 /var/log/errors.log"
 
 		alias tserv="+ multitail \
@@ -148,12 +148,6 @@
 		alias tsquid="+ multitail \
 			-n 200 -t \"Squid Access\" /var/log/squid/access.log \
 			-n 200 -t \"Squid Cache\" -wh 20 /var/log/squid/cache.log"
-	# }}}
-	# Suffix aliases {{{
-		alias -s html=$BROWSER
-		alias -s {php,tpl,txt,PKGBUILD}=$EDITOR
-		alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}="feh -FZd"
-		alias -s {mpg,mpeg,avi,ogm,wmv,m4v,mp4,mov}="mplayer -idx"
 	# }}}
 # }}}
 # Completion {{{

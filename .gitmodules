@@ -76,3 +76,6 @@
 [submodule "vimfiles/vim/bundle/sparkup"]
 	path = vimfiles/vim/bundle/sparkup
 	url = https://Lokaltog@github.com/Lokaltog/sparkup.git
+[submodule "vimfiles/vim/bundle/pgsql"]
+	path = vimfiles/vim/bundle/pgsql
+	url = https://github.com/exu/pgsql.vim.git

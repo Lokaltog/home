@@ -1,7 +1,7 @@
 augroup General " {{{
 	autocmd!
 	" Custom psql highlighting {{{
-		au BufNewFile,BufRead *.sql set ft=psql
+		au BufNewFile,BufRead *.sql set ft=pgsql
 	" }}}
 	" Nginx highlighting {{{
 		au BufNewFile,BufRead /etc/nginx/conf/* set ft=nginx

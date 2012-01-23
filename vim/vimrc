@@ -16,29 +16,25 @@
 	set clipboard=unnamed,unnamedplus,autoselect
 	set colorcolumn+=76
 	set nocompatible
-	set completeopt=menu,menuone,longest
+	set completeopt=menu,longest
 	set conceallevel=2
 	set confirm
-	set copyindent
 	set diffopt+=context:3
 	set encoding=utf-8
 	set noerrorbells visualbell t_vb= " Disable all bells
-	set formatoptions=roqwanl1
+	set formatoptions=roqwnl1 " Add 'a' for autoformatting of paragraphs
 	set hidden
 	set history=1000
 	set hlsearch
 	set ignorecase
 	set incsearch
 	set laststatus=2
-	set lazyredraw
 	set linebreak
 	set nomodeline
 	set nonumber
 	set numberwidth=4
-	set preserveindent
 	set pumheight=10
 	set report=0
-	set ruler
 	set scrolljump=10
 	set scrolloff=10
 	set shortmess=atToOI
@@ -49,7 +45,6 @@
 	set noswapfile
 	set switchbuf=useopen,usetab
 	set termencoding=utf-8
-	set textwidth=10000
 	set undodir=~/.vim/tmp
 	set undofile
 	set undolevels=1000
@@ -74,6 +69,6 @@
 	" Wild menu {{{
 		set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpe?g,*.png,*.xpm,*.gif
 		set wildmenu
-		set wildmode=full
+		set wildmode=list:longest,full
 	" }}}
 " }}}

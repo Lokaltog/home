@@ -83,3 +83,9 @@
 [submodule "vim/ftbundle/pgsql/pgsql"]
 	path = vim/ftbundle/pgsql/pgsql
 	url = git://github.com/exu/pgsql.vim.git
+[submodule "vim/bundle/indent-object"]
+	path = vim/bundle/indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object.git
+[submodule "vim/bundle/camelcasemotion"]
+	path = vim/bundle/camelcasemotion
+	url = git://github.com/bkad/CamelCaseMotion.git

@@ -1,6 +1,8 @@
 " EasyMotion settings {{{
 	let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
-	let g:EasyMotion_leader_key = '<Leader>'
+	let g:EasyMotion_mapping_f = '<C-f>'
+	let g:EasyMotion_mapping_w = '<C-w>'
+	let g:EasyMotion_mapping_b = '<C-b>'
 " }}}
 " Gundo settings {{{
 	let g:gundo_right = 1
@@ -44,4 +46,9 @@
 " }}}
 " Powerline settings {{{
 	let g:Powerline_symbols = 'fancy'
+" }}}
+" CamelCaseMotion settings {{{
+	nmap <silent> W <Plug>CamelCaseMotion_w
+	nmap <silent> B <Plug>CamelCaseMotion_b
+	nmap <silent> E <Plug>CamelCaseMotion_e
 " }}}

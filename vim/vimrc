@@ -1,13 +1,11 @@
 " Author: Kim Silkebækken <kim.silkebaekken+vim@gmail.com>
 " Source: http://git.io/LS
 
-" Load pathogen {{{
-	call pathogen#infect()
+" Load Unbundle {{{
+	runtime bundle/unbundle/unbundle.vim
 " }}}
 " Source viminit files {{{
-	for file in split(globpath($HOME . '/sync/vimfiles/viminit', '*.vim'))
-		exec 'source ' . file
-	endfor
+	runtime! config/**/*.vim
 " }}}
 " Basic configuration {{{
 	filetype plugin indent on

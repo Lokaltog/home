@@ -39,6 +39,9 @@
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
+[submodule "vim/bundle/unbundle"]
+	path = vim/bundle/unbundle
+	url = git://github.com/sunaku/vim-unbundle.git
 
 # vim ftbundles
 [submodule "vim/ftbundle/javascript/javascript"]

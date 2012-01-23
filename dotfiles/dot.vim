@@ -1,1 +1,1 @@
-../vimfiles/vim
+../vim

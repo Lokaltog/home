@@ -1,8 +1,6 @@
 " EasyMotion settings {{{
 	let g:EasyMotion_keys = ";,.pyfgcrl/aoeuidhtns-'qjkxbmwvz"
-	let g:EasyMotion_mapping_f = '<C-f>'
-	let g:EasyMotion_mapping_w = '<C-w>'
-	let g:EasyMotion_mapping_b = '<C-b>'
+	let g:EasyMotion_leader_key = '<Leader>e'
 " }}}
 " Gundo settings {{{
 	let g:gundo_right = 1

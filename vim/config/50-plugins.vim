@@ -40,6 +40,7 @@
 	let g:UltiSnipsListSnippets = '<S-Tab>'
 	let g:UltiSnipsJumpForwardTrigger = '<C-l>'
 	let g:UltiSnipsJumpBackwardTrigger = '<C-h>'
+	let g:UltiSnipsSnippetDirectories = ['snippets']
 " }}}
 " Powerline settings {{{
 	" Set g:has_cfi - this is necessary for Powerline to recognize that cfi is available

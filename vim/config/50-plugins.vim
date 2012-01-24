@@ -50,3 +50,6 @@
 	nmap <silent> B <Plug>CamelCaseMotion_b
 	nmap <silent> E <Plug>CamelCaseMotion_e
 " }}}
+" Sparkup settings {{{
+	let g:sparkupNextMapping = '<c-n>'
+" }}}

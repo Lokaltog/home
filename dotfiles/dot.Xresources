@@ -2,15 +2,15 @@
 Xcursor.theme: Vanilla-DMZ
 ! }}}
 ! Xft settings {{{
-Xft.dpi      : 97
+Xft.antialias: 1
+Xft.autohint : 0
 Xft.hinting  : 1
 Xft.hintstyle: hintslight
-Xft.antialias: 1
+Xft.lcdfilter: lcddefault
 Xft.rgba     : rgb
 ! }}}
 ! URxvt global settings {{{
 URxvt.termName       : rxvt-256color
-URxvt.title          : Terminal
 URxvt.cursorColor    : #dd4010
 URxvt.cursorColor2   : #fff
 URxvt.pointerBlank   : true

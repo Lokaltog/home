@@ -1,5 +1,5 @@
 RESOLUTION=`xrandr | grep '*' | awk '{print $1}'`
-BGFILE="$HOME/sync/backgrounds/$HOST-$RESOLUTION.png"
+BGFILE="$HOME/sync/backgrounds/`hostname`-$RESOLUTION.png"
 
 [[ -f $BGFILE ]] && feh --bg-scale $BGFILE &
 

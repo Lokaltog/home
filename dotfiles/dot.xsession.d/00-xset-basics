@@ -4,10 +4,7 @@ xset b 0 &
 # Set keyboard repeat rate
 xset r rate 250 40 &
 
-# Set mouse speed
-xinput --set-prop "SynPS/2 Synaptics TouchPad" "Device Accel Profile" 2 &
-
 # Set font paths
-for FONTPATH in "$HOME/.fonts/bdf" "/usr/share/fonts/artwiz-latin1-fonts"; do
+for FONTPATH in "$HOME/.fonts/bdf"; do
 	[[ -d $FONTPATH ]] && xset +fp $FONTPATH 
 done

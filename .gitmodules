@@ -45,6 +45,12 @@
 [submodule "vim/bundle/auto-pairs"]
 	path = vim/bundle/auto-pairs
 	url = git://github.com/jiangmiao/auto-pairs.git
+[submodule "vim/bundle/indent-object"]
+	path = vim/bundle/indent-object
+	url = git://github.com/michaeljsmith/vim-indent-object.git
+[submodule "vim/bundle/camelcasemotion"]
+	path = vim/bundle/camelcasemotion
+	url = git://github.com/bkad/CamelCaseMotion.git
 
 # vim ftbundles
 [submodule "vim/ftbundle/javascript/javascript"]
@@ -86,9 +92,3 @@
 [submodule "vim/ftbundle/pgsql/pgsql"]
 	path = vim/ftbundle/pgsql/pgsql
 	url = git://github.com/exu/pgsql.vim.git
-[submodule "vim/bundle/indent-object"]
-	path = vim/bundle/indent-object
-	url = git://github.com/michaeljsmith/vim-indent-object.git
-[submodule "vim/bundle/camelcasemotion"]
-	path = vim/bundle/camelcasemotion
-	url = git://github.com/bkad/CamelCaseMotion.git

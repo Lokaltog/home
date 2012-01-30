@@ -1,6 +1,9 @@
 [submodule "zshfiles/modules/git-flow-completion"]
 	path = zshfiles/modules/git-flow-completion
 	url = git://github.com/bobthecow/git-flow-completion.git
+[submodule "modules/vimpager"]
+	path = modules/vimpager
+	url = git://github.com/rkitover/vimpager.git
 
 # vim bundles
 [submodule "vim/bundle/fugitive"]

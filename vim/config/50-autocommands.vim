@@ -12,6 +12,9 @@ augroup General " {{{
 	" Support Genshi templates {{{
 		au FileType html set ft=genshi
 	" }}}
+	" Enforce gitcommit filetype {{{
+		au! BufReadPost COMMIT_EDITMSG,*/COMMIT_EDITMSG set ft=gitcommit
+	" }}}
 augroup END " }}}
 augroup Formatting " {{{
 	autocmd!

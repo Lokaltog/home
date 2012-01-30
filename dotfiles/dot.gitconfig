@@ -2,38 +2,46 @@
 	name = Kim Silkebækken
 	email = kim.silkebaekken@gmail.com
 	editor = vim
-[merge]
-	tool = meld
-	log = true
-[mergetool]
-	prompt = false
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
+
 [core]
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
 	excludesfile = ~/.gitignore
+
+[merge]
+	tool = lvimdiff
+
+[mergetool "lvimdiff"]
+	cmd = "vim -d -c 'wincmd J' $MERGED $LOCAL $BASE $REMOTE"
+	keepbackup = false
+
+[diff]
+	tool = vimdiff
+
 [color]
 	ui = auto
+
 [color "branch"]
 	current = bold cyan reverse
 	local = cyan
 	remote = yellow
+
 [color "diff"]
 	meta = yellow
 	frag = cyan
 	old = red bold
 	new = green bold
 	whitespace = red bold reverse
+
 [color "status"]
 	added = green bold
 	changed = yellow
 	untracked = red
 	nobranch = red bold reverse
+
 [push]
 	default = current
+
 [alias]
 	d = diff --patience --find-renames --find-copies
 	sd = diff --patience --find-renames --find-copies --staged
@@ -58,3 +66,19 @@
 	subdo = submodule foreach git
 	top = !eval cd "$(pwd)/$(git rev-parse --show-cdup)" && pwd
 	rmd = "!for f in $(git status | grep deleted | awk '{print $3}'); do git rm $f; done"
+
+[url "http://github.com/"]
+	insteadOf = "gh:"
+
+[url "git@github.com:"]
+	pushInsteadOf = "https://github.com/"
+	pushInsteadOf = "http://github.com/"
+	pushInsteadOf = "gh:"
+
+[url "https://gist.github.com/"]
+	insteadOf = "gist:"
+
+[url "git@gist.github.com:"]
+	pushInsteadOf = "https://gist.github.com/"
+	pushInsteadOf = "http://gist.github.com/"
+	pushInsteadOf = "gist:"

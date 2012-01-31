@@ -41,52 +41,6 @@ def draw_bar(percent, bar_len=15):
 
 	return bar
 
-def get_acpi():
-	try:
-		acpi = run_cmd(["acpi", "-V"])
-	except OSError:
-		return ''
-
-	has_bat = False
-	has_temp = False
-	battery = ['', 'n/a']
-	temperature = 0
-
-	for line in acpi.split("\n"):
-		split = re.split("\s+", line)
-		if "Battery" in line and not has_bat:
-			has_bat = True
-			try:
-				battery = [split[2][:-1], int(split[3].replace(',', '').replace('%', '')), split[4]]
-			except IndexError:
-				battery = [split[2][:-1], int(split[3].replace(',', '').replace('%', '')), False]
-		elif "Thermal" in line and not has_temp:
-			has_temp = True
-			temperature = int(float(split[3]))
-
-	if not has_bat and not has_temp:
-		return ''
-
-	baticon = "\x06Ï\x01"
-	batpadding = ""
-
-	if battery[0] == "Discharging":
-		baticon = "\x06Î\x01"
-		if battery[1] <= 25:
-			baticon = "\x06Í\x01"
-		if battery[1] <= 15:
-			baticon = "\x03 Ì "
-			batpadding = "\x01"
-		baticon += "{0} ".format(battery[2])
-
-	baticon += draw_bar(battery[1]) + batpadding
-
-	tempicon = "\x06þ\x01"
-	if temperature > 75:
-		tempicon = "\x07þ "
-
-	return "{baticon} {tempicon}{temp}°C ".format(baticon=baticon, tempicon=tempicon, temp=temperature)
-
 def get_mpd():
 	try:
 		status = run_cmd(["timeout", "1s", "mpc"])
@@ -110,17 +64,6 @@ def get_mpd():
 		status = "{playing} ({total}) {progress} {current}".format(playing=playing, progress=progress, total=total, current=current)
 
 	return "\x06 \x01{status} ".format(status=status)
-
-def get_wifi():
-	try:
-		iwconfig = run_cmd(["iwconfig", "wlan0"])
-		lquality = re.search("Link Quality=(\d+)/(\d+)", iwconfig).groups()
-	except (OSError, AttributeError):
-		return ""
-
-	sigstrength = int(int(lquality[0]) / int(lquality[1]) * 100)
-
-	return "\x06ï\x01{strength} ".format(strength=draw_bar(sigstrength))
 
 def get_volume():
 	try:
@@ -189,8 +132,6 @@ def get_notification():
 print(
 	get_mpd()    +
 	get_volume() +
-	get_wifi()   +
-	get_acpi()   +
 	get_mail()   +
 	get_date()   +
 	get_notification()

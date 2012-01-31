@@ -16,8 +16,8 @@ def run_cmd(cmd):
 	return Popen(cmd, stdout=PIPE).communicate()[0].decode("utf-8").strip()
 
 def draw_bar(percent, bar_len=15):
-	chars_empty = ("ò", "ô", "ö")
-	chars_full = ("ó", "õ", "÷", "ð")
+	chars_empty = ("", "", "")
+	chars_full = ("", "", "", "")
 	full_len = round(percent / 100 * bar_len)
 	bar = ""
 
@@ -89,7 +89,7 @@ def get_acpi():
 
 def get_mpd():
 	try:
-		status = run_cmd(["timeout", "1s", "mpc", "-h", "10.0.0.110"])
+		status = run_cmd(["timeout", "1s", "mpc"])
 	except OSError:
 		return ''
 
@@ -109,7 +109,7 @@ def get_mpd():
 
 		status = "{playing} ({total}) {progress} {current}".format(playing=playing, progress=progress, total=total, current=current)
 
-	return "\x06î\x01{status} ".format(status=status)
+	return "\x06 \x01{status} ".format(status=status)
 
 def get_wifi():
 	try:
@@ -134,15 +134,15 @@ def get_volume():
 		muted = True
 
 	if muted:
-		return "\x07ê {volume} ".format(volume=draw_bar(0))
+		return "\x07 {volume} ".format(volume=draw_bar(0))
 
-	icon = "í"
+	icon = ""
 	if volume < 50:
-		icon = "ì"
+		icon = ""
 	if volume < 10:
-		icon = "ë"
+		icon = ""
 
-	return "\x06{icon}\x01{volume} ".format(icon=icon, volume=draw_bar(volume))
+	return "\x06{icon} \x01{volume} ".format(icon=icon, volume=draw_bar(volume))
 
 def get_mail():
 	unread = []
@@ -169,20 +169,20 @@ def get_mail():
 		return ''
 
 	if hl:
-		icon = "\x04 Ê "
+		icon = "\x04  "
 	else:
-		icon = "\x06Ê\x01"
+		icon = "\x06 \x01"
 
 	return icon + ' / '.join(unread) + ' '
 
 def get_date():
 	date = datetime.now().strftime("%Y-%m-%d %R").split(" ")
 
-	return "\x06{date} ù {time}".format(date=date[0], time=date[1])
+	return "\x06{date}  {time}".format(date=date[0], time=date[1])
 
 def get_notification():
 	if len(sys.argv) > 1:
-		return " \x04 ÿ {notification} ".format(notification=sys.argv[-1])
+		return " \x04  {notification} ".format(notification=sys.argv[-1])
 
 	return ""
 

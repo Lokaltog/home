@@ -14,7 +14,13 @@ static const char colors[NUMCOLORS][ColLast][8] = {
 	{ "#000000", "#fd5337", "#1a1a1a" },  // red warning fg   red        / dark gray
 	{ "#000000", "#daff30", "#1a1a1a" },  //
 };
-static const char font[]            = "-artwiz-cureextra-medium-*-*-*-*-*-*-*-*-*-*-*";
+
+static const char font[] =
+                         "-lokaltog-symbols-*-*-*-*-11-*-*-*-*-*-*-*"
+                         ","
+                         "-lokaltog-fixed-medium-*-*-*-10-*-*-*-*-*-iso8859-*"
+                         ;
+
 static const unsigned int borderpx  = 1;        // border pixel of windows
 static const unsigned int snap      = 32;       // snap pixel
 static const Bool showbar           = True;     // False means no bar
@@ -26,21 +32,21 @@ static const Bool resizehints = False;  // True means respect size hints in tile
 
 static const Layout layouts[] = {
 	// symbol   arrange function
-	{ "½",      tile        }, // []=  first entry is default
-	{ "¾",      NULL        }, // <><  no layout function means floating behavior
-	{ "¼",      monocle     }, // [M]
-	{ "¿",      gaplessgrid }, // [#]
-	{ "À",      bstack      }, // [TTT]
+	{ "",      tile        }, // []=  first entry is default
+	{ "",      NULL        }, // <><  no layout function means floating behavior
+	{ "",      monocle     }, // [M]
+	{ "",      gaplessgrid }, // [#]
+	{ "",      bstack      }, // [TTT]
 };
 
 // Tags
 static const Tag tags[] = {
-	// name       layout           mfact
-	{ "Ä Main",     &layouts[0],     -1   },
-	{ "Ã Web",      &layouts[0],     0.5  },
-	{ "Â Dev",      &layouts[0],     0.8  },
-	{ "Ç Media",    &layouts[0],     0.8  },
-	{ "Á IM",       &layouts[2],     -1   },
+	// name         layout           mfact
+	{ " Main",     &layouts[0],     -1   },
+	{ " Web",      &layouts[0],     0.5  },
+	{ " Dev",      &layouts[0],     0.8  },
+	{ " Media",    &layouts[0],     0.8  },
+	{ " IM",       &layouts[2],     -1   },
 };
 
 // Window rules
@@ -50,7 +56,7 @@ static const Rule rules[] = {
 	{ "feh",      NULL,       NULL,       0,            True,        -1 },
 	{ "MPlayer",  NULL,       NULL,       0,            True,        -1 },
 	{ "Chromium", NULL,       NULL,       1<<1,         False,       -1 },
-	{ "URxvt",    "vim",      NULL,       1<<2,         False,       -1 },
+	{ "URxvt",    "vim",      NULL,       0,            False,       -1 },
 	{ "URxvt",    "ncmpcpp",  NULL,       1<<3,         False,       -1 },
 	{ "URxvt",    "ranger",   NULL,       0,            False,       -1 },
 	{ "URxvt",    "weechat",  NULL,       1<<4,         False,       -1 },

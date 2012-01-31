@@ -1,138 +1,251 @@
-#!/usr/bin/python
-# Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
-# Source: https://github.com/Lokaltog/sync
+#!/usr/bin/env python
 
-"""Lokaltog's status script for dwm"""
-
-import re
-import sys
+import datetime
 import os
+import re
+import subprocess
 import urllib.request
 import xml.dom.minidom
-from datetime import datetime
-from subprocess import *
 
 def run_cmd(cmd):
-	return Popen(cmd, stdout=PIPE).communicate()[0].decode("utf-8").strip()
+	return subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0].decode("utf-8").strip()
 
-def draw_bar(percent, bar_len=15):
-	chars_empty = ("", "", "")
-	chars_full = ("", "", "", "")
-	full_len = round(percent / 100 * bar_len)
-	bar = ""
+class Statusbar:
+	_segments = []
 
-	if not full_len:
-		# empty bar
-		bar += chars_empty[0]
-		bar += chars_empty[1] * (bar_len - 1)
-		bar += chars_empty[2]
-	elif full_len == bar_len:
-		# full bar
-		bar += chars_full[0]
-		bar += chars_full[1] * (bar_len - 1)
-		bar += chars_full[2]
-	else:
-		# partial bar
-		bar += chars_full[0]
-		bar += chars_full[1] * (full_len - 1)
-		bar += chars_full[3]
-		bar += chars_empty[1] * (bar_len - full_len - 1)
-		bar += chars_empty[2]
+	def __init__(self, *args):
+		for arg in args:
+			segment = arg.get_segment()
 
-	return bar
+			if segment is not None:
+				self._segments.append(segment)
 
-def get_mpd():
-	try:
-		status = run_cmd(["timeout", "1s", "mpc"])
-	except OSError:
-		return ''
+	def __str__(self):
+		return ' '.join(self._segments)
 
-	if "playing" not in status or not status:
-		status = "Not playing"
-	else:
-		status = status.split("\n")
-		playing = status[0]
-		percent = int(re.search("(\d+)%", status[1]).group(1))
-		progress = draw_bar(percent)
-		trim_len = 60
+class Segment:
+	icons = {
+		'vol_mute': '',
+		'vol_low': '',
+		'vol_medium': '',
+		'vol_high': '',
+		'music': '',
+		'mail': '',
+		'mail_inverted': '',
+		'date': '',
+		'time': '',
+	}
+	bars = {
+		'round-regular': '',
+		'round-candycane': '',
+	}
+	colors = {
+		'normal': '\x01',
+		'urgent': '\x03',
+		'error': '\x04',
+		'white': '\x06',
+		'warning': '\x07',
+	}
 
-		if len(playing) > trim_len:
-			playing = playing[:trim_len] + "..."
+	_icon = None
+	_icon_color = None
+	_text = None
+	_text_color = None
 
-		(current, total) = re.findall("(\d+:\d+)", status[1])
+	def get_bar(self, percent, length=10, type='round-regular'):
+		bar = []
+		fill_length = round(percent / 100 * length)
 
-		status = "{playing} ({total}) {progress} {current}".format(playing=playing, progress=progress, total=total, current=current)
+		chars_empty = self.bars[type][0:3]
+		chars_filled = self.bars[type][3:7]
 
-	return "\x06 \x01{status} ".format(status=status)
+		if not fill_length:
+			# Empty bar
+			bar.append(chars_empty[0])
+			bar.append(chars_empty[1] * (length - 1))
+			bar.append(chars_empty[2])
+		elif fill_length == length:
+			# Full bar
+			bar.append(chars_filled[0])
+			bar.append(chars_filled[1] * (length - 1))
+			bar.append(chars_filled[2])
+		else:
+			# Partially filled bar
+			bar.append(chars_filled[0])
+			bar.append(chars_filled[1] * (fill_length - 1))
+			bar.append(chars_filled[3])
 
-def get_volume():
-	try:
-		amixer = run_cmd(["amixer", "get", "Master"])
+			bar.append(chars_empty[1] * (length - fill_length - 1))
+			bar.append(chars_empty[2])
 
-		volume = int(re.search("\[(\d+)%\]", amixer).group(1))
-		muted = re.search("\[(on|off)\]", amixer).group(1) == "off"
-	except OSError:
-		return ''
-	except AttributeError:
-		muted = True
+		return ''.join(bar)
 
-	if muted:
-		return "\x07 {volume} ".format(volume=draw_bar(0))
+	def set_icon(self, icon, color=None):
+		self._icon = self.icons.get(icon)
 
-	icon = ""
-	if volume < 50:
-		icon = ""
-	if volume < 10:
-		icon = ""
+		if color is not None:
+			self._icon_color = self.colors.get(color)
 
-	return "\x06{icon} \x01{volume} ".format(icon=icon, volume=draw_bar(volume))
+	def set_text(self, text, color=None):
+		self._text = text
 
-def get_mail():
-	unread = []
-	hl = False
+		if color is not None:
+			self._text_color = self.colors.get(color)
 
-	try:
-		for account in open(os.environ['XDG_CONFIG_HOME'] + '/gmailaccounts', encoding='utf-8'):
-			(url, user, passwd) = account.split('|')
+	def get_segment(self):
+		segment = []
 
-			auth_handler = urllib.request.HTTPBasicAuthHandler()
-			auth_handler.add_password(realm='New mail feed', uri='https://mail.google.com/', user=user, passwd=passwd)
-			opener = urllib.request.build_opener(auth_handler)
-			urllib.request.install_opener(opener)
+		if self._icon:
+			part = ''
+			if self._icon_color is not None:
+				part += self._icon_color
+				part += ' '
+			else:
+				part += self.colors['white']
 
-			request = urllib.request.urlopen(url)
-			dom = xml.dom.minidom.parseString(request.read())
-			count = dom.getElementsByTagName('fullcount')[0].childNodes[0].data
+			part += self._icon
 
-			if int(count) > 0:
-				hl = True
+			segment.append(part)
 
-			unread.append(count)
-	except (IOError, ValueError, KeyError):
-		return ''
+		if self._text:
+			part = ''
+			if self._icon_color is not None and self._text_color is None:
+				part += ''
+			elif self._text_color is None:
+				part += self.colors['normal']
+			else:
+				part += self._text_color
 
-	if hl:
-		icon = "\x04  "
-	else:
-		icon = "\x06 \x01"
+			part += self._text
 
-	return icon + ' / '.join(unread) + ' '
+			segment.append(part)
 
-def get_date():
-	date = datetime.now().strftime("%Y-%m-%d %R").split(" ")
+		segment.append(self.colors['normal'])
 
-	return "\x06{date}  {time}".format(date=date[0], time=date[1])
+		return ' '.join(segment)
 
-def get_notification():
-	if len(sys.argv) > 1:
-		return " \x04  {notification} ".format(notification=sys.argv[-1])
+class MusicSegment(Segment):
+	trim_length = 60
 
-	return ""
+	def __init__(self):
+		Segment.__init__(self)
 
-print(
-	get_mpd()    +
-	get_volume() +
-	get_mail()   +
-	get_date()   +
-	get_notification()
+		self.set_icon('music')
+		self.set_text('Not playing')
+
+		try:
+			cmd = run_cmd(['timeout', '1s', 'mpc'])
+		except OSError:
+			return
+
+		if 'playing' in cmd:
+			text = []
+
+			(playing, info) = cmd.split('\n')
+			percent = int(re.search('(\d+)%', info).group(1))
+
+			if len(playing) > self.trim_length:
+				playing = playing[:self.trim_length] + '...'
+
+			(current, total) = re.findall('(\d+:\d+)', info)
+
+			text.extend([
+				playing,
+				'({1})'.format(total),
+				self.draw_bar(percent),
+				current,
+			])
+
+			self.set_text(' '.join(text))
+
+class VolumeSegment(Segment):
+	def __init__(self):
+		Segment.__init__(self)
+
+		try:
+			cmd = run_cmd(['amixer', 'get', 'Master'])
+		except OSError:
+			return
+
+		try:
+			volume = int(re.search('\[(\d+)%\]', cmd).group(1))
+			muted = re.search('\[(on|off)\]', cmd).group(1) == 'off'
+		except AttributeError:
+			self.set_icon('vol_mute', 'warning')
+			self.set_text('No sound')
+
+			return
+
+		if muted:
+			self.set_icon('vol_mute', 'warning')
+			self.set_text(self.get_bar(0))
+
+			return
+
+		self.set_icon('vol_high')
+		if volume < 50:
+			self.set_icon('vol_medium')
+		if volume < 10:
+			self.set_icon('vol_low')
+
+		self.set_text(self.get_bar(volume))
+
+class MailSegment(Segment):
+	def __init__(self):
+		Segment.__init__(self)
+
+		self.set_icon('mail')
+		self.set_text('N/A')
+
+		unread = []
+		hl = False
+
+		try:
+			for account in open(os.environ['XDG_CONFIG_HOME'] + '/gmailaccounts', encoding='utf-8'):
+				(url, user, passwd) = account.split('|')
+
+				auth_handler = urllib.request.HTTPBasicAuthHandler()
+				auth_handler.add_password(realm='New mail feed', uri='https://mail.google.com/', user=user, passwd=passwd)
+				opener = urllib.request.build_opener(auth_handler)
+				urllib.request.install_opener(opener)
+
+				request = urllib.request.urlopen(url)
+				dom = xml.dom.minidom.parseString(request.read())
+				count = dom.getElementsByTagName('fullcount')[0].childNodes[0].data
+
+				if int(count) > 0:
+					hl = True
+
+				unread.append(count)
+		except (IOError, ValueError, KeyError):
+			return
+
+		if hl:
+			self.set_icon('mail', 'error')
+
+		self.set_text(' / '.join(unread))
+
+
+class DateSegment(Segment):
+	def __init__(self):
+		Segment.__init__(self)
+
+		self.set_icon('date')
+		self.set_text(datetime.datetime.now().strftime('%Y-%m-%d'))
+
+class TimeSegment(Segment):
+	def __init__(self):
+		Segment.__init__(self)
+
+		self.set_icon('time')
+		self.set_text(datetime.datetime.now().strftime('%R'))
+
+sb = Statusbar(
+	MusicSegment(),
+	VolumeSegment(),
+	MailSegment(),
+	DateSegment(),
+	TimeSegment()
 )
+
+print(sb)

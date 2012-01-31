@@ -5,6 +5,8 @@ xset b 0 &
 xset r rate 250 40 &
 
 # Set font paths
-for FONTPATH in "$HOME/.fonts/bdf"; do
+for FONTPATH in `find $HOME/.fonts/bitmap/* -type d`; do
 	[[ -d $FONTPATH ]] && xset +fp $FONTPATH 
 done
+
+xset fp rehash

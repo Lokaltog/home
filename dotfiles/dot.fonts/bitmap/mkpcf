@@ -1,0 +1,20 @@
+#!/bin/sh
+
+for dir in `find * -type d`; do
+	cd "$dir"
+
+	# Remove old/irrelevant files
+	rm *.pcf *.bdf.bak fonts.dir fonts.scale
+
+	# Create PCF fonts
+	for file in *.bdf; do
+		bdftopcf -o "${file%\.*}.pcf" "$file"
+	done
+
+	# Create X font register files
+	mkfontdir
+	mkfontscale
+	xset fp rehash
+
+	cd ..
+done

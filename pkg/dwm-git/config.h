@@ -42,11 +42,11 @@ static const Layout layouts[] = {
 // Tags
 static const Tag tags[] = {
 	// name         layout           mfact
-	{ " Main",     &layouts[0],     -1   },
+	{ " Main",     &layouts[0],     -1   },
 	{ " Web",      &layouts[0],     0.5  },
 	{ " Dev",      &layouts[0],     0.8  },
 	{ " Media",    &layouts[0],     0.8  },
-	{ " IM",       &layouts[2],     -1   },
+	{ " IM",       &layouts[2],     -1   },
 };
 
 // Window rules

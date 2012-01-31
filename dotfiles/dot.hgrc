@@ -1,3 +1,2 @@
-[extensions]
-hgext.bookmarks =
-hggit =
+[ui]
+username=Lokaltog

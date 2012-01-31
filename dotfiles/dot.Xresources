@@ -1,5 +1,6 @@
 ! Cursor theme {{{
 Xcursor.theme: Vanilla-DMZ
+Xcursor.size: 16
 ! }}}
 ! Xft settings {{{
 Xft.antialias: 1

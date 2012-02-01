@@ -95,3 +95,6 @@
 [submodule "vim/ftbundle/pgsql/pgsql"]
 	path = vim/ftbundle/pgsql/pgsql
 	url = git://github.com/exu/pgsql.vim.git
+[submodule "vim/ftbundle/coffee/cute-coffee"]
+	path = vim/ftbundle/coffee/cute-coffee
+	url = git://github.com/Lokaltog/vim-cute-coffee.git

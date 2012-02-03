@@ -25,19 +25,19 @@ class Statusbar:
 
 class Segment:
 	icons = {
-		'vol_mute': '',
-		'vol_low': '',
-		'vol_medium': '',
-		'vol_high': '',
-		'music': '',
-		'mail': '',
-		'mail_inverted': '',
-		'date': '',
-		'time': '',
+		'vol_mute': '\uea30',
+		'vol_low': '\uea31',
+		'vol_medium': '\uea32',
+		'vol_high': '\uea33',
+		'music': '\uea36',
+		'mail': '\ueaf5',
+		'mail_inverted': '\ueaf6',
+		'date': '\ueaf7',
+		'time': '\ueafb',
 	}
 	bars = {
-		'round-regular': '',
-		'round-candycane': '',
+		'round-regular': '\uead0\uead1\uead2\uead3\uead4\uead5\uead6',
+		'round-candycane': '\uead0\uead1\uead2\uead7\uead8\uead9\ueada',
 	}
 	colors = {
 		'normal': '\x01',
@@ -248,4 +248,4 @@ sb = Statusbar(
 	TimeSegment()
 )
 
-print(sb)
+print(str(sb))

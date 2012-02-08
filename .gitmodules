@@ -45,9 +45,6 @@
 [submodule "vim/bundle/unbundle"]
 	path = vim/bundle/unbundle
 	url = git://github.com/sunaku/vim-unbundle.git
-[submodule "vim/bundle/auto-pairs"]
-	path = vim/bundle/auto-pairs
-	url = git://github.com/jiangmiao/auto-pairs.git
 [submodule "vim/bundle/indent-object"]
 	path = vim/bundle/indent-object
 	url = git://github.com/michaeljsmith/vim-indent-object.git

@@ -14,10 +14,10 @@
 		" }}}
 		" Handle diff foldmethod {{{
 			if &fdm == 'diff'
-				let l:text = printf('┥ %s matching lines ┝', l:line_count)
+				let l:text = printf('┤ %s matching lines ├', l:line_count)
 
 				" Center-align the foldtext
-				return repeat('┅', (l:w_win - strchars(l:text) - l:w_num - l:w_fold) / 2) . l:text
+				return repeat('┄', (l:w_win - strchars(l:text) - l:w_num - l:w_fold) / 2) . l:text
 			endif
 		" }}}
 		" Handle other foldmethods {{{
@@ -71,7 +71,7 @@
 				endif
 			" }}}
 			" Prepare fold text {{{
-				let l:fnum = printf(' %s ⭡ ', l:line_count)
+				let l:fnum = printf('┤ %s ⭡ ', printf('%4s', l:line_count))
 				let l:ftext = printf('%s%s ', l:indent, l:text)
 			" }}}
 			return l:ftext . repeat('┄', l:w_win - strchars(l:fnum) - strchars(l:ftext) - l:w_num - l:w_fold) . l:fnum

@@ -23,7 +23,7 @@ if &term =~ "rxvt-256color"
 	" }}}
 	" Use custom fillchars/listchars/showbreak icons {{{
 		set list
-		set fillchars=vert:┇,fold:┄,diff:╱
+		set fillchars=vert:│,fold:┄,diff:╱
 		set listchars=tab:⋮\ ,trail:⌴,eol:·,precedes:◂,extends:▸
 		set showbreak=↪
 	" }}}

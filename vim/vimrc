@@ -49,7 +49,7 @@
 	set undofile
 	set undolevels=1000
 	set updatetime=1500
-	set virtualedit=block,onemore
+	set virtualedit=block
 	set nowrap
 	set nowritebackup
 	" Set tab width {{{

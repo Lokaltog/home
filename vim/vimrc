@@ -29,6 +29,7 @@
 	set ignorecase
 	set incsearch
 	set laststatus=2
+	set lazyredraw
 	set linebreak
 	set nomodeline
 	set nonumber

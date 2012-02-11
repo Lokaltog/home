@@ -131,3 +131,9 @@ let mapleader = ','
 " Paste mode toggle {{{
 	nnoremap <silent> <F12> :set paste!<CR>
 " }}}
+" Re-indent pasted text {{{
+	nnoremap <Leader>p p
+	nnoremap <Leader>P P
+	nnoremap p p'[v']=
+	nnoremap P P'[v']=
+" }}}

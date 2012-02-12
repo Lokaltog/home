@@ -1,2 +1,0 @@
-setl nolist
-setl colorcolumn=

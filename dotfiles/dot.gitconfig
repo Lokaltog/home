@@ -7,7 +7,7 @@
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
 	excludesfile = ~/.gitignore
-	pager = /bin/less
+	pager = /usr/bin/less
 
 [merge]
 	tool = lvimdiff

@@ -4,8 +4,8 @@
 [submodule "modules/vimpager"]
 	path = modules/vimpager
 	url = git://github.com/rkitover/vimpager.git
-[submodule "dotfiles/dot.fonts/bitmap/lokaltog-fonts"]
-	path = dotfiles/dot.fonts/bitmap/lokaltog-fonts
+[submodule "dotfiles/.fonts/bitmap/lokaltog-fonts"]
+	path = dotfiles/.fonts/bitmap/lokaltog-fonts
 	url = git://github.com/Lokaltog/lokaltog-fonts.git
 [submodule "vimfiles"]
 	path = vimfiles

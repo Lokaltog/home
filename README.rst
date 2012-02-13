@@ -17,7 +17,7 @@ Installation guide
 
         git clone git://github.com/Lokaltog/sync.git
         cd sync
-        git submodule update --init
+        git submodule update --init --recursive
 
 2. Create symlinks to the dotfiles.
 

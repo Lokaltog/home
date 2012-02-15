@@ -43,9 +43,10 @@
 		export BROWSER="chromium"
 		export WINEARCH="win32"
 	# }}}
-	# Path {{{
+	# Paths {{{
 		# Add sync/bin to path
 		export PATH="$HOME/sync/bin:/usr/bin/vendor_perl:$PATH"
+		export NODE_PATH="/usr/lib/node_modules:$NODE_PATH"
 	# }}}
 # }}}
 # Load plugins {{{

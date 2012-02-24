@@ -2,23 +2,27 @@
 # Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
 # Source: https://github.com/Lokaltog/sync
 
+# Requires the following packages:
+#   * inotify-tools
+#   * ctags
+#   * cscope
+
 # Prepare variables
 SCRIPT_DIR=`dirname $0`
-BASE_DIR="$1"
+BASE_DIR="`pwd`/$1"
 VIM_DIR="${BASE_DIR}/vim"
 LOCK_FILE="${BASE_DIR}/vim/tags.lock"
+
+cd $BASE_DIR
 
 # Init LiveReload
 sudo gem list --local | grep -qi livereload
 [[ $? -eq 1 ]] && echo 'LiveReload gem is missing!' && sudo gem install livereload rb-inotify;
 (echo '[!!] Starting LiveReload...'; livereload ${BASE_DIR}) &
 
-if [[ "$2" != 'nocompass' ]]; then
-	# Init compass
-	for D in ${BASE_DIR}/application/assets/source/sass/*; do
-		echo "[!!] Starting Compass watcher for $D..."
-		compass watch $D &
-	done
+if [[ "$2" != 'nocakewatch' ]]; then
+	# Start cake watch
+	(cd $BASE_DIR/assets && ENV=dev cake watch) &
 fi
 
 # Make sure $XDG_CONFIG_HOME/projectpath is correct
@@ -96,7 +100,7 @@ inotifywait -mr --format '%f' -e close_write ${BASE_DIR} | while read LINE; do
 		-f ${VIM_DIR}/cscope.out \
 		-b
 
-	${SCRIPT_DIR}/project-highlight ${BASE_DIR}
+	$SCRIPT_DIR/project-highlight $VIM_DIR/tags > $VIM_DIR/tags.$FILE_EXT.hl.vim
 
 	# Remove lock file
 	rm ${LOCK_FILE}

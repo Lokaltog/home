@@ -10,3 +10,6 @@
 [submodule "vimfiles"]
 	path = vimfiles
 	url = git://github.com/Lokaltog/vimfiles.git
+[submodule "dotfiles/.fonts/fonts"]
+	path = dotfiles/.fonts/fonts
+	url = git@github.com:Lokaltog/fonts.git

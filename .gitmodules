@@ -13,3 +13,6 @@
 [submodule "dotfiles/.fonts/fonts"]
 	path = dotfiles/.fonts/fonts
 	url = git@github.com:Lokaltog/fonts.git
+[submodule "modules/taghighlight"]
+	path = modules/taghighlight
+	url = git://github.com/abudden/TagHighlight.git

@@ -98,9 +98,9 @@ elif [[ "$ACTION" == "watch" ]]; then
 
 		OUTFILE="`dirname $1`/../../release/css/`basename $1 .styl`.css"
 		if [[ $IS_PRODUCTION -eq 1 ]]; then
-			stylus -c <"$1" >"$OUTFILE"
+			stylus -u nib -c <"$1" >"$OUTFILE"
 		else
-			stylus <"$1" >"$OUTFILE"
+			stylus -u nib <"$1" >"$OUTFILE"
 		fi
 
 		gzip_file "$OUTFILE"

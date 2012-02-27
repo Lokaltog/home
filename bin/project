@@ -66,6 +66,7 @@ TARGET_PATH=`pwd`
 
 if [[ "$ACTION" == "init" ]]; then
 	mkdir -p "$PROJECT_PATH"
+	mkdir -p assets/{src/{js,css}/vendors,release/{js,css}}
 elif [[ "$ACTION" == "watch" ]]; then
 	echo -n "$TARGET_PATH" > $PROJECT_PATHFILE
 	trap "echo \"Cleaning up...\";\

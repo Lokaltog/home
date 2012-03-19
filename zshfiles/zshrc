@@ -192,65 +192,50 @@
 	fi
 # }}}
 # Prompt {{{
-	if [[ "$TERM" == "rxvt-256color" ]]; then
-		CLEAR='%{[0m%}'
-		# Regular prompt {{{
-			typeset -A \
-				C_SSH \
-				C_USER \
-				C_DIR
-			# Default colors {{{
-				C_SSH[BG]=166
-				C_SSH[FG]=214
+	if [[ $TERM =~ '256color' ]]; then
+		# VCS info {{{
+			autoload -Uz vcs_info
 
-				C_USER[BG]=22
-				C_USER[FG]=40
+			precmd () { vcs_info }
 
-				C_DIR[BG]=235
-				C_DIR[FG]=248
-			# }}}
-			# Root colors {{{
-				if [[ $UID == 0 ]]; then
-					C_USER[BG]=88
-					C_USER[FG]=196
-				fi
-			# }}}
-			# SSH host section {{{
-				if [[ ! -z "$SSH_CLIENT" ]]; then
-					SSHPROMPT='%{[(48;5;${C_SSH[BG]});(38;5;${C_SSH[FG]})m%} ⭤ %M '
-					SSHPROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_SSH[BG]})m%}⮀'
-				fi
-			# }}}
-			PROMPT=$SSHPROMPT'%{[(48;5;${C_USER[BG]});(38;5;${C_USER[FG]})m%} %n '
-			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_USER[BG]})m%}⮀ '
-			PROMPT=$PROMPT'%{[(48;5;${C_DIR[BG]});(38;5;${C_DIR[FG]})m%}%3~ '
-			PROMPT=$PROMPT'${CLEAR}%{[38;5;${C_DIR[BG]}m%}⮀${CLEAR} '
+			zstyle ':vcs_info:*' get-revision true
+			zstyle ':vcs_info:*' check-for-changes true
+			zstyle ':vcs_info:*' formats ' %u%c|%s ⭠ %b '
+			zstyle ':vcs_info:*' actionformats ' %c%u|%s@%a ⭠ %b '
+			zstyle ':vcs_info:*' branchformat ' %b@%r '
+			zstyle ':vcs_info:*' unstagedstr "%{$fg_no_bold[red]%}"
+			zstyle ':vcs_info:*' stagedstr "%{$fg_no_bold[yellow]%}"
+			zstyle ':vcs_info:*' enable git hg svn
+
+			zstyle ':vcs_info:git*:*' formats '%s ⭠ %b '
+			zstyle ':vcs_info:git*:*' actionformats ' %c%u|%s@%a:%b@%.5i '
 		# }}}
-		# Right prompt {{{
-			# VCS colors {{{
-				typeset -A \
-					C_VCS
 
-				C_VCS[BG]=53
-				C_VCS[FG_VCS]=162
-				C_VCS[FG_BRANCH]=219
-				
-				VCSPROMPT='%{[38;5;'${C_VCS[BG]}'m%}⮂'
-				VCSPROMPT=$VCSPROMPT'%{[(48;5;'${C_VCS[BG]}');(38;5;'${C_VCS[FG_VCS]}')m%} %s'
-				VCSPROMPT=$VCSPROMPT'%{[38;5;'${C_VCS[FG_BRANCH]}'m%} ⭠ %b '${CLEAR}
-			# }}}
-			# VCS info {{{
-				autoload -Uz vcs_info
+		C_RESET='[0m'
 
-				zstyle ':vcs_info:*' enable git svn hg
-				zstyle ':vcs_info:*' formats $VCSPROMPT
+		C_USER=$C_RESET'[1m[38;5;117m[48;5;31m'
+		C_USER_SEP=$C_RESET'[48;5;237m[38;5;31m'
+		C_PWD=$C_RESET'[38;5;248m[48;5;237m'
+		C_PWD_SEP=$C_RESET'[38;5;237m'
 
-				precmd(){
-					vcs_info
-				}
-			# }}}
-			RPROMPT='${vcs_info_msg_0_}'
-		# }}}
+		if [[ ! -z "$SSH_CLIENT" ]]; then
+			SSHPROMPT=$C_RESET'[48;5;166m[38;5;220m ⭤ %M [38;5;166m'
+
+			if [[ $UID == 0 ]]; then
+				SSHPROMPT=$SSHPROMPT'[48;5;88m⮀'
+			else
+				SSHPROMPT=$SSHPROMPT'[48;5;31m⮀'
+			fi
+		fi
+
+		if [[ $UID == 0 ]]; then
+			# Highlight root user
+			C_USER=$C_RESET'[1m[38;5;196m[48;5;88m'
+			C_USER_SEP=$C_RESET'[48;5;237m[38;5;88m'
+		fi
+
+		PROMPT=$SSHPROMPT$C_USER' %n '$C_USER_SEP'⮀'$C_PWD' %3~ '$C_PWD_SEP'⮀'$C_RESET' '
+		RPROMPT='${vcs_info_msg_0_}'
 	fi
 	# List prompt - don't ask 'do you want to see all ...' in menu selection {{{
 		LISTPROMPT=''

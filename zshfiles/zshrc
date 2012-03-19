@@ -1,8 +1,5 @@
 # Author: Kim Silkebækken <kim.silkebaekken+github@gmail.com>
 # Source: https://github.com/Lokaltog/sync
-# Show dopefish {{{
-	cat ~/sync/etc/dopefish
-# }}}
 # Environment variables {{{
 	# Command history {{{
 		export HISTFILE=~/.zshhist

@@ -211,27 +211,27 @@
 			zstyle ':vcs_info:git*:*' actionformats ' %c%u|%s@%a:%b@%.5i '
 		# }}}
 
-		C_RESET='[0m'
+		C_RESET='%{[0m%}'
 
-		C_USER=$C_RESET'[1m[38;5;117m[48;5;31m'
-		C_USER_SEP=$C_RESET'[48;5;237m[38;5;31m'
-		C_PWD=$C_RESET'[38;5;248m[48;5;237m'
-		C_PWD_SEP=$C_RESET'[38;5;237m'
+		C_USER=$C_RESET'%{[1m[38;5;117m[48;5;31m%}'
+		C_USER_SEP=$C_RESET'%{[48;5;237m[38;5;31m%}'
+		C_PWD=$C_RESET'%{[38;5;248m[48;5;237m%}'
+		C_PWD_SEP=$C_RESET'%{[38;5;237m%}'
 
 		if [[ ! -z "$SSH_CLIENT" ]]; then
-			SSHPROMPT=$C_RESET'[48;5;166m[38;5;220m ⭤ %M [38;5;166m'
+			SSHPROMPT=$C_RESET'%{[48;5;166m[38;5;220m%} ⭤ %M %{[38;5;166m%}'
 
 			if [[ $UID == 0 ]]; then
-				SSHPROMPT=$SSHPROMPT'[48;5;88m⮀'
+				SSHPROMPT=$SSHPROMPT'%{[48;5;88m%}⮀'
 			else
-				SSHPROMPT=$SSHPROMPT'[48;5;31m⮀'
+				SSHPROMPT=$SSHPROMPT'%{[48;5;31m%}⮀'
 			fi
 		fi
 
 		if [[ $UID == 0 ]]; then
 			# Highlight root user
-			C_USER=$C_RESET'[1m[38;5;196m[48;5;88m'
-			C_USER_SEP=$C_RESET'[48;5;237m[38;5;88m'
+			C_USER=$C_RESET'%{[1m[38;5;196m[48;5;88m%}'
+			C_USER_SEP=$C_RESET'%{[48;5;237m[38;5;88m%}'
 		fi
 
 		PROMPT=$SSHPROMPT$C_USER' %n '$C_USER_SEP'⮀'$C_PWD' %3~ '$C_PWD_SEP'⮀'$C_RESET' '

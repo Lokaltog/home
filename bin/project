@@ -67,6 +67,11 @@ TARGET_PATH=`pwd`
 if [[ "$ACTION" == "init" ]]; then
 	mkdir -p "$PROJECT_PATH"
 	mkdir -p assets/{src/{js,css}/vendors,release/{js,css}}
+	echo "module 'project'
+	src: 'assets/src/js'
+	vendors: []
+	release: 'assets/release/js/main.js'
+" > toaster.coffee
 elif [[ "$ACTION" == "watch" ]]; then
 	echo -n "$TARGET_PATH" > $PROJECT_PATHFILE
 	trap "echo \"Cleaning up...\";\

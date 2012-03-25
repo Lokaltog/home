@@ -44,29 +44,20 @@
 	default = current
 
 [alias]
-	d = diff --patience --find-renames --find-copies
-	sd = diff --patience --find-renames --find-copies --staged
-	dt = difftool
-	sdt = difftool --staged
-	co = checkout
-	br = branch
-	ci = commit
-	st = status -sb --ignore-submodules=all
-	pa = push --all
-	unstage = reset HEAD --
-	origin = remote show origin
-	sdiff = diff --staged
-	hdiff = diff HEAD
-	last = log -1 HEAD
-	commit-submodules = "!subs=$(git ls-files --error-unmatch --stage -- $(git ls-files --modified) | grep \"^160000\" | cut -f2-); msg=$(echo Update submodules: $subs; echo; git submodule summary); git commit -e -m \"$msg\" --only $(echo $subs | tr \"\n\" \" \")"
-	mkpatch = diff-tree -p --pretty
-	unmerged = ls-files --unmerged
-	lg = !GIT_PAGER=less git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	lp = !GIT_PAGER=less git log -p --patience
-	l = !GIT_PAGER=less git log --pretty=oneline --abbrev-commit --decorate
-	subdo = submodule foreach git
-	top = !eval cd "$(pwd)/$(git rev-parse --show-cdup)" && pwd
+	d   = diff --patience --find-renames --find-copies
+	sd  = diff --patience --find-renames --find-copies --staged
+	co  = checkout
+	br  = branch
+	st  = status -sb --ignore-submodules=all
+	pa  = push --all
 	rmd = "!for f in $(git status | grep deleted | awk '{print $3}'); do git rm $f; done"
+	l   = "!f () { git log --abbrev-commit --date=short --pretty=format:'%h%x00%cd%x00%s%x00%an%x00%d' $@ | gawk -F '\\0' '{ printf \"\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5 }' | less -R; }; f"
+	lg  = "!f () { git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' $@ | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-50s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R; }; f"
+	lp  = log -p --patience
+
+	unstage = reset HEAD --
+	csub    = "!subs=$(git ls-files --error-unmatch --stage -- $(git ls-files --modified) | grep \"^160000\" | cut -f2-); msg=$(echo Update submodules; echo; git submodule summary); git commit -e -m \"$msg\" --only $(echo $subs | tr \"\n\" \" \")"
+	subdo   = submodule foreach git
 
 [url "http://github.com/"]
 	insteadOf = "gh:"

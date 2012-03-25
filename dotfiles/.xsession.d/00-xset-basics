@@ -2,7 +2,10 @@
 xset b 0 &
 
 # Set keyboard repeat rate
-xset r rate 250 40 &
+xset r rate 200 50 &
+
+# Set mouse acceleration
+xset m 8 2
 
 # Set font paths
 for FONTPATH in `find $HOME/.fonts/bitmap/* -type d`; do

@@ -41,9 +41,9 @@
 		export WINEARCH="win32"
 	# }}}
 	# Paths {{{
-		# Add sync/bin to path
-		export PATH="$HOME/sync/bin:/usr/bin/vendor_perl:$PATH"
+		export PATH="$HOME/sync/bin:/usr/bin/vendor_perl:$PATH" # Add sync/bin to path
 		export NODE_PATH="/usr/lib/node_modules:$NODE_PATH"
+		export PROJECT_HOME="$HOME/projects" # Set project path for virtualenvwrapper
 	# }}}
 # }}}
 # Load plugins {{{

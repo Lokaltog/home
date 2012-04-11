@@ -64,22 +64,71 @@ PROJECT_CSCOPE="$PROJECT_PATH/cscope"
 pushd "$TARGET_PATH" >/dev/null
 TARGET_PATH=`pwd`
 
+# Status functions, based on the rc functions in Arch Linux {{{
+	SAVE_POSITION="\e[s"
+	RESTORE_POSITION="\e[u"
+	DEL_TEXT="\e[0G"
+
+	C_CLEAR=$(tput sgr0)
+	C_MAIN=${C_CLEAR}$(tput bold)
+	C_OTHER=${C_MAIN}$(tput setaf 4)
+	C_SEPARATOR=${C_MAIN}$(tput setaf 0)
+	C_BUSY=${C_CLEAR}$(tput setaf 6)
+	C_FAIL=${C_MAIN}$(tput setaf 1)
+	C_DONE=${C_MAIN}
+	C_EVENT=${C_MAIN}$(tput setaf 5)
+	C_H1=${C_MAIN}
+	C_H2=${C_MAIN}$(tput setaf 6)
+
+	printhl() {
+		printf "        ${C_H1}${1}${C_CLEAR} \n"
+	}
+	printevent() {
+		printf "        ${C_EVENT}${1}${C_CLEAR} \n"
+	}
+	printsep() {
+		printf "\n${C_SEPARATOR}        ------------------------------\n\n"
+	}
+	stat_busy() {
+		printf " ${C_OTHER}[${C_BUSY}BUSY${C_OTHER}]${C_CLEAR} "
+		printf "${C_OTHER}${PREFIX_REG}${C_CLEAR}${1}"
+		printf "${SAVE_POSITION}"
+		printf "${DEL_TEXT}"
+	}
+	stat_done() {
+		printf " ${C_OTHER}[${C_DONE}DONE${C_OTHER}]${C_CLEAR} \n"
+		printf "${DEL_TEXT}"
+	}
+	stat_fail() {
+		printf " ${C_OTHER}[${C_FAIL}FAIL${C_OTHER}]${C_CLEAR} \n"
+		printf "${DEL_TEXT}"
+	}
+# }}}
+
 if [[ "$ACTION" == "init" ]]; then
+	ASSETS_PATH="assets"
+
 	mkdir -p "$PROJECT_PATH"
-	mkdir -p assets/{src/{js,css}/vendors,release/{js,css}}
+	[[ ! `grep project .gitignore >/dev/null 2>&1` ]] && echo "project" >> .gitignore
+
+	mkdir -p $ASSETS_PATH/{src/{js,css}/vendors,release/{js,css}}
 	echo "module 'project'
-	src: 'assets/src/js'
+	src: '$ASSETS_PATH/src/js'
 	vendors: []
-	release: 'assets/release/js/main.js'
-" > toaster.coffee
+	release: '$ASSETS_PATH/release/js/main.js'" > toaster.coffee
+	echo "*.css
+*.css.gz" > $ASSETS_PATH/release/css/.gitignore
+	echo "*.js
+*.js.gz" > $ASSETS_PATH/release/js/.gitignore
+	touch $ASSETS_PATH/src/js/main.coffee
+	touch $ASSETS_PATH/src/css/main.styl
 elif [[ "$ACTION" == "watch" ]]; then
 	echo -n "$TARGET_PATH" > $PROJECT_PATHFILE
-	trap "echo \"Cleaning up...\";\
-		rm -f \"$PROJECT_PATHFILE\" \"$PROJECT_CSCOPE.files\" \"$PROJECT_LOCK\";\
+	trap "rm -f \"$PROJECT_PATHFILE\" \"$PROJECT_CSCOPE.files\" \"$PROJECT_LOCK\";\
 		exit" EXIT SIGHUP SIGINT SIGTERM
 
 	build_tags() {
-		echo "Building project tags..."
+		stat_busy "Building project tags..."
 
 		python "$TAGHIGHLIGHT" -d "$TARGET_PATH" --ctags-file=project/tags --types-file-location=project
 
@@ -96,10 +145,12 @@ elif [[ "$ACTION" == "watch" ]]; then
 			-i $PROJECT_CSCOPE.files \
 			-f $PROJECT_CSCOPE.out \
 			-b
+
+		stat_done
 	}
 
 	parse_stylus() {
-		echo "Compiling Stylus file"
+		stat_busy "Compiling Stylus file..."
 
 		OUTFILE="`dirname $1`/../../release/css/`basename $1 .styl`.css"
 		if [[ $IS_PRODUCTION -eq 1 ]]; then
@@ -108,33 +159,40 @@ elif [[ "$ACTION" == "watch" ]]; then
 			stylus -u nib <"$1" >"$OUTFILE"
 		fi
 
+		stat_done
+
 		gzip_file "$OUTFILE"
 	}
 
 	parse_coffee() {
-		echo "Compiling CoffeeScript with toaster"
+		stat_busy "Compiling CoffeeScript with Toaster..."
 
 		TOASTER_FILES=`toaster`
+
+		stat_done
 
 		while IFS=$'\n' read -ra FILE; do
 			read -ra FILE_SPLIT <<< "$FILE"
 			FILE=${FILE_SPLIT[1]}
 
-			echo "Compressing '$FILE' with uglifyjs"
+			stat_busy "Compressing '$FILE' with UglifyJS..."
 			if [[ $IS_PRODUCTION -eq 1 ]]; then
 				uglifyjs -d DEV=false --unsafe --mangle-toplevel --overwrite "$FILE"
 			else
 				uglifyjs -d DEV=true --no-mangle --no-squeeze --beautify --indent 4 --overwrite "$FILE"
 			fi
+			stat_done
 
 			gzip_file "$FILE"
 		done <<< "$TOASTER_FILES"
 	}
 
 	gzip_file() {
-		echo "Gzipping '$1'"
+		stat_busy "Gzipping '$1'..."
 
 		7z a -bd -tgzip -mx=9 -mpass=15 -y "$1.gz" "$1" >/dev/null 2>&1
+
+		stat_done
 	}
 
 	inotifywait -mr --format "%w%f" -e close_write "$TARGET_PATH" | while read FILE; do
@@ -145,24 +203,24 @@ elif [[ "$ACTION" == "watch" ]]; then
 
 		case $FILE_EXT in
 			"py")
-				echo "Python file '$FILE' modified"
+				printsep
+				printevent "Python file '$FILE' modified"
 				touch "$PROJECT_LOCK"
 				build_tags $FILE_EXT
-				echo "Done!"
 				rm "$PROJECT_LOCK"
 				;;
 			"styl" | "stylus")
+				printsep
+				printevent "Stylus file '$FILE' modified"
 				touch "$PROJECT_LOCK"
-				echo "Stylus file '$FILE' modified"
 				parse_stylus $FILE
-				echo "Done!"
 				rm "$PROJECT_LOCK"
 				;;
 			"coffee")
+				printsep
+				printevent "CoffeeScript file '$FILE' modified"
 				touch "$PROJECT_LOCK"
-				echo "CoffeeScript file '$FILE' modified"
 				parse_coffee
-				echo "Done!"
 				rm "$PROJECT_LOCK"
 				;;
 		esac

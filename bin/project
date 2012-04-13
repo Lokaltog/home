@@ -19,7 +19,8 @@
 
 ACTION=$1
 TARGET_PATH=$2
-IS_PRODUCTION=0
+IS_PRODUCTION=1
+[[ "$ENV" == "dev" ]] && IS_PRODUCTION=0
 
 if [[ "$ACTION" != "init" && "$ACTION" != "watch" ]]; then
 	echo "Usage: `basename "$0"` [init|watch] [path]"

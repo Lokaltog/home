@@ -196,6 +196,8 @@ elif [[ "$ACTION" == "watch" ]]; then
 		stat_done
 	}
 
+	[[ ! -d "$PROJECT_PATH" ]] && mkdir $PROJECT_PATH
+
 	inotifywait -mr --format "%w%f" -e close_write "$TARGET_PATH" | while read FILE; do
 		FILE_EXT="${FILE##*.}"
 

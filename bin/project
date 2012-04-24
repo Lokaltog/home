@@ -123,13 +123,18 @@ if [[ "$ACTION" == "init" ]]; then
 *.js.gz" > $ASSETS_PATH/release/js/.gitignore
 	touch $ASSETS_PATH/src/js/main.coffee
 	touch $ASSETS_PATH/src/css/main.styl
+
+	echo "Project has been initialized in $PROJECT_PATH.
+
+Remember to create a symlink to a WSGI file in the project folder if the WSGI
+file to be touched doesn't end in .wsgi or is located in a parent folder."
 elif [[ "$ACTION" == "watch" ]]; then
 	echo -n "$TARGET_PATH" > $PROJECT_PATHFILE
 	trap "rm -f \"$PROJECT_PATHFILE\" \"$PROJECT_CSCOPE.files\" \"$PROJECT_LOCK\";\
 		exit" EXIT SIGHUP SIGINT SIGTERM
 
 	build_tags() {
-		stat_busy "Building project tags..."
+		stat_busy "Building project tags"
 
 		python "$TAGHIGHLIGHT" -d "$TARGET_PATH" --ctags-file=project/tags --types-file-location=project
 
@@ -151,13 +156,13 @@ elif [[ "$ACTION" == "watch" ]]; then
 	}
 
 	parse_stylus() {
-		stat_busy "Compiling Stylus file..."
+		stat_busy "Compiling Stylus file"
 
 		OUTFILE="`dirname $1`/../../release/css/`basename $1 .styl`.css"
 		if [[ $IS_PRODUCTION -eq 1 ]]; then
-			stylus -u nib -c <"$1" >"$OUTFILE"
+			stylus --include-css -u nib -c <"$1" >"$OUTFILE"
 		else
-			stylus -u nib <"$1" >"$OUTFILE"
+			stylus --include-css -u nib <"$1" >"$OUTFILE"
 		fi
 
 		stat_done
@@ -166,7 +171,7 @@ elif [[ "$ACTION" == "watch" ]]; then
 	}
 
 	parse_coffee() {
-		stat_busy "Compiling CoffeeScript with Toaster..."
+		stat_busy "Compiling CoffeeScript with Toaster"
 
 		TOASTER_FILES=`toaster`
 
@@ -176,7 +181,7 @@ elif [[ "$ACTION" == "watch" ]]; then
 			read -ra FILE_SPLIT <<< "$FILE"
 			FILE=${FILE_SPLIT[1]}
 
-			stat_busy "Compressing '$FILE' with UglifyJS..."
+			stat_busy "Compressing '$FILE' with UglifyJS"
 			if [[ $IS_PRODUCTION -eq 1 ]]; then
 				uglifyjs -d DEV=false --unsafe --mangle-toplevel --overwrite "$FILE"
 			else
@@ -189,7 +194,7 @@ elif [[ "$ACTION" == "watch" ]]; then
 	}
 
 	gzip_file() {
-		stat_busy "Gzipping '$1'..."
+		stat_busy "Gzipping '$1'"
 
 		7z a -bd -tgzip -mx=9 -mpass=15 -y "$1.gz" "$1" >/dev/null 2>&1
 
@@ -197,6 +202,9 @@ elif [[ "$ACTION" == "watch" ]]; then
 	}
 
 	[[ ! -d "$PROJECT_PATH" ]] && mkdir $PROJECT_PATH
+
+	# Look for wsgi script for reloading
+	WSGI_FILE=`find -name '*.wsgi' | head -1`
 
 	inotifywait -mr --format "%w%f" -e close_write "$TARGET_PATH" | while read FILE; do
 		FILE_EXT="${FILE##*.}"
@@ -209,6 +217,11 @@ elif [[ "$ACTION" == "watch" ]]; then
 				printsep
 				printevent "Python file '$FILE' modified"
 				touch "$PROJECT_LOCK"
+				if [[ -f "$WSGI_FILE" ]]; then
+					stat_busy 'Reloading WSGI server'
+					touch "$WSGI_FILE"
+					stat_done
+				fi
 				build_tags $FILE_EXT
 				rm "$PROJECT_LOCK"
 				;;

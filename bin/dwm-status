@@ -7,8 +7,10 @@ import subprocess
 import urllib.request
 import xml.dom.minidom
 
+
 def run_cmd(cmd):
 	return subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0].decode("utf-8").strip()
+
 
 class Statusbar:
 	_segments = []
@@ -22,6 +24,7 @@ class Statusbar:
 
 	def __str__(self):
 		return ' '.join(self._segments)
+
 
 class Segment:
 	icons = {
@@ -124,6 +127,7 @@ class Segment:
 
 		return ' '.join(segment)
 
+
 class MusicSegment(Segment):
 	trim_length = 60
 
@@ -158,6 +162,7 @@ class MusicSegment(Segment):
 
 			self.set_text(' '.join(text))
 
+
 class VolumeSegment(Segment):
 	def __init__(self):
 		Segment.__init__(self)
@@ -189,6 +194,7 @@ class VolumeSegment(Segment):
 			self.set_icon('vol_low')
 
 		self.set_text(self.get_bar(volume))
+
 
 class MailSegment(Segment):
 	def __init__(self):
@@ -233,12 +239,14 @@ class DateSegment(Segment):
 		self.set_icon('date')
 		self.set_text(datetime.datetime.now().strftime('%Y-%m-%d'))
 
+
 class TimeSegment(Segment):
 	def __init__(self):
 		Segment.__init__(self)
 
 		self.set_icon('time')
 		self.set_text(datetime.datetime.now().strftime('%R'))
+
 
 sb = Statusbar(
 	MusicSegment(),

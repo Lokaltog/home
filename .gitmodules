@@ -16,3 +16,6 @@
 [submodule "modules/taghighlight"]
 	path = modules/taghighlight
 	url = git://github.com/abudden/TagHighlight.git
+[submodule "modules/dircolors"]
+	path = modules/dircolors
+	url = git://github.com/trapd00r/LS_COLORS.git

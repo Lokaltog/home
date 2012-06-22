@@ -48,6 +48,7 @@
 # }}}
 # Load plugins {{{
 	source ~/.zsh/git-flow-completion.zsh
+	source ~/.zsh/zsh-syntax-highlighting-filetypes.zsh
 # }}}
 # Zsh options {{{
 	typeset -g -A key

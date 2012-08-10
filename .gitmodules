@@ -13,12 +13,12 @@
 [submodule "dotfiles/.fonts/fonts"]
 	path = dotfiles/.fonts/fonts
 	url = git@github.com:Lokaltog/fonts.git
-[submodule "modules/taghighlight"]
-	path = modules/taghighlight
-	url = git://github.com/abudden/TagHighlight.git
 [submodule "modules/dircolors"]
 	path = modules/dircolors
 	url = git://github.com/trapd00r/LS_COLORS.git
 [submodule "zshfiles/modules/zsh-syntax-highlighting-filetypes"]
 	path = zshfiles/modules/zsh-syntax-highlighting-filetypes
 	url = git://github.com/trapd00r/zsh-syntax-highlighting-filetypes.git
+[submodule "modules/taghighlight"]
+	path = modules/taghighlight
+	url = git://github.com/Lokaltog/TagHighlight.git

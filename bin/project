@@ -136,7 +136,8 @@ elif [[ "$ACTION" == "watch" ]]; then
 	build_tags() {
 		stat_busy "Building project tags"
 
-		python "$TAGHIGHLIGHT" -d "$TARGET_PATH" --ctags-file=project/tags --types-file-location=project
+		python "$TAGHIGHLIGHT" -d "$TARGET_PATH" --ctags-file-dir=project \
+			--types-file-location=project --include-locals
 
 		find "$TARGET_PATH" \
 				 ! -wholename "./.git/*" \
@@ -209,6 +210,8 @@ elif [[ "$ACTION" == "watch" ]]; then
 	inotifywait -mr --format "%w%f" -e close_write "$TARGET_PATH" | while read FILE; do
 		FILE_EXT="${FILE##*.}"
 
+		[[ "$FILE" =~ "release" ]] && continue
+
 		# Check that the project isn't locked
 		[[ -e "$PROJECT_LOCK" ]] && continue
 
@@ -229,14 +232,14 @@ elif [[ "$ACTION" == "watch" ]]; then
 				printsep
 				printevent "Stylus file '$FILE' modified"
 				touch "$PROJECT_LOCK"
-				parse_stylus $FILE
+				$TARGET_PATH/assets/src/css/compile.sh
 				rm "$PROJECT_LOCK"
 				;;
-			"coffee")
+			"js")
 				printsep
-				printevent "CoffeeScript file '$FILE' modified"
+				printevent "JS file '$FILE' modified"
 				touch "$PROJECT_LOCK"
-				parse_coffee
+				$TARGET_PATH/assets/src/js/compile.sh
 				rm "$PROJECT_LOCK"
 				;;
 		esac

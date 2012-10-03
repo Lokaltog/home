@@ -4,7 +4,7 @@ set -u
 
 while :; do
 	for SCRIPT in `run-parts --list $HOME/.xsession.d`; do
-		echo -n "Sourcing ${SCRIPT:t}... "
+		echo -n "Sourcing ${SCRIPT}... "
 		. $SCRIPT
 		echo "done!"
 	done

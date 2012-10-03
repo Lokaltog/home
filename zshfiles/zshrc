@@ -151,9 +151,7 @@
 		zstyle ':completion:*:*:*' hosts $ssh_config_hosts $ssh_known_hosts
 	# }}}
 	# General rules {{{
-		zstyle ':completion:*' completer _complete _ignored _match _approximate
-		zstyle ":completion:*:match:*" original only
-		zstyle ":completion:*:approximate:*" max-errors 1 numeric
+		zstyle ':completion:*' completer _complete _ignored
 		zstyle ':completion:*' expand prefix suffix
 		zstyle ':completion:*' group-name ''
 		zstyle ':completion:*' ignore-parents parent pwd .. directory
@@ -166,7 +164,6 @@
 		zstyle ':completion::complete:*' use-cache 1
 		zstyle ':completion::complete:*' cache-path ~/.zshcache
 		zstyle ':completion:*:*:kill:*' menu yes select
-		zstyle ":completion:*:kill:*" force-list always
 		zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 		zstyle ':completion:*:*:killall:*:processes' command 'ps --forest -A -o pid,user,cmd'
 		zstyle ':completion:*:processes-names' command 'ps axho command'
@@ -197,68 +194,87 @@
 # }}}
 # Prompt {{{
 	if [[ $TERM =~ '256color' ]]; then
-		N_LINE=239
-		C_RESET="%{[0m%}"
-		C_BOLD_ON="%{[1m%}"
-		C_BOLD_OFF="%{[22m%}"
-		C_LINE="%{[48;5;0;38;5;${N_LINE}m%}"
-		C_BRANCH_ICON="%{[38;5;246m%}"
-		C_BRANCH="%{[38;5;231m%}"
-		C_PWD_ICON="%{[38;5;248m%}"
-		C_PWD="%{[48;5;${N_LINE};38;5;254m%}"
-		C_AT="%{[38;5;244m%}"
-		C_HOST="%{[38;5;250m%}"
-
-		if [[ $UID -eq 0 ]]; then
-		   C_USER="%{[1;38;5;160m%}"
-		else
-		   C_USER="%{[1;38;5;231m%}"
-		fi
-
 		autoload -Uz vcs_info
 
-		function precmd {
-			# Terminal width = width - 1 (for lineup)
-			((TERMWIDTH=${COLUMNS} - 1))
+		zstyle ':vcs_info:*' get-revision true
+		zstyle ':vcs_info:*' check-for-changes true
+		zstyle ':vcs_info:*' formats '%u%c|%s ⭠ %b'
+		zstyle ':vcs_info:*' actionformats '%c%u|%s@%a ⭠ %b'
+		zstyle ':vcs_info:*' branchformat '%b@%r'
+		zstyle ':vcs_info:*' unstagedstr "%{$fg_no_bold[red]%}"
+		zstyle ':vcs_info:*' stagedstr "%{$fg_no_bold[yellow]%}"
+		zstyle ':vcs_info:*' enable git hg svn
 
-			zstyle ':vcs_info:*' get-revision true
-			zstyle ':vcs_info:*' check-for-changes true
-			zstyle ':vcs_info:*' actionformats '%c%u|%s@%a:%b@%.5i'
-			zstyle ':vcs_info:*' actionformats "${C_LINE}⮃ ${C_BOLD_OFF}${C_BRANCH_ICON}%a: ${C_BRANCH}%b@%.5i%F{white} ${C_LINE}${C_BOLD_ON}⮁⮖"
-			zstyle ':vcs_info:*' stagedstr '%F{green}●'
-			zstyle ':vcs_info:*' unstagedstr '%F{yellow}●'
-			zstyle ':vcs_info:*' enable git
+		zstyle ':vcs_info:git*:*' formats '%s ⭠ %b'
+		zstyle ':vcs_info:git*:*' actionformats '%c%u|%s@%a:%b@%.5i'
 
-			if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-				zstyle ':vcs_info:*' formats "${C_LINE}⮃ ${C_BOLD_OFF}${C_BRANCH_ICON}⭠ ${C_BRANCH}%b%c%u%F{white} ${C_LINE}${C_BOLD_ON}⮁⮖"
-			else
-				zstyle ':vcs_info:*' formats "${C_LINE}⮃ ${C_BOLD_OFF}${C_BRANCH_ICON}⭠ ${C_BRANCH}%b%c%u%F{red}●%F{white} ${C_LINE}${C_BOLD_ON}⮁⮖"
-			fi
-
+		precmd () {
 			vcs_info
 
-			# Truncate long paths
-			PR_FILLBAR=""
-			PR_PWDLEN=""
+			if [[ $TMUX != '' ]]; then
+				# Dynamic tmux status (path/branch stuff)
+				#
+				# This is a hack which sets window-specific stuff as the
+				# window's title, so the title gets useless in e.g. dwm's
+				# statusbar. This has to be done because tmux doesn't
+				# support custom dynamic variables in the statusbar.
+				STATUS=''
+				STATUS_USER_FG=153
+				STATUS_USER_BG=31
 
-			local VCSSIZE="${#${(S%%)vcs_info_msg_0_//(\%([KF1]|)\{*\}|\%[Bbkf])}}" # Trim ansi chars from VCS info
-			local PROMPTSIZE="${#${(%):---( X %n@%m )---(  )--}}"
-			local PWDSIZE="${#${(%):-%~}}"
+				if [[ $UID == 0 ]]; then
+					STATUS_USER_FG=231
+					STATUS_USER_BG=160
+				fi
 
-			[[ $VCSSIZE -eq 1 ]] && VCSSIZE=0
+				if [[ ! -z "$SSH_CLIENT" ]]; then
+					STATUS=$STATUS"#[fg=colour220,bg=colour166] ⭤ `hostname` #[fg=colour166,bg=colour$STATUS_USER_BG]⮀"
+				fi
 
-			if [[ "${VCSSIZE} + ${PROMPTSIZE} + ${PWDSIZE}" -gt ${TERMWIDTH} ]]; then
-				((PR_PWDLEN=${TERMWIDTH} - ${PROMPTSIZE}))
-			else
-				PR_FILLBAR="\${(l.((${TERMWIDTH} - (${VCSSIZE} + ${PROMPTSIZE} + ${PWDSIZE})))..⮖.)}"
+				STATUS=$STATUS"#[fg=colour$STATUS_USER_FG,bg=colour$STATUS_USER_BG,bold] `whoami` #[fg=colour$STATUS_USER_BG,bg=colour239,nobold]⮀"
+				if [[ $vcs_info_msg_0_ != '' ]]; then
+					STATUS=$STATUS" #[fg=colour248]${vcs_info_msg_0_} ⮁"
+				fi
+				STATUS=$STATUS"#[fg=colour231,bg=colour239,bold] `pwd` #[fg=colour239,bg=colour236,nobold]⮀"
+
+				# Set the status bar info as the window title
+				echo -n ']2;'$STATUS''
 			fi
 		}
 
-		PROMPT='${C_BOLD_ON}${C_LINE}⮐⮖⮂${C_PWD} ${C_PWD_ICON}⭫ ${C_PWD}%$PR_PWDLEN<...<%~%<< ${C_BOLD_ON}${C_LINE}⮀⮖⮖\
-${(e)PR_FILLBAR}⮖${vcs_info_msg_0_}${C_LINE}⮃${C_BOLD_OFF}${C_USER} %n${C_AT}${C_BOLD_OFF}@${C_HOST}%m${C_BOLD_ON}${C_LINE} ⮁⮖⮒
-${C_LINE}⮑⮖⮔ ${C_RESET}'
-
-		RPROMPT='${C_BOLD_ON}${C_LINE}⮕⮖⮓${C_RESET}'
+		if [[ $TMUX != '' ]]; then
+			# Show shorter prompt in tmux because the statusbar has path/branch info
+			if [[ $UID != 0 ]]; then
+				PROMPT='%{[1m[38;5;76m%}▶ %{[0m%}'
+			else
+				PROMPT='%{[1m[38;5;160m%}▶ %{[0m%}'
+			fi
+		else
+			C_RESET='%{[0m%}'
+	
+			C_USER=$C_RESET'%{[1m[38;5;153m[48;5;31m%}'
+			C_USER_SEP=$C_RESET'%{[48;5;237m[38;5;31m%}'
+			C_PWD=$C_RESET'%{[38;5;248m[48;5;237m%}'
+			C_PWD_SEP=$C_RESET'%{[38;5;237m%}'
+			if [[ ! -z "$SSH_CLIENT" ]]; then
+				SSHPROMPT=$C_RESET'%{[48;5;166m[38;5;220m%} ⭤ %M %{[38;5;166m%}'
+	
+				if [[ $UID == 0 ]]; then
+					SSHPROMPT=$SSHPROMPT'%{[48;5;88m%}⮀'
+				else
+					SSHPROMPT=$SSHPROMPT'%{[48;5;31m%}⮀'
+				fi
+			fi
+	
+			if [[ $UID == 0 ]]; then
+				# Highlight root user
+				C_USER=$C_RESET'%{[1m[38;5;231m[48;5;160m%}'
+				C_USER_SEP=$C_RESET'%{[48;5;237m[38;5;160m%}'
+			fi
+	
+			PROMPT=$SSHPROMPT$C_USER' %n '$C_USER_SEP'⮀'$C_PWD' %3~ '$C_PWD_SEP'⮀'$C_RESET' '
+			RPROMPT='${vcs_info_msg_0_}'
+		fi
 	fi
 	# List prompt - don't ask 'do you want to see all ...' in menu selection {{{
 		LISTPROMPT=''
@@ -306,7 +322,7 @@ ${C_LINE}⮑⮖⮔ ${C_RESET}'
 	# }}}
 # }}}
 # Enable stderred {{{
-	if [[ -f "/usr/lib/libstderred.so" ]]; then
-		export LD_PRELOAD="/usr/lib/libstderred.so:$LD_PRELOAD"
+	if [[ -f "/usr/lib/stderred.so" ]]; then
+		export LD_PRELOAD="/usr/lib/stderred.so:$LD_PRELOAD"
 	fi
 # }}}

@@ -5,7 +5,9 @@ xset b 0 &
 xset r rate 200 50 &
 
 # Set mouse acceleration
-xset m 8 2
+xinput --set-prop 'Razer Razer DeathAdder' 'Device Accel Profile' -1
+xinput --set-prop 'Contour Design RollerMouse Pro' 'Device Accel Profile' 0
+xinput set-ptr-feedback 'Contour Design RollerMouse Pro' 3 10 -1
 
 # Set font paths
 for FONTPATH in `find $HOME/.fonts/bitmap/* -type d`; do
@@ -13,3 +15,5 @@ for FONTPATH in `find $HOME/.fonts/bitmap/* -type d`; do
 done
 
 xset fp rehash
+
+xsetroot -cursor_name left_ptr

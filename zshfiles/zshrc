@@ -41,7 +41,7 @@
 		export WINEARCH="win32"
 	# }}}
 	# Paths {{{
-		export PATH="$HOME/sync/bin:/usr/bin/vendor_perl:$PATH" # Add sync/bin to path
+		export PATH="$HOME/.local/bin:$HOME/sync/bin:/usr/bin/vendor_perl:$PATH" # Add sync/bin to path
 		export NODE_PATH="/usr/lib/node_modules:$NODE_PATH"
 		export PROJECT_HOME="$HOME/projects" # Set project path for virtualenvwrapper
 	# }}}
@@ -56,7 +56,6 @@
 
 	setopt auto_cd # Change dir without cd
 	setopt extended_glob # Regex globbing
-	setopt print_exit_value # Print exit value of programs with non-zero exit status
 	setopt notify # Report the status if background jobs immediately
 	setopt complete_in_word # Not just at the end
 	setopt always_to_end # When complete from middle, move cursor
@@ -71,7 +70,6 @@
 	setopt append_history # Allow multiple sessions to append to the history file
 	setopt extended_history # Save additional info to history file
 	setopt inc_append_history # Append commands to history immediately
-	setopt prompt_subst # Enable variable substitution in prompt
 	setopt correct # Command correction
 	setopt dvorak # Correkt dvorak typing mistakes
 	setopt short_loops # Allow short loops
@@ -91,8 +89,8 @@
 	bindkey '^[[D' backward-char # Left
 	bindkey '^[[B' down-line-or-search # Down
 	bindkey '^[[C' forward-char # Right
-	bindkey "^[OH" beginning-of-line
-	bindkey "^[OF" end-of-line
+	bindkey "^[[H" beginning-of-line
+	bindkey "^[[F" end-of-line
 # }}}
 # Aliases {{{
 	# Vimpager aliases {{{
@@ -194,87 +192,7 @@
 # }}}
 # Prompt {{{
 	if [[ $TERM =~ '256color' ]]; then
-		autoload -Uz vcs_info
-
-		zstyle ':vcs_info:*' get-revision true
-		zstyle ':vcs_info:*' check-for-changes true
-		zstyle ':vcs_info:*' formats '%u%c|%s ⭠ %b'
-		zstyle ':vcs_info:*' actionformats '%c%u|%s@%a ⭠ %b'
-		zstyle ':vcs_info:*' branchformat '%b@%r'
-		zstyle ':vcs_info:*' unstagedstr "%{$fg_no_bold[red]%}"
-		zstyle ':vcs_info:*' stagedstr "%{$fg_no_bold[yellow]%}"
-		zstyle ':vcs_info:*' enable git hg svn
-
-		zstyle ':vcs_info:git*:*' formats '%s ⭠ %b'
-		zstyle ':vcs_info:git*:*' actionformats '%c%u|%s@%a:%b@%.5i'
-
-		precmd () {
-			vcs_info
-
-			if [[ $TMUX != '' ]]; then
-				# Dynamic tmux status (path/branch stuff)
-				#
-				# This is a hack which sets window-specific stuff as the
-				# window's title, so the title gets useless in e.g. dwm's
-				# statusbar. This has to be done because tmux doesn't
-				# support custom dynamic variables in the statusbar.
-				STATUS=''
-				STATUS_USER_FG=153
-				STATUS_USER_BG=31
-
-				if [[ $UID == 0 ]]; then
-					STATUS_USER_FG=231
-					STATUS_USER_BG=160
-				fi
-
-				if [[ ! -z "$SSH_CLIENT" ]]; then
-					STATUS=$STATUS"#[fg=colour220,bg=colour166] ⭤ `hostname` #[fg=colour166,bg=colour$STATUS_USER_BG]⮀"
-				fi
-
-				STATUS=$STATUS"#[fg=colour$STATUS_USER_FG,bg=colour$STATUS_USER_BG,bold] `whoami` #[fg=colour$STATUS_USER_BG,bg=colour239,nobold]⮀"
-				if [[ $vcs_info_msg_0_ != '' ]]; then
-					STATUS=$STATUS" #[fg=colour248]${vcs_info_msg_0_} ⮁"
-				fi
-				STATUS=$STATUS"#[fg=colour231,bg=colour239,bold] `pwd` #[fg=colour239,bg=colour236,nobold]⮀"
-
-				# Set the status bar info as the window title
-				echo -n ']2;'$STATUS''
-			fi
-		}
-
-		if [[ $TMUX != '' ]]; then
-			# Show shorter prompt in tmux because the statusbar has path/branch info
-			if [[ $UID != 0 ]]; then
-				PROMPT='%{[1m[38;5;76m%}▶ %{[0m%}'
-			else
-				PROMPT='%{[1m[38;5;160m%}▶ %{[0m%}'
-			fi
-		else
-			C_RESET='%{[0m%}'
-	
-			C_USER=$C_RESET'%{[1m[38;5;153m[48;5;31m%}'
-			C_USER_SEP=$C_RESET'%{[48;5;237m[38;5;31m%}'
-			C_PWD=$C_RESET'%{[38;5;248m[48;5;237m%}'
-			C_PWD_SEP=$C_RESET'%{[38;5;237m%}'
-			if [[ ! -z "$SSH_CLIENT" ]]; then
-				SSHPROMPT=$C_RESET'%{[48;5;166m[38;5;220m%} ⭤ %M %{[38;5;166m%}'
-	
-				if [[ $UID == 0 ]]; then
-					SSHPROMPT=$SSHPROMPT'%{[48;5;88m%}⮀'
-				else
-					SSHPROMPT=$SSHPROMPT'%{[48;5;31m%}⮀'
-				fi
-			fi
-	
-			if [[ $UID == 0 ]]; then
-				# Highlight root user
-				C_USER=$C_RESET'%{[1m[38;5;231m[48;5;160m%}'
-				C_USER_SEP=$C_RESET'%{[48;5;237m[38;5;160m%}'
-			fi
-	
-			PROMPT=$SSHPROMPT$C_USER' %n '$C_USER_SEP'⮀'$C_PWD' %3~ '$C_PWD_SEP'⮀'$C_RESET' '
-			RPROMPT='${vcs_info_msg_0_}'
-		fi
+		. ~/powerline/powerline/bindings/zsh/powerline.zsh
 	fi
 	# List prompt - don't ask 'do you want to see all ...' in menu selection {{{
 		LISTPROMPT=''

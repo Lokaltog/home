@@ -1,4 +1,3 @@
 # Start background applications
 
-(sleep 1 && urxvtd -q -o -f) &
-statnot $HOME/sync/conf/statnot.py &
+systemd --user &

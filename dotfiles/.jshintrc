@@ -1,0 +1,35 @@
+{
+	"browser": true,
+	"node": true,
+	"jquery": true,
+
+	"globals": {
+		"DEBUG": true,
+		"angular": true
+	},
+
+	"asi": true,
+	"debug": false,
+	"devel": false,
+	"white": true,
+
+	"strict": true,
+
+	"curly": true,
+	"onevar": true,
+	"eqeqeq": true,
+	"forin": true,
+	"immed": true,
+	"latedef": true,
+	"newcap": true,
+	"nonew": true,
+	"plusplus": true,
+	"quotmark": "single",
+	"undef": true,
+	"unused": true,
+	"multistr": true,
+	"trailing": true,
+	"laxcomma": true,
+	"expr": true,
+	"smarttabs": true
+}

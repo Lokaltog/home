@@ -41,7 +41,7 @@
 		export WINEARCH="win32"
 	# }}}
 	# Paths {{{
-		export PATH="$HOME/.local/bin:$HOME/sync/bin:/usr/bin/vendor_perl:$PATH" # Add sync/bin to path
+		export PATH="$HOME/.local/bin:$HOME/.gem/ruby/1.9.1/bin:$HOME/sync/bin:/usr/bin/vendor_perl:$PATH" # Add sync/bin to path
 		export NODE_PATH="/usr/lib/node_modules:$NODE_PATH"
 		export PROJECT_HOME="$HOME/projects" # Set project path for virtualenvwrapper
 	# }}}

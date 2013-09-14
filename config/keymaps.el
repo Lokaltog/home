@@ -11,4 +11,13 @@
       (beginning-of-line))))
 (global-set-key (kbd "C-a") 'beginning-of-line-or-text)
 
+;; f key mappings
+(global-set-key (kbd "<f9>") 'switch-to-buffer)
+(global-set-key (kbd "<f10>") 'projectile-find-file)
+(global-set-key (kbd "<f11>") 'find-file)
+
+;; better hideshow mappings
+(global-set-key (kbd "C-c h") 'hs-hide-block)
+(global-set-key (kbd "C-c s") 'hs-show-block)
+
 (provide 'config/keymaps)

@@ -12,10 +12,10 @@ re-downloaded in order to locate PACKAGE."
 
 (setq package-archives
       (nconc package-archives
-             '(("melpa" . "http://melpa.milkbox.net/packages/")
+             '(("melpa"     . "http://melpa.milkbox.net/packages/")
                ("marmalade" . "http://marmalade-repo.org/packages/")
-               ("elpa" . "http://elpa.gnu.org/packages/")
-               ("org" . "http://orgmode.org/elpa/"))))
+               ("elpa"      . "http://elpa.gnu.org/packages/")
+               ("org"       . "http://orgmode.org/elpa/"))))
 
 (setq load-path
       (nconc load-path
@@ -37,21 +37,24 @@ re-downloaded in order to locate PACKAGE."
                 apps/org
 
                 ;; basic modes
-                modes/auto-complete
                 modes/cua
+                modes/golden-ratio
                 modes/hideshow
                 modes/parens
                 modes/pretty-mode-plus
                 modes/projectile
                 modes/rainbow-delimiters
+                modes/rainbow
                 modes/smart-tabs
                 modes/undo-tree
                 modes/yasnippet
 
                 ;; filetypes
                 modes/filetypes/js
+                modes/filetypes/json
                 modes/filetypes/nginx
                 modes/filetypes/python
+                modes/filetypes/sql
                 modes/filetypes/sws
 
                 ;; utils
@@ -60,8 +63,9 @@ re-downloaded in order to locate PACKAGE."
                 utils/cursor-style
                 utils/expand-region
                 utils/fill-column-indicator
-                utils/flymake
+                utils/flycheck
                 utils/multiple-cursors
+                utils/project-explorer
                 utils/smex
                 utils/uniquify
                 utils/windmove))

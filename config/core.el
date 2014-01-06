@@ -3,6 +3,7 @@
  inhibit-startup-message t
  backup-inhibited t
  auto-save-default nil
+ create-lockfiles nil
  scroll-margin 10
  scroll-step 1
  scroll-conservatively 100000
@@ -10,22 +11,31 @@
  indent-tabs-mode nil
  tab-width 4
  indicate-empty-lines t
- indicate-buffer-boundaries "left"
+ indicate-buffer-boundaries '((top . left) (bottom . left) (t . right))
+ require-final-newline t
+ next-line-add-newlines nil
  split-height-threshold nil
  split-width-threshold 0
+ major-mode 'text-mode
+ fill-column 85
  glasses-face (quote default)
  glasses-original-separator "_"
  glasses-separator "_"
  glasses-uncapitalize-p t
+ x-stretch-cursor t
  custom-file "~/.emacs.d/config/custom.el")
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (menu-bar-mode -1)
-(toggle-scroll-bar -1)
+(scroll-bar-mode -1)
 (tool-bar-mode -1)
-(global-hl-line-mode t)
 (global-subword-mode t)
+(electric-indent-mode t)
+
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
 
 (load custom-file)
 

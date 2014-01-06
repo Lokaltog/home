@@ -1,4 +1,4 @@
-(require-package 'zenburn-theme)
-(load-theme 'zenburn t)
+(require-package 'flatland-theme)
+(load-theme 'flatland t)
 
 (provide 'config/theme)

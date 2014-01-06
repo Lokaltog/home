@@ -64,6 +64,7 @@
     (inferior-octave-mode . octave-mode)
     (js-mode . javascript-mode)
     (js2-mode . javascript-mode)
+    (js3-mode . javascript-mode)
     (inferior-ruby-mode . ruby-mode))
   "Alist mapping from modes that should have the same substitution
 patterns as to the mode they are mapping to. Usually these are
@@ -350,6 +351,9 @@ Should be a list of the form ((MODE ((REGEXP . GLYPH) ...)) ...)"
 
        (?\u2501 :lodash (:equality)
                 (:lodash "_" javascript))
+
+       ;; (?\u2551 :comm (:equality)
+       ;;          (:comm "//" javascript))
 
        ;; (?\u2716 :throw (:equality)
        ;;          (:throw "throw new" javascript))

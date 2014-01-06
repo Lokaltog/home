@@ -8,5 +8,6 @@ XKBMAPFILE="$XKBDIR/keymap/`hostname`"
 info "Loading keymap from $XKBMAPFILE"
 
 xkbcomp -I"$XKBDIR" "$XKBMAPFILE" "${DISPLAY%%.*}"
+xcape -e 'Control_L=Escape'
 
 unset XKBDIR XKBMAPFILE

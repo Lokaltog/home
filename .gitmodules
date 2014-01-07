@@ -19,6 +19,3 @@
 [submodule "zshfiles/modules/zsh-syntax-highlighting-filetypes"]
 	path = zshfiles/modules/zsh-syntax-highlighting-filetypes
 	url = git://github.com/trapd00r/zsh-syntax-highlighting-filetypes.git
-[submodule "modules/taghighlight"]
-	path = modules/taghighlight
-	url = git://github.com/Lokaltog/TagHighlight.git

@@ -30,3 +30,9 @@ xkb_symbols "group2_symbols" {
 		symbols[Group2] = [ endash, emdash ]
 	};
 };
+
+// Remap left ctrl to escape
+partial modifier_keys alphanumeric_keys
+xkb_symbols "lctl_escape" {
+	replace key <LCTL> { [ Escape ] };
+};

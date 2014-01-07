@@ -1,4 +1,4 @@
-(require-package 'flatland-theme)
-(load-theme 'flatland t)
+(require-package 'monokai-theme)
+(load-theme 'monokai t)
 
 (provide 'config/theme)

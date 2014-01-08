@@ -19,3 +19,6 @@
 [submodule "zshfiles/modules/zsh-syntax-highlighting-filetypes"]
 	path = zshfiles/modules/zsh-syntax-highlighting-filetypes
 	url = git://github.com/trapd00r/zsh-syntax-highlighting-filetypes.git
+[submodule "modules/virtualfish"]
+	path = modules/virtualfish
+	url = https://github.com/adambrenecki/virtualfish.git

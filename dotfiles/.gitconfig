@@ -1,23 +1,13 @@
 [user]
 	name = Kim Silkebækken
 	email = kim.silkebaekken@gmail.com
-	editor = vim
+	editor = emacsclient -a "" -t
 
 [core]
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
 	excludesfile = ~/.gitignore
 	pager = /usr/bin/less
-
-[merge]
-	tool = lvimdiff
-
-[mergetool "lvimdiff"]
-	cmd = "vim -d -c 'wincmd J' $MERGED $LOCAL $BASE $REMOTE"
-	keepbackup = false
-
-[diff]
-	tool = vimdiff
 
 [color]
 	ui = auto

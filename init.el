@@ -37,14 +37,15 @@ re-downloaded in order to locate PACKAGE."
                 apps/org
 
                 ;; basic modes
+                modes/auto-complete
                 modes/cua
                 modes/golden-ratio
                 modes/hideshow
                 modes/parens
                 modes/pretty-mode-plus
                 modes/projectile
-                modes/rainbow-delimiters
                 modes/rainbow
+                modes/rainbow-delimiters
                 modes/smart-tabs
                 modes/undo-tree
                 modes/yasnippet
@@ -62,7 +63,6 @@ re-downloaded in order to locate PACKAGE."
                 utils/change-inner
                 utils/cursor-style
                 utils/expand-region
-                utils/fill-column-indicator
                 utils/flycheck
                 utils/multiple-cursors
                 utils/project-explorer

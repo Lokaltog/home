@@ -41,11 +41,13 @@ re-downloaded in order to locate PACKAGE."
                 modes/cua
                 modes/golden-ratio
                 modes/hideshow
+                modes/hl-line
                 modes/parens
                 modes/pretty-mode-plus
                 modes/projectile
                 modes/rainbow
                 modes/rainbow-delimiters
+                modes/smart-mode-line
                 modes/smart-tabs
                 modes/undo-tree
                 modes/yasnippet

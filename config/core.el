@@ -30,8 +30,12 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-(global-subword-mode t)
+
 (electric-indent-mode t)
+(global-subword-mode t)
+
+(column-number-mode t)
+(line-number-mode t)
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)

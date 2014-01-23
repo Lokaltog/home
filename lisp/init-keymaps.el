@@ -20,4 +20,4 @@
 (global-set-key (kbd "C-c h") 'hs-hide-block)
 (global-set-key (kbd "C-c s") 'hs-show-block)
 
-(provide 'config/keymaps)
+(provide 'init-keymaps)

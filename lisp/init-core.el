@@ -23,7 +23,7 @@
  glasses-separator "_"
  glasses-uncapitalize-p t
  x-stretch-cursor t
- custom-file "~/.emacs.d/config/custom.el")
+ custom-file "~/.emacs.d/lisp/init-custom.el")
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -31,11 +31,14 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-(electric-indent-mode t)
-(global-subword-mode t)
-
 (column-number-mode t)
 (line-number-mode t)
+
+;; global built-in modes
+(electric-indent-mode t)
+(global-subword-mode t)
+(transient-mark-mode t)
+(global-hl-line-mode t)
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -43,4 +46,4 @@
 
 (load custom-file)
 
-(provide 'config/core)
+(provide 'init-core)

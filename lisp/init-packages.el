@@ -1,3 +1,24 @@
+;; theme
+(require-package 'monokai-theme)
+(setq-default monokai-distinct-fringe-background t)
+(load-theme 'monokai t)
+
+;; whitespace-mode
+(global-whitespace-mode t)
+
+(setq-default whitespace-style (quote (face tabs newline tab-mark newline-mark))
+              whitespace-display-mappings '(
+                                            (newline-mark ?\n [?· ?\n])
+                                            (tab-mark     ?\t [?┊ ?\t] [?\\ ?\t])
+                                            ))
+
+(set-face-attribute 'whitespace-tab nil
+                    :foreground "#49483E"
+                    :weight 'normal)
+(set-face-attribute 'whitespace-newline nil
+                    :foreground "#49483E"
+                    :weight 'normal)
+
 ;; git packages
 (require-package 'magit)
 (require-package 'git-commit-mode)
@@ -8,10 +29,6 @@
 
 (global-git-gutter-mode t)
 (setq git-gutter-fr:side 'right-fringe)
-
-;; theme
-(require-package 'monokai-theme)
-(load-theme 'monokai t)
 
 ;; ido-mode
 (require-package 'flx-ido)
@@ -66,14 +83,22 @@
 (require-package 'golden-ratio)
 (golden-ratio-mode t)
 
-;; auto pairs
-(require-package 'autopair)
+;; handle parens
+(defadvice show-paren-function
+    (after show-matching-paren-offscreen activate)
+  "If the matching paren is offscreen, show the matching line in
+        the echo area. Has no effect if the character before
+        point is not of the syntax class ')'."
+  (interactive)
+  (let* ((cb (char-before (point)))
+         (matching-text (and cb
+                             (char-equal (char-syntax cb) ?\) )
+                             (blink-matching-open))))
+    (when matching-text (message matching-text))))
 
-(setq-default autopair-autowrap t
-              show-paren-delay 0)
+(setq-default show-paren-delay 0)
 
 (show-paren-mode t)
-(autopair-global-mode)
 
 ;; projectile
 (require-package 'projectile)

@@ -1,3 +1,4 @@
 # Start window manager
 
-exec qtile
+sxhkd &
+exec bspwm

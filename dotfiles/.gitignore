@@ -6,3 +6,7 @@ doc/tags
 __pycache__
 .netrwhist
 .venv
+node_modules
+.nodemonignore
+TAGS
+.projectile

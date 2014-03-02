@@ -11,6 +11,7 @@ alias du "du -h"
 alias rmr "rm -rf"
 alias mkdir "mkdir -vp"
 alias sc "sudo systemctl"
+alias em 'emacsclient -nw -a "" -c'
 
 set fish_greeting
 

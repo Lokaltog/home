@@ -126,7 +126,7 @@
 
 ;; smart tabs (indent with tabs, align with spaces)
 (require-package 'smart-tabs-mode)
-(smart-tabs-insinuate 'javascript)
+(smart-tabs-insinuate 'c 'javascript)
 (add-hook 'python-mode-hook
           (lambda ()
             (setq indent-tabs-mode t
@@ -322,5 +322,10 @@
 ;; switch windows with shift+arrow keys
 (require 'windmove)
 (windmove-default-keybindings)
+
+;; uncrustify
+(require-package 'uncrustify-mode)
+(require 'uncrustify-mode)
+(add-hook 'c-mode-common-hook '(lambda () (uncrustify-mode 1)))
 
 (provide 'init-packages)

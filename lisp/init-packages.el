@@ -175,6 +175,7 @@
 ;; nginx config mode
 (require-package 'nginx-mode)
 (add-to-list 'auto-mode-alist '("/etc/nginx/.*\.conf$" . nginx-mode))
+(add-to-list 'auto-mode-alist '(".*\.nginx\.conf$" . nginx-mode))
 
 ;; jedi (python completion)
 (require-package 'jedi)

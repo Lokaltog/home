@@ -1,7 +1,6 @@
 ;; theme
-(require-package 'monokai-theme)
-(setq-default monokai-distinct-fringe-background t)
-(load-theme 'monokai t)
+(require-package 'flatland-theme)
+(load-theme 'flatland t)
 
 ;; whitespace-mode
 (global-whitespace-mode t)
@@ -13,10 +12,12 @@
                                             ))
 
 (set-face-attribute 'whitespace-tab nil
-                    :foreground "#49483E"
+                    :foreground "#353a3d"
+                    :background "#26292c"
                     :weight 'normal)
 (set-face-attribute 'whitespace-newline nil
-                    :foreground "#49483E"
+                    :foreground "#353a3d"
+                    :background "#26292c"
                     :weight 'normal)
 
 ;; git packages

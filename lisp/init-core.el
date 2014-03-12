@@ -39,6 +39,7 @@
 (global-subword-mode t)
 (transient-mark-mode t)
 (global-hl-line-mode t)
+(blink-cursor-mode (- (*) (*) (*)))
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)

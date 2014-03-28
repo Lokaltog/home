@@ -21,6 +21,18 @@ re-downloaded in order to locate PACKAGE."
 
 (package-initialize)
 
+;; util functions
+(defun def-assoc (key alist default)
+  "Return cdr of `KEY' in `ALIST' or `DEFAULT' if key is no car in alist."
+  (let ((match (assoc key alist)))
+    (if match
+        (cdr match)
+      default)))
+
+(defun lt/var-file (filename)
+  (format "~/.var/%s" filename))
+
+;; requires
 (dolist (file '(init-core
                 init-hooks
                 init-keymaps

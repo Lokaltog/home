@@ -34,6 +34,10 @@
 (column-number-mode t)
 (line-number-mode t)
 
+;; enable disabled features
+(put 'set-goal-column 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 ;; global built-in modes
 (electric-indent-mode t)
 (global-subword-mode t)

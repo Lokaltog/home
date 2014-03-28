@@ -2,6 +2,31 @@
 (require-package 'flatland-theme)
 (load-theme 'flatland t)
 
+;; evil
+(require-package 'evil)
+(require 'evil)
+(evil-mode 1)
+
+(setq evil-default-cursor #'lt/evil-cursor)
+
+(defun lt/evil-cursor ()
+  "Change cursor color according to evil-state."
+  (let ((cursor-colors-default "#b0b3ba")
+        (cursor-colors '((insert . "#f6aa11")
+                         (visual . "#b0b3ba")
+                         (replace . "#ff4a52")))
+        (cursor-types-default 'box)
+        (cursor-types '((insert . 'bar)
+                        (visual . 'box))))
+    (setq cursor-type (def-assoc evil-state cursor-types cursor-types-default))
+    (set-cursor-color (def-assoc evil-state cursor-colors cursor-colors-default))))
+
+;; undo-tree
+(require-package 'undo-tree)
+(setq undo-tree-auto-save-history t
+      undo-tree-history-directory-alist `(("." . ,(lt/var-file "undo-tree-history"))))
+(global-undo-tree-mode)
+
 ;; whitespace-mode
 (global-whitespace-mode t)
 
@@ -13,11 +38,11 @@
 
 (set-face-attribute 'whitespace-tab nil
                     :foreground "#353a3d"
-                    :background "#26292c"
+                    :background "transparent"
                     :weight 'normal)
 (set-face-attribute 'whitespace-newline nil
                     :foreground "#353a3d"
-                    :background "#26292c"
+                    :background "transparent"
                     :weight 'normal)
 
 ;; git packages
@@ -68,7 +93,21 @@
                     ("None" . ?∅)
                     ("def" . ?ƒ)
                     ("lambda" . ?λ)
-                    ("return" . ?↩)
+                    ))))
+(add-hook 'c-mode-hook
+          (lambda ()
+            (setq prettify-symbols-alist
+                  '(("<=" . ?≤)
+                    (">=" . ?≥)
+                    ("!=" . ?≠)
+                    ("==" . ?≡)
+                    (">>" . ?≫)
+                    ("<<" . ?≪)
+                    ("&&" . ?∧)
+                    ("||" . ?∨)
+                    ("!" . ?¬)
+                    ("NULL" . ?∅)
+                    ("*" . ?∗)
                     ))))
 
 (global-prettify-symbols-mode t)
@@ -136,10 +175,6 @@
             (smart-tabs-mode-enable)
             ;; workaround, this needs to be python-indent-line instead of python-indent-line-1 which is the default advice
             (smart-tabs-advice python-indent-line python-indent)))
-
-;; undo-tree
-(require-package 'undo-tree)
-(global-undo-tree-mode)
 
 ;; snippets
 (require-package 'yasnippet)
@@ -247,45 +282,11 @@
 (require 'org-install)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-
 (setq org-log-done t)
 
 ;; ack-and-a-half
 (require-package 'ack-and-a-half)
 (defalias 'ack 'ack-and-a-half)
-
-;; change inner/outer sections
-(require-package 'change-inner)
-(global-set-key (kbd "C-c C-i") 'change-inner)
-(global-set-key (kbd "C-c C-o") 'change-outer)
-
-;; Change cursor color according to mode; inspired by
-;; http://www.emacswiki.org/emacs/ChangingCursorDynamically
-;; Valid values are t, nil, box, hollow, bar, (bar . WIDTH), hbar,
-;; (hbar. HEIGHT); see the docs for set-cursor-type
-(setq cursor-read-only-color "gray"
-      cursor-read-only-cursor-type 'hbar
-      cursor-overwrite-color "red"
-      cursor-overwrite-cursor-type 'box
-      cursor-normal-color "#eeeeee"
-      cursor-normal-cursor-type 'bar)
-
-(defun set-cursor-according-to-mode ()
-  "Change cursor color and type according to some minor modes."
-  (cond
-   (buffer-read-only
-    (set-cursor-color cursor-read-only-color)
-    (setq cursor-type cursor-read-only-cursor-type))
-   (overwrite-mode
-    (set-cursor-color cursor-overwrite-color)
-    (setq cursor-type cursor-overwrite-cursor-type))
-   (t
-    (set-cursor-color cursor-normal-color)
-    (setq cursor-type cursor-normal-cursor-type))))
-
-(add-hook 'post-command-hook 'set-cursor-according-to-mode)
 
 ;; expand region when selecting
 (require-package 'expand-region)
@@ -303,11 +304,6 @@
 (global-set-key (kbd "C-c C-m n") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c C-m p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-m a") 'mc/mark-all-like-this)
-
-;; project explorer
-;; TODO remove?
-(require-package 'project-explorer)
-(require 'project-explorer)
 
 ;; smex (m-x with ido-mode)
 (require-package 'smex)

@@ -51,6 +51,9 @@
 
 (load custom-file)
 
+;; set font
+(set-face-attribute 'default nil :family "Pragmata Pro" :height 85)
+
 ;; add extra font lock keywords
 (defun lt/kw-add-fixme ()
   (font-lock-add-keywords nil

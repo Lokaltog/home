@@ -1,6 +1,6 @@
 ;; theme
-(require-package 'flatland-theme)
-(load-theme 'flatland t)
+(require-package 'distinguished-theme)
+(load-theme 'distinguished t)
 
 ;; evil
 (require-package 'evil)

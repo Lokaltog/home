@@ -108,11 +108,17 @@
                           '(("\\(\\*+\\)[a-z]"
                              1 font-lock-pointer-face t))))
 
+(defun lt/kw-add-semicolon-eol ()
+  (font-lock-add-keywords nil
+                          '(("\\(;\\)$"
+                             1 font-lock-comment-face t))))
+
 (add-hook 'c-mode-common-hook
           (lambda ()
             (lt/kw-add-numbers)
             (lt/kw-add-fixme)
             (lt/kw-add-constant)
+            (lt/kw-add-semicolon-eol)
             (lt/kw-add-pointers)))
 
 (add-hook 'python-mode-hook

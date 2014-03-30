@@ -36,15 +36,6 @@
                                             (tab-mark     ?\t [?┊ ?\t] [?\\ ?\t])
                                             ))
 
-(set-face-attribute 'whitespace-tab nil
-                    :foreground "#353a3d"
-                    :background "transparent"
-                    :weight 'normal)
-(set-face-attribute 'whitespace-newline nil
-                    :foreground "#353a3d"
-                    :background "transparent"
-                    :weight 'normal)
-
 ;; git packages
 (require-package 'magit)
 (require-package 'git-commit-mode)

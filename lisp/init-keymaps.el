@@ -1,5 +1,6 @@
-;; m-space joins lines as well as truncate whitespace
-(global-set-key (kbd "M-SPC") (lambda () (interactive)(just-one-space -1)))
+;; evil mappings
+(define-key evil-normal-state-map (kbd "TAB") 'evil-indent-line)
+(define-key evil-visual-state-map (kbd "TAB") 'indent-region)
 
 ;; smart jump to start of line
 (defun beginning-of-line-or-text ()
@@ -15,9 +16,5 @@
 (global-set-key (kbd "<f9>") 'switch-to-buffer)
 (global-set-key (kbd "<f10>") 'projectile-find-file)
 (global-set-key (kbd "<f11>") 'find-file)
-
-;; better hideshow mappings
-(global-set-key (kbd "C-c h") 'hs-hide-block)
-(global-set-key (kbd "C-c s") 'hs-show-block)
 
 (provide 'init-keymaps)

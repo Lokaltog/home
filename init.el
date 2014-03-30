@@ -35,6 +35,6 @@ re-downloaded in order to locate PACKAGE."
 ;; requires
 (dolist (file '(init-core
                 init-hooks
-                init-keymaps
-                init-packages))
+                init-packages
+                init-keymaps))
   (require file))

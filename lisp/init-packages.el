@@ -317,4 +317,11 @@
 (require 'uncrustify-mode)
 (add-hook 'c-mode-common-hook '(lambda () (uncrustify-mode 1)))
 
+;; ace-jump-mode
+(require-package 'ace-jump-mode)
+
+;; move keys for programmer dvorak layout (from center on home row, upper row, lower row)
+(setq ace-jump-mode-move-keys (append "iduhetonasyfpg.c,r;lxbkmjwqv'z" nil))
+
+
 (provide 'init-packages)

@@ -1,6 +1,7 @@
 ;; evil mappings
 (define-key evil-normal-state-map (kbd "TAB") 'evil-indent-line)
 (define-key evil-visual-state-map (kbd "TAB") 'indent-region)
+(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
 ;; smart jump to start of line
 (defun beginning-of-line-or-text ()

@@ -52,7 +52,7 @@
 (load custom-file)
 
 ;; set font
-(set-face-attribute 'default nil :family "Pragmata Pro" :height 85)
+(set-face-attribute 'default nil :family "Pragmata Pro" :height 90)
 
 ;; add extra font lock keywords
 (defun lt/kw-add-fixme ()

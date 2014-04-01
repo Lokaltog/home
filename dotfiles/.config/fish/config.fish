@@ -15,17 +15,6 @@ alias em 'emacsclient -nw -a "" -c'
 
 set fish_greeting
 
-function fish_prompt
-	powerline shell left -r fish_prompt
-end
-function fish_right_prompt
-	powerline shell right -r fish_prompt
-end
-
-if test -f "/usr/lib/stderred.so"
-	set -x LD_PRELOAD "/usr/lib/stderred.so:$LD_PRELOAD"
-end
-
 function smartdot
 	commandline -i (commandline -b | awk '{print $0 ~ /\.\.$/ ? "/.." : "."}')
 end
@@ -38,7 +27,7 @@ function fish_user_key_bindings
 	bind \es 'smartsudo'
 end
 
-set -x EDITOR "emt"
+set -x EDITOR "emacsclient"
 
 set -x LANG "en_US.utf8"
 set -x LC_CTYPE "nb_NO.utf8"

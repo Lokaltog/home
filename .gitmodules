@@ -1,6 +1,3 @@
-[submodule "modules/dircolors"]
-	path = modules/dircolors
-	url = git://github.com/trapd00r/LS_COLORS.git
 [submodule "modules/virtualfish"]
 	path = modules/virtualfish
 	url = https://github.com/adambrenecki/virtualfish.git

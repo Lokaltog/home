@@ -49,8 +49,6 @@ set -x MAKEFLAGS "-j6"
 set -x PATH $PATH $HOME/.local/bin $HOME/.gem/ruby/1.9.1/bin $HOME/sync/bin /usr/bin/vendor_perl
 set -x NODE_PATH /usr/lib/node_modules $NODE_PATH
 
-eval (dircolors -c ~/sync/modules/dircolors/LS_COLORS)
-
 # virtualenv support
 . ~/sync/modules/virtualfish/virtual.fish
 . ~/sync/modules/virtualfish/auto_activation.fish

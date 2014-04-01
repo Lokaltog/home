@@ -1,4 +1,0 @@
-# Start window manager
-
-sxhkd &
-exec bspwm

@@ -7,9 +7,6 @@
 [submodule "dotfiles/.fonts/bitmap/lokaltog-fonts"]
 	path = dotfiles/.fonts/bitmap/lokaltog-fonts
 	url = git://github.com/Lokaltog/lokaltog-fonts.git
-[submodule "vimfiles"]
-	path = vimfiles
-	url = git://github.com/Lokaltog/vimfiles.git
 [submodule "dotfiles/.fonts/fonts"]
 	path = dotfiles/.fonts/fonts
 	url = git@github.com:Lokaltog/fonts.git

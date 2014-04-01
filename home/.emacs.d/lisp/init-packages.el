@@ -286,6 +286,8 @@
 ;; enable flycheck
 (require-package 'flycheck)
 
+(setq-default jshint-mode-jshintrc "~/.config/jshintrc")
+
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; multiple cursors

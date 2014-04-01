@@ -20,10 +20,10 @@ super + shift + c
 	bspc window -c
 
 super + {a,o,e,u,i}
-	bspc desktop -f "{I,II,III,IV,V}"
+	bspc desktop -f "^{1,2,3,4,5}"
 
 super + shift + {a,o,e,u,i}
-	bspc window -d "{I,II,III,IV,V}"
+	bspc window -d "^{1,2,3,4,5}"
 
 super + {h,j,k,l}
 	bspc window -f {left,down,up,right}

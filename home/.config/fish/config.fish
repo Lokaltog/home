@@ -47,3 +47,11 @@ set -x LC_ALL ""
 set -x MAKEFLAGS "-j6"
 set -x PATH $PATH $HOME/.local/bin
 
+# homeshick support
+function homeshick
+	if test \( (count $argv) = 2 -a $argv[1] = "cd" \)
+		cd "$HOME/.homesick/repos/$argv[2]"
+	else
+		eval /usr/bin/homeshick $argv
+	end
+end

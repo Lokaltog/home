@@ -45,9 +45,7 @@ set -x LC_IDENTIFICATION "nb_NO.utf8"
 set -x LC_ALL ""
 
 set -x MAKEFLAGS "-j6"
-
-set -x PATH $PATH $HOME/.local/bin $HOME/.gem/ruby/1.9.1/bin $HOME/sync/bin /usr/bin/vendor_perl
-set -x NODE_PATH /usr/lib/node_modules $NODE_PATH
+set -x PATH $PATH $HOME/.local/bin
 
 # virtualenv support
 . ~/sync/modules/virtualfish/virtual.fish

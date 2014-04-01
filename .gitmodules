@@ -1,12 +1,6 @@
 [submodule "modules/vimpager"]
 	path = modules/vimpager
 	url = git://github.com/rkitover/vimpager.git
-[submodule "dotfiles/.fonts/bitmap/lokaltog-fonts"]
-	path = dotfiles/.fonts/bitmap/lokaltog-fonts
-	url = git://github.com/Lokaltog/lokaltog-fonts.git
-[submodule "dotfiles/.fonts/fonts"]
-	path = dotfiles/.fonts/fonts
-	url = git@github.com:Lokaltog/fonts.git
 [submodule "modules/dircolors"]
 	path = modules/dircolors
 	url = git://github.com/trapd00r/LS_COLORS.git

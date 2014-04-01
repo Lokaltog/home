@@ -29,9 +29,6 @@ re-downloaded in order to locate PACKAGE."
         (cdr match)
       default)))
 
-(defun lt/var-file (filename)
-  (format "~/.var/%s" filename))
-
 ;; requires
 (dolist (file '(init-core
                 init-hooks

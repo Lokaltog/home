@@ -23,8 +23,6 @@
 
 ;; undo-tree
 (require-package 'undo-tree)
-(setq undo-tree-auto-save-history t
-      undo-tree-history-directory-alist `(("." . ,(lt/var-file "undo-tree-history"))))
 (global-undo-tree-mode)
 
 ;; whitespace-mode
@@ -324,6 +322,5 @@
 
 ;; move keys for programmer dvorak layout (from center on home row, upper row, lower row)
 (setq ace-jump-mode-move-keys (append "iduhetonasyfpg.c,r;lxbkmjwqv'z" nil))
-
 
 (provide 'init-packages)

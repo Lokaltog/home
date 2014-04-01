@@ -23,7 +23,7 @@
  glasses-separator "_"
  glasses-uncapitalize-p t
  x-stretch-cursor t
- custom-file "~/.emacs.d/lisp/init-custom.el")
+ custom-file (expand-file-name "lisp/init-custom.el" user-emacs-directory))
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

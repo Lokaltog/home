@@ -10,12 +10,10 @@ LESS_TERMCAP_ue=$(printf "\e[0m") \
 LESS_TERMCAP_us=$(printf "\e[1;32m")
 
 # Load keyboard layout
-XKBDIR="$HOME/.xkb"
+XKBDIR="$HOME/.config/.xkb"
 XKBMAPFILE="$XKBDIR/keymap/`hostname`"
 
 [[ -r "$XKBMAPFILE" ]] || XKBMAPFILE="${XKBMAPFILE%/*}/custom"
-
-info "Loading keymap from $XKBMAPFILE"
 
 xkbcomp -I"$XKBDIR" "$XKBMAPFILE" "${DISPLAY%%.*}"
 

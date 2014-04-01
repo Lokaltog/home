@@ -12,11 +12,7 @@ xinput --set-prop 'TPPS/2 IBM TrackPoint' 'Device Accel Profile' 1
 xinput --set-ptr-feedback 'TPPS/2 IBM TrackPoint' 1 5 1
 
 # Set font paths
-for FONTPATH in `find $HOME/.fonts/bitmap/* -type d`; do
-	[[ -d $FONTPATH ]] && xset +fp $FONTPATH 
-done
 xset +fp ~/.fonts
-
 xset fp rehash
 
 xsetroot -cursor_name left_ptr

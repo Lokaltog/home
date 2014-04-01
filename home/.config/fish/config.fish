@@ -47,6 +47,3 @@ set -x LC_ALL ""
 set -x MAKEFLAGS "-j6"
 set -x PATH $PATH $HOME/.local/bin
 
-# virtualenv support
-. ~/sync/modules/virtualfish/virtual.fish
-. ~/sync/modules/virtualfish/auto_activation.fish

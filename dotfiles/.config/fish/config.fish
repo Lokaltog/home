@@ -11,7 +11,7 @@ alias du "du -h"
 alias rmr "rm -rf"
 alias mkdir "mkdir -vp"
 alias sc "sudo systemctl"
-alias em 'emacsclient -nw -a "" -c'
+alias scu "systemctl --user"
 
 set fish_greeting
 
@@ -27,7 +27,7 @@ function fish_user_key_bindings
 	bind \es 'smartsudo'
 end
 
-set -x EDITOR "emacsclient"
+set -x EDITOR "em"
 
 set -x LANG "en_US.utf8"
 set -x LC_CTYPE "nb_NO.utf8"

@@ -18,11 +18,8 @@
  split-width-threshold 0
  major-mode 'text-mode
  fill-column 85
- glasses-face (quote default)
- glasses-original-separator "_"
- glasses-separator "_"
- glasses-uncapitalize-p t
  x-stretch-cursor t
+ gc-cons-threshold 20000000
  custom-file (expand-file-name "lisp/init-custom.el" user-emacs-directory))
 
 (fset 'yes-or-no-p 'y-or-n-p)

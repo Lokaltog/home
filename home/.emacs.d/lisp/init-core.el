@@ -20,6 +20,7 @@
  fill-column 85
  x-stretch-cursor t
  gc-cons-threshold 20000000
+ vc-follow-symlink t
  custom-file (expand-file-name "lisp/init-custom.el" user-emacs-directory))
 
 (fset 'yes-or-no-p 'y-or-n-p)

@@ -5,7 +5,6 @@
 [core]
 	autocrlf = input
 	whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol
-	excludesfile = ~/.gitignore
 	pager = /usr/bin/less
 	editor = emacsclient -c
 

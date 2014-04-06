@@ -16,6 +16,8 @@
 ;; f key mappings
 (global-set-key (kbd "<f9>") 'switch-to-buffer)
 (global-set-key (kbd "<f10>") 'projectile-find-file)
-(global-set-key (kbd "<f11>") 'find-file)
+(global-set-key (kbd "<C-f10>") 'projectile-switch-project)
+(global-set-key (kbd "<f11>") 'projectile-find-tag)
+(global-set-key (kbd "<C-f11>") 'projectile-regenerate-tags)
 
 (provide 'init-keymaps)

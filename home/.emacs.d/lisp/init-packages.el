@@ -1,6 +1,10 @@
 ;; theme
-(require-package 'distinguished-theme)
-(load-theme 'distinguished t)
+;(require-package 'distinguished-theme)
+(add-hook 'after-make-frame-functions
+          '(lambda (f) (with-selected-frame f (load-theme 'distinguished t))))
+
+;; show current function
+(which-function-mode t)
 
 ;; evil
 (require-package 'evil)
@@ -105,7 +109,8 @@
 (require-package 'auto-complete)
 (require 'auto-complete-config)
 
-(setq ac-auto-show-menu t)
+(setq ac-auto-show-menu t
+      ac-delay 0.05)
 (global-auto-complete-mode t)
 
 ;; golden ratio window resizing
@@ -132,7 +137,7 @@
 ;; projectile
 (require-package 'projectile)
 
-(setq-default projectile-enable-caching t)
+(setq projectile-enable-caching t)
 (projectile-global-mode)
 
 ;; rainbow delimiters
@@ -164,6 +169,11 @@
             (smart-tabs-mode-enable)
             ;; workaround, this needs to be python-indent-line instead of python-indent-line-1 which is the default advice
             (smart-tabs-advice python-indent-line python-indent)))
+
+(defadvice align (around smart-tabs activate)
+  (let ((indent-tabs-mode nil)) ad-do-it))
+(defadvice align-regexp (around smart-tabs activate)
+  (let ((indent-tabs-mode nil)) ad-do-it))
 
 ;; snippets
 (require-package 'yasnippet)

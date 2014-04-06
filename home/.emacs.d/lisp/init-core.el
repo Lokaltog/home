@@ -1,3 +1,10 @@
+;;; init-core.el --- Lokaltog's emacs configuration
+
+;;; Commentary:
+
+;; Main configuration file.
+
+;;; Code:
 (setq-default
  inhibit-splash-screen t
  inhibit-startup-message t
@@ -54,11 +61,13 @@
 
 ;; add extra font lock keywords
 (defun lt/kw-add-fixme ()
+  "Add font lock keywords for FIXME/TODO/BUG tags in code."
   (font-lock-add-keywords nil
                           '(("\\<\\(FIXME\\|TODO\\|BUG\\)\\>"
                              1 font-lock-warning-face t))))
 
 (defun lt/kw-add-constant ()
+  "Add font lock keywords for constants (all-uppercase strings in code)."
   (font-lock-add-keywords nil
                           '(("[^\"]\\<\\([A-Z_][A-Z0-9_]+\\)\\>[^(\"]"
                              1 font-lock-constant-face t))))
@@ -72,29 +81,28 @@
   :group 'font-lock-faces)
 
 (defun lt/kw-add-numbers ()
-    (font-lock-add-keywords
-     nil '(
-           ;; Valid hex number (will highlight invalid suffix though)
-           ("\\b0x[[:xdigit:]]+[uUlL]*\\b" . font-lock-number-face)
-           ;; Invalid hex number
-           ("\\b0x\\(\\w\\|\\.\\)+\\b" . font-lock-warning-face)
-           ;; Valid floating point number.
-           ("\\(\\b[0-9]+\\|\\)\\(\\.\\)\\([0-9]+\\(e[-]?[0-9]+\\)?\\([lL]?\\|[dD]?[fF]?\\)\\)\\b" (1 font-lock-number-face) (3 font-lock-number-face))
-           ;; Invalid floating point number.  Must be before valid decimal.
-           ("\\b[0-9].*?\\..+?\\b" . font-lock-warning-face)
-           ;; Valid decimal number.  Must be before octal regexes otherwise 0 and 0l
-           ;; will be highlighted as errors.  Will highlight invalid suffix though.
-           ("\\b\\(\\(0\\|[1-9][0-9]*\\)[uUlL]*\\)\\b" 1 font-lock-number-face)
-           ;; Valid octal number
-           ("\\b0[0-7]+[uUlL]*\\b" . font-lock-number-face)
-           ;; Floating point number with no digits after the period.  This must be
-           ;; after the invalid numbers, otherwise it will "steal" some invalid
-           ;; numbers and highlight them as valid.
-           ("\\b\\([0-9]+\\)\\." (1 font-lock-number-face))
-           ;; Invalid number.  Must be last so it only highlights anything not
-           ;; matched above.
-           ("\\b[0-9]\\(\\w\\|\\.\\)+?\\b" . font-lock-warning-face)
-           )))
+  "Add font lock keywords for numbers."
+  (font-lock-add-keywords nil '(;; Valid hex number (will highlight invalid suffix though)
+                                ("\\b0x[[:xdigit:]]+[uUlL]*\\b" . font-lock-number-face)
+                                ;; Invalid hex number
+                                ("\\b0x\\(\\w\\|\\.\\)+\\b" . font-lock-warning-face)
+                                ;; Valid floating point number.
+                                ("\\(\\b[0-9]+\\|\\)\\(\\.\\)\\([0-9]+\\(e[-]?[0-9]+\\)?\\([lL]?\\|[dD]?[fF]?\\)\\)\\b"
+                                 (1 font-lock-number-face) (3 font-lock-number-face))
+                                ;; Invalid floating point number.  Must be before valid decimal.
+                                ("\\b[0-9].*?\\..+?\\b" . font-lock-warning-face)
+                                ;; Valid decimal number.  Must be before octal regexes otherwise 0 and 0l
+                                ;; will be highlighted as errors.  Will highlight invalid suffix though.
+                                ("\\b\\(\\(0\\|[1-9][0-9]*\\)[uUlL]*\\)\\b" 1 font-lock-number-face)
+                                ;; Valid octal number
+                                ("\\b0[0-7]+[uUlL]*\\b" . font-lock-number-face)
+                                ;; Floating point number with no digits after the period.  This must be
+                                ;; after the invalid numbers, otherwise it will "steal" some invalid
+                                ;; numbers and highlight them as valid.
+                                ("\\b\\([0-9]+\\)\\." (1 font-lock-number-face))
+                                ;; Invalid number.  Must be last so it only highlights anything not
+                                ;; matched above.
+                                ("\\b[0-9]\\(\\w\\|\\.\\)+?\\b" . font-lock-warning-face))))
 
 (defvar font-lock-pointer-face 'font-lock-pointer-face
   "Face name to use for C pointers.")
@@ -105,6 +113,7 @@
   :group 'font-lock-faces)
 
 (defun lt/kw-add-pointers ()
+  "Add font lock keywords for C pointers."
   (font-lock-add-keywords nil
                           '(("\\(\\*+\\)[a-z]"
                              1 font-lock-pointer-face t))))
@@ -123,3 +132,4 @@
             (lt/kw-add-constant)))
 
 (provide 'init-core)
+;;; init-core.el ends here

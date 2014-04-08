@@ -14,7 +14,8 @@
 (global-set-key (kbd "C-a") 'beginning-of-line-or-text)
 
 ;; f key mappings
-(global-set-key (kbd "<f9>") 'switch-to-buffer)
+(global-set-key (kbd "<f9>") 'projectile-switch-to-buffer)
+(global-set-key (kbd "<C-f9>") 'switch-to-buffer)
 (global-set-key (kbd "<f10>") 'projectile-find-file)
 (global-set-key (kbd "<C-f10>") 'projectile-switch-project)
 (global-set-key (kbd "<f11>") 'projectile-find-tag)

@@ -136,8 +136,12 @@
 
 ;; projectile
 (require-package 'projectile)
+(require 'projectile)
 
-(setq projectile-enable-caching t)
+(setq projectile-remember-window-configs t
+      projectile-globally-ignored-files (append projectile-globally-ignored-files '("waf" "'.lock-waf*'"))
+      projectile-globally-ignored-directories (append projectile-globally-ignored-directories '("'.waf*'" "build" "out")))
+
 (projectile-global-mode)
 
 ;; rainbow delimiters

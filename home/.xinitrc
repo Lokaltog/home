@@ -65,6 +65,14 @@ Xft.dpi: 120
 EOF
 fi
 
+# Start gpg-agent daemon
+if [[ -x /usr/bin/gpg-agent ]]; then
+    kill $(ps ux | awk '/gpg-agent/ && !/awk/ {print $2}') >/dev/null 2>&1
+fi
+if [[ -x /usr/bin/gpg-agent ]]; then
+    eval "$(/usr/bin/gpg-agent --daemon)"
+fi
+
 # Start WM
 sxhkd &
 exec bspwm

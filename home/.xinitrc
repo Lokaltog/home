@@ -1,6 +1,8 @@
 # Update RC file locations for apps that don't support XDG
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc"
 export HGRCPATH="$HOME/.config/hg/hgrc"
+export PASSWORD_STORE_DIR="$HOME/.config/password-store"
+export GNUPGHOME="$HOME/.config/gnupg"
 
 # Colorize less
 export LESS_TERMCAP_mb=$(printf "\e[1;31m") \

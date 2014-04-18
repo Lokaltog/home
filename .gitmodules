@@ -1,0 +1,3 @@
+[submodule "home/.config/password-store"]
+	path = home/.config/password-store
+	url = git@godstog:/mnt/backup/srv/git/password-store.git

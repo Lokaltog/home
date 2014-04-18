@@ -19,6 +19,7 @@
 
 [core]
 	autocrlf = input
+	editor = emacsclient -c
 
 [diff]
 	algorithm = patience

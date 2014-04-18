@@ -75,4 +75,5 @@ fi
 
 # Start WM
 sxhkd &
+wkline &
 exec bspwm

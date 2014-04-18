@@ -1,35 +1,33 @@
 {
-	"browser": true,
-	"node": true,
-	"jquery": true,
-
 	"globals": {
 		"DEBUG": true,
+		"$": true,
+		"$$": true,
+		"define": true,
+		"module": true,
 		"angular": true
 	},
 
 	"asi": true,
+	"browser": true,
+	"curly": true,
 	"debug": false,
 	"devel": false,
-	"white": true,
-
-	"strict": true,
-
-	"curly": true,
-	"onevar": true,
 	"eqeqeq": true,
+	"expr": true,
 	"forin": true,
 	"immed": true,
+	"jquery": true,
 	"latedef": true,
+	"multistr": true,
 	"newcap": true,
+	"node": true,
 	"nonew": true,
 	"plusplus": true,
 	"quotmark": "single",
-	"undef": true,
-	"unused": true,
-	"multistr": true,
+	"smarttabs": true,
+	"strict": false,
 	"trailing": true,
-	"laxcomma": true,
-	"expr": true,
-	"smarttabs": true
+	"undef": true,
+	"unused": true
 }

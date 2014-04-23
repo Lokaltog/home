@@ -1,0 +1,33 @@
+{
+	"globals": {
+		"DEBUG": true,
+		"$": true,
+		"$$": true,
+		"define": true,
+		"module": true,
+		"angular": true
+	},
+
+	"asi": true,
+	"browser": true,
+	"curly": true,
+	"debug": false,
+	"devel": false,
+	"eqeqeq": true,
+	"expr": true,
+	"forin": true,
+	"immed": true,
+	"jquery": true,
+	"latedef": true,
+	"multistr": true,
+	"newcap": true,
+	"node": true,
+	"nonew": true,
+	"plusplus": true,
+	"quotmark": "single",
+	"smarttabs": true,
+	"strict": false,
+	"trailing": true,
+	"undef": true,
+	"unused": true
+}

@@ -1,0 +1,16 @@
+# python stuff
+__pycache__
+.venv/
+*.pyc
+
+# node stuff
+node_modules/
+
+# backup files
+*.bak
+*.old
+*~
+
+# misc
+TAGS
+out/

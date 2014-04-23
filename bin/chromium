@@ -1,7 +1,0 @@
-#!/bin/sh
-
-/usr/bin/chromium-browser \
-	--enable-extension-timeline-api \
-	--omnibox-popup-count=15 \
-	--disable-enforced-throttling \
-	"$@"

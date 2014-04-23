@@ -1,0 +1,60 @@
+# exit wm
+super + alt + Escape
+	bspc quit
+
+# reload config file
+super + shift + Escape
+	pkill -USR1 -x sxhkd
+
+# bspwm control
+super + t
+	bspc desktop -l next
+
+super + {comma,period}
+	bspc desktop -C {backward,forward}
+
+super + m
+	bspc window -s biggest
+
+super + shift + c
+	bspc window -c
+
+super + {a,o,e,u,i}
+	bspc desktop -f "^{1,2,3,4,5}"
+
+super + shift + {a,o,e,u,i}
+	bspc window -d "^{1,2,3,4,5}"
+
+super + {h,j,k,l}
+	bspc window -f {left,down,up,right}
+
+super + shift + {h,j,k,l}
+	bspc window -s {left,down,up,right}
+
+~button1
+	bspc pointer -g focus
+
+super + button{1-3}
+	bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+	bspc pointer -t %i %i
+
+super + @button{1-3}
+	bspc pointer -u
+
+# apps
+super + Return
+	konsole
+
+super + space
+	dmenu_run
+
+super + n
+	chromium
+
+super + shift + s
+	skype
+
+super + s
+	spotify

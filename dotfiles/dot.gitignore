@@ -1,6 +1,0 @@
-*.bak
-*.old
-*.pyc
-*~
-doc/tags
-__pycache__

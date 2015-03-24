@@ -1,7 +1,6 @@
 ;; theme
 ;(require-package 'distinguished-theme)
-(add-hook 'after-make-frame-functions
-          '(lambda (f) (with-selected-frame f (load-theme 'distinguished t))))
+(load-theme 'distinguished t)
 
 ;; show current function
 (which-function-mode t)
@@ -15,8 +14,8 @@
 
 (defun lt/evil-cursor ()
   "Change cursor color according to evil-state."
-  (let ((cursor-colors-default "#b0b3ba")
-        (cursor-colors '((insert . "#f6aa11")
+  (let ((cursor-colors-default "#ffe326")
+        (cursor-colors '((insert . "#a5e724")
                          (visual . "#b0b3ba")
                          (replace . "#ff4a52")))
         (cursor-types-default 'box)
@@ -76,14 +75,11 @@
                     (">=" . ?≥)
                     ("!=" . ?≠)
                     ("==" . ?≡)
-                    (">>" . ?≫)
-                    ("<<" . ?≪)
                     ("and" . ?∧)
                     ("or" . ?∨)
                     ("not in" . ?∉)
                     ("in" . ?∈)
                     ("not" . ?¬)
-                    ("None" . ?∅)
                     ("def" . ?ƒ)
                     ("lambda" . ?λ)
                     ))))
@@ -94,13 +90,9 @@
                     (">=" . ?≥)
                     ("!=" . ?≠)
                     ("==" . ?≡)
-                    (">>" . ?≫)
-                    ("<<" . ?≪)
                     ("&&" . ?∧)
                     ("||" . ?∨)
                     ("!" . ?¬)
-                    ("NULL" . ?∅)
-                    ("*" . ?∗)
                     ))))
 
 (global-prettify-symbols-mode t)
@@ -140,13 +132,18 @@
 
 (setq projectile-remember-window-configs t
       projectile-globally-ignored-files (append projectile-globally-ignored-files '("waf" "'.lock-waf*'"))
-      projectile-globally-ignored-directories (append projectile-globally-ignored-directories '("'.waf*'" "build" "out")))
+      projectile-globally-ignored-directories (append projectile-globally-ignored-directories '("'.waf*'" "build" "out" "venv")))
 
 (projectile-global-mode)
 
-;; rainbow delimiters
+;; rainbow delimiters and highlighting
 (require-package 'rainbow-delimiters)
-(global-rainbow-delimiters-mode)
+
+(add-hook 'python-mode-hook
+          (lambda ()
+            (rainbow-delimiters-mode)
+            (highlight-numbers-mode)
+            (highlight-parentheses-mode)))
 
 ;; rainbow-mode, colorizes color names in buffers
 (require-package 'rainbow-mode)
@@ -167,6 +164,8 @@
 (smart-tabs-insinuate 'c 'javascript)
 (add-hook 'python-mode-hook
           (lambda ()
+            (jedi:setup)
+            (setq jedi:complete-on-dot t)
             (setq indent-tabs-mode t
                   tab-width (default-value 'tab-width)
                   python-indent (default-value 'tab-width))
@@ -181,8 +180,6 @@
 
 ;; snippets
 (require-package 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets/"))
 (yas-global-mode 1)
 
 ;; javascript modes and configuration
@@ -205,10 +202,24 @@
               js2-cleanup-whitespace t
               js2-include-node-externs t)
 
-(add-hook 'json-mode-hook (lambda ()
-                            (setq indent-tabs-mode t
-                                  tab-width (default-value 'tab-width)
-                                  sws-tab-width (default-value 'tab-width))))
+;; force indenting with tabs
+(defun lt/set-tabs-mode-hook ()
+  (setq indent-tabs-mode t
+        tab-width (default-value 'tab-width)
+        sws-tab-width (default-value 'tab-width)))
+
+(add-hook 'json-mode-hook 'lt/set-tabs-mode-hook)
+(add-hook 'nginx-mode-hook 'lt/set-tabs-mode-hook)
+(add-hook 'sws-mode-hook 'lt/set-tabs-mode-hook)
+(add-hook 'text-mode-hook 'lt/set-tabs-mode-hook)
+(add-hook 'jade-mode-hook 'lt/set-tabs-mode-hook)
+(add-hook 'sass-mode-hook 'lt/set-tabs-mode-hook)
+
+(add-hook 'jade-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode t
+                  tab-width (default-value 'tab-width)
+                  jade-tab-width (default-value 'tab-width))))
 
 ;; nginx config mode
 (require-package 'nginx-mode)
@@ -217,9 +228,10 @@
 
 ;; jedi (python completion)
 (require-package 'jedi)
-(add-hook 'python-mode-hook 'jedi:setup)
+(require 'jedi-force)
 (setq-default jedi:setup-keys t
               jedi:complete-on-dot t)
+(jedi-force-set-up-hooks)
 
 ;; override sql mode indentation
 (defun lokaltog-sql-mode-hook ()
@@ -233,10 +245,6 @@
 (require-package 'jade-mode)
 (require-package 'stylus-mode)
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
-(add-hook 'sws-mode-hook (lambda ()
-                           (setq indent-tabs-mode t
-                                 tab-width (default-value 'tab-width)
-                                 sws-tab-width (default-value 'tab-width))))
 
 ;; apps/erc
 (require-package 'erc)
@@ -299,6 +307,7 @@
 (require-package 'flycheck)
 
 (setq flycheck-jshintrc "~/.config/jshintrc")
+(setq flycheck-flake8rc "~/.config/flake8")
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
@@ -329,12 +338,19 @@
 ;; uncrustify
 (require-package 'uncrustify-mode)
 (require 'uncrustify-mode)
-(add-hook 'c-mode-common-hook '(lambda () (uncrustify-mode 1)))
 
 ;; ace-jump-mode
 (require-package 'ace-jump-mode)
 
 ;; move keys for programmer dvorak layout (from center on home row, upper row, lower row)
 (setq ace-jump-mode-move-keys (append "iduhetonasyfpg.c,r;lxbkmjwqv'z" nil))
+
+;; auctex
+(require-package 'auctex)
+
+;; po-mode
+(setq auto-mode-alist
+      (cons '("\\.po\\'\\|\\.po\\." . po-mode) auto-mode-alist))
+(autoload 'po-mode "po-mode" "Major mode for translators to edit PO files" t)
 
 (provide 'init-packages)

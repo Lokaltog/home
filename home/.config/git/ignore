@@ -1,6 +1,7 @@
 # python stuff
 __pycache__
 .venv/
+venv/
 *.pyc
 
 # node stuff

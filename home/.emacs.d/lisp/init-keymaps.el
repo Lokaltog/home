@@ -3,6 +3,10 @@
 (define-key evil-visual-state-map (kbd "TAB") 'indent-region)
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
+;; swap :/;
+(define-key evil-motion-state-map ";" 'evil-ex)
+(define-key evil-motion-state-map ":" 'evil-repeat-find-char)
+
 ;; smart jump to start of line
 (defun beginning-of-line-or-text ()
   "Move to beginning of line or beginning of text"

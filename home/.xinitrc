@@ -21,7 +21,7 @@ xkbcomp -I"$XKBDIR" "$XKBMAPFILE" "${DISPLAY%%.*}"
 # Load X resources
 cat <<EOF | xrdb -merge
 Xcursor.theme: Vanilla-DMZ
-Xcursor.size : 16
+Xcursor.size: 16
 
 Xft.antialias: 1
 Xft.autohint : 0
@@ -61,7 +61,7 @@ if [[ "$HOSTNAME" = "regiontog" ]]; then
 
     # Set monitor DPI
     cat <<EOF | xrdb -merge
-Xft.dpi: 120
+Xft.dpi: 96
 EOF
 fi
 
@@ -75,5 +75,5 @@ fi
 
 # Start WM
 sxhkd &
-wkline &
+candybar &
 exec bspwm

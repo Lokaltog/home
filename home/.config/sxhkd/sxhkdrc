@@ -45,7 +45,7 @@ super + @button{1-3}
 
 # apps
 super + Return
-	konsole
+	lilyterm
 
 super + space
 	dmenu_run

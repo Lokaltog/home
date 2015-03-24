@@ -27,7 +27,7 @@ function fish_user_key_bindings
 	bind \es 'smartsudo'
 end
 
-set -x EDITOR "em"
+set -x EDITOR "emacs"
 
 set -x LANG "en_US.utf8"
 set -x LC_CTYPE "nb_NO.utf8"
@@ -45,13 +45,8 @@ set -x LC_IDENTIFICATION "nb_NO.utf8"
 set -x LC_ALL ""
 
 set -x MAKEFLAGS "-j6"
-set -x PATH $PATH $HOME/.local/bin
+set -x PATH $PATH $HOME/.local/bin ./node_modules/.bin /usr/bin/vendor_perl/
 
-# homeshick support
-function homeshick
-	if test \( (count $argv) = 2 -a $argv[1] = "cd" \)
-		cd "$HOME/.homesick/repos/$argv[2]"
-	else
-		eval /usr/bin/homeshick $argv
-	end
-end
+set -x TERM xterm-256color
+
+source $HOME/.homesick/repos/homeshick/homeshick.fish

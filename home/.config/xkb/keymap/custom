@@ -11,6 +11,8 @@ xkb_keymap {
 			virtualmods = AltGr
 		};
 
+		key <TLDE> { [ dollar,          asciitilde,     dead_tilde                  ] };
+
 		// Remap number keys
 		key <AE01> { [ ampersand,    1                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
 		key <AE02> { [ bracketleft,  2,       currency   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };

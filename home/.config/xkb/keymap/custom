@@ -17,13 +17,15 @@ xkb_keymap {
 		key <AE01> { [ ampersand,    1                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
 		key <AE02> { [ bracketleft,  2,       currency   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
 		key <AE03> { [ braceleft,    3,       cent       ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
-		key <AE04> { [ braceright,   4,       yen        ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
-		key <AE05> { [ parenleft,    5,       EuroSign   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
-		key <AE06> { [ equal,        6,       sterling   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
-		key <AE07> { [ asterisk,     7                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
-		key <AE08> { [ parenright,   8,       onehalf    ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
-		key <AE09> { [ plus,         9                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
-		key <AE10> { [ bracketright, 0                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+		key <AE04> { [ parenleft,    4,       yen        ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+		key <AE05> { [ equal,        5,       EuroSign   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+		key <AE06> { [ plus,         6,       sterling   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+		key <AE07> { [ parenright,   7                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+		key <AE08> { [ braceright,   8,       onehalf    ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+		key <AE09> { [ bracketright, 9                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+		key <AE10> { [ asterisk,     0                   ], type[Group1] = "FOUR_LEVEL_ALPHABETIC" };
+
+		key <AE12> { [ numbersign,   grave,          dead_grave                  ] };
 
 		key <AD11> { [ exclam,       percent,        exclamdown ] };  // Left bracket
 		key <AD12> { [ at,           asciicircum,    dead_circumflex, dead_caron ] };  // Right bracket

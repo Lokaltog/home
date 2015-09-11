@@ -58,3 +58,6 @@ super + shift + s
 
 super + s
 	spotify
+
+super + m
+	emacs

@@ -106,8 +106,6 @@
 (global-auto-complete-mode t)
 
 ;; golden ratio window resizing
-(require-package 'golden-ratio)
-(golden-ratio-mode t)
 
 ;; handle parens
 (defadvice show-paren-function
@@ -162,16 +160,6 @@
 ;; smart tabs (indent with tabs, align with spaces)
 (require-package 'smart-tabs-mode)
 (smart-tabs-insinuate 'c 'javascript)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (jedi:setup)
-            (setq jedi:complete-on-dot t)
-            (setq indent-tabs-mode t
-                  tab-width (default-value 'tab-width)
-                  python-indent (default-value 'tab-width))
-            (smart-tabs-mode-enable)
-            ;; workaround, this needs to be python-indent-line instead of python-indent-line-1 which is the default advice
-            (smart-tabs-advice python-indent-line python-indent)))
 
 (defadvice align (around smart-tabs activate)
   (let ((indent-tabs-mode nil)) ad-do-it))
@@ -210,6 +198,7 @@
 
 (add-hook 'json-mode-hook 'lt/set-tabs-mode-hook)
 (add-hook 'nginx-mode-hook 'lt/set-tabs-mode-hook)
+(add-hook 'vcl-mode-hook 'lt/set-tabs-mode-hook)
 (add-hook 'sws-mode-hook 'lt/set-tabs-mode-hook)
 (add-hook 'text-mode-hook 'lt/set-tabs-mode-hook)
 (add-hook 'jade-mode-hook 'lt/set-tabs-mode-hook)
@@ -221,10 +210,16 @@
                   tab-width (default-value 'tab-width)
                   jade-tab-width (default-value 'tab-width))))
 
+(setq sass-indent-offset (default-value 'tab-width))
+
 ;; nginx config mode
 (require-package 'nginx-mode)
 (add-to-list 'auto-mode-alist '("/etc/nginx/.*\.conf$" . nginx-mode))
 (add-to-list 'auto-mode-alist '(".*\.nginx\.conf$" . nginx-mode))
+
+;; vcl-mode
+(require-package 'vcl-mode)
+(add-to-list 'auto-mode-alist '(".*\.vcl$" . vcl-mode))
 
 ;; jedi (python completion)
 (require-package 'jedi)
@@ -232,6 +227,16 @@
 (setq-default jedi:setup-keys t
               jedi:complete-on-dot t)
 (jedi-force-set-up-hooks)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (jedi:setup)
+            (setq jedi:complete-on-dot t)
+            (setq indent-tabs-mode t
+                  tab-width (default-value 'tab-width)
+                  python-indent (default-value 'tab-width))
+            (smart-tabs-mode-enable)
+            ;; workaround, this needs to be python-indent-line instead of python-indent-line-1 which is the default advice
+            (smart-tabs-advice python-indent-line python-indent)))
 
 ;; override sql mode indentation
 (defun lokaltog-sql-mode-hook ()
@@ -256,37 +261,6 @@
                erc-server "irc.freenode.org"
                erc-user-full-name "Kim Silkebækken")
 
-;; apps/mu4e
-(require 'mu4e)
-(require 'smtpmail)
-(setq mu4e-drafts-folder "/[Gmail].Drafts"
-      mu4e-sent-folder "/[Gmail].Sent Mail"
-      mu4e-refile-folder "/[Gmail].All Mail"
-      mu4e-trash-folder "/[Gmail].Trash"
-      mu4e-sent-messages-behavior 'delete
-      mu4e-update-interval 300
-      mu4e-get-mail-command "offlineimap"
-      mu4e-headers-skip-duplicates t
-      mu4e-view-show-images t
-      mu4e-view-image-max-width 800
-      mu4e-maildir-shortcuts '(("/INBOX" . ?i)
-                               ("/[Gmail].Sent Mail" . ?s)
-                               ("/[Gmail].Trash" . ?t)
-                               ("/[Gmail].All Mail" . ?a))
-      user-mail-address "kim.silkebaekken@gmail.com"
-      user-full-name "Kim Silkebækken"
-      message-signature (concat
-                         "Med vennlig hilsen\n"
-                         "Kim Silkebækken\n")
-      message-send-mail-function 'smtpmail-send-it
-      message-kill-buffer-on-exit t
-      smtpmail-stream-type 'starttls
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587
-      mu4e-headers-date-format "%Y-%m-%d"
-      mu4e-headers-time-format "%H:%M"
-      mu4e-headers-visible-lines 15)
 
 ;; apps/org-mode
 (require-package 'org)

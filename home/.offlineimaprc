@@ -1,0 +1,70 @@
+[general]
+ui = ttyui
+accounts = Gmail, Private
+pythonfile = ~/.config/offlineimap
+fsync = false
+maxsyncaccounts = 10
+
+[Account Gmail]
+localrepository = Gmail-Local
+remoterepository = Gmail-Remote
+status_backend = sqlite
+autorefresh = 5
+postsynchook = notmuch new
+
+[Repository Gmail-Local]
+type = Maildir
+localfolders = ~/Maildir/gmail
+sep = /
+maxconnections = 3
+nametrans = lambda folder: {'drafts':   '[Gmail]/Drafts',
+                            'sent':     '[Gmail]/Sent Mail',
+                            'important':'[Gmail]/Important',
+                            'spam':     '[Gmail]/Spam',
+                            'starred':  '[Gmail]/Starred',
+                            'trash':    '[Gmail]/Trash',
+                            'archive':  '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository Gmail-Remote]
+type = Gmail
+remoteuser = kim.silkebaekken@gmail.com
+remotepasseval = get_pass('gmail/kim.silkebaekken@gmail.com/offlineimap')
+maxconnections = 3
+holdconnectionopen = yes
+keepalive = 60
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'starred',
+                            '[Gmail]/Important': 'important',
+                            '[Gmail]/Spam':      'spam',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+idlefolders = ['INBOX', '[Gmail]/All Mail', '[Gmail]/Important']
+
+[Account Private]
+localrepository = Private-Local
+remoterepository = Private-Remote
+status_backend = sqlite
+autorefresh = 5
+postsynchook = notmuch new
+
+[Repository Private-Local]
+type = Maildir
+localfolders = ~/Maildir/private
+sep = /
+maxconnections = 3
+
+[Repository Private-Remote]
+type = IMAP
+remotehost = mail.lokaltog.net
+remoteuser = kim@silkebaekken.no
+remotepasseval = get_pass('mail.lokaltog.net/kim@silkebaekken.no')
+remoteport = 143
+maxconnections = 3
+holdconnectionopen = yes
+keepalive = 60
+idlefolders = ['INBOX']

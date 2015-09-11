@@ -31,6 +31,10 @@ Xft.lcdfilter: lcddefault
 Xft.rgba     : rgb
 EOF
 
+# Disable DPMS and screen saver blanking
+xset -dpms
+xset s off
+
 # Disable bell
 xset b 0 &
 
@@ -74,6 +78,6 @@ if [[ -x /usr/bin/gpg-agent ]]; then
 fi
 
 # Start WM
-sxhkd &
+sxhkd -m -1 &
 candybar &
 exec bspwm

@@ -12,6 +12,7 @@ alias rmr "rm -rf"
 alias mkdir "mkdir -vp"
 alias sc "sudo systemctl"
 alias scu "systemctl --user"
+alias doc "docker-compose"
 
 set fish_greeting
 

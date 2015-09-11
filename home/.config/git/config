@@ -19,6 +19,7 @@
 
 [core]
 	autocrlf = input
+	editor = vim
 
 [diff]
 	algorithm = patience

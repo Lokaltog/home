@@ -54,7 +54,6 @@ re-downloaded in order to locate PACKAGE."
  fill-column 85
  x-stretch-cursor t
  gc-cons-threshold 20000000
- vc-follow-symlink t
  blink-cursor-alist '((box . hbar))
  custom-file (expand-file-name "init-custom.el" user-emacs-directory)
  echo-keystrokes 0.02)
@@ -72,7 +71,6 @@ re-downloaded in order to locate PACKAGE."
 
 ;; Global built-in modes
 (electric-indent-mode t)
-(global-subword-mode t)
 (transient-mark-mode t)
 
 (blink-cursor-mode t)
@@ -111,16 +109,25 @@ This functions should be added to the hooks of major modes for programming."
 
 (defun lokaltog-set-tabs-mode-hook ()
   "Set tabs as indentation mode."
-  (setq-default indent-tabs-mode t
-                tab-width (default-value 'tab-width)
-                sws-tab-width (default-value 'tab-width)
-                sass-indent-offset (default-value 'tab-width)
-                jade-tab-width (default-value 'tab-width)))
+  (setq indent-tabs-mode t
+        tab-width (default-value 'tab-width)
+        sws-tab-width (default-value 'tab-width)
+        sass-indent-offset (default-value 'tab-width)
+        haml-indent-offset (default-value 'tab-width)
+        jade-tab-width (default-value 'tab-width)))
 
-(dolist (hook '(json nginx vcl sws text jade sass sql))
+(dolist (hook '(json nginx vcl sws text jade haml sws sass sql))
   (add-hook (intern (concat (symbol-name hook) "-mode-hook")) 'lokaltog-set-tabs-mode-hook))
 
 ;; Setup packages
+(use-package diminish
+  :ensure t)
+
+(use-package subword
+  :diminish subword-mode
+  :config
+  (global-subword-mode t))
+
 (use-package server
   :if window-system
   :config
@@ -145,6 +152,7 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package rainbow-mode
   :ensure t
+  :diminish rainbow-mode
   :config
   (add-hook 'prog-mode-hook #'rainbow-mode))
 
@@ -153,17 +161,12 @@ This functions should be added to the hooks of major modes for programming."
   :config
   (add-hook 'prog-mode-hook #'highlight-numbers-mode))
 
-(use-package smartparens-config
-  :ensure smartparens
-  :config
-  (show-smartparens-global-mode t)
-  (add-hook 'prog-mode-hook #'turn-on-smartparens-strict-mode))
-
 (use-package prog-mode
   :defer t)
 
 (use-package guide-key
   :commands guide-key-mode
+  :diminish guide-key-mode
   :ensure t
   :init
   (setq guide-key/guide-key-sequence '(","       ; Evil leader
@@ -234,11 +237,13 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package undo-tree
   :ensure t
+  :diminish undo-tree-mode
   :config
   (global-undo-tree-mode))
 
 (use-package whitespace
   :ensure t
+  :diminish whitespace-mode global-whitespace-mode
   :init
   (setq whitespace-style (quote (face tabs newline tab-mark newline-mark))
         whitespace-display-mappings '((newline-mark ?\n [?· ?\n])
@@ -251,16 +256,17 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package git-gutter-fringe
   :ensure t
+  :diminish git-gutter-mode
   :init
   (setq git-gutter-fr:side 'right-fringe)
   :config
   (global-git-gutter-mode t))
 
-(use-package flx-ido)
-:ensure t
+(use-package flx-ido
+  :ensure t)
 
-(use-package ido-vertical-mode)
-:ensure t
+(use-package ido-vertical-mode
+  :ensure t)
 
 (use-package smex
   :ensure t
@@ -280,6 +286,10 @@ This functions should be added to the hooks of major modes for programming."
         ido-use-faces nil
         ido-default-file-method 'selected-window)
   :config
+  (defun lokaltog-bind-ido-keys ()
+    "Keybindings for ido-mode."
+    (define-key ido-completion-map (kbd "<backspace>") 'ido-delete-backward-word-updir))
+  (add-hook 'ido-setup-hook 'lokaltog-bind-ido-keys)
   (flx-ido-mode t)
   (ido-mode 1)
   (ido-everywhere 1)
@@ -299,6 +309,7 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package company
   :ensure t
+  :diminish company-mode
   :config
   (global-company-mode)
 
@@ -341,11 +352,26 @@ This functions should be added to the hooks of major modes for programming."
   (setq projectile-globally-ignored-files (append projectile-globally-ignored-files '("waf" "'.lock-waf*'"))
         projectile-globally-ignored-directories (append projectile-globally-ignored-directories '("'.waf*'" "build" "out" "venv"))))
 
-(use-package smart-mode-line
+(use-package window-numbering
   :ensure t
   :config
-  (add-to-list 'sml/replacer-regexp-list '("^~/projects" ":proj:"))
-  (sml/setup))
+  (window-numbering-mode))
+
+(use-package anzu
+  :ensure t
+  :diminish anzu-mode
+  :config
+  (global-anzu-mode +1))
+
+(use-package spaceline-config
+  :ensure spaceline
+  :init
+  (setq powerline-default-separator 'wave
+        powerline-height 20
+        spaceline-highlight-face-func 'spaceline-highlight-face-evil-state
+        spaceline-window-numbers-unicode t)
+  :config
+  (spaceline-spacemacs-theme))
 
 (use-package smart-tabs-mode
   :ensure t
@@ -358,6 +384,7 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package anaconda-mode
   :ensure t
+  :diminish anaconda-mode
   :config
   (progn (add-to-list 'company-backends 'company-anaconda)))
 
@@ -366,15 +393,16 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package yasnippet
   :ensure t
+  :diminish yas-minor-mode
   :config
   (yas-global-mode 1))
 
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode
   :init
   (setq flycheck-jshintrc "~/.config/jshintrc"
         flycheck-flake8rc "~/.config/flake8"
-        flycheck-check-syntax-automatically '(mode-enabled new-line save)
         flycheck-indication-mode 'left-fringe)
   :config
   (global-flycheck-mode))
@@ -392,44 +420,39 @@ This functions should be added to the hooks of major modes for programming."
   (setq ace-jump-mode-move-keys (append "iduhetonasyfpg.c,r;lxbkmjwqv'z" nil)))
 
 ;; Filetype modes
-(use-package python-mode
-  :ensure t
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
   :init
-  (setq py-indent-offset (default-value 'tab-width)
-        py-indent-tabs-mode t)
-  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-  (add-to-list 'interpreter-mode-alist '("python" . python-mode))
-  (add-hook 'python-mode-hook
-            (lambda () (run-hooks 'prog-mode-hook)))
-  :config
-  (anaconda-mode)
-  (smart-tabs-mode-enable)
-  ;; workaround, this needs to be python-indent-line instead of python-indent-line-1 which is the default advice
-  (smart-tabs-advice python-indent-line python-indent))
+  (add-hook 'python-mode-hook (lambda ()
+                                (setq indent-tabs-mode t
+                                      tab-width (default-value 'tab-width)
+                                      python-indent-offset (default-value 'tab-width))
+                                (anaconda-mode)
+                                (smart-tabs-mode-enable)
+                                (smart-tabs-advice python-indent-line python-indent-offset))))
 
 (use-package json-mode
   :ensure t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.json$" . json-mode)))
+  :mode ("\\.json\\'" . json-mode))
 
 (use-package js2-mode
   :ensure t
+  :mode ("\\.js\\'" . js2-mode)
   :init
   (setq js2-highlight-level 3
         js2-mode-show-parse-errors nil
-        js2-mode-show-strict-warnings nil)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
+        js2-mode-show-strict-warnings nil))
 
 (use-package nginx-mode
   :ensure t
-  :init
-  (add-to-list 'auto-mode-alist '("/etc/nginx/.*\\.conf$" . nginx-mode))
-  (add-to-list 'auto-mode-alist '(".*\\.nginx\\.conf$" . nginx-mode)))
+  :mode
+  ("/etc/nginx/.*\\.conf\\'" . nginx-mode)
+  (".*\\.nginx\\.conf\\'" . nginx-mode))
 
 (use-package vcl-mode
   :ensure t
-  :init
-  (add-to-list 'auto-mode-alist '(".*\\.vcl$" . vcl-mode)))
+  :mode (".*\\.vcl\\'" . vcl-mode))
 
 (use-package sql
   :ensure t
@@ -438,10 +461,24 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package jade-mode
   :ensure t
-  :init
-  (add-to-list 'auto-mode-alist '(".*\\.jade$" . jade-mode)))
+  :mode (".*\\.jade\\'" . jade-mode))
+
+(use-package sws-mode
+  :ensure t)
 
 (use-package stylus-mode
+  :ensure t)
+
+(use-package haml-mode
+  :ensure t)
+
+(use-package sass-mode
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
+
+(use-package dockerfile-mode
   :ensure t)
 
 (provide 'init)

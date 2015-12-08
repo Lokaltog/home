@@ -2,15 +2,23 @@
 ui = ttyui
 accounts = Gmail, Private
 pythonfile = ~/.config/offlineimap
+metadata = ~/Maildir/.offlineimap
 fsync = false
 maxsyncaccounts = 10
+
+[DEFAULT]
+status_backend = sqlite
+autorefresh = 5
+postsynchook = notmuch new
+presynchook = ~/maildir.sh
+
+keepalive = 60
+maxconnections = 3
+holdconnectionopen = yes
 
 [Account Gmail]
 localrepository = Gmail-Local
 remoterepository = Gmail-Remote
-status_backend = sqlite
-autorefresh = 5
-postsynchook = notmuch new
 
 [Repository Gmail-Local]
 type = Maildir
@@ -30,9 +38,6 @@ nametrans = lambda folder: {'drafts':   '[Gmail]/Drafts',
 type = Gmail
 remoteuser = kim.silkebaekken@gmail.com
 remotepasseval = get_pass('gmail/kim.silkebaekken@gmail.com/offlineimap')
-maxconnections = 3
-holdconnectionopen = yes
-keepalive = 60
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
@@ -44,13 +49,11 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/All Mail':  'archive',
                             }.get(folder, folder)
 idlefolders = ['INBOX', '[Gmail]/All Mail', '[Gmail]/Important']
+folderfilter = lambda folder: folder not in ('[Gmail]/Trash', '[Gmail]/Spam')
 
 [Account Private]
 localrepository = Private-Local
 remoterepository = Private-Remote
-status_backend = sqlite
-autorefresh = 5
-postsynchook = notmuch new
 
 [Repository Private-Local]
 type = Maildir
@@ -64,7 +67,4 @@ remotehost = mail.lokaltog.net
 remoteuser = kim@silkebaekken.no
 remotepasseval = get_pass('mail.lokaltog.net/kim@silkebaekken.no')
 remoteport = 143
-maxconnections = 3
-holdconnectionopen = yes
-keepalive = 60
 idlefolders = ['INBOX']

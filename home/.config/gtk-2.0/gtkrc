@@ -1,6 +1,6 @@
-gtk-theme-name="Adwaita"
-gtk-icon-theme-name="Faenza"
-gtk-font-name="Droid Sans 9"
+gtk-theme-name="Vertex-Dark"
+gtk-icon-theme-name="Faenza-Darker"
+gtk-font-name="Roboto 9"
 gtk-toolbar-style=0
 
 gtk-xft-antialias=1

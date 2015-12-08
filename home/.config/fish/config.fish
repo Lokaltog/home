@@ -1,7 +1,7 @@
 alias + "sudo -E"
 alias l "ls -ABFhovX --color=auto --group-directories-first --time-style=long-iso"
 alias p "+ pacman"
-alias pr "packer --noedit"
+alias pac "packer --aur"
 alias y "yaourt"
 alias sd "+ shutdown -h now"
 alias rb "+ reboot"
@@ -19,6 +19,7 @@ set fish_greeting
 function smartdot
 	commandline -i (commandline -b | awk '{print $0 ~ /\.\.$/ ? "/.." : "."}')
 end
+
 function smartsudo
 	commandline -r (commandline -b | awk '{print $0 ~ /^(sudo|\+)\ / ? "" : "+ "}')(commandline -b)
 end
@@ -27,6 +28,15 @@ function fish_user_key_bindings
 	bind . 'smartdot'
 	bind \es 'smartsudo'
 end
+
+function pr
+	cd ~/projects/$argv[1]
+end
+
+function __fish_project_list
+	find ~/projects/ -mindepth 1 -maxdepth 1 -type d -printf '%f\tChanged %CY-%Cm-%Cd %CH:%CM\n'
+end
+complete -c pr -r -A -a '(__fish_project_list)' -d 'Goto project'
 
 set -x EDITOR "emacs"
 

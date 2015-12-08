@@ -3,6 +3,7 @@ __pycache__
 .venv/
 venv/
 *.pyc
+*.egg-info
 
 # node stuff
 node_modules/

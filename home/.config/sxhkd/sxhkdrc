@@ -7,29 +7,32 @@ super + shift + Escape
 	pkill -USR1 -x sxhkd
 
 # bspwm control
-super + t
-	bspc desktop -l next
+super + g
+	bspc node -s biggest
 
 super + {comma,period}
 	bspc desktop -C {backward,forward}
 
 super + m
-	bspc window -s biggest
+	bspc desktop -l next
 
-super + shift + c
-	bspc window -c
+super + {_,shift + }w
+	bspc node -{c,k}
 
 super + {a,o,e,u,i}
 	bspc desktop -f "^{1,2,3,4,5}"
 
 super + shift + {a,o,e,u,i}
-	bspc window -d "^{1,2,3,4,5}"
+	bspc node -d "^{1,2,3,4,5}"
 
-super + {h,j,k,l}
-	bspc window -f {left,down,up,right}
+super + {_,shift +}{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
 
-super + shift + {h,j,k,l}
-	bspc window -s {left,down,up,right}
+super + {t,shift + t}
+	bspc node -t {tiled,floating}
+
+super + bracket{left,right}
+	bspc monitor -f {prev,next}
 
 ~button1
 	bspc pointer -g focus
@@ -52,9 +55,6 @@ super + r
 
 super + n
 	chromium
-
-super + shift + s
-	skype
 
 super + s
 	spotify

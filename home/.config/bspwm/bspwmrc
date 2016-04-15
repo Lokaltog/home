@@ -4,23 +4,34 @@
 bspc monitor DVI-I-1 -n 1
 bspc monitor DVI-D-0 -n 2
 
-bspc config border_width          1
-bspc config window_gap            0
-bspc config -d '>' window_gap     0
-bspc config borderless_monocle    true
-bspc config gapless_monocle       true
-bspc config focus_follows_pointer true
-bspc config focus_by_distance     true
-bspc config normal_border_color   '#000000'
-bspc config focused_border_color  '#dddddd'
+bspc config border_width              1
+bspc config window_gap                0
+bspc config -d '>' window_gap         0
+bspc config borderless_monocle        true
+bspc config gapless_monocle           true
+bspc config paddingless_monocle       true
+bspc config single_monocle            true
+bspc config focus_follows_pointer     true
+bspc config focus_by_distance         true
+bspc config history_aware_focus       true
+bspc config pointer_follows_monitor   true
+bspc config initial_polarity          second_child
 
-bspc config split_ratio           0.5
-bspc config -m 1 top_padding      0
-bspc config -m 2 top_padding      0
+bspc config normal_border_color       '#000000'
+bspc config active_border_color       '#666666'
+bspc config focused_border_color      '#dddddd'
+
+bspc config split_ratio               0.5
+bspc config -m 1 top_padding          0
+bspc config -m 2 top_padding          0
 
 bspc monitor 1 -d '1' '2' '3' '4' '5'
 bspc monitor 2 -d '>'
 
-bspc rule -a mpv floating=on follow=on focus=on
-bspc rule -a Emacs monitor=2 border_width=2 follow=on focus=on
-bspc rule -a Gvncviewer floating=on
+bspc rule -a mpv monitor=2 state=floating follow=true focus=true
+bspc rule -a Emacs monitor=1 follow=true focus=true
+bspc rule -a Gvncviewer monitor=2 state=floating
+bspc rule -a Zathura state=fullscreen
+bspc rule -a Eog state=fullscreen
+bspc rule -a feh state=fullscreen
+bspc rule -a VirtualBox monitor=2 state=fullscreen

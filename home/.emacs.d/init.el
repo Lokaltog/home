@@ -94,7 +94,7 @@ re-downloaded in order to locate PACKAGE."
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; Set font
-(set-face-attribute 'default nil :family "Pragmata Pro" :height 100)
+(set-face-attribute 'default nil :family "Pragmata Pro" :height 110)
 
 ;; Highlight comment annotations
 (defun lokaltog-font-lock-comment-annotations ()
@@ -163,6 +163,35 @@ This functions should be added to the hooks of major modes for programming."
 
 (use-package prog-mode
   :defer t)
+
+(use-package prettify-symbols-mode
+  :defer t
+  :init
+  (add-hook 'prog-mode-hook
+            (lambda ()
+              (setq prettify-symbols-alist
+                    '(("<=" . ?)
+                      (">=" . ?)
+                      ("->" . ?)
+                      ("<-" . ?)
+                      ("=>" . ?)
+                      ("!=" . ?)
+                      ("==" . ?)
+                      ("/=" . ?)
+                      ("*=" . ?)
+                      ("*=" . ?)
+                      ("//" . ?)
+                      ("/*" . ?)
+                      ("/**" . ?)
+                      ("*/" . ?)
+                      (".." . ?)
+                      ("..." . ?)
+                      ("<<" . ?)
+                      (">>" . ?)
+                      ("lambda" . ?λ)
+                      ))))
+  (global-prettify-symbols-mode t))
+
 
 (use-package guide-key
   :commands guide-key-mode

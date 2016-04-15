@@ -61,3 +61,11 @@ set -x PATH $PATH $HOME/.local/bin ./node_modules/.bin /usr/bin/vendor_perl/
 set -x TERM xterm-256color
 
 source $HOME/.homesick/repos/homeshick/homeshick.fish
+
+# start X at login
+if status --is-login
+	if test -z "$DISPLAY" -a $XDG_VTNR -eq 1
+		exec startx -- -keeptty
+	end
+end
+

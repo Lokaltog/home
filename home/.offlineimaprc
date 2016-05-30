@@ -13,7 +13,6 @@ postsynchook = notmuch new
 presynchook = ~/maildir.sh
 
 keepalive = 60
-maxconnections = 3
 holdconnectionopen = yes
 
 [Account Gmail]
@@ -24,7 +23,6 @@ remoterepository = Gmail-Remote
 type = Maildir
 localfolders = ~/Maildir/gmail
 sep = /
-maxconnections = 3
 nametrans = lambda folder: {'drafts':   '[Gmail]/Drafts',
                             'sent':     '[Gmail]/Sent Mail',
                             'important':'[Gmail]/Important',
@@ -38,6 +36,7 @@ nametrans = lambda folder: {'drafts':   '[Gmail]/Drafts',
 type = Gmail
 remoteuser = kim.silkebaekken@gmail.com
 remotepasseval = get_pass('gmail/kim.silkebaekken@gmail.com/offlineimap')
+auth_mechanisms = LOGIN
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
@@ -48,7 +47,7 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Trash':     'trash',
                             '[Gmail]/All Mail':  'archive',
                             }.get(folder, folder)
-idlefolders = ['INBOX', '[Gmail]/All Mail', '[Gmail]/Important']
+idlefolders = ['INBOX']
 folderfilter = lambda folder: folder not in ('[Gmail]/Trash', '[Gmail]/Spam')
 
 [Account Private]
@@ -59,12 +58,12 @@ remoterepository = Private-Remote
 type = Maildir
 localfolders = ~/Maildir/private
 sep = /
-maxconnections = 3
 
 [Repository Private-Remote]
 type = IMAP
-remotehost = mail.lokaltog.net
+ssl = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remotehost = bertine.lokaltog.net
 remoteuser = kim@silkebaekken.no
 remotepasseval = get_pass('mail.lokaltog.net/kim@silkebaekken.no')
-remoteport = 143
 idlefolders = ['INBOX']
